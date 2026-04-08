@@ -89,9 +89,9 @@ jobs:
               case "$CURRENT_REVIEWER" in
                 "chen4023") MENTIONS="<@683563560063991848>" ;;
                 "sysysysyb") MENTIONS="<@950597490086924368>" ;;
-                "WoongBaeJeon") MENTIONS="<@1325430352843636736>" ;;
+                "fishwwww2") MENTIONS="<@363536806286721034>" ;;
                 "Clacki") MENTIONS="<@768360541995008010>" ;;
-                "0rrriiinnn0") MENTIONS="<@1430028471731749008>" ;;
+                "용병") MENTIONS="<@용병디스코드>" ;;
                 *) MENTIONS="@$CURRENT_REVIEWER" ;;
               esac
             fi
@@ -173,14 +173,14 @@ jobs:
             "sysysysyb")
               AUTHOR_MENTION="<@950597490086924368>"
               ;;
-            "WoongBaeJeon")
-              AUTHOR_MENTION="<@1325430352843636736>"
-              ;;
+            "fishwwww2")
+                MENTIONS="$MENTIONS <@363536806286721034>"
+                ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
-            "0rrriiinnn0")
-              AUTHOR_MENTION="<@1430028471731749008>"
+            "용병")
+              AUTHOR_MENTION="<@용병디스코드>"
               ;;
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
@@ -226,14 +226,14 @@ jobs:
             "sysysysyb")
               AUTHOR_MENTION="<@950597490086924368>"
               ;;
-            "WoongBaeJeon")
-              AUTHOR_MENTION="<@1325430352843636736>"
-              ;;
+            "fishwwww2")
+                MENTIONS="$MENTIONS <@363536806286721034>"
+                ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
-            "0rrriiinnn0")
-              AUTHOR_MENTION="<@1430028471731749008>"
+            "용병")
+              AUTHOR_MENTION="<@용병디스코드>"
               ;;
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
