@@ -75,8 +75,8 @@ jobs:
                 "Clacki")
                   MENTIONS="$MENTIONS <@768360541995008010>"
                   ;;
-                "용병자리")
-                 MENTIONS="$MENTIONS <@용병 디스코드넘버>"
+                "ThePott")
+                 MENTIONS="$MENTIONS <@599242098683936770>"
                  ;;
                 *)
                   MENTIONS="$MENTIONS @$login"
@@ -91,7 +91,7 @@ jobs:
                 "sysysysyb") MENTIONS="<@950597490086924368>" ;;
                 "fishwwww2") MENTIONS="<@363536806286721034>" ;;
                 "Clacki") MENTIONS="<@768360541995008010>" ;;
-                "용병") MENTIONS="<@용병디스코드>" ;;
+                "ThePott") MENTIONS="<@599242098683936770>" ;;
                 *) MENTIONS="@$CURRENT_REVIEWER" ;;
               esac
             fi
@@ -179,8 +179,8 @@ jobs:
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
-            "용병")
-              AUTHOR_MENTION="<@용병디스코드>"
+            "ThePott")
+              AUTHOR_MENTION="<@599242098683936770>"
               ;;
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
@@ -232,8 +232,8 @@ jobs:
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
-            "용병")
-              AUTHOR_MENTION="<@용병디스코드>"
+            "ThePott")
+              AUTHOR_MENTION="<@599242098683936770>"
               ;;
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
