@@ -12,6 +12,11 @@ export default defineConfig([globalIgnores(['dist']), {
   files: ['**/*.{ts,tsx}'],
   extends: [
     js.configs.recommended,
+      {
+        rules: {
+          "react-refresh/only-export-components": "off",
+        },
+      },
     tseslint.configs.recommended,
     reactHooks.configs.flat.recommended,
     reactRefresh.configs.vite,
