@@ -2,12 +2,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
+@import "tailwindcss/preflight";
 
-@tailwind base;
-
-@custom-variant dark (&:is(.dark *));
-@tailwind components;
 @tailwind utilities;
+@custom-variant dark (&: is(.dark *));
 
 :root {
   /* =====================================================
@@ -182,6 +180,7 @@
   --spacing-md: var(--space-md);
   --spacing-lg: var(--space-lg);
   --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
 
   /* TYPOGRAPHY (핵심) */
   --font-size-xs: var(--text-xs);
