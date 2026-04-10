@@ -2,9 +2,11 @@ import type { DivProps } from "@/shared/types"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
 
-// NOTE: 여기에 [scrollbar-gutter:stable]하게 되면 겹겹이 FlexOneContainer를 쓸 때 거터가 중첩됨
-// NOTE: 예시: progress page
-const flexOneContainerVariants = cva("flex-1", {
+/**
+ * flex-1로 남는 공간을 채울 때 사용합니다
+ * 스크롤 영역을 설정할 때 유용합니다
+ * */
+const flexOneContainerVariants = cva("flex-1 [scrollbar-gutter:stable]", {
   variants: {
     isYScrollable: {
       true: "overflow-y-auto",

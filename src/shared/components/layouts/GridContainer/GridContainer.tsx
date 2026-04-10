@@ -62,10 +62,17 @@ interface WithGridContainerProps {
   isAutoFill?: boolean
   minColWidth: SmToLg
 }
+
+/**
+ * minColWidth에 따른 쓰임새
+ * - sm: 로그인 페이지 소셜 로그인 버튼들
+ *   md: 향기 찾기 페이지 3
+ *   lg: 마이페이지 1 피드
+ */
 const GridContainer = ({
-  gap = "md",
+  gap,
   isAutoFill = true,
-  minColWidth = "md",
+  minColWidth,
   ...props
 }: DivProps & WithGridContainerProps) => {
   const { className, children, ...rest } = props

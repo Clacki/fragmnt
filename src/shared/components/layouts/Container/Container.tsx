@@ -22,8 +22,17 @@ interface WithContainerProps {
   width?: SmToXl
   isPadded?: boolean
 }
+
+/**
+ * 페이지 콘텐츠의 경계를 정할 때 사용합니다.
+ * width에 따른 쓰임새
+ * - "xl": 보통 페이지의 중앙부(default)
+ * - "lg": 회원가입
+ * - "md": 채팅 위젯
+ * - "sm": 모달
+ * */
 const Container = ({
-  width = "lg",
+  width = "xl",
   isPadded = false,
   ...props
 }: DivProps & WithContainerProps) => {

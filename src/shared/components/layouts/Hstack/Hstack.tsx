@@ -16,7 +16,12 @@ const hstackVariants = cva("flex", {
 interface WithHstackProps {
   gap?: XsTo2xl | None
 }
-const Hstack = ({ gap, ...props }: DivProps & WithHstackProps) => {
+
+/**
+ * 가로 배치시 사용
+ * default gap: lg (16px)
+ * */
+const Hstack = ({ gap = "lg", ...props }: DivProps & WithHstackProps) => {
   const { className, children, ...rest } = props
 
   return (

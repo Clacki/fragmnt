@@ -14,10 +14,14 @@ const vstackVariants = cva("flex flex-col", {
 })
 
 interface WithVstackProps {
-  gap: XsTo2xl | None
+  gap?: XsTo2xl | None
 }
 
-const Vstack = ({ gap, ...props }: DivProps & WithVstackProps) => {
+/**
+ * 세로 배치시 사용
+ * default gap: lg (16px)
+ * */
+const Vstack = ({ gap = "lg", ...props }: DivProps & WithVstackProps) => {
   const { className, children, ...rest } = props
 
   return (

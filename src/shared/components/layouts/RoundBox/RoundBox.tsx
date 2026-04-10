@@ -7,13 +7,12 @@ import type {
 import { paddingVariants } from "@/shared/utils/variantToClassName"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
-import type { Color } from "storybook/theming"
 
 const roundBoxVariants = cva("", {
   variants: {
     padding: paddingVariants,
     isBordered: {
-      true: "border border-iua-fg-dim",
+      true: "border border-gray/20",
       false: "",
     },
     radius: {
@@ -23,39 +22,27 @@ const roundBoxVariants = cva("", {
       lg: "rounded-lg",
     },
     isShadowed: {
-      true: "",
+      true: "shadow-box",
       false: "",
     },
   },
-  compoundVariants: [
-    {
-      radius: "sm",
-      isShadowed: true,
-      className: "shadow-iua-sm",
-    },
-    {
-      radius: "md",
-      isShadowed: true,
-      className: "shadow-iua-md",
-    },
-    {
-      radius: "lg",
-      isShadowed: true,
-      className: "shadow-iua-lg",
-    },
-  ],
 })
 
 interface WithRoundBoxProps {
   radius?: SmToLg | None
   padding?: XsToXl | None
-  color?: Color
   isBordered?: boolean
   isShadowed?: boolean
 }
+
+/**
+ * 둥근 상자를 만드는 데에 사용
+ * default radius = "lg" (20px)
+ * default padding = "lg" (16px)
+ */
 const RoundBox = ({
-  radius,
-  padding,
+  radius = "lg",
+  padding = "lg",
   isBordered,
   isShadowed,
   ...props
