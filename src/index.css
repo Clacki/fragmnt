@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
@@ -8,126 +9,200 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: "Geist Variable", sans-serif;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* =====================================================
+   PRIMITIVE COLOR TOKENS (절대값)
+  ===================================================== */
+
+  /* Base */
+  --color-bg-default: #f6f5f1;
+  --color-bg-container: #e7ddc8;
+  --color-action-active: #b58a2a;
+
+  /* Gray Scale */
+  --color-gray-primary: #2f2f2f;
+  --color-gray-0: #ffffff;
+  --color-gray-5: #f6f6f6;
+  --color-gray-10: #e6e6e6;
+  --color-gray-20: #d8d8d8;
+  --color-gray-30: #b7b7b7;
+  --color-gray-40: #9e9e9e;
+  --color-gray-50: #808080;
+  --color-gray-60: #6c6c6c;
+  --color-gray-70: #464c53;
+  --color-gray-80: #33363d;
+  --color-gray-90: #1e2124;
+  --color-gray-95: #131416;
+  --color-gray-100: #000000;
+
+  --gray-disabled: #bdbdbd;
+
+  /* BASE */
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Gradient */
+
+  --gradient-primary: linear-gradient(
+    90deg,
+    var(--primary-200) 0%,
+    var(--primary-default) 50%,
+    var(--primary-600) 100%
+  );
+
+  --gradient-line: linear-gradient(
+    90deg,
+    var(--primary-200),
+    var(--primary-default)
+  );
+
+  /* Green */
+  --color-green-5: #e3e8df;
+  --color-green-10: #a8b09a;
+  --color-green-20: #818f75;
+  --color-green-30: #6b7860;
+  --color-green-40: #56654a;
+  --color-green-50: #3d5635;
+
+  /* SHADOW  */
+
+  --shadow-box-value: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --shadow-modal-value: 0px 0px 16px rgba(160, 160, 160, 0.35);
+  --shadow-toast-value: 4px 4px 4px rgba(131, 131, 131, 0.25);
+
+  /* STATUS PALETTE */
+  --answer-active: #04c730;
+  --toast-error: #ec0037;
+
+  /* =====================================================
+   SEMANTIC TOKENS (역할 기반)
+  ===================================================== */
+
+  /* Primary */
+  --color-primary: var(--color-green-40);
+  --color-primary-disabled: var(--color-green-5);
+  --color-primary-hover: var(--color-green-50);
+
+  /* Component */
+  --color-card: var(--color-white);
+  --color-tag: var(--color-green-10);
+  --color-button: var(--color-green-40);
+  --color-chatbot: var(--color-green-50);
+  --color-star: var(--color-action-active);
+  --color-secondary: var(--color-gray-30);
+
+  /* Text */
+  --color-text-primary: var(--color-gray-primary);
+  --color-text-sub: var(--color-gray-40);
+  --color-text-highlight: var(--color-green-30);
+  --color-text-description: var(--color-gray-50);
+  --color-text-footer: var(--color-gray-60);
+  --color-text-button: var(--white);
+  --color-text-disabled: var(--gray-disabled);
+
+  /* Surface */
+  --color-surface-default: var(--color-bg-default);
+  --color-surface-container: var(--color-bg-container);
+
+  /* Toast */
+  --toast-error-color: var(--toast-error);
+
+  /* Shadow */
+  --shadow-box-color: var(--shadow-box-value);
+  --shadow-modal-color: var(--shadow-modal-value);
+  --shadow-toast-color: var(--shadow-toast-value);
+
+  /* =====================================================
+   🔥 SPACING TOKENS
+  ===================================================== */
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 48px;
+
+  /* =====================================================
+   🔥 TYPOGRAPHY TOKENS
+  ===================================================== */
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 24px;
+  --text-xl: 32px;
+  --text-2xl: 48px;
+
+  /* typography tuning (폰트 차이 보정용) */
+  --font-letter-tight: -0.01em;
+  --font-line-base: 1.45;
+
+  /* =====================================================
+   🔥 SIZE TOKENS
+  ===================================================== */
+
+  --size-container-sm: 400px;
+  --size-container-md: 600px;
+  --size-container-lg: 700px;
+  --size-container-xl: 850px;
+
+  --size-button-sm: 32px;
+  --size-button-md: 40px;
+  --size-button-lg: 48px;
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
+@theme {
+  /* COLOR */
+  --color-primary: var(--color-primary);
+  --color-card: var(--color-card);
+  --color-tag: var(--color-tag);
+  --color-button: var(--color-button);
+  --color-chatbot: var(--color-chatbot);
+  --color-star: var(--color-star);
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
+  --color-text-primary: var(--color-text-primary);
+  --color-text-sub: var(--color-text-sub);
+  --color-text-highlight: var(--color-text-highlight);
+  --color-text-description: var(--color-text-description);
+  --color-text-footer: var(--color-text-footer);
+  --color-text-button: var(--color-text-button);
+
+  --color-surface-default: var(--color-surface-default);
+  --color-surface-container: var(--color-surface-container);
+
+  /* SPACING (핵심) */
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+
+  /* TYPOGRAPHY (핵심) */
+  --font-size-xs: var(--text-xs);
+  --font-size-sm: var(--text-sm);
+  --font-size-base: var(--text-md);
+  --font-size-lg: var(--text-lg);
+  --font-size-xl: var(--text-xl);
+  --font-size-2xl: var(--text-2xl);
+
+  /* SIZE */
+  --size-button-sm: var(--size-button-sm);
+  --size-button-md: var(--size-button-md);
+  --size-button-lg: var(--size-button-lg);
+
+  /* RADIUS */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  /* SHADOW */
+  --shadow-box: var(--shadow-box-color);
+  --shadow-modal: var(--shadow-modal-color);
+  --shadow-toast: var(--shadow-toast-color);
 }
