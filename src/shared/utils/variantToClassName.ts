@@ -5,7 +5,7 @@ import type {
 } from "../types/commonPropsTypes/commonPropsTypes"
 
 export const gapVariants: Record<None | XsTo2xl, TailwindCSS> = {
-  none: "gap-0",
+  none: "",
   xs: "gap-xs",
   sm: "gap-sm",
   md: "gap-md",
@@ -15,7 +15,7 @@ export const gapVariants: Record<None | XsTo2xl, TailwindCSS> = {
 }
 
 export const paddingVariants: Record<None | XsTo2xl, TailwindCSS> = {
-  none: "p-0",
+  none: "",
   xs: "p-xs",
   sm: "p-sm",
   md: "p-md",
