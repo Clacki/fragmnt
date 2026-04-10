@@ -53,7 +53,8 @@ const RoundBox = ({
       {...rest}
       className={clsx(
         roundBoxVariants({ radius, padding, isBordered, isShadowed }),
-        className
+        className,
+        "p-10"
       )}
     >
       {children}
