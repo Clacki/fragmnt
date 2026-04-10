@@ -180,6 +180,7 @@
   --spacing-md: var(--space-md);
   --spacing-lg: var(--space-lg);
   --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
 
   /* TYPOGRAPHY (핵심) */
   --font-size-xs: var(--text-xs);

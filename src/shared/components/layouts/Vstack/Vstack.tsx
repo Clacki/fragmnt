@@ -25,7 +25,10 @@ const Vstack = ({ gap = "lg", ...props }: DivProps & WithVstackProps) => {
   const { className, children, ...rest } = props
 
   return (
-    <div {...rest} className={clsx(vstackVariants({ gap }), className)}>
+    <div
+      {...rest}
+      className={clsx(vstackVariants({ gap }), className, "gap-2xl")}
+    >
       {children}
     </div>
   )
