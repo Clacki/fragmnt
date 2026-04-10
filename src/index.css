@@ -57,7 +57,6 @@
   );
 
   /* Green */
-  --color-green-0: #fbfbfb;
   --color-green-5: #e3e8df;
   --color-green-10: #a8b09a;
   --color-green-20: #818f75;
@@ -96,7 +95,9 @@
   --color-text-sub: var(--color-gray-40);
   --color-text-highlight: var(--color-green-30);
   --color-text-description: var(--color-gray-50);
-  --color-text-card: var(--color-gray-60);
+  --color-text-footer: var(--color-gray-60);
+  --color-text-button: var(--white);
+  --color-text-disabled: var(--gray-disabled);
 
   /* Surface */
   --color-surface-default: var(--color-bg-default);
@@ -149,9 +150,92 @@
   --size-button-md: 40px;
   --size-button-lg: 48px;
 
-  --radius-sm: 6px;
+  --radius-sm: 4px;
   --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-lg: 20px;
+}
+
+@theme inline {
+  /* =====================================================
+  COLOR
+  ===================================================== */
+
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-disabled: var(--color-primary-disabled);
+
+  --color-card: var(--color-card);
+  --color-tag: var(--color-tag);
+  --color-button: var(--color-button);
+  --color-chatbot: var(--color-chatbot);
+  --color-star: var(--color-star);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-sub: var(--color-text-sub);
+  --color-text-highlight: var(--color-text-highlight);
+  --color-text-description: var(--color-text-description);
+  --color-text-footer: var(--color-text-footer);
+  --color-text-button: var(--color-text-button);
+  --color-text-disabled: var(--color-text-disabled);
+
+  --color-surface-default: var(--color-surface-default);
+  --color-surface-container: var(--color-surface-container);
+
+  --color-toast-error: var(--toast-error-color);
+
+  /* =====================================================
+  SPACING
+  ===================================================== */
+
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+
+  /* =====================================================
+  TYPOGRAPHY
+  ===================================================== */
+
+  --font-size-xs: var(--text-xs);
+  --font-size-sm: var(--text-sm);
+  --font-size-md: var(--text-md);
+  --font-size-lg: var(--text-lg);
+  --font-size-xl: var(--text-xl);
+  --font-size-2xl: var(--text-2xl);
+
+  --tracking-tight: var(--font-letter-tight);
+  --leading-base: var(--font-line-base);
+
+  /* =====================================================
+  SIZE
+  ===================================================== */
+
+  --size-container-sm: var(--size-container-sm);
+  --size-container-md: var(--size-container-md);
+  --size-container-lg: var(--size-container-lg);
+  --size-container-xl: var(--size-container-xl);
+
+  --size-button-sm: var(--size-button-sm);
+  --size-button-md: var(--size-button-md);
+  --size-button-lg: var(--size-button-lg);
+
+  /* =====================================================
+  RADIUS
+  ===================================================== */
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  /* =====================================================
+  SHADOW
+  ===================================================== */
+
+  --shadow-box: var(--shadow-box-color);
+  --shadow-modal: var(--shadow-modal-color);
+  --shadow-toast: var(--shadow-toast-color);
 }
 
 /* shadcn css */
