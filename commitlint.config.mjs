@@ -37,4 +37,4 @@ export default {
     // 본문이 있는 경우, 제목 다음에 한 줄(Blank Line) 띄어야 합니다.
     "body-leading-blank": [1, "always"],
   },
-};
+}
