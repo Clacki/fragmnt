@@ -3489,6 +3489,7 @@ packages:
     engines: {node: '>= 0.8.0'}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   pretty-format@27.5.1:
     resolution: {integrity: sha512-Qb1gy5OrP5+zDf2Bvnzdl3jsTf1qXVMazbvCoKhtKqVs4/YK4ozX4gKQJJVyNe+cajNPn0KoC0MC3FUmaHWEmQ==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
@@ -3505,6 +3506,8 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 =======
+=======
+>>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
   prettier-plugin-organize-imports@4.3.0:
     resolution: {integrity: sha512-FxFz0qFhyBsGdIsb697f/EkvHzi5SZOhWAjxcx2dLt+Q532bAlhswcXGYB1yzjZ69kW8UoadFBw7TyNwlq96Iw==}
     peerDependencies:
@@ -3574,6 +3577,9 @@ packages:
     resolution: {integrity: sha512-8c3mgTe0ASwWAJK+78dpviD+A8EqhndQPUBpNUIPt6+xWlIigCwfN01lWr9MAede4uqXGTEKeQWTvzb3vjia0Q==}
     engines: {node: '>=14'}
     hasBin: true
+<<<<<<< HEAD
+>>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
+=======
 >>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
 
   punycode@2.3.1:
@@ -7617,6 +7623,7 @@ snapshots:
   prelude-ls@1.2.1: {}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   pretty-format@27.5.1:
     dependencies:
       ansi-regex: 5.0.1
@@ -7637,6 +7644,8 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 =======
+=======
+>>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
   prettier-plugin-organize-imports@4.3.0(prettier@3.8.2)(typescript@6.0.2):
     dependencies:
       prettier: 3.8.2
@@ -7649,6 +7658,9 @@ snapshots:
       prettier-plugin-organize-imports: 4.3.0(prettier@3.8.2)(typescript@6.0.2)
 
   prettier@3.8.2: {}
+<<<<<<< HEAD
+>>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
+=======
 >>>>>>> a1a4b6d (chore(dep): 프리티어 및 관련 플러그인 설치)
 
   punycode@2.3.1: {}
