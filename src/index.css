@@ -8,6 +8,153 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* =====================================================
+   PRIMITIVE COLOR TOKENS (절대값)
+  ===================================================== */
+
+  /* Base */
+  --color-bg-default: #f6f5f1;
+  --color-bg-container: #e7ddc8;
+  --color-action-active: #b58a2a;
+
+  /* Gray Scale */
+  --color-gray-primary: #2f2f2f;
+  --color-gray-0: #ffffff;
+  --color-gray-5: #f6f6f6;
+  --color-gray-10: #e6e6e6;
+  --color-gray-20: #d8d8d8;
+  --color-gray-30: #b7b7b7;
+  --color-gray-40: #9e9e9e;
+  --color-gray-50: #808080;
+  --color-gray-60: #6c6c6c;
+  --color-gray-70: #464c53;
+  --color-gray-80: #33363d;
+  --color-gray-90: #1e2124;
+  --color-gray-95: #131416;
+  --color-gray-100: #000000;
+
+  --gray-disabled: #bdbdbd;
+
+  /* BASE */
+
+  --white: #ffffff;
+  --black: #000000;
+
+  /* Gradient */
+
+  --gradient-primary: linear-gradient(
+    90deg,
+    var(--primary-200) 0%,
+    var(--primary-default) 50%,
+    var(--primary-600) 100%
+  );
+
+  --gradient-line: linear-gradient(
+    90deg,
+    var(--primary-200),
+    var(--primary-default)
+  );
+
+  /* Green */
+  --color-green-0: #fbfbfb;
+  --color-green-5: #e3e8df;
+  --color-green-10: #a8b09a;
+  --color-green-20: #818f75;
+  --color-green-30: #6b7860;
+  --color-green-40: #56654a;
+  --color-green-50: #3d5635;
+
+  /* SHADOW  */
+
+  --shadow-box-value: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --shadow-modal-value: 0px 0px 16px rgba(160, 160, 160, 0.35);
+  --shadow-toast-value: 4px 4px 4px rgba(131, 131, 131, 0.25);
+
+  /* STATUS PALETTE */
+  --answer-active: #04c730;
+  --toast-error: #ec0037;
+
+  /* =====================================================
+   SEMANTIC TOKENS (역할 기반)
+  ===================================================== */
+
+  /* Primary */
+  --color-primary: var(--color-green-40);
+  --color-primary-disabled: var(--color-green-5);
+  --color-primary-hover: var(--color-green-50);
+
+  /* Component */
+  --color-card: var(--color-green-30);
+  --color-tag: var(--color-green-10);
+  --color-button: var(--color-green-40);
+  --color-chatbot: var(--color-green-50);
+  --color-star: var(--color-action-active);
+
+  /* Text */
+  --color-text-primary: var(--color-gray-primary);
+  --color-text-sub: var(--color-gray-40);
+  --color-text-highlight: var(--color-green-30);
+  --color-text-description: var(--color-gray-50);
+  --color-text-card: var(--color-gray-60);
+
+  /* Surface */
+  --color-surface-default: var(--color-bg-default);
+  --color-surface-container: var(--color-bg-container);
+
+  /* Toast */
+  --toast-error-color: var(--toast-error);
+
+  /* Shadow */
+  --shadow-box-color: var(--shadow-box-value);
+  --shadow-modal-color: var(--shadow-modal-value);
+  --shadow-toast-color: var(--shadow-toast-value);
+
+  /* =====================================================
+   🔥 SPACING TOKENS
+  ===================================================== */
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 48px;
+
+  /* =====================================================
+   🔥 TYPOGRAPHY TOKENS
+  ===================================================== */
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 24px;
+  --text-xl: 32px;
+  --text-2xl: 48px;
+
+  /* typography tuning (폰트 차이 보정용) */
+  --font-letter-tight: -0.01em;
+  --font-line-base: 1.45;
+
+  /* =====================================================
+   🔥 SIZE TOKENS
+  ===================================================== */
+
+  --size-container-sm: 400px;
+  --size-container-md: 600px;
+  --size-container-lg: 700px;
+  --size-container-xl: 850px;
+
+  --size-button-sm: 32px;
+  --size-button-md: 40px;
+  --size-button-lg: 48px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+/* shadcn css */
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: "Geist Variable", sans-serif;
