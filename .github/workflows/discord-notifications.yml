@@ -174,7 +174,7 @@ jobs:
               AUTHOR_MENTION="<@950597490086924368>"
               ;;
             "fishwwww2")
-                MENTIONS="$MENTIONS <@363536806286721034>"
+              AUTHOR_MENTION="<@363536806286721034>"
                 ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
@@ -227,7 +227,7 @@ jobs:
               AUTHOR_MENTION="<@950597490086924368>"
               ;;
             "fishwwww2")
-                MENTIONS="$MENTIONS <@363536806286721034>"
+              AUTHOR_MENTION="<@363536806286721034>"
                 ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
