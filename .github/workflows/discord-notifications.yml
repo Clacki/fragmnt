@@ -76,8 +76,8 @@ jobs:
                   MENTIONS="$MENTIONS <@768360541995008010>"
                   ;;
                 "ThePott")
-                 MENTIONS="$MENTIONS <@599242098683936770>"
-                 ;;
+                  MENTIONS="$MENTIONS <@599242098683936770>"
+                  ;;
                 *)
                   MENTIONS="$MENTIONS @$login"
                   ;;
@@ -98,28 +98,28 @@ jobs:
 
             # 안전한 JSON 생성
             curl -H "Content-Type: application/json" \
-                 -X POST \
-                 -d "{
+                  -X POST \
+                  -d "{
                    \"content\": \"🔍 **리뷰 요청이 도착했습니다!** $MENTIONS\",
-                   \"embeds\": [{
-                     \"title\": \"리뷰를 부탁드립니다! 👀\",
-                     \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
-                     \"color\": 16776960,
-                     \"fields\": [
-                       {
-                         \"name\": \"👤 PR 작성자\",
-                         \"value\": \"${{ github.event.pull_request.user.login }}\",
-                         \"inline\": true
-                       },
-                       {
-                         \"name\": \"📁 변경사항\",
-                         \"value\": \"파일 ${{ github.event.pull_request.changed_files }}개 | +${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }}\",
-                         \"inline\": false
-                       }
-                     ]
-                   }]
-                 }" \
-                 ${{ secrets.DISCORD_WEBHOOK_URL }}
+                    \"embeds\": [{
+                      \"title\": \"리뷰를 부탁드립니다! 👀\",
+                      \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
+                      \"color\": 16776960,
+                      \"fields\": [
+                        {
+                          \"name\": \"👤 PR 작성자\",
+                          \"value\": \"${{ github.event.pull_request.user.login }}\",
+                          \"inline\": true
+                        },
+                        {
+                          \"name\": \"📁 변경사항\",
+                          \"value\": \"파일 ${{ github.event.pull_request.changed_files }}개 | +${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }}\",
+                          \"inline\": false
+                        }
+                      ]
+                    }]
+                  }" \
+                  ${{ secrets.DISCORD_WEBHOOK_URL }}
           else
             echo "중복 실행 방지: 이미 첫 번째 리뷰어가 알림을 전송했습니다."
           fi
@@ -175,7 +175,7 @@ jobs:
               ;;
             "fishwwww2")
               AUTHOR_MENTION="<@363536806286721034>"
-                ;;
+              ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
@@ -228,7 +228,7 @@ jobs:
               ;;
             "fishwwww2")
               AUTHOR_MENTION="<@363536806286721034>"
-                ;;
+              ;;
             "Clacki")
               AUTHOR_MENTION="<@768360541995008010>"
               ;;
@@ -238,3 +238,28 @@ jobs:
             *)
               AUTHOR_MENTION="@${{ github.event.pull_request.user.login }}"
               ;;
+          esac
+
+          curl -H "Content-Type: application/json" \
+              -X POST \
+              -d "{
+                \"content\": \"🔄 **변경사항이 요청되었습니다!** $AUTHOR_MENTION\",
+                \"embeds\": [{
+                  \"title\": \"❗ 수정이 필요합니다\",
+                  \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
+                  \"color\": 16776960,
+                  \"fields\": [
+                    {
+                      \"name\": \"👀 리뷰어\",
+                      \"value\": \"${{ github.event.review.user.login }}\",
+                      \"inline\": true
+                    },
+                    {
+                      \"name\": \"📝 요청사항\",
+                      \"value\": \"변경사항이 요청되었습니다. 자세한 내용은 PR을 확인해주세요.\",
+                      \"inline\": false
+                    }
+                  ]
+                }]
+              }" \
+              ${{ secrets.DISCORD_WEBHOOK_URL }}
