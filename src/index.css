@@ -2,7 +2,6 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-@import "tailwindcss/preflight";
 
 @tailwind utilities;
 @custom-variant dark (&: is(.dark *));
@@ -101,6 +100,7 @@
 
   /* border */
   --color-border: var(--color-gray-20);
+  --color-border-primary: var(--color-primary);
 
   /* Surface */
   --color-surface-default: var(--color-bg-default);
@@ -129,8 +129,8 @@
    🔥 TYPOGRAPHY TOKENS
   ===================================================== */
 
-  --text-xs: 12px;
-  --text-sm: 14px;
+  --text-xs: 8px;
+  --text-sm: 12px;
   --text-md: 16px;
   --text-lg: 24px;
   --text-xl: 32px;
@@ -171,6 +171,7 @@
   --color-star: var(--color-star);
   --color-secondary: var(--color-secondary);
   --color-border: var(--color-gray-20);
+  --color-border-primary: var(--color-primary);
 
   /* color: text */
   --color-text-primary: var(--color-text-primary);
@@ -204,12 +205,12 @@
   --spacing-2xl: var(--space-2xl);
 
   /* typography */
-  --font-size-xs: var(--text-xs);
-  --font-size-sm: var(--text-sm);
-  --font-size-base: var(--text-md);
-  --font-size-lg: var(--text-lg);
-  --font-size-xl: var(--text-xl);
-  --font-size-2xl: var(--text-2xl);
+  --text-xs: var(--text-xs);
+  --text-sm: var(--text-sm);
+  --text-md: var(--text-md);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
 
   /* radius */
   --radius-sm: var(--radius-sm);
