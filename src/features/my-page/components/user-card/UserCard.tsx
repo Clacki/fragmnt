@@ -10,10 +10,10 @@ type UserCardProps = {
   icon?: ReactNode
 }
 
-/**
+/*
  * 사용자 정보를 표시하는 공통 카드 컴포넌트입니다.
  */
-export default function UserCard(props: UserCardProps) {
+const UserCard = (props: UserCardProps) => {
   const { label, value, className, icon } = props
 
   return (
@@ -37,3 +37,5 @@ export default function UserCard(props: UserCardProps) {
     </div>
   )
 }
+
+export default UserCard
