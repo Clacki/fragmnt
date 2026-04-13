@@ -9,6 +9,24 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
+    size: {
+      control: "select",
+      options: ["sm", "lg"],
+      description: "Button size",
+    },
+    shape: {
+      control: "select",
+      options: ["rectangle", "pill"],
+      description: "Button shape",
+    },
+    isContained: {
+      control: "boolean",
+      description: "Whether button is contained style",
+    },
+    disabled: {
+      control: "boolean",
+      description: "Whether button is disabled",
+    },
     children: {
       control: "text",
       description: "Button content",
@@ -22,6 +40,41 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     children: "Button",
+  },
+}
+
+export const Small: Story = {
+  args: {
+    size: "sm",
+    children: "Small Button",
+  },
+}
+
+export const Large: Story = {
+  args: {
+    size: "lg",
+    children: "Large Button",
+  },
+}
+
+export const Pill: Story = {
+  args: {
+    shape: "pill",
+    children: "Pill Button",
+  },
+}
+
+export const Outlined: Story = {
+  args: {
+    isContained: false,
+    children: "Outlined Button",
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: "Disabled Button",
   },
 }
 
