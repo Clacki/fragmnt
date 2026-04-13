@@ -83,7 +83,7 @@
   --color-primary-hover: var(--color-green-50);
 
   /* Component */
-  --color-card: var(--color-white);
+  --color-card: var(--white);
   --color-tag: var(--color-green-10);
   --color-button: var(--color-green-40);
   --color-chatbot: var(--color-green-50);
@@ -98,6 +98,9 @@
   --color-text-footer: var(--color-gray-60);
   --color-text-button: var(--white);
   --color-text-disabled: var(--gray-disabled);
+
+  /* border */
+  --color-border: var(--color-gray-20);
 
   /* Surface */
   --color-surface-default: var(--color-bg-default);
@@ -156,25 +159,43 @@
 }
 
 @theme {
-  /* COLOR */
+  /* color: brand / component */
   --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-disabled: var(--color-primary-disabled);
+
   --color-card: var(--color-card);
   --color-tag: var(--color-tag);
   --color-button: var(--color-button);
   --color-chatbot: var(--color-chatbot);
   --color-star: var(--color-star);
+  --color-secondary: var(--color-secondary);
+  --color-border: var(--color-gray-20);
 
+  /* color: text */
   --color-text-primary: var(--color-text-primary);
   --color-text-sub: var(--color-text-sub);
   --color-text-highlight: var(--color-text-highlight);
   --color-text-description: var(--color-text-description);
   --color-text-footer: var(--color-text-footer);
   --color-text-button: var(--color-text-button);
+  --color-text-disabled: var(--color-text-disabled);
 
+  /* color: surface */
   --color-surface-default: var(--color-surface-default);
   --color-surface-container: var(--color-surface-container);
 
-  /* SPACING (핵심) */
+  /* gray */
+  --color-gray-primary: var(--color-gray-primary);
+  --color-gray-0: var(--color-gray-0);
+  --color-gray-5: var(--color-gray-5);
+  --color-gray-10: var(--color-gray-10);
+  --color-gray-20: var(--color-gray-20);
+  --color-gray-30: var(--color-gray-30);
+  --color-gray-40: var(--color-gray-40);
+  --color-gray-50: var(--color-gray-50);
+
+  /* spacing */
   --spacing-xs: var(--space-xs);
   --spacing-sm: var(--space-sm);
   --spacing-md: var(--space-md);
@@ -182,7 +203,7 @@
   --spacing-xl: var(--space-xl);
   --spacing-2xl: var(--space-2xl);
 
-  /* TYPOGRAPHY (핵심) */
+  /* typography */
   --font-size-xs: var(--text-xs);
   --font-size-sm: var(--text-sm);
   --font-size-base: var(--text-md);
@@ -190,17 +211,12 @@
   --font-size-xl: var(--text-xl);
   --font-size-2xl: var(--text-2xl);
 
-  /* SIZE */
-  --size-button-sm: var(--size-button-sm);
-  --size-button-md: var(--size-button-md);
-  --size-button-lg: var(--size-button-lg);
-
-  /* RADIUS */
+  /* radius */
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
 
-  /* SHADOW */
+  /* shadow */
   --shadow-box: var(--shadow-box-color);
   --shadow-modal: var(--shadow-modal-color);
   --shadow-toast: var(--shadow-toast-color);
