@@ -16,8 +16,8 @@ const tagVariants = cva(
   {
     variants: {
       size: {
-        sm: "text-sm py-sm px-md",
-        md: "text-md py-xs px-sm",
+        sm: "text-sm py-xs px-sm",
+        md: "text-md py-sm px-md",
       },
       variant: {
         outlined: "cursor-pointer border border-border text-text-sub bg-gray-0",

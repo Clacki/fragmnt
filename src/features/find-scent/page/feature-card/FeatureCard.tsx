@@ -31,7 +31,7 @@ const FeatureCard = ({
           onClick={onClick}
           size="sm"
           shape="rectangle"
-          className="w-25 mt-auto"
+          className="mt-auto w-[100px]"
         >
           {buttonLabel}
         </Button>

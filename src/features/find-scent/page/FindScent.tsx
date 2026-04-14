@@ -1,8 +1,8 @@
 import ChatImage from "@/assets/images/find-scent/chat.jpg"
 import PhotoImage from "@/assets/images/find-scent/photo.jpg"
 import SurveyImage from "@/assets/images/find-scent/survey.jpg"
-import FeatureCard from "../components/feature-card/FeatureCard"
 import type { FeatureCardItem } from "../types/feature-card.type"
+import FeatureCard from "./feature-card/FeatureCard"
 
 const featureCardList: FeatureCardItem[] = [
   {

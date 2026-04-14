@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
+import ChatImage from "@/assets/images/find-scent/chat.jpg"
+import PhotoImage from "@/assets/images/find-scent/photo.jpg"
+import SurveyImage from "@/assets/images/find-scent/survey.jpg"
 import FeatureCard from "./FeatureCard"
 
 const meta = {
@@ -22,7 +25,7 @@ type Story = StoryObj<typeof meta>
 
 export const Photo: Story = {
   args: {
-    imageSrc: "/src/assets/images/find-scent/photo.jpg",
+    imageSrc: PhotoImage,
     imageAlt: "사진 기반 공간 분석 카드 이미지",
     title: "사진 기반 공간 분석",
     description:
@@ -33,7 +36,7 @@ export const Photo: Story = {
 
 export const Chat: Story = {
   args: {
-    imageSrc: "/src/assets/images/find-scent/chat.jpg",
+    imageSrc: ChatImage,
     imageAlt: "대화 기반 취향 분석 카드 이미지",
     title: "대화 기반 취향 분석",
     description: "당신의 문장 사이에서\n오늘의 향기를 찾습니다",
@@ -43,7 +46,7 @@ export const Chat: Story = {
 
 export const Keyword: Story = {
   args: {
-    imageSrc: "/src/assets/images/find-scent/servey.jpg",
+    imageSrc: SurveyImage,
     imageAlt: "키워드 기반 정밀 분석 카드 이미지",
     title: "키워드 기반 정밀 분석",
     description: "선호하는 분위기와 향 키워드를\n조합하여 향기를 찾습니다",
@@ -53,7 +56,7 @@ export const Keyword: Story = {
 
 export const Default: Story = {
   args: {
-    imageSrc: "/src/assets/images/find-scent/photo.jpg",
+    imageSrc: PhotoImage,
     imageAlt: "사진 기반 공간 분석 카드 이미지",
     title: "사진 기반 공간 분석",
     description:
