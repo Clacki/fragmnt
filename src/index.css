@@ -226,6 +226,11 @@
   --width-container-lg: var(--size-container-lg);
   --width-container-xl: var(--size-container-xl);
 
+  /* button sizes */
+  --size-button-sm: var(--size-button-sm);
+  --size-button-md: var(--size-button-md);
+  --size-button-lg: var(--size-button-lg);
+
   /* radius */
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
