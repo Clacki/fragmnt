@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import type { HistoryCardProps } from "@/features/my-page/types"
 import { cn } from "@/lib/utils"
-import { EmptyImage } from "@/shared/components"
+import { EmptyImage, Tag } from "@/shared/components"
 
 const HistoryCard = ({
   imageSrc,
@@ -57,12 +57,7 @@ const HistoryCard = ({
         {!!tags.length && (
           <div className="mt-2 flex overflow-hidden gap-2">
             {tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex h-10 items-center rounded-md border border-border px-lg text-md text-text-sub whitespace-nowrap"
-              >
-                {tag}
-              </span>
+              <Tag key={tag} label={tag} size="md" variant="outlined" />
             ))}
           </div>
         )}

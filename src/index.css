@@ -122,12 +122,12 @@
    🔥 SPACING TOKENS
   ===================================================== */
 
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 12px;
-  --space-lg: 16px;
-  --space-xl: 24px;
-  --space-2xl: 48px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 48px;
 
   /* =====================================================
    🔥 TYPOGRAPHY TOKENS
