@@ -23,7 +23,7 @@ const HistoryCard = ({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex w-container-md items-center gap-4 rounded-md border border-primary bg-white px-4 py-3 text-left shadow-md transition-all",
+        "flex w-container-md items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
         "hover:bg-gray-5 hover:shadow-lg",
         className
       )}
@@ -59,7 +59,7 @@ const HistoryCard = ({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex h-10 items-center rounded-md border border-border px-5 pt-1 text-md text-text-sub"
+                className="inline-flex h-10 items-center rounded-md border border-border px-lg text-md text-text-sub"
               >
                 {tag}
               </span>
