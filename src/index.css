@@ -83,6 +83,7 @@
 
   /* Component */
   --color-card: var(--white);
+  --color-badge: var(--color-green-5);
   --color-tag: var(--color-green-10);
   --color-button: var(--color-green-40);
   --color-chatbot: var(--color-green-50);
@@ -166,6 +167,7 @@
   --color-primary-disabled: var(--color-primary-disabled);
 
   --color-card: var(--color-card);
+  --color-badge: var(--color-badge);
   --color-tag: var(--color-tag);
   --color-button: var(--color-button);
   --color-chatbot: var(--color-chatbot);
@@ -213,6 +215,16 @@
   --text-lg: var(--text-lg);
   --text-xl: var(--text-xl);
   --text-2xl: var(--text-2xl);
+
+  /* container sizes */
+  --size-container-sm: var(--size-container-sm);
+  --size-container-md: var(--size-container-md);
+  --size-container-lg: var(--size-container-lg);
+  --size-container-xl: var(--size-container-xl);
+  --width-container-sm: var(--size-container-sm);
+  --width-container-md: var(--size-container-md);
+  --width-container-lg: var(--size-container-lg);
+  --width-container-xl: var(--size-container-xl);
 
   /* radius */
   --radius-sm: var(--radius-sm);

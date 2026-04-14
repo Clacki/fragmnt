@@ -48,7 +48,7 @@ const Empty = ({
           sizeStyle[type][size],
           isAvatar
             ? "rounded-full bg-white shadow-md"
-            : "rounded-lg bg-disabled",
+            : "rounded-lg bg-primary-disabled",
           className
         )}
       >

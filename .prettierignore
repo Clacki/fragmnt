@@ -7,6 +7,7 @@ package.json
 package-lock.json
 .husky
 .github
+.vscode
 tsconfig.json
 tsconfig.app.json
 tsconfig.node.json
