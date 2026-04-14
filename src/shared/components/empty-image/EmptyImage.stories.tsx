@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import Empty from "./Empty"
+import EmptyImage from "./EmptyImage"
 
-const meta: Meta<typeof Empty> = {
-  title: "Common/Empty",
-  component: Empty,
+const meta: Meta<typeof EmptyImage> = {
+  title: "Common/EmptyImage",
+  component: EmptyImage,
   parameters: {
     layout: "centered",
     docs: {
       description: {
         component: `
-Empty 컴포넌트는 콘텐츠가 없을 때 표시되는 플레이스홀더 UI입니다.
+EmptyImage 컴포넌트는 콘텐츠가 없을 때 표시되는 플레이스홀더 UI입니다.
 
 ### 타입
 - avatar: 프로필 이미지가 없을 때 사용
@@ -26,11 +26,11 @@ Empty 컴포넌트는 콘텐츠가 없을 때 표시되는 플레이스홀더 UI
 
 ### 예시
 \`\`\`tsx
-<Empty />
-<Empty type="avatar" size="lg" />
-<Empty className="bg-white" />
-<Empty wrapperClassName="justify-start" />
-<Empty iconSize={28} />
+<EmptyImage />
+<EmptyImage type="avatar" size="lg" />
+<EmptyImage className="bg-white" />
+<EmptyImage wrapperClassName="justify-start" />
+<EmptyImage iconSize={28} />
 \`\`\`
     `,
       },
@@ -40,7 +40,7 @@ Empty 컴포넌트는 콘텐츠가 없을 때 표시되는 플레이스홀더 UI
 }
 
 export default meta
-type Story = StoryObj<typeof Empty>
+type Story = StoryObj<typeof EmptyImage>
 
 export const Avatar: Story = {
   args: {

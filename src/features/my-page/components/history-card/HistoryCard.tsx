@@ -3,7 +3,7 @@ import { useState } from "react"
 
 import type { HistoryCardProps } from "@/features/my-page/types"
 import { cn } from "@/lib/utils"
-import { Empty } from "@/shared/components"
+import { EmptyImage } from "@/shared/components"
 
 const HistoryCard = ({
   imageSrc,
@@ -37,7 +37,7 @@ const HistoryCard = ({
             onError={() => setIsError(true)}
           />
         ) : (
-          <Empty type="image" size="sm" className="rounded-lg" />
+          <EmptyImage type="image" size="sm" className="rounded-lg" />
         )}
       </div>
 

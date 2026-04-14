@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import CollectionCard from "./CollectionCard"
 
 const meta: Meta<typeof CollectionCard> = {
-  title: "Common/CollectionCard",
+  title: "Components/CollectionCard",
   component: CollectionCard,
   parameters: {
     layout: "centered",

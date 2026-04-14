@@ -1,4 +1,4 @@
-import { Tag } from "../tag"
+import Tag from "../tag/Tag"
 
 type ArchiveCardProps = {
   imageSrc: string

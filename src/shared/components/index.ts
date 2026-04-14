@@ -1,4 +1,5 @@
-export { default as Empty } from "./empty/Empty"
+export { default as EmptyImage } from "./empty-image/EmptyImage"
 export * from "./inputs"
 export * from "./layouts"
 export { default as StateBar } from "./state-bar/StateBar"
+export { default as Tag } from "./tag/Tag"

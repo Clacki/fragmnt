@@ -31,7 +31,7 @@ const iconSizeStyle = {
   lg: 48,
 } as const
 
-const Empty = ({
+const EmptyImage = ({
   type = "image",
   size = "md",
   iconSize,
@@ -70,4 +70,4 @@ const Empty = ({
   )
 }
 
-export default Empty
+export default EmptyImage

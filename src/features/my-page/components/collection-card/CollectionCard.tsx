@@ -1,5 +1,4 @@
-import { Empty } from "@/shared/components"
-import { Tag } from "@/shared/components/tag"
+import { EmptyImage, Tag } from "@/shared/components"
 import { Trash2 } from "lucide-react"
 import { useState } from "react"
 
@@ -35,7 +34,7 @@ const CollectionCard = ({
             onError={() => setIsError(true)}
           />
         ) : (
-          <Empty type="image" size="md" />
+          <EmptyImage type="image" size="md" />
         )}
       </div>
       <div className="flex flex-1 flex-col justify-between p-lg">

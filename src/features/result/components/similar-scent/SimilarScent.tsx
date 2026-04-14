@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { cn } from "@/lib/utils"
-import { Empty } from "@/shared/components"
+import { EmptyImage } from "@/shared/components"
 import type { SimilarScentProps } from "@/shared/types"
 
 const SimilarScent = ({
@@ -35,7 +35,7 @@ const SimilarScent = ({
             onError={() => setIsError(true)}
           />
         ) : (
-          <Empty type="image" size="md" className="rounded-none" />
+          <EmptyImage type="image" size="md" className="rounded-none" />
         )}
       </div>
 
