@@ -4,7 +4,7 @@ import type {
   SmToLg,
   XsToXl,
 } from "@/shared/types/commonPropsTypes/commonPropsTypes"
-import { paddingVariants } from "@/shared/utils/variantToClassName"
+import { paddingVariants } from "@/shared/utils/variant-to-classname"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
 

@@ -3,7 +3,7 @@ import type {
   None,
   XsTo2xl,
 } from "@/shared/types/commonPropsTypes/commonPropsTypes"
-import { gapVariants } from "@/shared/utils/variantToClassName"
+import { gapVariants } from "@/shared/utils/variant-to-classname"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
 

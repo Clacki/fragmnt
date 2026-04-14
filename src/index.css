@@ -99,10 +99,12 @@
   --color-text-footer: var(--color-gray-60);
   --color-text-button: var(--white);
   --color-text-disabled: var(--gray-disabled);
+  --color-text-error: var(--toast-error);
 
   /* border */
   --color-border: var(--color-gray-20);
   --color-border-primary: var(--color-primary);
+  --color-border-error: var(--toast-error);
 
   /* Surface */
   --color-surface-default: var(--color-bg-default);
@@ -176,6 +178,7 @@
 
   --color-border: var(--color-gray-20);
   --color-border-primary: var(--color-primary);
+  --color-border-error: var(--color-border-error);
 
   /* color: text */
   --color-text-primary: var(--color-text-primary);
@@ -185,6 +188,7 @@
   --color-text-footer: var(--color-text-footer);
   --color-text-button: var(--color-text-button);
   --color-text-disabled: var(--color-text-disabled);
+  --color-text-error: var(--color-text-error);
 
   /* color: surface */
   --color-surface-default: var(--color-surface-default);
