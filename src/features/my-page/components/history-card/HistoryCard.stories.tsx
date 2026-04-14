@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import HistoryCard from "./HistoryCard"
 
 const meta: Meta<typeof HistoryCard> = {
-  title: "Common/HistoryCard",
+  title: "Components/HistoryCard",
   component: HistoryCard,
   parameters: {
     layout: "centered",

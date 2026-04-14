@@ -23,12 +23,12 @@ const HistoryCard = ({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex w-container-md items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
+        "flex w-full items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
         "hover:bg-gray-5 hover:shadow-lg",
         className
       )}
     >
-      <div className="flex size-25 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-disabled">
+      <div className="flex w-1/4 aspect-square shrink-0 items-center justify-center overflow-hidden rounded-lg bg-disabled">
         {imageSrc && !isError ? (
           <img
             src={imageSrc}
@@ -41,8 +41,8 @@ const HistoryCard = ({
         )}
       </div>
 
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
+      <div className="flex-1 min-w-0">
+        <div className="flex min-w-0 items-center gap-2">
           <h3 className="min-w-0 truncate text-lg font-bold leading-none text-text-primary">
             {title}
           </h3>
@@ -55,11 +55,11 @@ const HistoryCard = ({
         </div>
 
         {!!tags.length && (
-          <div className="mt-2 flex flex-wrap gap-2">
+          <div className="mt-2 flex overflow-hidden gap-2">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex h-10 items-center rounded-md border border-border px-lg text-md text-text-sub"
+                className="inline-flex h-10 items-center rounded-md border border-border px-lg text-md text-text-sub whitespace-nowrap"
               >
                 {tag}
               </span>

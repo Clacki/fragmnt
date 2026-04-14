@@ -4,7 +4,7 @@ import { CalendarDays, Mail, Phone, User } from "lucide-react"
 import UserCard from "./UserCard"
 
 const meta: Meta<typeof UserCard> = {
-  title: "common/UserCard",
+  title: "Components/UserCard",
   component: UserCard,
   parameters: {
     layout: "centered",

@@ -1,2 +1,4 @@
+export * from "./card-types/card.type.ts"
 export * from "./commonPropsTypes/commonPropsTypes.ts"
 export * from "./defaultTypes/defaultTypes.ts"
+export * from "./scent-types/scent.type.ts"

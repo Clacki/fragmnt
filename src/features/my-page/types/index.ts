@@ -1,2 +1,2 @@
-export * from "./analysis"
-export * from "./history"
+export * from "./analysis.type"
+export * from "./history.type"

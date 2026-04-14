@@ -1,12 +1,9 @@
-export type HistoryCardProps = {
-  imageSrc?: string
-  imageAlt?: string
-  title: string
+import type { BaseImageCardProps } from "@/shared/types"
+
+export type HistoryCardProps = BaseImageCardProps & {
   badgeText?: string
   tags?: string[]
   date: string
-  onClick?: () => void
-  className?: string
 }
 
 // 추후 렌더링 단계에서 사용
