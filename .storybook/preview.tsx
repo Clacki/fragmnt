@@ -1,7 +1,16 @@
+import "@/index.css"
 import type { Preview } from "@storybook/react-vite"
-import "../src/index.css"
+import { Toaster } from "../src/shared/components/toast/sonner"
 
 const preview: Preview = {
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+        <Toaster />
+      </>
+    ),
+  ],
   parameters: {
     controls: {
       matchers: {
@@ -9,11 +18,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
       test: "todo",
     },
   },

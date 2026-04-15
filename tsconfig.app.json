@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "ignoreDeprecations": "6.0",
+    "allowArbitraryExtensions": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
@@ -19,10 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    "types": ["vite/client"],
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", ".storybook"]
 }

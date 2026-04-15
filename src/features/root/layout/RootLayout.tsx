@@ -1,3 +1,4 @@
+import { Toaster } from "@/shared/components/toast"
 import { Outlet } from "@tanstack/react-router"
 
 const RootLayout = () => {
@@ -5,6 +6,7 @@ const RootLayout = () => {
     <div>
       <div>this is header placeholder</div>
       <Outlet />
+      <Toaster />
     </div>
   )
 }
