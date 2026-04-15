@@ -6,7 +6,7 @@ import type { ReactNode } from "react"
 const buttonVariants = cva("transition", {
   variants: {
     size: {
-      sm: "text-sm py-md px-xl",
+      sm: "text-md py-sm px-xl",
       lg: "text-md py-lg px-xl",
     },
     shape: {

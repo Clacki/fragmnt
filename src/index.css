@@ -254,6 +254,8 @@
   --shadow-box: var(--shadow-box-color);
   --shadow-modal: var(--shadow-modal-color);
   --shadow-toast: var(--shadow-toast-color);
+
+  --font-league-gothic: "League Gothic", sans-serif;
 }
 
 /* fonts */
@@ -287,6 +289,11 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: "League Gothic";
+  src: url("/src/assets/fonts/LeagueGothic.ttf") format("truetype");
 }
 
 html,
