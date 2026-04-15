@@ -1,4 +1,4 @@
-import EmptyStateImage from "@/assets/images/empty-state/empty_scent.svg"
+import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import { Button } from "@/shared/components"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import EmptyState from "./EmptyState"
