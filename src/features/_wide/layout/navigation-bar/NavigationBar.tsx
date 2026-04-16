@@ -1,10 +1,10 @@
+import type { FileRoutesByFullPath } from "@/routeTree.gen"
 import { Hstack, Vstack } from "@/shared/components"
-import { useLocation, useNavigate } from "@tanstack/react-router"
+import { Link, useLocation, useNavigate } from "@tanstack/react-router"
 import clsx from "clsx"
 import { Home, ScrollText, Sparkles, User } from "lucide-react"
 
-type NavigationPathname = "/" | "." // TODO: 실제 라우트 생성되고 나면 "." 삭제
-// type NavigationPathname = "/" | "/list" | "/search" | "/my-page" | "." // TODO: 실제 라우트 생성되고 나면 이것 사용
+type NavigationPathname = keyof FileRoutesByFullPath
 type LucideIconProps = typeof Home
 
 type NavigationButtonConfig = {
@@ -15,9 +15,9 @@ type NavigationButtonConfig = {
 
 const navigationButtonConfigs: NavigationButtonConfig[] = [
   { pathname: "/", label: "Home", Icon: Home },
-  { pathname: ".", label: "List", Icon: ScrollText },
-  { pathname: ".", label: "Search", Icon: Sparkles },
-  { pathname: ".", label: "My Page", Icon: User },
+  { pathname: "/not-real", label: "List", Icon: ScrollText }, // TODO: 리스트 페이지 등록시 수정
+  { pathname: "/not-real", label: "Search", Icon: Sparkles }, // TODO: 검색 페이지 등록시 수정
+  { pathname: "/my-page", label: "My Page", Icon: User },
 ]
 
 const NavigationButton = ({
@@ -31,7 +31,7 @@ const NavigationButton = ({
   const isSelected = currentPathname === pathname
   const navigate = useNavigate()
   return (
-    <button>
+    <Link to={pathname} className="w-full hover:bg-gray-5 transition">
       <Vstack gap="none" className="items-center">
         <Icon
           size={40}
@@ -43,15 +43,15 @@ const NavigationButton = ({
         />
         <p className="text-button">{label}</p>
       </Vstack>
-    </button>
+    </Link>
   )
 }
 
 const NavigationBar = () => {
   return (
-    <Hstack className="justify-evenly">
+    <Hstack className="justify-evenly" gap="none">
       {navigationButtonConfigs.map((config) => (
-        <NavigationButton {...config} />
+        <NavigationButton key={config.label} {...config} />
       ))}
     </Hstack>
   )

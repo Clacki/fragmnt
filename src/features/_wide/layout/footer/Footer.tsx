@@ -5,27 +5,28 @@ import Youtube from "@/assets/images/footer/Youtube.svg.tsx"
 import type { FileRoutesByFullPath } from "@/routeTree.gen"
 import { FlexOneContainer, Hstack, RoundBox, Vstack } from "@/shared/components"
 import type { SvgProps } from "@/shared/types"
-import { useNavigate } from "@tanstack/react-router"
+import { Link } from "@tanstack/react-router"
 import clsx from "clsx"
 import type { JSX } from "react"
 
-type SnsButtonProps = {
+type SnsLinkProps = {
   SvgInReact: (props: SvgProps) => JSX.Element
   to: string
 }
-const SnsButton = ({ SvgInReact, to }: SnsButtonProps) => {
+const SnsLink = ({ SvgInReact, to }: SnsLinkProps) => {
   // NOTE: BackButton과 SnsButton이 형태적으로 많이 유사합니다
   // NOTE: 비슷한 또 다른 동그라미 버튼이 있다면 공통 컴포넌트로 만드는 것도 고려할만 할 것 같습니다
   const handleClick = () => {
     window.location.href = to
   }
   return (
-    <button
+    <Link
       onClick={handleClick}
       className="transition text-button/50 hover:bg-button hover:text-card rounded-full border border-border p-xs"
+      to={to}
     >
       <SvgInReact className="size-6" />
-    </button>
+    </Link>
   )
 }
 
@@ -34,18 +35,17 @@ type FooterButtonProps = {
   isDim?: boolean
   children: string
 }
-const FooterButton = ({ to, isDim, children }: FooterButtonProps) => {
-  const navigate = useNavigate()
+const FooterLink = ({ to, isDim, children }: FooterButtonProps) => {
   return (
-    <button
+    <Link
       className={clsx(
         "text-sm text-left cursor-pointer",
         isDim ? "text-text-disabled" : "text-text-footer"
       )}
-      onClick={() => navigate({ to })}
+      to={to}
     >
       {children}
-    </button>
+    </Link>
   )
 }
 
@@ -80,33 +80,33 @@ const Footer = () => {
         <FlexOneContainer>
           <Vstack>
             <h3 className="text-text-disabled text-sm">EXPLORE</h3>
-            <FooterButton to="/">About</FooterButton>
-            <FooterButton to="/">Scent Recommendation</FooterButton>
-            <FooterButton to="/">Feed</FooterButton>
-            <FooterButton to="/">My Page</FooterButton>
+            <FooterLink to="/">About</FooterLink>
+            <FooterLink to="/">Scent Recommendation</FooterLink>
+            <FooterLink to="/">Feed</FooterLink>
+            <FooterLink to="/">My Page</FooterLink>
           </Vstack>
         </FlexOneContainer>
-        <FooterButton to="/" isDim>
+        <FooterLink to="/" isDim>
           Privacy Policy
-        </FooterButton>
+        </FooterLink>
       </Vstack>
 
       <Vstack>
         <FlexOneContainer>
           <Vstack>
             <h3 className="text-text-disabled text-sm">CONNECT</h3>
-            <FooterButton to="/">fragmnt studio</FooterButton>
-            <FooterButton to="/">Onepiece@fragmnt.co</FooterButton>
+            <FooterLink to="/">fragmnt studio</FooterLink>
+            <FooterLink to="/">Onepiece@fragmnt.co</FooterLink>
             <Hstack>
-              <SnsButton to="https://www.google.com" SvgInReact={Instagram} />
-              <SnsButton to="https://www.google.com" SvgInReact={Kakao} />
-              <SnsButton to="https://www.google.com" SvgInReact={Youtube} />
+              <SnsLink to="https://www.google.com" SvgInReact={Instagram} />
+              <SnsLink to="https://www.google.com" SvgInReact={Kakao} />
+              <SnsLink to="https://www.google.com" SvgInReact={Youtube} />
             </Hstack>
           </Vstack>
         </FlexOneContainer>
-        <FooterButton to="/" isDim>
+        <FooterLink to="/" isDim>
           Terms of Service
-        </FooterButton>
+        </FooterLink>
       </Vstack>
     </RoundBox>
   )
