@@ -239,6 +239,10 @@
   --width-container-md: var(--size-container-md);
   --width-container-lg: var(--size-container-lg);
   --width-container-xl: var(--size-container-xl);
+  --container-container-sm: var(--size-container-sm);
+  --container-container-md: var(--size-container-md);
+  --container-container-lg: var(--size-container-lg);
+  --container-container-xl: var(--size-container-xl);
 
   /* button sizes */
   --size-button-sm: var(--size-button-sm);

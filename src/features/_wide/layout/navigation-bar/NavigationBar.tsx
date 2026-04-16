@@ -32,7 +32,7 @@ const NavigationButton = ({
   const navigate = useNavigate()
   return (
     <button>
-      <Vstack gap="none">
+      <Vstack gap="none" className="items-center">
         <Icon
           size={40}
           className={clsx(
@@ -41,7 +41,7 @@ const NavigationButton = ({
           )}
           onClick={() => navigate({ to: pathname })}
         />
-        <p>{label}</p>
+        <p className="text-button">{label}</p>
       </Vstack>
     </button>
   )

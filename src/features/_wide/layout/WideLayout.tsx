@@ -11,12 +11,12 @@ import NavigationBar from "./navigation-bar/NavigationBar"
 
 const WideLayout = () => {
   return (
-    <FullScreen>
-      <Container>
-        <Vstack gap="none">
+    <FullScreen className="overflow-hidden">
+      <Container className="overflow-hidden h-full">
+        <Vstack gap="none" className="overflow-hidden h-full">
           <Header />
           <FlexOneContainer isYScrollable>
-            <Vstack gap="none">
+            <Vstack gap="none" className="h-full justify-between">
               <Outlet />
               <Footer />
             </Vstack>

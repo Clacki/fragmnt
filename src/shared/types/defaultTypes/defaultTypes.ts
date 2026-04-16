@@ -27,3 +27,5 @@ export type TextareaProps = React.DetailedHTMLProps<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
   HTMLTextAreaElement
 >
+
+export type SvgProps = React.SVGProps<SVGSVGElement>

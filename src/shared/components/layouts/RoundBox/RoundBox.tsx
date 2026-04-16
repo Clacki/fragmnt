@@ -2,7 +2,7 @@ import type { DivProps } from "@/shared/types"
 import type {
   None,
   SmToLg,
-  XsToXl,
+  XsTo2xl,
 } from "@/shared/types/commonPropsTypes/commonPropsTypes"
 import { paddingVariants } from "@/shared/utils/variant-to-classname"
 import { cva } from "class-variance-authority"
@@ -30,7 +30,7 @@ const roundBoxVariants = cva("", {
 
 interface WithRoundBoxProps {
   radius?: SmToLg | None
-  padding?: XsToXl | None
+  padding?: XsTo2xl | None
   isBordered?: boolean
   isShadowed?: boolean
 }
