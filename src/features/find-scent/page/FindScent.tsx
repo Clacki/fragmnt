@@ -1,8 +1,17 @@
 import ChatImage from "@/assets/images/find-scent/chat.jpg"
 import PhotoImage from "@/assets/images/find-scent/photo.jpg"
 import SurveyImage from "@/assets/images/find-scent/survey.jpg"
+import {
+  CenterContainer,
+  FadeUpItem,
+  Hstack,
+  PageIntro,
+  Vstack,
+} from "@/shared/components"
+import { useEffect, useState } from "react"
 import type { FeatureCardItem } from "../types/feature-card.type"
 import FeatureCard from "./feature-card/FeatureCard"
+import "./find-scent.css"
 
 const featureCardList: FeatureCardItem[] = [
   {
@@ -27,12 +36,47 @@ const featureCardList: FeatureCardItem[] = [
 ]
 
 const FindScent = () => {
+  const [isReady, setIsReady] = useState(false)
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const imageLoaders = featureCardList.map((card) => {
+        return new Promise((resolve, reject) => {
+          const image = new Image()
+          image.src = card.imageSrc
+          image.onload = resolve
+          image.onerror = reject
+        })
+      })
+
+      try {
+        await Promise.all(imageLoaders)
+        setIsReady(true)
+      } catch {
+        setIsReady(true)
+      }
+    }
+
+    preloadImages()
+  }, [])
+
   return (
-    <div className="mx-auto flex w-[850px] gap-6 py-10">
-      {featureCardList.map((card) => (
-        <FeatureCard key={card.id} {...card} />
-      ))}
-    </div>
+    <CenterContainer className="w-[850px] pt-16 pb-60">
+      <Vstack gap="none" className="gap-20">
+        <PageIntro
+          title="어떤 방식으로 향기를 찾을까요?"
+          description="당신의 공간과 취향, 그 정교한 조각(Fragment)들을 분석해 드립니다"
+        />
+
+        <Hstack className="w-full justify-center gap-6">
+          {featureCardList.map((card, index) => (
+            <FadeUpItem key={card.id} isReady={isReady} delay={index * 160}>
+              <FeatureCard {...card} />
+            </FadeUpItem>
+          ))}
+        </Hstack>
+      </Vstack>
+    </CenterContainer>
   )
 }
 

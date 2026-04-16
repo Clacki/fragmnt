@@ -10,7 +10,7 @@ const FeatureCard = ({
   onClick,
 }: FeatureCardProps) => {
   return (
-    <article className="flex flex-col items-center border border-gray-20 rounded-3xl overflow-hidden shadow-box bg-surface-default w-[250px] h-[360px]">
+    <article className="flex flex-col items-center border border-gray-20 rounded-3xl overflow-hidden shadow-box bg-white w-[250px] h-[360px] transition-all duration-300 hover:-translate-y-2 cursor-pointer">
       <div className="h-[200px] w-full overflow-hidden">
         <img
           src={imageSrc}
@@ -31,7 +31,7 @@ const FeatureCard = ({
           onClick={onClick}
           size="sm"
           shape="rectangle"
-          className="mt-auto w-[100px]"
+          className="mt-auto"
         >
           {buttonLabel}
         </Button>
