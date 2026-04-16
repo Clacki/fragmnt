@@ -10,7 +10,7 @@ const FullScreen = (props: DivProps) => {
     <div
       {...rest}
       className={clsx(
-        "flex h-screen w-screen flex-col overflow-hidden",
+        "flex min-h-screen w-full flex-col overflow-hidden",
         className
       )}
     >

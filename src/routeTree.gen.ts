@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MyPageRouteImport } from './routes/my-page'
 import { Route as WideRouteImport } from './routes/_wide'
 import { Route as WideIndexRouteImport } from './routes/_wide.index'
 import { Route as WideNotRealRouteImport } from './routes/_wide.not-real'
 
+const MyPageRoute = MyPageRouteImport.update({
+  id: '/my-page',
+  path: '/my-page',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WideRoute = WideRouteImport.update({
   id: '/_wide',
   getParentRoute: () => rootRouteImport,
@@ -30,32 +36,43 @@ const WideNotRealRoute = WideNotRealRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof WideIndexRoute
+  '/my-page': typeof MyPageRoute
   '/not-real': typeof WideNotRealRoute
 }
 export interface FileRoutesByTo {
+  '/my-page': typeof MyPageRoute
   '/not-real': typeof WideNotRealRoute
   '/': typeof WideIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_wide': typeof WideRouteWithChildren
+  '/my-page': typeof MyPageRoute
   '/_wide/not-real': typeof WideNotRealRoute
   '/_wide/': typeof WideIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/not-real'
+  fullPaths: '/' | '/my-page' | '/not-real'
   fileRoutesByTo: FileRoutesByTo
-  to: '/not-real' | '/'
-  id: '__root__' | '/_wide' | '/_wide/not-real' | '/_wide/'
+  to: '/my-page' | '/not-real' | '/'
+  id: '__root__' | '/_wide' | '/my-page' | '/_wide/not-real' | '/_wide/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   WideRoute: typeof WideRouteWithChildren
+  MyPageRoute: typeof MyPageRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/my-page': {
+      id: '/my-page'
+      path: '/my-page'
+      fullPath: '/my-page'
+      preLoaderRoute: typeof MyPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_wide': {
       id: '/_wide'
       path: ''
@@ -94,6 +111,7 @@ const WideRouteWithChildren = WideRoute._addFileChildren(WideRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   WideRoute: WideRouteWithChildren,
+  MyPageRoute: MyPageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,3 +1,4 @@
+import { myPageHandlers } from "@/features/my-page/mocks/handlers"
 import { http, HttpResponse } from "msw"
 
 export const handlers = [
@@ -5,4 +6,5 @@ export const handlers = [
   http.get("/api/hello", () => {
     return HttpResponse.json({ message: "Hello, world!", code: 200 })
   }),
+  ...myPageHandlers,
 ]
