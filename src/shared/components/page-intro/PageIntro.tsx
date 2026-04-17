@@ -21,7 +21,9 @@ const PageIntro = ({
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-3xl font-bold text-text-primary">{title}</h1>
         {description && (
-          <p className="text-base text-text-description">{description}</p>
+          <p className="whitespace-pre-line text-base text-text-description">
+            {description}
+          </p>
         )}
       </div>
     </div>

@@ -31,7 +31,10 @@ const NavigationButton = ({
   const isSelected = currentPathname === pathname
   const navigate = useNavigate()
   return (
-    <Link to={pathname} className="w-full hover:bg-gray-5 transition pt-sm">
+    <Link
+      to={pathname}
+      className="w-full hover:bg-gray-5 transition pt-sm border-t border-border"
+    >
       <Vstack gap="none" className="items-center">
         <Icon
           size={40}

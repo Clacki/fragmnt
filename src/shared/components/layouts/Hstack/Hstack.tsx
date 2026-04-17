@@ -7,7 +7,7 @@ import { gapVariants } from "@/shared/utils/variant-to-classname"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
 
-const hstackVariants = cva("flex", {
+const hstackVariants = cva("flex justify-center", {
   variants: {
     gap: gapVariants,
   },
