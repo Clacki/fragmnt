@@ -49,7 +49,7 @@ const NavigationButton = ({
 
 const NavigationBar = () => {
   return (
-    <Hstack className="justify-evenly" gap="none">
+    <Hstack className="justify-evenly bg-card" gap="none">
       {navigationButtonConfigs.map((config) => (
         <NavigationButton key={config.label} {...config} />
       ))}
