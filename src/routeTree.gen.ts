@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WideRouteImport } from './routes/_wide'
 import { Route as WideIndexRouteImport } from './routes/_wide.index'
 import { Route as WideScentSurveyRouteImport } from './routes/_wide.scent-survey'
+import { Route as WideScentKeywordRouteImport } from './routes/_wide.scent-keyword'
 import { Route as WideNotRealRouteImport } from './routes/_wide.not-real'
 import { Route as WideMyPageRouteImport } from './routes/_wide.my-page'
 import { Route as WideFindScentRouteImport } from './routes/_wide.find-scent'
@@ -28,6 +29,11 @@ const WideIndexRoute = WideIndexRouteImport.update({
 const WideScentSurveyRoute = WideScentSurveyRouteImport.update({
   id: '/scent-survey',
   path: '/scent-survey',
+  getParentRoute: () => WideRoute,
+} as any)
+const WideScentKeywordRoute = WideScentKeywordRouteImport.update({
+  id: '/scent-keyword',
+  path: '/scent-keyword',
   getParentRoute: () => WideRoute,
 } as any)
 const WideNotRealRoute = WideNotRealRouteImport.update({
@@ -51,12 +57,14 @@ export interface FileRoutesByFullPath {
   '/find-scent': typeof WideFindScentRoute
   '/my-page': typeof WideMyPageRoute
   '/not-real': typeof WideNotRealRoute
+  '/scent-keyword': typeof WideScentKeywordRoute
   '/scent-survey': typeof WideScentSurveyRoute
 }
 export interface FileRoutesByTo {
   '/find-scent': typeof WideFindScentRoute
   '/my-page': typeof WideMyPageRoute
   '/not-real': typeof WideNotRealRoute
+  '/scent-keyword': typeof WideScentKeywordRoute
   '/scent-survey': typeof WideScentSurveyRoute
   '/': typeof WideIndexRoute
 }
@@ -66,20 +74,34 @@ export interface FileRoutesById {
   '/_wide/find-scent': typeof WideFindScentRoute
   '/_wide/my-page': typeof WideMyPageRoute
   '/_wide/not-real': typeof WideNotRealRoute
+  '/_wide/scent-keyword': typeof WideScentKeywordRoute
   '/_wide/scent-survey': typeof WideScentSurveyRoute
   '/_wide/': typeof WideIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/find-scent' | '/my-page' | '/not-real' | '/scent-survey'
+  fullPaths:
+    | '/'
+    | '/find-scent'
+    | '/my-page'
+    | '/not-real'
+    | '/scent-keyword'
+    | '/scent-survey'
   fileRoutesByTo: FileRoutesByTo
-  to: '/find-scent' | '/my-page' | '/not-real' | '/scent-survey' | '/'
+  to:
+    | '/find-scent'
+    | '/my-page'
+    | '/not-real'
+    | '/scent-keyword'
+    | '/scent-survey'
+    | '/'
   id:
     | '__root__'
     | '/_wide'
     | '/_wide/find-scent'
     | '/_wide/my-page'
     | '/_wide/not-real'
+    | '/_wide/scent-keyword'
     | '/_wide/scent-survey'
     | '/_wide/'
   fileRoutesById: FileRoutesById
@@ -111,6 +133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WideScentSurveyRouteImport
       parentRoute: typeof WideRoute
     }
+    '/_wide/scent-keyword': {
+      id: '/_wide/scent-keyword'
+      path: '/scent-keyword'
+      fullPath: '/scent-keyword'
+      preLoaderRoute: typeof WideScentKeywordRouteImport
+      parentRoute: typeof WideRoute
+    }
     '/_wide/not-real': {
       id: '/_wide/not-real'
       path: '/not-real'
@@ -139,6 +168,7 @@ interface WideRouteChildren {
   WideFindScentRoute: typeof WideFindScentRoute
   WideMyPageRoute: typeof WideMyPageRoute
   WideNotRealRoute: typeof WideNotRealRoute
+  WideScentKeywordRoute: typeof WideScentKeywordRoute
   WideScentSurveyRoute: typeof WideScentSurveyRoute
   WideIndexRoute: typeof WideIndexRoute
 }
@@ -147,6 +177,7 @@ const WideRouteChildren: WideRouteChildren = {
   WideFindScentRoute: WideFindScentRoute,
   WideMyPageRoute: WideMyPageRoute,
   WideNotRealRoute: WideNotRealRoute,
+  WideScentKeywordRoute: WideScentKeywordRoute,
   WideScentSurveyRoute: WideScentSurveyRoute,
   WideIndexRoute: WideIndexRoute,
 }

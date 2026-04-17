@@ -1,0 +1,9 @@
+import { createFileRoute } from '@tanstack/react-router'
+
+export const Route = createFileRoute('/_wide/scent-keyword')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return <div>Hello "/_wide/scent-keyword"!</div>
+}

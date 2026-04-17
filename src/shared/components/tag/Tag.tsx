@@ -12,7 +12,7 @@ type TagProps = {
 }
 
 const tagVariants = cva(
-  "inline-flex items-center justify-center rounded-full transition-colors",
+  "inline-flex items-center justify-center rounded-full transition-all duration-200 active:scale-95",
   {
     variants: {
       size: {
@@ -21,7 +21,8 @@ const tagVariants = cva(
       },
       variant: {
         outlined: "cursor-pointer border border-border text-text-sub bg-gray-0",
-        selected: "cursor-pointer bg-button text-text-button",
+        selected:
+          "cursor-pointer border border-border bg-button text-text-button",
         soft: "cursor-default bg-surface-container text-text-highlight",
         subtle:
           "cursor-default border border-border bg-surface-default text-text-sub",

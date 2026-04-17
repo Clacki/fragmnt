@@ -1,5 +1,5 @@
 import {
-  CenterContainer,
+  Container,
   FadeUpItem,
   Hstack,
   PageIntro,
@@ -45,7 +45,7 @@ const FindScent = () => {
 
   return (
     <>
-      <CenterContainer className="w-[850px] pt-16 pb-60">
+      <Container className=" pt-16 pb-60">
         <Vstack gap="none" className="gap-20">
           <PageIntro
             title="어떤 방식으로 향기를 찾을까요?"
@@ -63,7 +63,7 @@ const FindScent = () => {
             ))}
           </Hstack>
         </Vstack>
-      </CenterContainer>
+      </Container>
 
       <FindMethodModal
         isOpen={isKeywordModalOpen}
