@@ -13,7 +13,7 @@ const hstackVariants = cva("flex justify-center", {
   },
 })
 
-interface WithHstackProps {
+export interface WithHstackProps {
   gap?: XsTo2xl | None
 }
 

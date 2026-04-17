@@ -1,3 +1,4 @@
+import HOrVStack from "@/shared/components/layouts/HOrVStack/HOrVStack"
 import SectionVstack from "../section-container/SectionContainer"
 
 const FindYourScent = () => {
@@ -9,11 +10,12 @@ const FindYourScent = () => {
       <h1>당신만의 향기를 발견해 보세요</h1>
       <p>가장 편안한 방식으로 당신의 취향을 찾아보세요.</p>
 
-      <div className="gap-xl grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
-        <div className="bg-amber-100 h-87.5 col-span-2">some content</div>
-        <div className="bg-amber-100 h-87.5">some content</div>
-        <div className="bg-amber-100 h-87.5">some content</div>
-      </div>
+      <HOrVStack>
+        <div className="bg-amber-100 min-h-87.5 flex-2">some content</div>
+        <div className="bg-amber-100 min-h-87.5 flex-1">some content</div>
+        <div className="bg-amber-100 min-h-87.5 flex-1">some content</div>
+        <div className="bg-amber-300" />
+      </HOrVStack>
     </SectionVstack>
   )
 }
