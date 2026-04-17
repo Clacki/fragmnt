@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { ChevronRight } from "lucide-react"
 import Button from "./Button"
 
 const meta = {
@@ -14,14 +15,20 @@ const meta = {
       options: ["sm", "lg"],
       description: "Button size",
     },
-    shape: {
+    radius: {
       control: "select",
-      options: ["rectangle", "pill"],
-      description: "Button shape",
+      options: ["md", "full"],
+      description: "Button radius",
     },
-    isContained: {
-      control: "boolean",
-      description: "Whether button is contained style",
+    style: {
+      control: "select",
+      options: ["contained", "outlined", "ghost"],
+      description: "Button style",
+    },
+    padding: {
+      control: "select",
+      options: ["wide", "same"],
+      description: "Button padding",
     },
     disabled: {
       control: "boolean",
@@ -43,43 +50,17 @@ export const Default: Story = {
   },
 }
 
-export const Small: Story = {
+export const IconPill: Story = {
   args: {
-    size: "sm",
-    children: "Small Button",
+    radius: "full",
+    children: <ChevronRight />,
   },
 }
 
-export const Large: Story = {
+export const IconCircle: Story = {
   args: {
-    size: "lg",
-    children: "Large Button",
-  },
-}
-
-export const Pill: Story = {
-  args: {
-    shape: "pill",
-    children: "Pill Button",
-  },
-}
-
-export const Outlined: Story = {
-  args: {
-    isContained: false,
-    children: "Outlined Button",
-  },
-}
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    children: "Disabled Button",
-  },
-}
-
-export const WithLongText: Story = {
-  args: {
-    children: "This is a button with longer text",
+    radius: "full",
+    padding: "same",
+    children: <ChevronRight />,
   },
 }

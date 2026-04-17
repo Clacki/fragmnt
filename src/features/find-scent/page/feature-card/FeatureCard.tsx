@@ -26,13 +26,7 @@ const FeatureCard = ({
             {description}
           </p>
         </div>
-        <Button
-          type="button"
-          onClick={onClick}
-          size="sm"
-          shape="rectangle"
-          className="mt-auto"
-        >
+        <Button type="button" onClick={onClick} size="sm" className="mt-auto">
           {buttonLabel}
         </Button>
       </div>

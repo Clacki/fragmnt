@@ -22,12 +22,10 @@ const QuickStart = () => {
       </Hstack>
 
       <Hstack gap="none">
-        <Button isContained={false}>Start now</Button>
+        <Button style="outlined">Start now</Button>
         <Button>
-          <Hstack gap="sm" className="items-center">
-            <p>Learn more</p>
-            <ChevronRight />
-          </Hstack>
+          <p>Learn more</p>
+          <ChevronRight />
         </Button>
       </Hstack>
     </SectionVstack>

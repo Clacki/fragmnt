@@ -11,7 +11,7 @@ const ViewAllScents = () => {
       <p>누군가의 공간을 완성했던 향기 조각들을 만나보세요.</p>
       <p>기분과 장소, 그리고 찰나의 순간을 위해 엄선했습니다.</p>
       <Hstack gap="none">
-        <Button isContained={false}>View all</Button>
+        <Button style="outlined">View all</Button>
         <Button>Scroll</Button>
       </Hstack>
     </SectionVstack>

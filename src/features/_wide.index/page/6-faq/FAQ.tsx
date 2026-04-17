@@ -32,7 +32,7 @@ const FAQ = () => {
         </AccordionItem>
       </Accordion>
       <p>원하시는 답변을 찾지 못했나요?</p>
-      <Button shape="pill" isContained={false}>
+      <Button radius="full" style="outlined">
         문의하기
       </Button>
     </SectionVstack>
