@@ -164,7 +164,8 @@
 }
 
 @theme {
-  /* color: brand / component */
+  /* color:green */
+  --color-green-input: var(--color-green-5); /* color: brand / component */
   --color-primary: var(--color-primary);
   --color-primary-hover: var(--color-primary-hover);
   --color-primary-disabled: var(--color-primary-disabled);

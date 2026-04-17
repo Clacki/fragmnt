@@ -10,7 +10,7 @@ const FeatureCard = ({
   onClick,
 }: FeatureCardProps) => {
   return (
-    <article className="flex flex-col items-center border border-gray-20 rounded-3xl overflow-hidden shadow-box bg-white w-[250px] h-[360px] transition-all duration-300 hover:-translate-y-2 cursor-pointer">
+    <article className="flex flex-col items-center border border-gray-20 rounded-3xl overflow-hidden shadow-box bg-white w-[250px] h-[360px] transition-all duration-300 hover:-translate-y-2">
       <div className="h-[200px] w-full overflow-hidden">
         <img
           src={imageSrc}

@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import "./PreferenceSlider.css"
+import "./preference-slider.css"
 
 type PreferenceSliderProps = {
   order: number
