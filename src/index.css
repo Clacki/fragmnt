@@ -8,6 +8,7 @@
 
 :root {
   scrollbar-color: hsl(0 0 50) transparent;
+  word-break: keep-all;
 
   /* =====================================================
    PRIMITIVE COLOR TOKENS (절대값)

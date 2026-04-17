@@ -8,7 +8,7 @@ type SectionVstackProps = {
 }
 const SectionVstack = ({ children, className }: SectionVstackProps) => {
   return (
-    <Vstack gap="xl" className={clsx("px-2xl bg-amber-50", className)}>
+    <Vstack gap="xl" className={clsx("px-2xl", className)}>
       {children}
     </Vstack>
   )

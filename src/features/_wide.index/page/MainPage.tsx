@@ -1,3 +1,4 @@
+import InsertionSrc from "@/assets/images/main/insertion.png"
 import { Vstack } from "@/shared/components"
 import Introduction from "./1-introduction/Introduction"
 import FindYourScent from "./2-find-your-scent/FindYourScent"
@@ -12,7 +13,7 @@ const MainPage = () => {
       <Introduction />
       <FindYourScent />
       <ViewAllScents />
-      <div>perfume image placeholder</div>
+      <img src={InsertionSrc} alt="삽입 이미지" />
       <QuickStart />
       <CustomerReviews />
       <FAQ />

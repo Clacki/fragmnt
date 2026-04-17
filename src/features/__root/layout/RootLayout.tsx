@@ -24,7 +24,7 @@ const RootLayout = () => {
       <img
         src={imageSrc}
         alt="배경 이미지"
-        className="-z-1 fixed inset-0 opacity-40 size-full object-cover"
+        className="-z-100 fixed inset-0 opacity-40 size-full object-cover"
       />
 
       <Outlet />
