@@ -9,4 +9,14 @@ type UserProfile = {
   birthDate: string
 }
 
+export type FavoriteScent = {
+  id: number
+  imageSrc: string
+  imageAlt?: string
+  category: string
+  title: string
+  tags: string[]
+  savedAt: string
+}
+
 export type { UserProfile }

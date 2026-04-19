@@ -31,7 +31,7 @@ export default function MyPage() {
         <Container
           width="xl"
           isPadded
-          className="h-screen max-w-container-xl bg-surface-default shadow-box"
+          className="min-h-screen max-w-container-xl bg-surface-default"
         >
           {/* 내부 영역 */}
           {!user ? <LoadingState /> : <UserSection user={user} />}
