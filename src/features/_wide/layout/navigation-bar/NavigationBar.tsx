@@ -1,10 +1,14 @@
-import type { FileRoutesByFullPath } from "@/routeTree.gen"
 import { Hstack, Vstack } from "@/shared/components"
-import { Link, useLocation, useNavigate } from "@tanstack/react-router"
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  type LinkProps,
+} from "@tanstack/react-router"
 import clsx from "clsx"
 import { Home, ScrollText, Sparkles, User } from "lucide-react"
 
-type NavigationPathname = keyof FileRoutesByFullPath
+type NavigationPathname = LinkProps["to"]
 type LucideIconProps = typeof Home
 
 type NavigationButtonConfig = {

@@ -6,7 +6,7 @@ import {
   Vstack,
 } from "@/shared/components"
 import { useState } from "react"
-import { scentSurveyMockData } from "../data/scent-servey-mock"
+import { scentSurveyMockData } from "../mocks/scent-servey-mock"
 import PreferenceSlider from "./preference-slider/PreferenceSlider"
 
 const DEFAULT_SURVEY_VALUE = 2

@@ -2,10 +2,9 @@ import Flower from "@/assets/images/footer/flower.svg"
 import Instagram from "@/assets/images/footer/Instagram.svg.tsx"
 import Kakao from "@/assets/images/footer/Kakao.svg.tsx"
 import Youtube from "@/assets/images/footer/Youtube.svg.tsx"
-import type { FileRoutesByFullPath } from "@/routeTree.gen"
 import { FlexOneContainer, Hstack, RoundBox, Vstack } from "@/shared/components"
 import type { SvgProps } from "@/shared/types"
-import { Link } from "@tanstack/react-router"
+import { Link, type LinkProps } from "@tanstack/react-router"
 import clsx from "clsx"
 import type { JSX } from "react"
 
@@ -31,7 +30,7 @@ const SnsLink = ({ SvgInReact, to }: SnsLinkProps) => {
 }
 
 type FooterButtonProps = {
-  to: keyof FileRoutesByFullPath
+  to: LinkProps["to"]
   isDim?: boolean
   children: string
 }

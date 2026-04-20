@@ -1,5 +1,5 @@
 import { Tag } from "@/shared/components"
-import { scentKeywordMockData } from "../../data/scent-keyword-mock-data"
+import { scentKeywordMockData } from "../../mocks/scent-keyword-mock-data"
 import type { SelectedKeyword } from "../ScentKeyword"
 
 type KeywordSelectionSectionProps = {
