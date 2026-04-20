@@ -11,7 +11,7 @@ type UserProfile = {
 
 export type FavoriteScent = {
   id: number
-  imageSrc: string
+  imageSrc?: string
   imageAlt?: string
   category: string
   title: string

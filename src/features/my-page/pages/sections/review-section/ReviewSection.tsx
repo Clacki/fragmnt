@@ -2,10 +2,20 @@ import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import { mockReviewList } from "@/features/my-page/mocks/review.mock"
 import { EmptyState } from "@/shared/components"
 
+import { useHistoryList } from "@/features/my-page/hooks/useHistoryList"
+import LoadingState from "@/shared/components/loading-state/LoadingState"
 import ReviewCard from "./review-card/ReviewCard"
 
 export default function ReviewSection() {
   const hasItems = mockReviewList.length > 0
+  const { error, isLoading } = useHistoryList()
+
+  if (isLoading) {
+    return <LoadingState />
+  }
+  if (error) {
+    return <div>리뷰를 불러오지 못했어요.</div>
+  }
 
   return (
     <section>

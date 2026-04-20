@@ -1,0 +1,10 @@
+import { useQuery } from "@tanstack/react-query"
+import { getHistoryList } from "../api/user.api"
+import type { HistoryItem } from "../mocks/history.mock"
+
+export const useHistoryList = () => {
+  return useQuery<HistoryItem[]>({
+    queryKey: ["my-page", "historyList"],
+    queryFn: getHistoryList,
+  })
+}
