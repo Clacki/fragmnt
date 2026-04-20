@@ -4,13 +4,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { Button } from "@/shared/components"
+import { Button, Vstack } from "@/shared/components"
 import SectionVstack from "../section-container/SectionContainer"
 const FAQ = () => {
   return (
     <SectionVstack className="items-center">
-      <h1>자주 묻는 질문</h1>
-      <h2>Fragmnt 서비스에 대해 궁금한 점을 확인해보세요.</h2>
+      <Vstack className="items-center">
+        <h2 className="text-lg font-bold">자주 묻는 질문</h2>
+        <p className="text-text-sub">
+          Fragmnt 서비스에 대해 궁금한 점을 확인해보세요.
+        </p>
+      </Vstack>
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
           <AccordionTrigger>AI는 어떻게 향기를 추천하나요?</AccordionTrigger>

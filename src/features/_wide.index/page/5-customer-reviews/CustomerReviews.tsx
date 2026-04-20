@@ -14,7 +14,7 @@ const ReviewCard = () => {
 const CustomerReviews = () => {
   return (
     <SectionVstack>
-      <h2>고객 후기</h2>
+      <h2 className="text-lg font-bold">고객 후기</h2>
       <Hstack className="justify-end">
         <button>
           <ChevronLeft />

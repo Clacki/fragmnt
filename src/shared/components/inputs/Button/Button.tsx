@@ -30,7 +30,7 @@ const buttonVariants = cva("transition", {
         "text-primary disabled:text-text-disabled"
       ),
       ghost: clsx(
-        "hover:bg-gray-5 disabled:bg-transparent",
+        "hover:bg-green-input disabled:bg-transparent",
         "text-primary disabled:text-text-disabled"
       ),
     },
