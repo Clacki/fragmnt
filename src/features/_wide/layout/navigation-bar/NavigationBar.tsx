@@ -19,7 +19,7 @@ type NavigationButtonConfig = {
 
 const navigationButtonConfigs: NavigationButtonConfig[] = [
   { pathname: "/", label: "Home", Icon: Home },
-  { pathname: "/not-real", label: "List", Icon: ScrollText }, // TODO: 리스트 페이지 등록시 수정
+  { pathname: "/scent-list", label: "List", Icon: ScrollText }, // TODO: 리스트 페이지 등록시 수정
   { pathname: "/not-real", label: "Search", Icon: Sparkles }, // TODO: 검색 페이지 등록시 수정
   { pathname: "/my-page", label: "My Page", Icon: User },
 ]
