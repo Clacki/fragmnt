@@ -10,7 +10,7 @@ const NarrowLayout = () => {
   return (
     <FullScreen>
       <FlexOneContainer isYScrollable className="max-h-screen py-2xl">
-        <Container width="md">
+        <Container width="lg">
           <RoundBox className="bg-card shadow-box" padding="2xl">
             <Outlet />
           </RoundBox>
