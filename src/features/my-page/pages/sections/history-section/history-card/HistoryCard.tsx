@@ -23,12 +23,12 @@ const HistoryCard = ({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex w-full items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
+        "flex w-full h-[120px] items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
         "hover:bg-gray-5 hover:shadow-lg",
         className
       )}
     >
-      <div className="flex w-1/4 aspect-square shrink-0 items-center justify-center overflow-hidden rounded-lg bg-disabled">
+      <div className="flex  aspect-square shrink-0 items-left justify-left overflow-hidden rounded-lg bg-disabled">
         {imageSrc && !isError ? (
           <img
             src={imageSrc}
@@ -57,7 +57,7 @@ const HistoryCard = ({
         {!!tags.length && (
           <div className="mt-2 flex overflow-hidden gap-2">
             {tags.map((tag) => (
-              <Tag key={tag} label={tag} size="md" variant="outlined" />
+              <Tag key={tag} label={tag} size="sm" variant="outlined" />
             ))}
           </div>
         )}

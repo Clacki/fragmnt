@@ -5,12 +5,16 @@ import { EmptyState } from "@/shared/components"
 
 export default function CollectionSection() {
   const hasItems = mockFavoriteScents.length > 0
+  const collectionList = mockFavoriteScents.map((item) => ({
+    ...item,
+    date: item.savedAt,
+  }))
 
   return (
     <section>
       <h2 className="px-md text-center text-lg font-bold text-text-primary">
         저장된 향기{" "}
-        <span className="text-text-highlight font-extrabold">
+        <span className="font-extrabold text-text-highlight">
           {mockFavoriteScents.length}
         </span>
         개
@@ -18,16 +22,8 @@ export default function CollectionSection() {
 
       {hasItems ? (
         <div className="mt-md grid grid-cols-2 gap-lg">
-          {mockFavoriteScents.map((item) => (
-            <CollectionCard
-              key={item.id}
-              imageSrc={item.imageSrc}
-              imageAlt={item.imageAlt}
-              category={item.category}
-              title={item.title}
-              tags={item.tags}
-              date={item.savedAt}
-            />
+          {collectionList.map(({ id, ...item }) => (
+            <CollectionCard key={id} {...item} />
           ))}
         </div>
       ) : (
