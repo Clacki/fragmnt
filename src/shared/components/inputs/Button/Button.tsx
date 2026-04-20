@@ -2,7 +2,6 @@ import cn from "@/lib/utils"
 import type { DefaultButtonProps } from "@/shared/types"
 import { cva } from "class-variance-authority"
 import clsx from "clsx"
-import type { ReactNode } from "react"
 import { Hstack } from "../../layouts"
 
 const buttonVariants = cva("transition", {
@@ -49,13 +48,11 @@ const buttonVariants = cva("transition", {
 
 // NOTE: pill = padding wide + radius full
 // NOTE: circle = padding same + radius full
-type ButtonProps = {
+export type WithButtonProps = {
   size?: "sm" | "lg"
   padding?: "wide" | "same"
   radius?: "md" | "full"
   style?: "contained" | "outlined" | "ghost"
-  disabled?: boolean
-  children?: ReactNode
 }
 const Button = ({
   size = "sm",
@@ -65,7 +62,7 @@ const Button = ({
   disabled = false,
   children,
   ...props
-}: DefaultButtonProps & ButtonProps) => {
+}: DefaultButtonProps & WithButtonProps) => {
   const { className, ...rest } = props
   return (
     <button
