@@ -7,6 +7,17 @@
 @custom-variant dark (&: is(.dark *));
 
 :root {
+  /* Chrome, Safari, Edge, Opera 인풋 화살표 없애기 */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox 인풋 화살표 없애기 */
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
   scrollbar-color: hsl(0 0 50) transparent;
   word-break: keep-all;
 

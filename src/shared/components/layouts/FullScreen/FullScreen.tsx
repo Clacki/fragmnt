@@ -7,7 +7,13 @@ import clsx from "clsx"
 const FullScreen = (props: DivProps) => {
   const { className, children, ...rest } = props
   return (
-    <div {...rest} className={clsx("size-screen overflow-hidden", className)}>
+    <div
+      {...rest}
+      className={clsx(
+        "size-screen max-h-screen max-w-screen overflow-hidden",
+        className
+      )}
+    >
       {children}
     </div>
   )

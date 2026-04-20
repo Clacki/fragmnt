@@ -5,16 +5,11 @@ import { useLabeledContext } from "../labeled-context/labeled-context"
 const LabeledTitle = (props: PProps) => {
   const { className, children, ...rest } = props
   const { isError } = useLabeledContext()
-  console.log({ isError })
 
   return (
     <p
       {...rest}
-      className={clsx(
-        "text-lg font-medium",
-        isError && "text-text-error",
-        className
-      )}
+      className={clsx("font-medium", isError && "text-text-error", className)}
     >
       {children}
     </p>
