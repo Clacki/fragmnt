@@ -1,9 +1,10 @@
 import NarrowTitleSection from "@/features/_narrow/components/narrow-title-section/NarrowTitleSection"
-import { headlessInstance } from "@/shared/api/axios-instance"
+import { plainInstance } from "@/shared/api/axios-instance"
 import { Button, Hstack, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
+import axios from "axios"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -35,11 +36,13 @@ type SignupSchema = z.input<typeof signupSchema>
 
 const SignupPage = () => {
   const postMutation = useMutation({
-    mutationFn: (body: SignupSchema) => headlessInstance.post("/signup", body),
+    mutationFn: (body: SignupSchema) =>
+      plainInstance.post("accounts/signup", body),
   })
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({ resolver: zodResolver(signupSchema) })
 
@@ -52,6 +55,17 @@ const SignupPage = () => {
   // TODO: 현재 api body 에 인증 번호가 없다
   // TODO: 현재 CORS 막혀 있음. 백엔드에 열어달라고 해야
   console.log({ errors })
+
+  const handleEmailVerification = async () => {
+    const email = watch().email
+    const response = await axios.post(
+      "https://fragmnt.pics/api/v1/accounts/verification/send-email",
+      {
+        email,
+      }
+    )
+    console.log({ response })
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -70,7 +84,9 @@ const SignupPage = () => {
               className="grow"
               status={errors.email ? "error" : "none"}
             />
-            <Button>인증</Button>
+            <Button type="button" onClick={handleEmailVerification}>
+              인증
+            </Button>
           </Hstack>
           <Labeled.Message>{errors.email?.message}</Labeled.Message>
         </Labeled>
@@ -115,7 +131,7 @@ const SignupPage = () => {
               placeholder={`"-"없이 숫자만 입력해주세요`}
               className="grow"
             />
-            <Button>인증</Button>
+            <Button type="button">인증</Button>
           </Hstack>
           <Labeled.Message>{errors.phone?.message}</Labeled.Message>
         </Labeled>
