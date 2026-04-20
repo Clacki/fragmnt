@@ -1,7 +1,7 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
-import { CollectionCard } from "@/features/my-page/components"
 import { mockFavoriteScents } from "@/features/my-page/mocks/favoriteScents.mock"
 import { EmptyState } from "@/shared/components"
+import CollectionCard from "./collection-card/CollectionCard"
 
 export default function CollectionSection() {
   const hasItems = mockFavoriteScents.length > 0

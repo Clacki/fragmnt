@@ -2,7 +2,7 @@ import { Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-type ReviewCardProps = {
+export type ReviewCardProps = {
   title: string
   rating: number
   content: string
@@ -31,7 +31,7 @@ export default function ReviewCard({
       )}
     >
       <div className="flex items-start justify-between gap-sm">
-        <h3 className="text-lg font-bold text-text-primary">{title}</h3>
+        <h3 className="text-lg font-bold text-text-primary pt-sm">{title}</h3>
 
         <div className="flex shrink-0 items-center gap-2 text-sm text-disabled">
           {/* disabled buttons */}
@@ -64,7 +64,7 @@ export default function ReviewCard({
           return (
             <Star
               key={index}
-              size={18}
+              size={16}
               strokeWidth={1.8}
               className={cn("text-text-primary", filled && "fill-primary")}
             />
@@ -73,7 +73,7 @@ export default function ReviewCard({
       </div>
 
       <div className="mt-md">
-        <p className="whitespace-pre-line text-md break-words text-base leading-5 font-medium text-text-sub">
+        <p className="whitespace-pre-line text- break-words text-base leading-5 font-medium text-text-sub">
           {content}
         </p>
 
