@@ -1,46 +1,17 @@
 import NarrowTitleSection from "@/features/_narrow/components/narrow-title-section/NarrowTitleSection"
-import { plainInstance } from "@/shared/api/axios-instance"
 import { Button, Hstack, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
-import { useForm } from "react-hook-form"
-import z from "zod"
 import FindEmailSuccess from "./find-email-success/FindEmailSuccess"
+import useFindEmail from "./use-find-email/use-find-email"
 
-const findEmailSchema = z.object({
-  name: z.string().min(1, "이름을 입력해주세요"),
-  phone: z.string().min(1, "전화번호를 입력해주세요"),
-  phoneVerification: z
-    .string()
-    .min(6, "6자리의 인증번호를 입력해주세요")
-    .max(6, "6자리의 인증번호를 입력해주세요"),
-})
-
-type FindEmailSchema = z.input<typeof findEmailSchema>
 const FindEmailPage = () => {
-  const { data, mutate } = useMutation({
-    mutationFn: (body: FindEmailSchema) =>
-      // NOTE: api가 아직 나오지 않음
-      // NOTE: 현재는 404가 뜹니다
-      plainInstance.post("/accounts/find-email", body),
-  })
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(findEmailSchema) })
-
-  const onSubmit = (data: FindEmailSchema) => {
-    console.log({ data })
-    mutate(data)
-  }
+  const { data, errors, register, submitForm } = useFindEmail()
 
   // TODO: api 나오면 응답 타입 확인해야
   if (data) return <FindEmailSuccess email={data.data.email as string} />
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={submitForm}>
       <Vstack gap="xl">
         <NarrowTitleSection
           title="이메일 찾기"

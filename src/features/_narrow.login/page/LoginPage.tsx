@@ -1,15 +1,11 @@
 import NarrowTitleSection from "@/features/_narrow/components/narrow-title-section/NarrowTitleSection"
-import { plainInstance } from "@/shared/api/axios-instance"
 import { Button, Hstack, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
 import HOrVStack from "@/shared/components/layouts/HOrVStack/HOrVStack"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useMutation } from "@tanstack/react-query"
 import { Link } from "@tanstack/react-router"
 import clsx from "clsx"
-import { useForm } from "react-hook-form"
-import z from "zod"
 import SocialLoginButton from "./social-login-button/SocialLoginButton"
+import useLogin from "./use-login/use-login"
 
 const DimLink = ({
   to,
@@ -21,38 +17,11 @@ const DimLink = ({
   </Link>
 )
 
-const loginSchema = z.object({
-  email: z
-    .string()
-    .min(1, "이메일을 입력해주세요")
-    .email("올바른 이메일 형식으로 입력해주세요"),
-  password: z.string().min(1, "비밀번호를 입력해주세요"),
-})
-
-type LoginSchema = z.input<typeof loginSchema>
 const LoginPage = () => {
-  const postMutation = useMutation({
-    mutationFn: (body: LoginSchema) =>
-      plainInstance.post("/accounts/login", body),
-  })
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: zodResolver(loginSchema) })
-
-  const onSubmit = (data: LoginSchema) => {
-    console.log({ data })
-    postMutation.mutate(data)
-  }
-
-  // TODO: 인증 번호는 어디에 쓰지??
-  // TODO: 현재 api body 에 인증 번호가 없다
-  // TODO: 현재 CORS 막혀 있음. 백엔드에 열어달라고 해야
-  console.log({ errors })
+  const { errors, register, submitForm } = useLogin()
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={submitForm}>
       <Vstack gap="xl">
         <NarrowTitleSection
           title="공간의 완성, 향기의 조각"
