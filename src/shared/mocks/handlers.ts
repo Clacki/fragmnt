@@ -1,3 +1,4 @@
+import { mainPageHandlers } from "@/features/_wide.index/mocks/main-page-handler"
 import { myPageHandlers } from "@/features/my-page/mocks/handlers"
 import { http, HttpResponse } from "msw"
 
@@ -7,4 +8,5 @@ export const handlers = [
     return HttpResponse.json({ message: "Hello, world!", code: 200 })
   }),
   ...myPageHandlers,
+  ...mainPageHandlers,
 ]

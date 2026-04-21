@@ -28,7 +28,7 @@ const roundBoxVariants = cva("", {
   },
 })
 
-interface WithRoundBoxProps {
+export interface WithRoundBoxProps {
   radius?: SmToLg | None
   padding?: XsTo2xl | None
   isBordered?: boolean
