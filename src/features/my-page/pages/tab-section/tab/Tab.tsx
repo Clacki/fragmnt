@@ -52,7 +52,7 @@ export default function Tab({ activeTab, onChange, className }: TabProps) {
             type="button"
             onClick={() => onChange(tab.key)}
             className={cn(
-              "relative z-10 rounded-full px-md py-sm text-sm font-semibold transition-colors",
+              "relative z-10 rounded-full px-md py-sm text-md font-semibold transition-colors",
               isActive
                 ? "text-text-primary"
                 : "text-text-disabled hover:text-text-primary"
