@@ -20,7 +20,10 @@ const signupSchema = z.object({
   password: z
     .string()
     .min(1, "비밀번호를 입력해주세요")
-    .regex(/^(?=.*[A-Z])(?=.*[a-z]).{6,}$/),
+    .regex(
+      /^(?=.*[A-Za-z])(?=.*\d).{8,}$/,
+      "영문과 숫자를 포함해 8자리 이상을 입력해주세요"
+    ),
   name: z.string().min(1, "이름을 입력해주세요"),
   phone: z.string().min(1, "전화번호를 입력해주세요"),
   phoneVerification: z
