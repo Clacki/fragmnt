@@ -1,6 +1,7 @@
 import NarrowTitleSection from "@/features/_narrow/components/narrow-title-section/NarrowTitleSection"
 import { Button, Hstack, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
+import PasswordInput from "@/shared/components/inputs/password-input/PasswordInput"
 import HOrVStack from "@/shared/components/layouts/HOrVStack/HOrVStack"
 import { Link } from "@tanstack/react-router"
 import clsx from "clsx"
@@ -45,9 +46,9 @@ const LoginPage = () => {
 
         <Labeled isError={Boolean(errors.password)}>
           <Labeled.Title>비밀번호</Labeled.Title>
-          <Input
+          <PasswordInput
             {...register("password")}
-            status={errors.password ? "error" : "none"}
+            isError={Boolean(errors.password)}
             placeholder="비밀번호를 입력해주세요"
           />
           <Hstack className="justify-end">

@@ -48,7 +48,6 @@ const useSignup = () => {
   } = useForm({ resolver: zodResolver(signupSchema) })
 
   const onSubmit = (data: SignupSchema) => {
-    console.log({ data })
     mutate(data)
   }
 
