@@ -5,13 +5,16 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 import { featureCardList } from "../data/feature-card-list"
+import type { FeatureCardItem } from "../types/feature-card.type"
 import FeatureCard from "./feature-card/FeatureCard"
 import FindMethodModal from "./find-method-modal/FindMethodModal"
 import "./find-scent.css"
 
 const FindScent = () => {
+  const navigate = useNavigate()
   const [isReady, setIsReady] = useState(false)
   const [isKeywordModalOpen, setIsKeywordModalOpen] = useState(false)
 
@@ -37,9 +40,14 @@ const FindScent = () => {
     preloadImages()
   }, [])
 
-  const handleFeatureCardClick = ({ id }: { id: number }) => {
-    if (id === 3) {
+  const handleFeatureCardClick = (card: FeatureCardItem) => {
+    if (card.actionType === "modal") {
       setIsKeywordModalOpen(true)
+      return
+    }
+
+    if (card.to) {
+      navigate({ to: card.to })
     }
   }
 
@@ -57,7 +65,7 @@ const FindScent = () => {
               <FadeUpItem key={card.id} isReady={isReady} delay={index * 160}>
                 <FeatureCard
                   {...card}
-                  onClick={() => handleFeatureCardClick({ id: card.id })}
+                  onClick={() => handleFeatureCardClick(card)}
                 />
               </FadeUpItem>
             ))}

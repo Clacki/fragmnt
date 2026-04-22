@@ -1,4 +1,5 @@
 import { Modal } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 import { ClipboardPen, Sparkles, type LucideIcon } from "lucide-react"
 import type { ReactNode } from "react"
 
@@ -15,7 +16,7 @@ type FindMethodOptionProps = {
 }
 
 const optionButtonStyle =
-  "w-full rounded-2xl border border-border bg-white p-md text-left text-text-sub transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-primary-hover hover:bg-green-input hover:shadow-sm active:translate-y-0 active:scale-[0.99]"
+  "w-full cursor-pointer rounded-2xl border border-border bg-white p-md text-left text-text-sub transition-all duration-200 ease-out hover:-translate-y-[1px] hover:border-primary-hover hover:bg-green-input hover:shadow-sm active:translate-y-0 active:scale-[0.99]"
 
 const iconWrapperStyle =
   "flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-green-input"
@@ -47,6 +48,8 @@ const FindMethodOption = ({
 }
 
 const FindMethodModal = ({ isOpen, onClose }: FindMethodModalProps) => {
+  const navigate = useNavigate()
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="flex flex-col gap-lg p-xl text-center">
@@ -63,6 +66,7 @@ const FindMethodModal = ({ isOpen, onClose }: FindMethodModalProps) => {
           <FindMethodOption
             icon={ClipboardPen}
             title="설문으로 찾기"
+            onClick={() => navigate({ to: "/find-scent/survey" })}
             description={
               <>
                 질문에 답하면서 나의 취향과
@@ -75,6 +79,7 @@ const FindMethodModal = ({ isOpen, onClose }: FindMethodModalProps) => {
           <FindMethodOption
             icon={Sparkles}
             title="키워드로 찾기"
+            onClick={() => navigate({ to: "/find-scent/keyword" })}
             description={
               <>
                 원하는 분위기와 향의 무드를

@@ -5,6 +5,7 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { scentSurveyMockData } from "../mocks/scent-servey-mock"
 import PreferenceSlider from "./preference-slider/PreferenceSlider"
@@ -12,9 +13,14 @@ import PreferenceSlider from "./preference-slider/PreferenceSlider"
 const DEFAULT_SURVEY_VALUE = 2
 
 const ScentSurvey = () => {
+  const navigate = useNavigate()
   const [answers, setAnswers] = useState<number[]>(
     scentSurveyMockData.map(() => DEFAULT_SURVEY_VALUE)
   )
+
+  const handleBack = () => {
+    navigate({ to: "/find-scent" })
+  }
 
   const handleChangeAnswer = ({
     index,
@@ -45,7 +51,7 @@ const ScentSurvey = () => {
           title="나만의 향 찾기"
           description={`각 질문에 대해 선호하는 방향을 선택해 주세요
 드래그하거나 점을 탭하여 선택할 수 있습니다`}
-          backButton={<BackButton />}
+          backButton={<BackButton onClick={handleBack} />}
         />
 
         {scentSurveyMockData.map((item, index) => (

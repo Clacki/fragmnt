@@ -6,6 +6,8 @@ export type FeatureCardProps = {
   buttonLabel?: string
   onClick?: () => void
   className?: string
+  to?: string
+  actionType: "navigate" | "modal"
 }
 
 export type FeatureCardItem = FeatureCardProps & {

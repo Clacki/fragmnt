@@ -5,6 +5,7 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import KeywordSelectionSection from "./keyword-selection-section/KeywordSelectionSection"
 import SelectedKeywordSection from "./selected-keyword-section/SelectedKeywordSection"
@@ -16,6 +17,7 @@ export type SelectedKeyword = {
 }
 
 const ScentKeyword = () => {
+  const navigate = useNavigate()
   const [selectedKeywords, setSelectedKeywords] = useState<SelectedKeyword[]>(
     []
   )
@@ -36,6 +38,9 @@ const ScentKeyword = () => {
     })
   }
 
+  const handleBack = () => {
+    navigate({ to: "/find-scent" })
+  }
   const handleClearKeywords = () => {
     setSelectedKeywords([])
   }
@@ -47,7 +52,7 @@ const ScentKeyword = () => {
           title="나만의 향 찾기"
           description={`지금 가장 끌리는 무드를 선택해 보세요
 당신의 취향을 담은 향기를 큐레이션해 드립니다`}
-          backButton={<BackButton />}
+          backButton={<BackButton onClick={handleBack} />}
         />
 
         <KeywordSelectionSection

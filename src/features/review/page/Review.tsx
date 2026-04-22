@@ -10,7 +10,7 @@ import ReviewStarRating from "./review-star-rating/ReviewStatRating"
 
 const Review = () => {
   const { recommendation, feedback } = mockReviewData
-
+  // TODO : 뒤로가기 버튼 결과페이지 연결
   return (
     <Vstack className="gap-lg px-10 py-16">
       <PageIntro
