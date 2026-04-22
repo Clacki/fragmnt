@@ -8,6 +8,7 @@ type ArchiveCardProps = {
   tags: string[]
   title: string
   description: string
+  onClick?: () => void
 }
 
 const ArchiveCard = ({
@@ -16,14 +17,18 @@ const ArchiveCard = ({
   tags,
   title,
   description,
+  onClick,
 }: ArchiveCardProps) => {
   const visibleTags = tags.slice(0, 2)
-
   const [isError, setIsError] = useState(false)
 
   return (
-    <article className="flex w-full flex-col gap-xs rounded-lg border border-border bg-card p-lg shadow-box hover:shadow-hover hover:bg-gray-5 transition">
-      <div className="h-[200px] w-full overflow-hidden rounded-md flex items-center justify-center">
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex w-full flex-col gap-md rounded-lg border border-border bg-card p-lg text-left shadow-box transition hover:bg-gray-5 hover:shadow-hover"
+    >
+      <div className="flex h-[200px] w-full items-center justify-center overflow-hidden rounded-md">
         {imageSrc && !isError ? (
           <img
             src={imageSrc}
@@ -50,7 +55,7 @@ const ArchiveCard = ({
         </h2>
         <p className="line-clamp-2 text-sm text-text-sub">{description}</p>
       </div>
-    </article>
+    </button>
   )
 }
 

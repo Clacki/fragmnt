@@ -1,12 +1,15 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import type { ScentCardItem } from "@/features/scent-list/mocks/scent-card.mock"
 import { ArchiveCard, EmptyState } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 
 type CardSectionProps = {
   items: ScentCardItem[]
 }
 
 export default function CardSection({ items }: CardSectionProps) {
+  const navigate = useNavigate()
+
   if (items.length === 0) {
     return (
       <EmptyState
@@ -19,8 +22,7 @@ export default function CardSection({ items }: CardSectionProps) {
   }
 
   return (
-    <section className="grid grid-cols-1 gap-lg sm:grid-cols-2 lg:grid-cols-3 pt-2xl">
-      {/* TODO: 카드를 클릭했을 때 상세 페이지로 이동할 수 있도록 수정 */}
+    <section className="grid grid-cols-1 gap-lg pt-2xl sm:grid-cols-2 lg:grid-cols-3">
       {items.map((item) => (
         <ArchiveCard
           key={item.id}
@@ -29,6 +31,12 @@ export default function CardSection({ items }: CardSectionProps) {
           tags={item.tags.map((tag) => tag.name)}
           title={item.name}
           description={item.description}
+          onClick={() =>
+            navigate({
+              to: "/scent-detail",
+              search: { id: item.id },
+            })
+          }
         />
       ))}
     </section>

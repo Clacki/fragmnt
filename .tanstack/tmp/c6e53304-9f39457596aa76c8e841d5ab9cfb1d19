@@ -14,7 +14,6 @@ import { Route as NarrowRouteImport } from './routes/_narrow'
 import { Route as WideIndexRouteImport } from './routes/_wide.index'
 import { Route as WideScentListRouteImport } from './routes/_wide.scent-list'
 import { Route as WideScentDetailRouteImport } from './routes/_wide.scent-detail'
-import { Route as WideReviewRouteImport } from './routes/_wide.review'
 import { Route as WideNotRealRouteImport } from './routes/_wide.not-real'
 import { Route as WideMyPageRouteImport } from './routes/_wide.my-page'
 import { Route as WideFindScentRouteImport } from './routes/_wide.find-scent'
@@ -26,7 +25,6 @@ import { Route as WideFindScentIndexRouteImport } from './routes/_wide.find-scen
 import { Route as WideFindScentSurveyRouteImport } from './routes/_wide.find-scent.survey'
 import { Route as WideFindScentPhotoRouteImport } from './routes/_wide.find-scent.photo'
 import { Route as WideFindScentKeywordRouteImport } from './routes/_wide.find-scent.keyword'
-import { Route as WideFindScentChatRouteImport } from './routes/_wide.find-scent.chat'
 
 const WideRoute = WideRouteImport.update({
   id: '/_wide',
@@ -49,11 +47,6 @@ const WideScentListRoute = WideScentListRouteImport.update({
 const WideScentDetailRoute = WideScentDetailRouteImport.update({
   id: '/scent-detail',
   path: '/scent-detail',
-  getParentRoute: () => WideRoute,
-} as any)
-const WideReviewRoute = WideReviewRouteImport.update({
-  id: '/review',
-  path: '/review',
   getParentRoute: () => WideRoute,
 } as any)
 const WideNotRealRoute = WideNotRealRouteImport.update({
@@ -111,11 +104,6 @@ const WideFindScentKeywordRoute = WideFindScentKeywordRouteImport.update({
   path: '/keyword',
   getParentRoute: () => WideFindScentRoute,
 } as any)
-const WideFindScentChatRoute = WideFindScentChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => WideFindScentRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof WideIndexRoute
@@ -126,10 +114,8 @@ export interface FileRoutesByFullPath {
   '/find-scent': typeof WideFindScentRouteWithChildren
   '/my-page': typeof WideMyPageRoute
   '/not-real': typeof WideNotRealRoute
-  '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
-  '/find-scent/chat': typeof WideFindScentChatRoute
   '/find-scent/keyword': typeof WideFindScentKeywordRoute
   '/find-scent/photo': typeof WideFindScentPhotoRoute
   '/find-scent/survey': typeof WideFindScentSurveyRoute
@@ -143,10 +129,8 @@ export interface FileRoutesByTo {
   '/signup': typeof NarrowSignupRoute
   '/my-page': typeof WideMyPageRoute
   '/not-real': typeof WideNotRealRoute
-  '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
-  '/find-scent/chat': typeof WideFindScentChatRoute
   '/find-scent/keyword': typeof WideFindScentKeywordRoute
   '/find-scent/photo': typeof WideFindScentPhotoRoute
   '/find-scent/survey': typeof WideFindScentSurveyRoute
@@ -163,11 +147,9 @@ export interface FileRoutesById {
   '/_wide/find-scent': typeof WideFindScentRouteWithChildren
   '/_wide/my-page': typeof WideMyPageRoute
   '/_wide/not-real': typeof WideNotRealRoute
-  '/_wide/review': typeof WideReviewRoute
   '/_wide/scent-detail': typeof WideScentDetailRoute
   '/_wide/scent-list': typeof WideScentListRoute
   '/_wide/': typeof WideIndexRoute
-  '/_wide/find-scent/chat': typeof WideFindScentChatRoute
   '/_wide/find-scent/keyword': typeof WideFindScentKeywordRoute
   '/_wide/find-scent/photo': typeof WideFindScentPhotoRoute
   '/_wide/find-scent/survey': typeof WideFindScentSurveyRoute
@@ -184,10 +166,8 @@ export interface FileRouteTypes {
     | '/find-scent'
     | '/my-page'
     | '/not-real'
-    | '/review'
     | '/scent-detail'
     | '/scent-list'
-    | '/find-scent/chat'
     | '/find-scent/keyword'
     | '/find-scent/photo'
     | '/find-scent/survey'
@@ -201,10 +181,8 @@ export interface FileRouteTypes {
     | '/signup'
     | '/my-page'
     | '/not-real'
-    | '/review'
     | '/scent-detail'
     | '/scent-list'
-    | '/find-scent/chat'
     | '/find-scent/keyword'
     | '/find-scent/photo'
     | '/find-scent/survey'
@@ -220,11 +198,9 @@ export interface FileRouteTypes {
     | '/_wide/find-scent'
     | '/_wide/my-page'
     | '/_wide/not-real'
-    | '/_wide/review'
     | '/_wide/scent-detail'
     | '/_wide/scent-list'
     | '/_wide/'
-    | '/_wide/find-scent/chat'
     | '/_wide/find-scent/keyword'
     | '/_wide/find-scent/photo'
     | '/_wide/find-scent/survey'
@@ -271,13 +247,6 @@ declare module '@tanstack/react-router' {
       path: '/scent-detail'
       fullPath: '/scent-detail'
       preLoaderRoute: typeof WideScentDetailRouteImport
-      parentRoute: typeof WideRoute
-    }
-    '/_wide/review': {
-      id: '/_wide/review'
-      path: '/review'
-      fullPath: '/review'
-      preLoaderRoute: typeof WideReviewRouteImport
       parentRoute: typeof WideRoute
     }
     '/_wide/not-real': {
@@ -357,13 +326,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WideFindScentKeywordRouteImport
       parentRoute: typeof WideFindScentRoute
     }
-    '/_wide/find-scent/chat': {
-      id: '/_wide/find-scent/chat'
-      path: '/chat'
-      fullPath: '/find-scent/chat'
-      preLoaderRoute: typeof WideFindScentChatRouteImport
-      parentRoute: typeof WideFindScentRoute
-    }
   }
 }
 
@@ -385,7 +347,6 @@ const NarrowRouteWithChildren =
   NarrowRoute._addFileChildren(NarrowRouteChildren)
 
 interface WideFindScentRouteChildren {
-  WideFindScentChatRoute: typeof WideFindScentChatRoute
   WideFindScentKeywordRoute: typeof WideFindScentKeywordRoute
   WideFindScentPhotoRoute: typeof WideFindScentPhotoRoute
   WideFindScentSurveyRoute: typeof WideFindScentSurveyRoute
@@ -393,7 +354,6 @@ interface WideFindScentRouteChildren {
 }
 
 const WideFindScentRouteChildren: WideFindScentRouteChildren = {
-  WideFindScentChatRoute: WideFindScentChatRoute,
   WideFindScentKeywordRoute: WideFindScentKeywordRoute,
   WideFindScentPhotoRoute: WideFindScentPhotoRoute,
   WideFindScentSurveyRoute: WideFindScentSurveyRoute,
@@ -408,7 +368,6 @@ interface WideRouteChildren {
   WideFindScentRoute: typeof WideFindScentRouteWithChildren
   WideMyPageRoute: typeof WideMyPageRoute
   WideNotRealRoute: typeof WideNotRealRoute
-  WideReviewRoute: typeof WideReviewRoute
   WideScentDetailRoute: typeof WideScentDetailRoute
   WideScentListRoute: typeof WideScentListRoute
   WideIndexRoute: typeof WideIndexRoute
@@ -418,7 +377,6 @@ const WideRouteChildren: WideRouteChildren = {
   WideFindScentRoute: WideFindScentRouteWithChildren,
   WideMyPageRoute: WideMyPageRoute,
   WideNotRealRoute: WideNotRealRoute,
-  WideReviewRoute: WideReviewRoute,
   WideScentDetailRoute: WideScentDetailRoute,
   WideScentListRoute: WideScentListRoute,
   WideIndexRoute: WideIndexRoute,
