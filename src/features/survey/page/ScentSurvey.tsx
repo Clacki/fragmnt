@@ -1,22 +1,24 @@
+import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
 import {
   BackButton,
   Button,
   Container,
+  EmptyState,
   PageIntro,
   Vstack,
 } from "@/shared/components"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
-import { scentSurveyMockData } from "../mocks/scent-servey-mock"
+import { useSurveyQuestions } from "../hooks/useSurveyQuestions"
 import PreferenceSlider from "./preference-slider/PreferenceSlider"
 
 const DEFAULT_SURVEY_VALUE = 2
 
 const ScentSurvey = () => {
+  const { data: questions, isPending, isError } = useSurveyQuestions()
+
   const navigate = useNavigate()
-  const [answers, setAnswers] = useState<number[]>(
-    scentSurveyMockData.map(() => DEFAULT_SURVEY_VALUE)
-  )
+  const [answers, setAnswers] = useState<Record<number, number>>({})
 
   const handleBack = () => {
     navigate({ to: "/find-scent" })
@@ -29,19 +31,36 @@ const ScentSurvey = () => {
     index: number
     value: number
   }) => {
-    setAnswers((prev) =>
-      prev.map((item, itemIndex) => {
-        if (itemIndex === index) {
-          return value
-        }
-
-        return item
-      })
-    )
+    setAnswers((prev) => ({
+      ...prev,
+      [index]: value,
+    }))
   }
 
   const handleSubmit = () => {
-    console.log(answers)
+    if (!questions) {
+      return
+    }
+
+    const normalizedAnswers = questions.map((_, index) => {
+      return answers[index] ?? DEFAULT_SURVEY_VALUE
+    })
+
+    console.log(normalizedAnswers)
+  }
+
+  if (isPending) {
+    return <Container className="px-30 pt-16 pb-40">불러오는 중...</Container>
+  }
+
+  if (isError || !questions) {
+    return (
+      <EmptyState
+        imageSrc={EmptyScentImage}
+        title="설문을 불러오지 못했습니다"
+        description="잠시 후 다시 시도해주세요!"
+      />
+    )
   }
 
   return (
@@ -54,15 +73,19 @@ const ScentSurvey = () => {
           backButton={<BackButton onClick={handleBack} />}
         />
 
-        {scentSurveyMockData.map((item, index) => (
-          <PreferenceSlider
-            item={item}
-            value={answers[index]}
-            onChange={(value) => {
-              handleChangeAnswer({ index, value })
-            }}
-          />
-        ))}
+        {questions.map((item, index) => {
+          return (
+            <PreferenceSlider
+              key={`${item.title}-${index}`}
+              item={item}
+              order={index + 1}
+              value={answers[index] ?? DEFAULT_SURVEY_VALUE}
+              onChange={(value) => {
+                handleChangeAnswer({ index, value })
+              }}
+            />
+          )
+        })}
 
         <Button
           size="lg"

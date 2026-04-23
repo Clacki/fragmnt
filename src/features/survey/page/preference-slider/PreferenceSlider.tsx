@@ -1,41 +1,33 @@
 import clsx from "clsx"
+import type { SurveyQuestion } from "../../types/survey.types"
 import "./preference-slider.css"
 
-type PreferenceSliderItem = {
-  order: number
-  title: string
-  description: string
-  labels: [string, string, string, string, string]
-  edgeLabels?: [string, string]
-}
-
 type PreferenceSliderProps = {
-  item: PreferenceSliderItem
+  item: SurveyQuestion
+  order: number
   value: number
-  onChange?: (value: number) => void
+  onChange: (value: number) => void
   className?: string
 }
 
-const POINTS = [0, 1, 2, 3, 4] as const
+const POINTS = [0, 1, 2, 3] as const
 const LAST_POINT_INDEX = POINTS.length - 1
 
 const PreferenceSlider = ({
   item,
+  order,
   value,
   onChange,
   className,
 }: PreferenceSliderProps) => {
-  const { order, title, description, labels, edgeLabels } = item
+  const { title, additional, left_label, right_label, answer } = item
 
+  const labels = answer.map(({ content }) => content)
   const percentage = (value / LAST_POINT_INDEX) * 100
   const selectedLabel = labels[value]
-  const [leftEdgeLabel, rightEdgeLabel] = edgeLabels ?? [labels[0], labels[4]]
+  const [leftEdgeLabel, rightEdgeLabel] = [left_label, right_label]
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!onChange) {
-      return
-    }
-
     onChange(Number(event.target.value))
   }
 
@@ -53,7 +45,7 @@ const PreferenceSlider = ({
 
         <div className="flex flex-col">
           <h3 className="text-lg font-bold text-text-primary">{title}</h3>
-          <p className="text-md text-text-sub">{description}</p>
+          <p className="text-md text-text-sub">{additional}</p>
         </div>
       </header>
 
@@ -94,10 +86,6 @@ const PreferenceSlider = ({
                 className="absolute top-1/2 z-30 h-xl w-xl -translate-x-1/2 -translate-y-1/2 rounded-full"
                 style={{ left: pointLeft }}
                 onClick={() => {
-                  if (!onChange) {
-                    return
-                  }
-
                   onChange(point)
                 }}
               />
