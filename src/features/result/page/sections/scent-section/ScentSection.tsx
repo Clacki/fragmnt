@@ -1,0 +1,53 @@
+import { StateBar } from "@/shared/components"
+import NoteSectionCard from "@/shared/components/note-section/NoteSectionCard"
+import { resultMock } from "../../../mock/result.mock"
+import {
+  getNoteList,
+  getProfileItems,
+} from "../../../utils/transformResultData"
+
+const ScentSection = () => {
+  const notes = resultMock.recommended_scent.scent_notes
+  const profile = resultMock.recommended_scent.profile
+
+  const items = getProfileItems(profile)
+  const noteList = getNoteList(notes)
+
+  return (
+    <div className="w-full mt-md">
+      <div className="flex flex-row gap-sm w-full">
+        {/* profile */}
+        <div className="flex-1 w-full rounded-lg border border-border bg-white p-xl">
+          <div className="mb-md text-base font-semibold text-text-primary text-sm">
+            SCENT PROFILE
+          </div>
+
+          <div className="mt-md flex flex-col gap-md">
+            {items.map((item) => (
+              <StateBar
+                key={item.label}
+                label={item.label}
+                value={item.value}
+                leftText={item.leftText}
+                rightText={item.rightText}
+              />
+            ))}
+          </div>
+        </div>
+        {/* notes */}
+        <div className="flex-1 w-full rounded-lg border border-border bg-white p-xl">
+          <div className="mb-md text-base font-semibold text-text-primary text-sm">
+            NOTE COMPOSITION
+          </div>
+          <div className="mt-sm flex flex-col gap-md">
+            {noteList.map((note) => (
+              <NoteSectionCard key={note.labelEn} {...note} size="md" />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ScentSection
