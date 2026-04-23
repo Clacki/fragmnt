@@ -1,16 +1,38 @@
 import { Tag } from "@/shared/components"
-import { scentKeywordMockData } from "../../mocks/scent-keyword-mock-data"
+import type { KeywordQuestion } from "../../types/keyword-questions.types"
 import type { SelectedKeyword } from "../ScentKeyword"
 
 type KeywordSelectionSectionProps = {
+  questions: KeywordQuestion[]
   selectedKeywords: SelectedKeyword[]
   onToggleKeyword: (keyword: SelectedKeyword) => void
 }
 
+const divisionTitleMap: Record<string, string> = {
+  Place: "공간",
+  MD: "무드",
+  Texture: "질감",
+  "Time & Season": "시간과 계절",
+  "Scent Notes": "향 노트",
+}
+
 const KeywordSelectionSection = ({
+  questions,
   selectedKeywords,
   onToggleKeyword,
 }: KeywordSelectionSectionProps) => {
+  const groupedQuestions = questions.reduce<Record<string, KeywordQuestion[]>>(
+    (acc, question) => {
+      if (!acc[question.keyword_division]) {
+        acc[question.keyword_division] = []
+      }
+
+      acc[question.keyword_division].push(question)
+      return acc
+    },
+    {}
+  )
+
   const isSelectedKeyword = (keywordId: number) => {
     return selectedKeywords.some(
       (selectedKeyword) => selectedKeyword.keywordId === keywordId
@@ -24,31 +46,28 @@ const KeywordSelectionSection = ({
       </h3>
 
       <div>
-        {scentKeywordMockData.map((section) => {
+        {Object.entries(groupedQuestions).map(([division, keywords]) => {
           return (
-            <section
-              key={section.keywordDivision}
-              className="flex flex-col gap-md pb-lg"
-            >
+            <section key={division} className="flex flex-col gap-md pb-lg">
               <h4 className="text-lg font-extrabold text-primary">
-                {section.title}
+                {divisionTitleMap[division] ?? division}
               </h4>
 
               <div className="flex flex-wrap gap-xs">
-                {section.keywords.map((keyword) => {
-                  const isSelected = isSelectedKeyword(keyword.keywordId)
+                {keywords.map((keyword) => {
+                  const isSelected = isSelectedKeyword(keyword.keyword_id)
 
                   return (
                     <Tag
-                      key={keyword.keywordId}
+                      key={keyword.keyword_id}
                       size="sm"
-                      label={keyword.keywordName}
+                      label={keyword.keyword_name}
                       variant={isSelected ? "selected" : "outlined"}
                       onClick={() => {
                         onToggleKeyword({
-                          keywordId: keyword.keywordId,
-                          keywordName: keyword.keywordName,
-                          keywordDivision: section.keywordDivision,
+                          keywordId: keyword.keyword_id,
+                          keywordName: keyword.keyword_name,
+                          keywordDivision: keyword.keyword_division,
                         })
                       }}
                     />

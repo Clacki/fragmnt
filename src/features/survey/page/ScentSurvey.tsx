@@ -7,6 +7,7 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import LoadingState from "@/shared/components/loading-state/LoadingState"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { useSurveyQuestions } from "../hooks/useSurveyQuestions"
@@ -50,7 +51,7 @@ const ScentSurvey = () => {
   }
 
   if (isPending) {
-    return <Container className="px-30 pt-16 pb-40">불러오는 중...</Container>
+    return <LoadingState />
   }
 
   if (isError || !questions) {

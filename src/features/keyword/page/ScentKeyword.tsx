@@ -1,12 +1,16 @@
+import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
 import {
   BackButton,
   Button,
   Container,
+  EmptyState,
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import LoadingState from "@/shared/components/loading-state/LoadingState"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
+import { useKeywordQuestions } from "../hooks/keyword-questions"
 import KeywordSelectionSection from "./keyword-selection-section/KeywordSelectionSection"
 import SelectedKeywordSection from "./selected-keyword-section/SelectedKeywordSection"
 
@@ -18,6 +22,7 @@ export type SelectedKeyword = {
 
 const ScentKeyword = () => {
   const navigate = useNavigate()
+  const { data: questions, isPending, isError } = useKeywordQuestions()
   const [selectedKeywords, setSelectedKeywords] = useState<SelectedKeyword[]>(
     []
   )
@@ -41,8 +46,23 @@ const ScentKeyword = () => {
   const handleBack = () => {
     navigate({ to: "/find-scent" })
   }
+
   const handleClearKeywords = () => {
     setSelectedKeywords([])
+  }
+
+  if (isPending) {
+    return <LoadingState />
+  }
+
+  if (isError || !questions) {
+    return (
+      <EmptyState
+        imageSrc={EmptyScentImage}
+        title="설문을 불러오지 못했습니다"
+        description="잠시 후 다시 시도해주세요!"
+      />
+    )
   }
 
   return (
@@ -56,6 +76,7 @@ const ScentKeyword = () => {
         />
 
         <KeywordSelectionSection
+          questions={questions}
           selectedKeywords={selectedKeywords}
           onToggleKeyword={handleToggleKeyword}
         />
