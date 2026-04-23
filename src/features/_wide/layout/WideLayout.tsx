@@ -18,7 +18,7 @@ const ContainerForScrollbarGutter = ({
 }: ContainerForScrollbarGutterProps) => {
   // NOTE: scrollbar 유무에 따른 header와 본문의 중앙 위치 어긋남을 방지합니다
   return (
-    <div className="shrink-0 overflow-y-scroll">
+    <div className="shrink-0 overflow-y-auto [scrollbar-gutter:stable]">
       <Container>{children}</Container>
     </div>
   )
