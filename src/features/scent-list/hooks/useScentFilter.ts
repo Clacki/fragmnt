@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react"
 
-import type { ScentCardItem } from "@/features/scent-list/mocks/scent-card.mock"
-import type { ScentFilterItem } from "@/features/scent-list/mocks/scent-filter.mock"
+import type { ScentFilterItem } from "@/shared/constants/scent-filter"
+import type { ScentCardItem, ScentSeason } from "../types/scent-card.type"
+import { getIntensityLabel } from "../utils/getIntensityLabel"
 
 export const useScentFilter = (initialData: ScentCardItem[]) => {
   const [selectedItems, setSelectedItems] = useState<ScentFilterItem[]>([])
@@ -23,15 +24,26 @@ export const useScentFilter = (initialData: ScentCardItem[]) => {
   }
 
   const filteredItems = useMemo(() => {
-    if (selectedItems.length === 0) return initialData
+    const safeData = Array.isArray(initialData) ? initialData : []
 
-    return initialData.filter((card) =>
-      selectedItems.every((selected) =>
-        card.tags.some(
-          (tag) =>
-            tag.category === selected.category && tag.name === selected.name
-        )
-      )
+    if (selectedItems.length === 0) return safeData
+
+    return safeData.filter((card) =>
+      selectedItems.every((selected) => {
+        if (selected.category === "category") {
+          return card.category === selected.name
+        }
+
+        if (selected.category === "season") {
+          return card.season.includes(selected.name as ScentSeason)
+        }
+
+        if (selected.category === "intensity") {
+          return getIntensityLabel(card.intensity) === selected.name
+        }
+
+        return true
+      })
     )
   }, [selectedItems, initialData])
 

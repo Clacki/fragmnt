@@ -2,6 +2,7 @@ import { findEmailHandlers } from "@/features/_narrow.find-email/mocks/handlers"
 import { findPasswordHandlers } from "@/features/_narrow.find-password/mocks/handlers"
 import { mainPageHandlers } from "@/features/_wide.index/mocks/main-page-handler"
 import { myPageHandlers } from "@/features/my-page/mocks/handlers"
+import { scentHandlers } from "@/features/scent-list/mocks/handlers"
 import { http, HttpResponse } from "msw"
 
 export const handlers = [
@@ -10,6 +11,7 @@ export const handlers = [
     return HttpResponse.json({ message: "Hello, world!", code: 200 })
   }),
   ...myPageHandlers,
+  ...scentHandlers,
   ...mainPageHandlers,
 
   ...findEmailHandlers,

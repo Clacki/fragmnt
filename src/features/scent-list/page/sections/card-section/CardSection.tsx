@@ -1,13 +1,13 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
-import type { ScentCardItem } from "@/features/scent-list/mocks/scent-card.mock"
 import { ArchiveCard, EmptyState } from "@/shared/components"
 import { useNavigate } from "@tanstack/react-router"
+import type { ScentCardItem } from "../../../types/scent-card.type"
 
 type CardSectionProps = {
   items: ScentCardItem[]
 }
 
-export default function CardSection({ items }: CardSectionProps) {
+export const CardSection = ({ items }: CardSectionProps) => {
   const navigate = useNavigate()
 
   if (items.length === 0) {
@@ -28,7 +28,7 @@ export default function CardSection({ items }: CardSectionProps) {
           key={item.id}
           imageSrc={item.imageUrl}
           imageAlt={item.name}
-          tags={item.tags.map((tag) => tag.name)}
+          tags={item.tags}
           title={item.name}
           description={item.description}
           onClick={() =>

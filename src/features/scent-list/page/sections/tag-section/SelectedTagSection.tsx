@@ -11,7 +11,7 @@ type SelectedTagSectionProps = {
   onClearAll: () => void
 }
 
-const SelectedTagSection = ({
+export const SelectedTagSection = ({
   items,
   onRemove,
   onClearAll,
@@ -52,5 +52,3 @@ const SelectedTagSection = ({
     </section>
   )
 }
-
-export default SelectedTagSection

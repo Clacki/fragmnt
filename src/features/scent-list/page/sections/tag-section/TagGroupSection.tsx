@@ -12,7 +12,7 @@ type TagGroupSectionProps = {
   onToggle: (option: TagOption) => void
 }
 
-const TagGroupSection = ({
+export const TagGroupSection = ({
   title,
   options,
   selectedIds,
@@ -40,5 +40,3 @@ const TagGroupSection = ({
     </section>
   )
 }
-
-export default TagGroupSection
