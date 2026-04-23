@@ -16,7 +16,7 @@ const mainLoaderFn = async (queryClient: QueryClient) => {
   const reviewsInMain = await queryClient.ensureQueryData(
     makeReviewsInMainQueryOptions()
   )
-  return { reviewsInMain }
+  return reviewsInMain
 }
 
 export default mainLoaderFn

@@ -4,5 +4,12 @@ import { createFileRoute } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_wide/")({
   component: MainPage,
-  loader: ({ context: { queryClient } }) => mainLoaderFn(queryClient),
+  loader: async ({ context: { queryClient } }) => {
+    try {
+      const data = await mainLoaderFn(queryClient)
+      return { data, error: null }
+    } catch (error) {
+      return { data: null, error }
+    }
+  },
 })

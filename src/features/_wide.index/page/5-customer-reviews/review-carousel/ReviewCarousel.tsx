@@ -1,6 +1,9 @@
+import { makeReviewsInMainQueryOptions } from "@/features/_wide.index/loader/main-loader"
 import { Button, Hstack } from "@/shared/components"
+import ErrorBox from "@/shared/components/error-box/ErrorBox"
 import type { WithButtonProps } from "@/shared/components/inputs/Button/Button"
 import type { DefaultButtonProps } from "@/shared/types"
+import { useQuery } from "@tanstack/react-query"
 import { useLoaderData } from "@tanstack/react-router"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
@@ -13,7 +16,22 @@ const RoundButton = (props: DefaultButtonProps & WithButtonProps) => {
 const ReviewCarousel = () => {
   const [index, setIndex] = useState(0)
 
-  const { reviewsInMain } = useLoaderData({ from: "/_wide/" })
+  const { data: loaderData, error: loaderError } = useLoaderData({
+    from: "/_wide/",
+  })
+
+  const {
+    data: queryData,
+    error: queryError,
+    refetch,
+  } = useQuery(makeReviewsInMainQueryOptions())
+
+  const reviewsInMain = queryData ?? loaderData
+  const error = queryError ?? loaderError
+
+  if (error) return <ErrorBox refetch={refetch} />
+  if (!reviewsInMain) throw new Error("---- UNREACHABLE")
+
   return (
     <div className="relative">
       {reviewsInMain.length > 2 && (
