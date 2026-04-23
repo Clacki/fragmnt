@@ -2,6 +2,7 @@ import { Send } from "lucide-react"
 import { useState, type ChangeEvent, type KeyboardEvent } from "react"
 
 type ChatInputProps = {
+  disabled?: boolean
   onSendMessage: (text: string) => void
 }
 

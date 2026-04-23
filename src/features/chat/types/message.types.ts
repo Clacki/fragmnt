@@ -10,21 +10,24 @@ export type RecommendationCardData = {
 
 export type MessageRole = "user" | "assistant"
 
-export type ChatMessage =
-  | {
-      id: number
-      role: MessageRole
-      type: "text"
-      text: string
-    }
-  | {
-      id: number
-      role: "assistant"
-      type: "typing"
-    }
-  | {
-      id: number
-      role: "assistant"
-      type: "recommendation"
-      data: RecommendationCardData
-    }
+export type TextMessage = {
+  id: number
+  role: MessageRole
+  type: "text"
+  text: string
+}
+
+export type TypingMessage = {
+  id: number
+  role: "assistant"
+  type: "typing"
+}
+
+export type RecommendationMessage = {
+  id: number
+  role: "assistant"
+  type: "recommendation"
+  data: RecommendationCardData
+}
+
+export type ChatMessage = TextMessage | TypingMessage | RecommendationMessage

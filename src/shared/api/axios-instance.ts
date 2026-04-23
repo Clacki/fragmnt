@@ -41,7 +41,8 @@ instance.interceptors.response.use(
     const refreshToken = state.refreshToken
     const setAccessToken = state.setAccessToken
     const setRefreshToken = state.setRefreshToken
-    const logout = state.logout
+    // const logout = state.logout
+    // 로그아웃 주석처리로 같이 주석처리
 
     // NOTE: 재발급에 사용할 refresh token 없으면 에러 그대로 뱉음
     if (!refreshToken || !error.config) return Promise.reject(error)
@@ -60,7 +61,8 @@ instance.interceptors.response.use(
     } catch (error) {
       // NOTE: 재발급 실패 -> 추가 요청 없이 로그아웃
       console.log({ error })
-      logout()
+      // logout()
+      // TODO : 리프레쉬 토큰 확인 필요
       return Promise.reject(error)
     }
   }

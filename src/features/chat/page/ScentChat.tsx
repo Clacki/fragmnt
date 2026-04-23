@@ -4,69 +4,93 @@ import {
   RoundBox,
   Vstack,
 } from "@/shared/components"
-import { useState } from "react"
-import {
-  mockAssistantText,
-  mockRecommendation,
-} from "../mocks/chat-assistant-mocks"
+import { useEffect, useState } from "react"
+import { useCreateChatSession } from "../hooks/useCreateChatSession"
+import { useSendChatMessage } from "../hooks/useSendChatMessage"
 import { messages } from "../mocks/chat-mocks"
 import type { ChatMessage } from "../types/message.types"
+import {
+  createAssistantTextMessage,
+  createTypingMessage,
+  createUserMessage,
+} from "../utils/create-chat-message"
+import { handleChatResponse } from "../utils/handle-chat-response"
 import ChatHeader from "./chat-header/ChatHeader"
 import ChatInput from "./chat-input/ChatInput"
 import ChatList from "./chat-list/ChatList"
 
 const ScentChat = () => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(messages)
+  const [sessionId, setSessionId] = useState<number | null>(null)
 
-  // TODO: 어시스턴트 자동응답은 추후 API 응답으로 교체
-  const handleSendMessage = (text: string) => {
+  const { mutateAsync: createSession } = useCreateChatSession()
+  const { mutateAsync: sendMessageAsync } = useSendChatMessage()
+
+  useEffect(() => {
+    if (sessionId) {
+      return
+    }
+
+    const initializeSession = async () => {
+      try {
+        const response = await createSession()
+        setSessionId(response.data.id)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    initializeSession()
+  }, [createSession, sessionId])
+
+  const handleSendMessage = async (text: string) => {
     const trimmedText = text.trim()
 
-    if (!trimmedText) {
+    if (!trimmedText || !sessionId) {
       return
     }
 
     const baseId = Date.now()
 
-    const userMessage: ChatMessage = {
+    const userMessage = createUserMessage({
       id: baseId,
-      role: "user",
-      type: "text",
       text: trimmedText,
-    }
+    })
 
-    const typingMessage: ChatMessage = {
+    const typingMessage = createTypingMessage({
       id: baseId + 1,
-      role: "assistant",
-      type: "typing",
-    }
-
-    const assistantTextMessage: ChatMessage = {
-      id: baseId + 2,
-      role: "assistant",
-      type: "text",
-      text: mockAssistantText,
-    }
-
-    const assistantRecommendationMessage: ChatMessage = {
-      id: baseId + 3,
-      role: "assistant",
-      type: "recommendation",
-      data: mockRecommendation,
-    }
+    })
 
     setChatMessages((prev) => [...prev, userMessage, typingMessage])
 
-    setTimeout(() => {
+    try {
+      const response = await sendMessageAsync({
+        sessionId,
+        message: trimmedText,
+      })
+
+      const assistantMessages = handleChatResponse({
+        responseData: response.data,
+        baseId,
+      })
+
       setChatMessages((prev) => [
         ...prev.filter((message) => message.id !== typingMessage.id),
-        assistantTextMessage,
+        ...assistantMessages,
       ])
-    }, 1000)
+    } catch (error) {
+      console.error(error)
 
-    setTimeout(() => {
-      setChatMessages((prev) => [...prev, assistantRecommendationMessage])
-    }, 2000)
+      const errorMessage = createAssistantTextMessage({
+        id: baseId + 2,
+        text: "메시지 전송에 실패했어요. 잠시 후 다시 시도해주세요.",
+      })
+
+      setChatMessages((prev) => [
+        ...prev.filter((message) => message.id !== typingMessage.id),
+        errorMessage,
+      ])
+    }
   }
 
   return (
