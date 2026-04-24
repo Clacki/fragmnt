@@ -69,7 +69,7 @@ const ScentChat = () => {
         message: trimmedText,
       })
 
-      const assistantMessages = handleChatResponse({
+      const assistantMessages = await handleChatResponse({
         responseData: response.data,
         baseId,
       })

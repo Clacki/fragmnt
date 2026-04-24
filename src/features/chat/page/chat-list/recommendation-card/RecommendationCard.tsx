@@ -1,4 +1,5 @@
 import { Button, Hstack, RoundBox, Tag, Vstack } from "@/shared/components"
+import EmptyImage from "@/shared/components/empty-image/EmptyImage"
 import type { RecommendationCardData } from "../../../types/message.types"
 import RecommendationActionButton from "./recommendation-button/RecommendationActionButton"
 
@@ -12,18 +13,24 @@ const RecommendationCard = ({
   description,
   tags,
 }: RecommendationCardProps) => {
+  const hasImage = Boolean(imageSrc)
+
   return (
     <RoundBox
-      className="message-enter w-full max-w-[440px] bg-white"
+      className="ml-10 border border-border message-enter w-full max-w-[440px] bg-white"
       padding="none"
     >
       <Vstack gap="none">
-        <div>
-          <img
-            className="h-60 w-full rounded-t-xl object-cover"
-            src={imageSrc}
-            alt={imageAlt}
-          />
+        <div className="h-60 w-full overflow-hidden rounded-t-xl flex items-center justify-center">
+          {hasImage ? (
+            <img
+              className="h-full w-full object-cover"
+              src={imageSrc}
+              alt={imageAlt}
+            />
+          ) : (
+            <EmptyImage />
+          )}
         </div>
 
         <section className="flex flex-col gap-sm p-lg">
@@ -42,7 +49,7 @@ const RecommendationCard = ({
           </ul>
 
           <div className="flex flex-col gap-md">
-            <Button className="w-full">자세히 보기</Button>
+            <Button className="w-full">추천 결과 자세히 보기</Button>
 
             <Hstack>
               <RecommendationActionButton>저장하기</RecommendationActionButton>

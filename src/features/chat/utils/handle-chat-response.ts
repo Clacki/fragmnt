@@ -1,31 +1,39 @@
-// chat/utils/handle-chat-response.ts
+import { getScentDetail } from "../api/scent-response-detail.api"
 import type { SendChatMessageResponse } from "../api/send-chat-message.api"
 import type { ChatMessage } from "../types/message.types"
-import { createAssistantTextMessage } from "./create-chat-message"
+import {
+  createAssistantTextMessage,
+  createRecommendationMessage,
+} from "./create-chat-message"
+import { toRecommendationCardData } from "./to-recommendation-card-data"
 
 type HandleChatResponseParams = {
   responseData: SendChatMessageResponse["data"]
   baseId: number
 }
 
-export const handleChatResponse = ({
+export const handleChatResponse = async ({
   responseData,
   baseId,
-}: HandleChatResponseParams): ChatMessage[] => {
-  const { reply, is_recommendation, recommendation_id, scent_id } = responseData
+}: HandleChatResponseParams): Promise<ChatMessage[]> => {
+  const { reply, is_recommendation, scent_id } = responseData
 
-  // TODO : 결과추천 API 나오면 연결
-  if (is_recommendation) {
-    console.log("추천 도달", {
-      recommendation_id,
-      scent_id,
-    })
+  const assistantTextMessage = createAssistantTextMessage({
+    id: baseId + 2,
+    text: reply,
+  })
+
+  if (!is_recommendation || scent_id === null) {
+    return [assistantTextMessage]
   }
 
-  return [
-    createAssistantTextMessage({
-      id: baseId + 2,
-      text: reply,
-    }),
-  ]
+  const scentResponse = await getScentDetail(scent_id)
+  const recommendationCardData = toRecommendationCardData(scentResponse.data)
+
+  const recommendationMessage = createRecommendationMessage({
+    id: baseId + 3,
+    data: recommendationCardData,
+  })
+
+  return [assistantTextMessage, recommendationMessage]
 }
