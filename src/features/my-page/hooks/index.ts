@@ -1,5 +1,5 @@
 export * from "./useDeleteReview"
-export * from "./useEditReview"
+export * from "./useEditReviewMutation"
 export * from "./useFavoriteScents"
 export * from "./useHistoryList"
 export * from "./useReviewList"

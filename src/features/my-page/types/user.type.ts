@@ -1,12 +1,16 @@
-// map 변환 함수 추가해야 할 듯
-type UserProfile = {
-  profileImageUrl?: string
-  userName: string
-  userId: string
+export type UserProfile = {
+  name: string
   email: string
-  gender: string
-  phone: string
-  birthDate: string
+  phone_number: string
+  birthday: string
+  profile_image_url: string | null
+}
+
+export type UpdateUserProfileRequest = {
+  name: string
+  email: string
+  phone_number: string
+  birthday: string
 }
 
 export type FavoriteScent = {
@@ -18,5 +22,3 @@ export type FavoriteScent = {
   tags: string[]
   savedAt: string
 }
-
-export type { UserProfile }

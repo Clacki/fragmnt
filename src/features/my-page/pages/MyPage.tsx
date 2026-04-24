@@ -1,5 +1,6 @@
 import { CenterContainer, Container } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
+
 import { useUserProfile } from "../hooks/useUserProfile"
 import TabSection from "./tab-section/TabSection"
 import UserSection from "./user-section/UserSection"

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-import ReviewCard from "./ReviewCard"
+import { ReviewCard } from "./ReviewCard"
 
 const meta: Meta<typeof ReviewCard> = {
   title: "components/ReviewCard",

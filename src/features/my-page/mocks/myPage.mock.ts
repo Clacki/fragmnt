@@ -1,11 +1,9 @@
 import type { UserProfile } from "../types"
 
 export const mockUserProfile: UserProfile = {
-  profileImageUrl: undefined,
-  userName: "USER NAME",
-  userId: "USER_ID",
-  email: "example@user.com",
-  gender: "여성",
-  phone: "010-0000-0000",
-  birthDate: "1999.01.01",
+  name: "정수지",
+  email: "staff5@example.com",
+  phone_number: "010-5555-5555",
+  birthday: "2000-01-01",
+  profile_image_url: null,
 }

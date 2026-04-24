@@ -1,9 +1,20 @@
 import { instance } from "@/shared/api/axios-instance"
 import type { HistoryItem } from "../mocks/history.mock"
-import type { FavoriteScent, UserProfile } from "../types"
+import type {
+  FavoriteScent,
+  UpdateUserProfileRequest,
+  UserProfile,
+} from "../types"
 
 export const getMyProfile = async (): Promise<UserProfile> => {
-  const { data } = await instance.get("/accounts/me")
+  const { data } = await instance.get("/accounts/me/profile")
+  return data
+}
+
+export const updateMyProfile = async (
+  body: UpdateUserProfileRequest
+): Promise<UserProfile> => {
+  const { data } = await instance.patch("/accounts/me/profile", body)
   return data
 }
 
@@ -13,6 +24,6 @@ export const getFavoriteScents = async (): Promise<FavoriteScent[]> => {
 }
 
 export const getHistoryList = async (): Promise<HistoryItem[]> => {
-  const { data } = await instance.get("/analyses/")
+  const { data } = await instance.get("/analyses")
   return data
 }
