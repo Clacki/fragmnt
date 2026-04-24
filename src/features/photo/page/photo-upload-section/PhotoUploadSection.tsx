@@ -16,6 +16,7 @@ type PhotoUploadSectionProps = {
   previewUrl: string
   setPreviewUrl: Dispatch<SetStateAction<string>>
   onStepChange: Dispatch<SetStateAction<MobilePhotoStep>>
+  setSelectedFile: Dispatch<SetStateAction<File | null>>
 }
 
 const PhotoUploadSection = ({
@@ -23,6 +24,7 @@ const PhotoUploadSection = ({
   previewUrl,
   setPreviewUrl,
   onStepChange,
+  setSelectedFile,
 }: PhotoUploadSectionProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const objectUrlRef = useRef<string | null>(null)
@@ -56,14 +58,16 @@ const PhotoUploadSection = ({
     }
 
     const imageUrl = URL.createObjectURL(file)
+    setSelectedFile(file)
     updatePreviewUrl(imageUrl, true)
     onStepChange("preview")
 
     event.target.value = ""
   }
 
-  const handleCaptureImage = (imageUrl: string) => {
-    updatePreviewUrl(imageUrl)
+  const handleCaptureImage = (imageUrl: string, file: File) => {
+    setSelectedFile(file)
+    updatePreviewUrl(imageUrl, true)
     onStepChange("preview")
   }
 

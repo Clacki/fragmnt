@@ -5,7 +5,7 @@ import CameraIconButton from "./camera-icon-button/CameraIconButton"
 type CameraFacingMode = "user" | "environment"
 
 type MobileCameraContentProps = {
-  onCapture: (imageUrl: string) => void
+  onCapture: (imageUrl: string, file: File) => void
   onClose: () => void
 }
 
@@ -96,8 +96,23 @@ const MobileCameraContent = ({
 
     context.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-    const imageUrl = canvas.toDataURL("image/jpeg", 0.9)
-    onCapture(imageUrl)
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          return
+        }
+
+        const file = new File([blob], `analysis-image-${Date.now()}.jpg`, {
+          type: "image/jpeg",
+        })
+
+        const imageUrl = URL.createObjectURL(file)
+
+        onCapture(imageUrl, file)
+      },
+      "image/jpeg",
+      0.9
+    )
   }
 
   useEffect(() => {
