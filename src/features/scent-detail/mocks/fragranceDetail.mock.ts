@@ -1,7 +1,7 @@
 import type { ScentDetailResponse } from "@/shared/types/scent-types/scent.type"
 
 export const fragranceDetailMock: ScentDetailResponse = {
-  scent: {
+  data: {
     id: 1,
     name: "그린 포즈",
     eng_name: "Green Pause",

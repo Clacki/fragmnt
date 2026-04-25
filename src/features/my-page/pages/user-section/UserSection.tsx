@@ -32,6 +32,7 @@ export default function UserSection({ user, className }: UserSectionProps) {
   })
 
   const { mutate, isPending } = useUpdateUserProfile()
+
   const handleEditStart = () => {
     setForm({
       name: user.name,
@@ -49,6 +50,7 @@ export default function UserSection({ user, className }: UserSectionProps) {
         [key]: value,
       }))
     }
+
   const handleSubmit = () => {
     mutate(form, {
       onSuccess: () => {

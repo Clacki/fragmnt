@@ -1,25 +1,30 @@
+import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
 import {
   BackButton,
   CenterContainer,
   Container,
+  EmptyState,
+  LoadingState,
   Vstack,
 } from "@/shared/components"
 
-import { useSearch } from "@tanstack/react-router"
-import { fragranceDetailMock } from "../mocks/fragranceDetail.mock"
+import { useNavigate, useSearch } from "@tanstack/react-router"
+import { useDetailQuery } from "../hooks/useDetailQuery"
 
 import BottomCard from "./sections/bottom-section/BottomCard"
 import NoteCard from "./sections/note-section/NoteCard"
 import ProfileCard from "./sections/profile-section/ProfileCard"
 import TopCard from "./sections/top-section/TopCard"
 
-const ScentDetail = () => {
+export const ScentDetail = () => {
   const { id } = useSearch({ from: "/_wide/scent-detail" })
-  const scent = fragranceDetailMock.scent
+  const scentId = Number(id)
 
-  if (scent.id !== id) {
-    return <div>해당 향기 정보를 찾을 수 없습니다.</div>
-  }
+  const navigate = useNavigate()
+  const { data, isLoading, error } = useDetailQuery(scentId)
+
+  const scent = data?.data
+  const isInvalid = !Number.isFinite(scentId) || error || !scent
 
   return (
     <CenterContainer className="w-full">
@@ -29,24 +34,40 @@ const ScentDetail = () => {
         className="min-h-screen max-w-container-xl bg-surface-default"
       >
         <Vstack className="mx-2xl">
-          <BackButton />
-          <TopCard data={fragranceDetailMock} />
-          <ProfileCard intensity={scent.intensity} profile={scent.profile} />
+          <BackButton onClick={() => navigate({ to: "/scent-list" })} />
 
-          <NoteCard
-            notes={scent.scent_notes}
-            tags={scent.tags}
-            seasons={scent.season}
-          />
+          {isLoading ? (
+            <LoadingState />
+          ) : isInvalid ? (
+            <EmptyState
+              imageSrc={EmptyScentImage}
+              title="존재하지 않는 향기입니다."
+              description="잠시 후 다시 시도해주세요!"
+              className="border-none"
+            />
+          ) : (
+            <>
+              <TopCard data={data} />
 
-          <BottomCard
-            recommendedPlaces={scent.recommended_places}
-            similarScents={scent.similar_scents}
-          />
+              <ProfileCard
+                intensity={scent.intensity}
+                profile={scent.profile}
+              />
+
+              <NoteCard
+                notes={scent.scent_notes}
+                tags={scent.tags}
+                seasons={scent.season}
+              />
+
+              <BottomCard
+                recommendedPlaces={scent.recommended_places}
+                similarScents={scent.similar_scents}
+              />
+            </>
+          )}
         </Vstack>
       </Container>
     </CenterContainer>
   )
 }
-
-export default ScentDetail

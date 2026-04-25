@@ -2,6 +2,7 @@ import { findEmailHandlers } from "@/features/_narrow.find-email/mocks/handlers"
 import { findPasswordHandlers } from "@/features/_narrow.find-password/mocks/handlers"
 import { mainPageHandlers } from "@/features/_wide.index/mocks/main-page-handler"
 import { myPageHandlers } from "@/features/my-page/mocks/handlers"
+import { detailPageHandlers } from "@/features/scent-detail/mocks/handler"
 import { scentHandlers } from "@/features/scent-list/mocks/handlers"
 import { http, HttpResponse } from "msw"
 
@@ -12,6 +13,7 @@ export const handlers = [
   }),
   ...myPageHandlers,
   ...scentHandlers,
+  ...detailPageHandlers,
   ...mainPageHandlers,
 
   ...findEmailHandlers,

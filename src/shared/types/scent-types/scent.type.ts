@@ -57,5 +57,5 @@ export type ScentDetail = {
 }
 
 export type ScentDetailResponse = {
-  scent: ScentDetail
+  data: ScentDetail
 }

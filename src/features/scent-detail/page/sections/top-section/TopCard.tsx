@@ -1,13 +1,17 @@
 import { Button, EmptyImage, Tag } from "@/shared/components"
 import type { ScentDetailResponse } from "@/shared/types/scent-types/scent.type"
 import { BookmarkIcon, Share2 } from "lucide-react"
+import { useState } from "react"
 
 type TopCardProps = {
   data: ScentDetailResponse
 }
 
 const TopCard = ({ data }: TopCardProps) => {
-  const scent = data.scent
+  const scent = data.data
+  const [isImageError, setIsImageError] = useState(false)
+
+  const hasImage = scent.thumbnail_url && !isImageError
 
   return (
     <div className="flex flex-col items-center justify-center gap-md">
@@ -15,11 +19,12 @@ const TopCard = ({ data }: TopCardProps) => {
         <Tag label={scent.categories} size="sm" variant="outlined" />
       </div>
 
-      {scent.thumbnail_url ? (
+      {hasImage ? (
         <img
           src={scent.thumbnail_url}
           alt={scent.eng_name}
           className="mb-md aspect-square w-[220px] rounded-xl object-cover"
+          onError={() => setIsImageError(true)}
         />
       ) : (
         <div className="mb-md flex aspect-square w-[220px] items-center justify-center">
