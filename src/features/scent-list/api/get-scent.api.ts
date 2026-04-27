@@ -9,11 +9,11 @@ export const getScents = async (): Promise<ScentCardItem[]> => {
   return data.data.map((item) => ({
     id: item.id,
     name: item.name,
-    eng_name: item.englishName,
+    eng_name: item.eng_name,
     description: item.description,
-    imageUrl: item.imageUrl,
+    imageUrl: item.thumbnail_url,
     tags: item.tags,
-    category: item.category,
+    category: item.categories,
     season: item.season,
     intensity: item.intensity,
   }))

@@ -5,10 +5,11 @@ export const mapScentApiToCard = (item: ScentApiItem): ScentCardItem => {
   return {
     id: item.id,
     name: item.name,
+    eng_name: item.eng_name,
     description: item.description,
-    imageUrl: item.imageUrl,
+    imageUrl: item.thumbnail_url,
     tags: item.tags,
-    category: item.category,
+    category: item.categories,
     season: item.season,
     intensity: item.intensity,
   }

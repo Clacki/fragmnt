@@ -4,12 +4,12 @@ import Feather from "@/assets/images/scent-list/Feather.svg"
 import { CenterContainer, Container, Hstack, Vstack } from "@/shared/components"
 
 import LoadingState from "@/shared/components/loading-state/LoadingState"
-import { useScentFilter } from "../hooks/useScentFilter"
-import { useScentsQuery } from "../hooks/useScentQuery"
-import { CardSection } from "./sections/card-section/CardSection"
-import { ScentFilterPanel } from "./sections/tag-section/ScentFilterPanel"
+import { useScentFilter } from "./hooks/useScentFilter"
+import { useScentsQuery } from "./hooks/useScentQuery"
+import { CardSection } from "./page/sections/card-section/CardSection"
+import { ScentFilterPanel } from "./page/sections/tag-section/ScentFilterPanel"
 
-export default function ScentList() {
+export const ScentList = () => {
   const { data: scentCards = [], isLoading, isError, error } = useScentsQuery()
 
   const {

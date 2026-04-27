@@ -17,10 +17,11 @@ export type ScentIntensityLabel = "약함" | "보통" | "강함"
 export type ScentCardItem = {
   id: number
   name: string
+  eng_name: string
   description: string
   imageUrl: string
   tags: string[]
-  category: ScentCategory
-  season: ScentSeason[]
+  category: string
+  season: string[]
   intensity: number
 }

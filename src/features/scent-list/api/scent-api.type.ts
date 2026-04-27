@@ -1,15 +1,13 @@
-import type { ScentCategory, ScentSeason } from "../types/scent-card.type"
-
 export type ScentApiItem = {
   id: number
   name: string
-  englishName: string
-  category: ScentCategory
-  description: string
-  imageUrl: string
-  intensity: number
+  categories: string
   tags: string[]
-  season: ScentSeason[]
+  description: string
+  eng_name: string
+  intensity: number
+  season: string[]
+  thumbnail_url: string
 }
 
 export type GetScentsResponse = {
