@@ -1,4 +1,3 @@
-import type { ImageAnalysisResult } from "@/features/photo/types/image-analysis.type"
 import {
   CenterContainer,
   Container,
@@ -6,32 +5,48 @@ import {
   Vstack,
 } from "@/shared/components"
 import { useMemo } from "react"
+import type { AnalysisResult } from "../types/analysis-result.types"
 import AISection from "./sections/ai-section/AISection"
 import BottomSection from "./sections/bottom-section/BottomSection"
 import TopCardSection from "./sections/card-section/TopCardSection"
 import ScentSection from "./sections/scent-section/ScentSection"
 
-type ResultPageProps = {
-  resultId: string
+type ResultType = "image" | "survey" | "keyword" | "chat"
+
+const RESULT_STORAGE_KEY: Record<ResultType, string> = {
+  image: "imageAnalysisResult",
+  survey: "surveyAnalysisResult",
+  keyword: "keywordAnalysisResult",
+  chat: "chatAnalysisResult",
 }
 
-const ResultPage = ({ resultId }: ResultPageProps) => {
+type ResultPageProps = {
+  resultId: string
+  type: ResultType
+}
+
+const ResultPage = ({ resultId, type }: ResultPageProps) => {
   const result = useMemo(() => {
-    const storedResult = sessionStorage.getItem("imageAnalysisResult")
+    const storageKey = RESULT_STORAGE_KEY[type]
+    const storedResult = sessionStorage.getItem(storageKey)
 
     if (!storedResult) {
       return undefined
     }
 
-    const parsedResult = JSON.parse(storedResult) as ImageAnalysisResult
+    const parsedResult = JSON.parse(storedResult) as AnalysisResult
 
     if (String(parsedResult.id) !== resultId) {
       return undefined
     }
 
     return parsedResult
-  }, [resultId])
-
+  }, [resultId, type])
+  console.log("resultId:", resultId)
+  console.log("type:", type)
+  console.log("storageKey:", RESULT_STORAGE_KEY[type])
+  console.log("storedResult:", sessionStorage.getItem(RESULT_STORAGE_KEY[type]))
+  console.log("result:", result)
   return (
     <CenterContainer className="w-full py-2xl">
       <Container

@@ -1,3 +1,15 @@
+export type SimilarScentType = {
+  id: number
+  name: string
+  eng_name: string
+  categories: string
+  tags: string[]
+  description: string
+  intensity: number
+  season: string[]
+  thumbnail_url: string
+}
+
 export type RecommendedScent = {
   id: number
   name: string
@@ -39,7 +51,7 @@ export type RecommendedScent = {
     matchScore: number
     description: string
   }[]
-  similar_scents: number[]
+  similar_scents: SimilarScentType[]
   thumbnail_url: string
   created_at: string
 }

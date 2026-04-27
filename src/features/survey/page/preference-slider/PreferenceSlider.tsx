@@ -10,7 +10,7 @@ type PreferenceSliderProps = {
   className?: string
 }
 
-const POINTS = [0, 1, 2, 3] as const
+const POINTS = [0, 1, 2, 3, 4] as const
 const LAST_POINT_INDEX = POINTS.length - 1
 
 const PreferenceSlider = ({

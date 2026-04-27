@@ -68,6 +68,9 @@ const ScentPhoto = () => {
         params: {
           resultId: String(analysisResult.id),
         },
+        search: {
+          type: "survey",
+        },
       })
     } finally {
       setIsUploadingToS3(false)

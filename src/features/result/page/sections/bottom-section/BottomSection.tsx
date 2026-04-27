@@ -1,5 +1,5 @@
-import type { SimilarScentType } from "@/features/photo/types/image-analysis.type"
 import { Button } from "@/shared/components"
+import type { SimilarScentType } from "@/shared/types"
 import { useNavigate } from "@tanstack/react-router"
 import { MessageSquareIcon } from "lucide-react"
 import SimilarScent from "./similar-scent/SimilarScent"
@@ -31,14 +31,14 @@ const BottomSection = ({
           </div>
 
           <div className="w-full grid grid-cols-2 gap-md">
-            {similarScents.map((scentId) => (
+            {similarScents.map((scent) => (
               <SimilarScent
-                key={scentId.id}
-                imageSrc={scentId.thumbnail_url}
-                imageAlt={`Scent ${scentId}`}
-                label={scentId.categories}
-                title={scentId.eng_name}
-                description={scentId.description}
+                key={scent.id}
+                imageSrc={scent.thumbnail_url}
+                imageAlt={scent.name}
+                label={scent.categories}
+                title={scent.eng_name}
+                description={scent.description}
               />
             ))}
           </div>

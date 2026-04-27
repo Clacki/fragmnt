@@ -1,11 +1,11 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import { EmptyState } from "@/shared/components"
 
-import type { ImageAnalysisResult } from "@/features/photo/types/image-analysis.type"
+import type { AnalysisResult } from "@/features/result/types/analysis-result.types"
 import ResultTopCard from "./result-card/ResultCard"
 
 type TopCardSectionProps = {
-  result?: ImageAnalysisResult
+  result?: AnalysisResult
 }
 
 const TopCardSection = ({ result }: TopCardSectionProps) => {

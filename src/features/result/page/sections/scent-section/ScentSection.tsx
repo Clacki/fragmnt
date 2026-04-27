@@ -1,6 +1,6 @@
-import type { RecommendedScent } from "@/features/photo/types/image-analysis.type"
 import { StateBar } from "@/shared/components"
 import NoteSectionCard from "@/shared/components/note-section/NoteSectionCard"
+import type { RecommendedScent } from "@/shared/types"
 import {
   getNoteList,
   getProfileItems,
