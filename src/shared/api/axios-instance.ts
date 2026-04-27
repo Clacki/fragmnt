@@ -1,14 +1,15 @@
 import axios, { AxiosError } from "axios"
-import { checkEnvVar } from "../utils/check-env-var"
+import { BASE_URL } from "../env/env-vars"
 import useAuthStore from "./use-auth-store"
 
-const baseURL = checkEnvVar(import.meta.env.VITE_BASE_URL)
-
-/**  아무것도 없이 (Authorization: Bearer ... 없이, 쿠키 없이) 요청을 보내야 할 때 사용합니다 */
-const plainInstance = axios.create({ baseURL })
+// NOTE: 아무것도 없이 (Authorization: Bearer ... 없이, 쿠키 없이) 요청을 보내야 할 때 사용합니다
+const plainInstance = axios.create({ baseURL: BASE_URL })
 
 /** jwt 토큰 재발급 성공 이후 재요청 할 때만 사용합니다 */
-const headOnlyInstance = axios.create({ baseURL, withCredentials: true })
+const headOnlyInstance = axios.create({
+  baseURL: BASE_URL,
+  withCredentials: true,
+})
 headOnlyInstance.interceptors.request.use((config) => {
   const accessToken = useAuthStore.getState().accessToken
   if (!accessToken) {
@@ -19,8 +20,9 @@ headOnlyInstance.interceptors.request.use((config) => {
   return config
 })
 
-/** 액세스 토큰을 넣고 요청할 때 사용합니다 */
-const instance = axios.create({ baseURL, withCredentials: true })
+// NOTE: 액세스 토큰을 넣고 요청할 때 사용합니다
+// TODO: interceptor 구현해야
+const instance = axios.create({ baseURL: BASE_URL, withCredentials: true })
 
 // NOTE: 헤더에 access token을 넣습니다
 instance.interceptors.request.use((config) => {
