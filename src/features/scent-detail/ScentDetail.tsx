@@ -9,12 +9,12 @@ import {
 } from "@/shared/components"
 
 import { useNavigate, useSearch } from "@tanstack/react-router"
-import { useDetailQuery } from "../hooks/useDetailQuery"
+import { useDetailQuery } from "./hooks/useDetailQuery"
 
-import BottomCard from "./sections/bottom-section/BottomCard"
-import NoteCard from "./sections/note-section/NoteCard"
-import ProfileCard from "./sections/profile-section/ProfileCard"
-import TopCard from "./sections/top-section/TopCard"
+import BottomCard from "./page/sections/bottom-section/BottomCard"
+import NoteCard from "./page/sections/note-section/NoteCard"
+import ProfileCard from "./page/sections/profile-section/ProfileCard"
+import TopCard from "./page/sections/top-section/TopCard"
 
 export const ScentDetail = () => {
   const { id } = useSearch({ from: "/_wide/scent-detail" })

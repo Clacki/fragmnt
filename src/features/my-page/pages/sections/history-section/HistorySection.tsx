@@ -5,7 +5,7 @@ import { useHistoryList } from "@/features/my-page/hooks/useHistoryList"
 import { formatDate } from "@/shared/utils/date"
 import HistoryCard from "./history-card/HistoryCard"
 
-export default function HistorySection() {
+export const HistorySection = () => {
   const { data: historyList = [], isLoading, error } = useHistoryList()
   const hasItems = historyList.length > 0
 
@@ -16,7 +16,7 @@ export default function HistorySection() {
   return (
     <section>
       <h2 className="px-md text-right text-md font-bold text-text-primary">
-        내 기록
+        {"내 기록 "}
         <span className="font-extrabold text-primary">
           {historyList.length}
         </span>

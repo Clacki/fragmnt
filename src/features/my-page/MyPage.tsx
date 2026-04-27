@@ -54,7 +54,7 @@ export const MyPage = () => {
               style="ghost"
               size="sm"
               onClick={handleLogout}
-              className="mt-auto self-end text-text-sub text-sm"
+              className="mt-2xl self-end text-text-sub text-sm"
             >
               <LogOutIcon size={16} />
               로그아웃

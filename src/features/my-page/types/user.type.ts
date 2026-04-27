@@ -8,9 +8,8 @@ export type UserProfile = {
 
 export type UpdateUserProfileRequest = {
   name: string
-  email: string
-  phone_number: string
   birthday: string
+  profile_image_url?: string
 }
 
 export type FavoriteScent = {

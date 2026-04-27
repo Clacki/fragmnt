@@ -33,7 +33,7 @@ const HistoryCard = ({
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="block h-full w-full object-cover"
+            className="block size-25 object-cover"
             onError={() => setIsError(true)}
           />
         ) : (

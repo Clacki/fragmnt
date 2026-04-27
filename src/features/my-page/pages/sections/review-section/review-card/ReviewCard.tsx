@@ -6,21 +6,27 @@ import { useState } from "react"
 
 export type ReviewCardProps = {
   reviewId: number
+  type: string
   title: string
   rating: number
   content: string
   date: string
   onDelete?: () => void
   className?: string
+  onEditSuccess?: () => void
+  onEditError?: () => void
 }
 
 export const ReviewCard = ({
   reviewId,
+  type,
   title,
   rating,
   content,
   date,
   onDelete,
+  onEditSuccess,
+  onEditError,
   className,
 }: ReviewCardProps) => {
   const safeRating = Math.max(0, Math.min(5, rating))
@@ -31,11 +37,16 @@ export const ReviewCard = ({
     editReview(
       {
         reviewId,
-        content: editedContent,
+        type,
+        review: editedContent,
       },
       {
         onSuccess: () => {
           setIsEditing(false)
+          onEditSuccess?.()
+        },
+        onError: () => {
+          onEditError?.()
         },
       }
     )

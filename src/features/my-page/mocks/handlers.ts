@@ -20,14 +20,14 @@ export const myPageHandlers = [
     return HttpResponse.json(mockHistoryList)
   }),
 
-  http.get(`${BASE_URL}/analyses/reviews/me`, () => {
+  http.get(`${BASE_URL}/analyses/reviews`, () => {
     return HttpResponse.json(mockReviewList)
   }),
 
   http.delete(`${BASE_URL}/analyses/:reviewId/review`, (req) => {
     const { reviewId } = req.params
     const index = mockReviewList.findIndex(
-      (review) => review.reviewId === Number(reviewId)
+      (review) => review.id === Number(reviewId)
     )
     if (index !== -1) {
       mockReviewList.splice(index, 1)
@@ -37,7 +37,6 @@ export const myPageHandlers = [
     }
   }),
 
-  // TODO: 실제 API 명세 보고 수정 필요, 수정 모달 띄우는 text area 구현 필요
   http.patch(
     `${BASE_URL}/analyses/:reviewId/review`,
     async ({ request, params }) => {
@@ -45,14 +44,14 @@ export const myPageHandlers = [
       const { content } = (await request.json()) as { content: string }
 
       const review = mockReviewList.find(
-        (review) => review.reviewId === Number(reviewId)
+        (review) => review.id === Number(reviewId)
       )
 
       if (!review) {
         return new HttpResponse(null, { status: 404 })
       }
 
-      review.content = content
+      review.review = content
       return new HttpResponse(null, { status: 204 })
     }
   ),

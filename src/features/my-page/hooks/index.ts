@@ -1,4 +1,4 @@
-export * from "./useDeleteReview"
+export * from "./useDeleteReviewMutation"
 export * from "./useEditReviewMutation"
 export * from "./useFavoriteScents"
 export * from "./useHistoryList"
