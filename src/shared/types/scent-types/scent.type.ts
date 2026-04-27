@@ -51,7 +51,13 @@ export type ScentDetail = {
   profile: ScentProfile
   season: string[]
   recommended_places: RecommendedPlace[]
-  similar_scents: number[]
+  similar_scents: {
+    id: number
+    name: string
+    thumbnail_url: string
+    tags: string[]
+    description: string
+  }[]
   thumbnail_url: string
   created_at: string
 }

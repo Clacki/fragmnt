@@ -1,6 +1,5 @@
-import { Button, EmptyImage, Tag } from "@/shared/components"
+import { EmptyImage, Tag } from "@/shared/components"
 import type { ScentDetailResponse } from "@/shared/types/scent-types/scent.type"
-import { BookmarkIcon, Share2 } from "lucide-react"
 import { useState } from "react"
 
 type TopCardProps = {
@@ -43,17 +42,6 @@ const TopCard = ({ data }: TopCardProps) => {
         {scent.tags.map((tag) => (
           <Tag key={tag} label={tag} size="sm" variant="soft" />
         ))}
-      </div>
-
-      <div className="mt-md flex items-center justify-center gap-lg">
-        <Button size="lg" radius="full">
-          <BookmarkIcon size={18} />내 향기로 저장
-        </Button>
-
-        <Button size="lg" radius="full" style="outlined">
-          <Share2 size={18} />
-          공유하기
-        </Button>
       </div>
     </div>
   )

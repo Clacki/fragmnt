@@ -26,6 +26,8 @@ export const ScentDetail = () => {
   const scent = data?.data
   const isInvalid = !Number.isFinite(scentId) || error || !scent
 
+  console.log(data)
+
   return (
     <CenterContainer className="w-full">
       <Container

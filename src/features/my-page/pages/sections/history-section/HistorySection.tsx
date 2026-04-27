@@ -2,15 +2,18 @@ import EmptyState from "@/shared/components/empty-state/EmptyState"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 
 import { useHistoryList } from "@/features/my-page/hooks/useHistoryList"
+import { mapAnalysisType } from "@/features/my-page/utils/mapAnalysisType"
 import { formatDate } from "@/shared/utils/date"
+import { useNavigate } from "@tanstack/react-router"
 import HistoryCard from "./history-card/HistoryCard"
 
 export const HistorySection = () => {
+  const navigate = useNavigate()
+
   const { data: historyList = [], isLoading, error } = useHistoryList()
   const hasItems = historyList.length > 0
 
   if (isLoading) return <LoadingState />
-
   if (error) return <div>기록을 불러오지 못했어요.</div>
 
   return (
@@ -31,11 +34,17 @@ export const HistorySection = () => {
               imageSrc={item.recommended_scent.thumbnail_url}
               imageAlt={item.recommended_scent.name}
               title={item.recommended_scent.name}
-              badgeText={item.type}
+              badgeText={mapAnalysisType(item.type)}
               tags={item.recommended_scent.tags}
               date={formatDate(item.created_at)}
               onClick={() => {
-                console.log(`${item.recommended_scent.name} clicked`)
+                navigate({
+                  to: "/find-scent/result/$resultId",
+                  params: {
+                    resultId: String(item.id),
+                  },
+                  search: { type: item.type },
+                })
               }}
             />
           ))}

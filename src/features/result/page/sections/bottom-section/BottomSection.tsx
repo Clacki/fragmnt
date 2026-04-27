@@ -39,6 +39,14 @@ const BottomSection = ({
                 label={scent.categories}
                 title={scent.eng_name}
                 description={scent.description}
+                onClick={() => {
+                  navigate({
+                    to: "/scent-detail",
+                    search: {
+                      id: scent.id,
+                    },
+                  })
+                }}
               />
             ))}
           </div>

@@ -88,7 +88,7 @@ export default function UserSection({ user, className }: UserSectionProps) {
             <img
               src={user.profile_image_url}
               alt={`${user.name} 프로필 이미지`}
-              className="size-24 rounded-full object-cover"
+              className="size-35 rounded-full object-cover"
             />
           ) : (
             <EmptyImage type="avatar" />

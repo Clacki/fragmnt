@@ -1,6 +1,6 @@
 export type HistoryItem = {
   id: number
-  type: "analyses"
+  type: "image"
   recommended_scent: {
     id: number
     name: string
@@ -17,7 +17,7 @@ export type HistoryItem = {
 export const mockHistoryList: HistoryItem[] = [
   {
     id: 4,
-    type: "analyses",
+    type: "image",
     recommended_scent: {
       id: 12,
       name: "스모크드 팀버",
