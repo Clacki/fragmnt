@@ -14,7 +14,14 @@ const FindPasswordSuccess = () => {
       >
         이제 새로운 비밀번호로 로그인할 수 있습니다
       </RoundBox>
-      <Button onClick={() => navigate({ to: "/login" })}>
+      <Button
+        onClick={() =>
+          navigate({
+            to: "/login",
+            search: { reason: undefined },
+          })
+        }
+      >
         로그인으로 이동
       </Button>
     </Vstack>

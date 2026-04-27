@@ -9,7 +9,7 @@ const SignupSuccessModal = () => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate({ to: "/login", replace: true })
+    navigate({ to: "/login", search: { reason: undefined }, replace: true })
     setModalKey(null)
   }
 

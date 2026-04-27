@@ -17,7 +17,14 @@ const FindEmailSuccess = ({ email }: FindEmailSuccessProps) => {
           <p>{email}</p>
         </Vstack>
       </RoundBox>
-      <Button onClick={() => navigate({ to: "/login" })}>
+      <Button
+        onClick={() =>
+          navigate({
+            to: "/login",
+            search: { reason: undefined },
+          })
+        }
+      >
         로그인으로 이동
       </Button>
     </Vstack>

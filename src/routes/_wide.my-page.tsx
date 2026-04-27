@@ -1,16 +1,19 @@
-import MyPage from "@/features/my-page/pages/MyPage"
-// import useAuthStore from "@/shared/api/use-auth-store"
-import { createFileRoute } from "@tanstack/react-router"
+import { MyPage } from "@/features/my-page/MyPage"
+import useAuthStore from "@/shared/api/use-auth-store"
+import { createFileRoute, redirect } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_wide/my-page")({
-  // beforeLoad: () => {
-  //   const accessToken = useAuthStore.getState().accessToken
+  beforeLoad: () => {
+    const accessToken = useAuthStore.getState().accessToken
 
-  //   if (!accessToken) {
-  //     throw redirect({
-  //       to: "/login",
-  //     })
-  //   }
-  // },
+    if (!accessToken) {
+      throw redirect({
+        to: "/login",
+        search: {
+          reason: "unauthorized",
+        },
+      })
+    }
+  },
   component: MyPage,
 })
