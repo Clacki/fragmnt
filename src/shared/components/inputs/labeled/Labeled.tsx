@@ -1,5 +1,6 @@
 import type { DivProps } from "@/shared/types"
 import { Vstack } from "../../layouts"
+import LabeledBody from "./labeled-body/LabeledBody"
 import { LabeledContextProvider } from "./labeled-context/labeled-context"
 import LabeledMessage from "./labeled-message/LabeledMessage"
 import LabeledTitle from "./labeled-title/LabeledTitle"
@@ -23,6 +24,7 @@ const Labeled = ({
 }
 
 Labeled.Title = LabeledTitle
+Labeled.Body = LabeledBody
 Labeled.Message = LabeledMessage
 
 export default Labeled
