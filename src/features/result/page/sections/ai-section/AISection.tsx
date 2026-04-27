@@ -1,10 +1,17 @@
-import { resultMock } from "../../../mock/result.mock"
 import AICard from "./ai-card/AICard"
 
-const AISection = () => {
+type AISectionProps = {
+  aiComment?: string
+}
+
+const AISection = ({ aiComment }: AISectionProps) => {
+  if (!aiComment) {
+    return null
+  }
+
   return (
     <section className="w-full pb-md">
-      <AICard title="AI 분석 결과" description={resultMock.ai_comment} />
+      <AICard title="AI 분석 결과" description={aiComment} />
     </section>
   )
 }

@@ -1,15 +1,18 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import { EmptyState } from "@/shared/components"
 
-import { resultMock } from "../../../mock/result.mock"
+import type { ImageAnalysisResult } from "@/features/photo/types/image-analysis.type"
 import ResultTopCard from "./result-card/ResultCard"
 
-const TopCardSection = () => {
-  const { recommended_scent, match_score } = resultMock
+type TopCardSectionProps = {
+  result?: ImageAnalysisResult
+}
 
-  const hasResult = !!recommended_scent
+const TopCardSection = ({ result }: TopCardSectionProps) => {
+  const recommendedScent = result?.recommended_scent
+  const matchScore = result?.match_score
 
-  if (!hasResult) {
+  if (!recommendedScent) {
     return (
       <div className="mt-2xl flex justify-center">
         <EmptyState
@@ -25,13 +28,13 @@ const TopCardSection = () => {
   return (
     <section>
       <ResultTopCard
-        imageSrc={recommended_scent.thumbnail_url}
-        imageAlt={`${recommended_scent.name} 향 이미지`}
-        category={recommended_scent.categories}
-        matchRate={match_score}
-        title={recommended_scent.name}
-        description={recommended_scent.description}
-        tags={recommended_scent.tags.slice(0, 2)}
+        imageSrc={recommendedScent.thumbnail_url}
+        imageAlt={`${recommendedScent.name} 향 이미지`}
+        category={recommendedScent.categories}
+        matchRate={matchScore ?? 0}
+        title={recommendedScent.name}
+        description={recommendedScent.description}
+        tags={recommendedScent.tags.slice(0, 2)}
       />
     </section>
   )

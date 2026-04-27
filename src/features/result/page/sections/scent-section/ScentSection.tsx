@@ -1,14 +1,22 @@
+import type { RecommendedScent } from "@/features/photo/types/image-analysis.type"
 import { StateBar } from "@/shared/components"
 import NoteSectionCard from "@/shared/components/note-section/NoteSectionCard"
-import { resultMock } from "../../../mock/result.mock"
 import {
   getNoteList,
   getProfileItems,
 } from "../../../utils/transformResultData"
 
-const ScentSection = () => {
-  const notes = resultMock.recommended_scent.scent_notes
-  const profile = resultMock.recommended_scent.profile
+type ScentSectionProps = {
+  scent?: RecommendedScent
+}
+
+const ScentSection = ({ scent }: ScentSectionProps) => {
+  if (!scent) {
+    return null
+  }
+
+  const notes = scent.scent_notes
+  const profile = scent.profile
 
   const items = getProfileItems(profile)
   const noteList = getNoteList(notes)
@@ -18,7 +26,7 @@ const ScentSection = () => {
       <div className="flex flex-row gap-sm w-full">
         {/* profile */}
         <div className="flex-1 w-full rounded-lg border border-border bg-white p-xl">
-          <div className="mb-md text-base font-semibold text-text-primary text-sm">
+          <div className="mb-md text-sm font-semibold text-text-primary">
             SCENT PROFILE
           </div>
 
@@ -34,11 +42,13 @@ const ScentSection = () => {
             ))}
           </div>
         </div>
+
         {/* notes */}
         <div className="flex-1 w-full rounded-lg border border-border bg-white p-xl">
-          <div className="mb-md text-base font-semibold text-text-primary text-sm">
+          <div className="mb-md text-sm font-semibold text-text-primary">
             NOTE COMPOSITION
           </div>
+
           <div className="mt-sm flex flex-col gap-md">
             {noteList.map((note) => (
               <NoteSectionCard key={note.labelEn} {...note} size="md" />

@@ -27,7 +27,6 @@ import { Route as WideFindScentSurveyRouteImport } from './routes/_wide.find-sce
 import { Route as WideFindScentPhotoRouteImport } from './routes/_wide.find-scent.photo'
 import { Route as WideFindScentKeywordRouteImport } from './routes/_wide.find-scent.keyword'
 import { Route as WideFindScentChatRouteImport } from './routes/_wide.find-scent.chat'
-import { Route as WideFindScentResultResultIdRouteImport } from './routes/_wide.find-scent.result.$resultId'
 
 const WideRoute = WideRouteImport.update({
   id: '/_wide',
@@ -117,12 +116,6 @@ const WideFindScentChatRoute = WideFindScentChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => WideFindScentRoute,
 } as any)
-const WideFindScentResultResultIdRoute =
-  WideFindScentResultResultIdRouteImport.update({
-    id: '/result/$resultId',
-    path: '/result/$resultId',
-    getParentRoute: () => WideFindScentRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof WideIndexRoute
@@ -141,7 +134,6 @@ export interface FileRoutesByFullPath {
   '/find-scent/photo': typeof WideFindScentPhotoRoute
   '/find-scent/survey': typeof WideFindScentSurveyRoute
   '/find-scent/': typeof WideFindScentIndexRoute
-  '/find-scent/result/$resultId': typeof WideFindScentResultResultIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof WideIndexRoute
@@ -159,7 +151,6 @@ export interface FileRoutesByTo {
   '/find-scent/photo': typeof WideFindScentPhotoRoute
   '/find-scent/survey': typeof WideFindScentSurveyRoute
   '/find-scent': typeof WideFindScentIndexRoute
-  '/find-scent/result/$resultId': typeof WideFindScentResultResultIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -181,7 +172,6 @@ export interface FileRoutesById {
   '/_wide/find-scent/photo': typeof WideFindScentPhotoRoute
   '/_wide/find-scent/survey': typeof WideFindScentSurveyRoute
   '/_wide/find-scent/': typeof WideFindScentIndexRoute
-  '/_wide/find-scent/result/$resultId': typeof WideFindScentResultResultIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -202,7 +192,6 @@ export interface FileRouteTypes {
     | '/find-scent/photo'
     | '/find-scent/survey'
     | '/find-scent/'
-    | '/find-scent/result/$resultId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -220,7 +209,6 @@ export interface FileRouteTypes {
     | '/find-scent/photo'
     | '/find-scent/survey'
     | '/find-scent'
-    | '/find-scent/result/$resultId'
   id:
     | '__root__'
     | '/_narrow'
@@ -241,7 +229,6 @@ export interface FileRouteTypes {
     | '/_wide/find-scent/photo'
     | '/_wide/find-scent/survey'
     | '/_wide/find-scent/'
-    | '/_wide/find-scent/result/$resultId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -377,13 +364,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WideFindScentChatRouteImport
       parentRoute: typeof WideFindScentRoute
     }
-    '/_wide/find-scent/result/$resultId': {
-      id: '/_wide/find-scent/result/$resultId'
-      path: '/result/$resultId'
-      fullPath: '/find-scent/result/$resultId'
-      preLoaderRoute: typeof WideFindScentResultResultIdRouteImport
-      parentRoute: typeof WideFindScentRoute
-    }
   }
 }
 
@@ -410,7 +390,6 @@ interface WideFindScentRouteChildren {
   WideFindScentPhotoRoute: typeof WideFindScentPhotoRoute
   WideFindScentSurveyRoute: typeof WideFindScentSurveyRoute
   WideFindScentIndexRoute: typeof WideFindScentIndexRoute
-  WideFindScentResultResultIdRoute: typeof WideFindScentResultResultIdRoute
 }
 
 const WideFindScentRouteChildren: WideFindScentRouteChildren = {
@@ -419,7 +398,6 @@ const WideFindScentRouteChildren: WideFindScentRouteChildren = {
   WideFindScentPhotoRoute: WideFindScentPhotoRoute,
   WideFindScentSurveyRoute: WideFindScentSurveyRoute,
   WideFindScentIndexRoute: WideFindScentIndexRoute,
-  WideFindScentResultResultIdRoute: WideFindScentResultResultIdRoute,
 }
 
 const WideFindScentRouteWithChildren = WideFindScentRoute._addFileChildren(

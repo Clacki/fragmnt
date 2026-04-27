@@ -13,20 +13,20 @@ const AICard = ({ title, description, className = "" }: AICardProps) => {
   return (
     <section
       className={cn(
-        "w-full rounded-lg border border-border bg-white p-lg shadow-sm",
+        "w-full rounded-lg border border-border bg-green-input p-lg shadow-sm text-primary",
         className
       )}
     >
-      <div className="flex flex-col gap-sm">
-        <div className="flex items-center gap-md">
-          <Sparkles size={18} />
-          <h2 className="text-md font-bold text-text-primary">{title}</h2>
+      <div className="flex flex-col gap-sm text-primary">
+        <div className="flex items-center gap-sm">
+          <Sparkles size={24} />
+          <h2 className="text-lg font-bold text-primary pt-xs">{title}</h2>
         </div>
 
         <p
           className={cn(
-            "break-keep text-md leading-relaxed ml-xl",
-            hasContent ? "text-text-primary" : "text-text-sub"
+            "break-keep text-primary text-md leading-relaxed ml-8 font-semibold",
+            hasContent ? "text-primary" : "text-text-sub"
           )}
         >
           {hasContent ? description : "아직 AI 분석 결과가 생성되지 않았어요."}

@@ -59,7 +59,7 @@ const ResultTopCard = ({
               {category}
             </span>
 
-            <span className="inline-flex h-8 items-center rounded-full bg-tag px-4 text-sm font-medium text-white">
+            <span className="inline-flex h-8 items-center rounded-full bg-primary px-4 text-sm font-medium text-white">
               {matchRate}% Match
             </span>
           </div>

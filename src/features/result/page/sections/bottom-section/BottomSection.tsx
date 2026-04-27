@@ -1,38 +1,55 @@
+import type { SimilarScentType } from "@/features/photo/types/image-analysis.type"
 import { Button } from "@/shared/components"
 import { useNavigate } from "@tanstack/react-router"
 import { MessageSquareIcon } from "lucide-react"
-import { resultMock } from "../../../mock/result.mock"
 import SimilarScent from "./similar-scent/SimilarScent"
 
-const BottomSection = () => {
+type BottomSectionProps = {
+  similarScents?: SimilarScentType[]
+  resultId?: number
+}
+const BottomSection = ({
+  similarScents = [],
+  resultId,
+}: BottomSectionProps) => {
   const navigate = useNavigate()
-  const similarScents = resultMock.recommended_scent.similar_scents
+
   const handleReviewClick = () => {
+    if (!resultId) {
+      return
+    }
+
     navigate({ to: "/review" })
   }
 
   return (
     <div className="w-full mt-2xl flex flex-col items-center justify-center">
-      <div className="w-full mb-md text-base font-semibold text-text-primary text-lg">
-        Similar Scents
-      </div>
-      {/* cards */}
-      <div className="w-full grid grid-cols-2 gap-md">
-        {similarScents.map((scentId) => (
-          <SimilarScent
-            key={scentId}
-            imageSrc=""
-            imageAlt={`Scent ${scentId}`}
-            label=""
-            title={`Scent #${scentId}`}
-            description="유사한 향 정보는 추후 제공될 예정입니다."
-          />
-        ))}
-      </div>
+      {similarScents.length > 0 && (
+        <>
+          <div className="w-full mb-md text-lg font-semibold text-text-primary">
+            Similar Scents
+          </div>
+
+          <div className="w-full grid grid-cols-2 gap-md">
+            {similarScents.map((scentId) => (
+              <SimilarScent
+                key={scentId.id}
+                imageSrc={scentId.thumbnail_url}
+                imageAlt={`Scent ${scentId}`}
+                label={scentId.categories}
+                title={scentId.eng_name}
+                description={scentId.description}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
       <div className="flex flex-col gap-md items-center justify-center border border-primary p-lg bg-badge w-full mt-2xl rounded-lg">
         <div className="bg-card p-md rounded-full mb-md">
           <MessageSquareIcon size={20} className="text-primary" />
         </div>
+
         <div className="flex flex-col gap-xs items-center">
           <p className="font-semibold text-md">추천 결과에 만족하셨나요?</p>
           <p className="font-light text-md text-text-sub">
@@ -40,7 +57,7 @@ const BottomSection = () => {
           </p>
         </div>
 
-        <Button size="sm" onClick={handleReviewClick}>
+        <Button size="sm" onClick={handleReviewClick} disabled={!resultId}>
           후기 남기기
         </Button>
       </div>
