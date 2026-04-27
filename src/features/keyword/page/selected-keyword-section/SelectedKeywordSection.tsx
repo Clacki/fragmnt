@@ -1,5 +1,5 @@
 import { Tag } from "@/shared/components"
-import type { SelectedKeyword } from "../ScentKeyword"
+import type { SelectedKeyword } from "../../types/keyword-questions.types"
 
 type SelectedKeywordSectionProps = {
   selectedKeywords: SelectedKeyword[]
@@ -18,7 +18,7 @@ const SelectedKeywordSection = ({
     <article className="w-full">
       <div className="w-full rounded-lg border border-green-input bg-white p-lg">
         <div className="flex justify-between pb-md text-text-sub">
-          <p>선택한 키워드를 바탕으로 향을 추천해드릴게요</p>
+          <p>최소 3개의 키워드를 선택해주세요</p>
 
           {hasSelectedKeywords && (
             <button

@@ -10,15 +10,15 @@ import {
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
-import { useKeywordQuestions } from "../hooks/keyword-questions"
+import {
+  useKeywordQuestions,
+  usePostKeywordResult,
+} from "../hooks/keyword-questions"
+import type { SelectedKeyword } from "../types/keyword-questions.types"
 import KeywordSelectionSection from "./keyword-selection-section/KeywordSelectionSection"
 import SelectedKeywordSection from "./selected-keyword-section/SelectedKeywordSection"
 
-export type SelectedKeyword = {
-  keywordId: number
-  keywordName: string
-  keywordDivision: string
-}
+const MIN_KEYWORD_COUNT = 3
 
 const ScentKeyword = () => {
   const navigate = useNavigate()
@@ -26,6 +26,8 @@ const ScentKeyword = () => {
   const [selectedKeywords, setSelectedKeywords] = useState<SelectedKeyword[]>(
     []
   )
+  const { mutate: postKeywordResult, isPending: isPostKeywordResultPending } =
+    usePostKeywordResult()
 
   const handleToggleKeyword = (keyword: SelectedKeyword) => {
     setSelectedKeywords((prev) => {
@@ -51,7 +53,35 @@ const ScentKeyword = () => {
     setSelectedKeywords([])
   }
 
-  if (isPending) {
+  const handleSubmitKeyword = () => {
+    if (selectedKeywords.length < MIN_KEYWORD_COUNT) {
+      return
+    }
+
+    const requestBody = selectedKeywords.map((keyword) => {
+      return {
+        keyword_id: keyword.keywordId,
+        keyword_name: keyword.keywordName,
+      }
+    })
+
+    postKeywordResult(requestBody, {
+      onSuccess: (result) => {
+        sessionStorage.setItem("keywordAnalysisResult", JSON.stringify(result))
+
+        navigate({
+          to: "/find-scent/result/$resultId",
+          params: {
+            resultId: String(result.id),
+          },
+          search: {
+            type: "keyword",
+          },
+        })
+      },
+    })
+  }
+  if (isPending || isPostKeywordResultPending) {
     return <LoadingState />
   }
 
@@ -88,8 +118,13 @@ const ScentKeyword = () => {
         />
 
         <Button
+          onClick={handleSubmitKeyword}
           size="lg"
           className="mt-lg flex items-center justify-center text-lg font-bold"
+          disabled={
+            selectedKeywords.length < MIN_KEYWORD_COUNT ||
+            isPostKeywordResultPending
+          }
         >
           나만의 향기 확인하기
         </Button>

@@ -1,6 +1,8 @@
 import { Tag } from "@/shared/components"
-import type { KeywordQuestion } from "../../types/keyword-questions.types"
-import type { SelectedKeyword } from "../ScentKeyword"
+import type {
+  KeywordQuestion,
+  SelectedKeyword,
+} from "../../types/keyword-questions.types"
 
 type KeywordSelectionSectionProps = {
   questions: KeywordQuestion[]
