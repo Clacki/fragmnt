@@ -1,7 +1,7 @@
-export type ReviewInMainDummy = {
+export type ReviewInMain = {
   id: number
   thumbnail_url: string
-  user_name: string
+  name: string // NOTE: user name
   created_at: string
   review: string
 }

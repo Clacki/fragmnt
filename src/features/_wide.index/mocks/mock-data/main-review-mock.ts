@@ -1,4 +1,4 @@
-import type { ReviewInMainDummy } from "../../types/dummy.api.type"
+import type { ReviewInMain } from "../../types/main.api.type"
 
 const imgUrls = [
   "https://placehold.co/600x400",
@@ -20,12 +20,12 @@ const reviews = [
   "학교장에서 쓰기엔 좀 강한 편이에요.",
 ]
 
-export const MainReviewMock: ReviewInMainDummy[] = Array.from(
+export const MainReviewMock: ReviewInMain[] = Array.from(
   { length: 11 },
   (_, index) => ({
     id: index,
     thumbnail_url: imgUrls[index % imgUrls.length],
-    user_name: `더미유저${index + 1}`,
+    name: `더미유저${index + 1}`,
     created_at: new Date(Date.now() - index * 86400000).toISOString(),
     review: reviews[index % reviews.length],
   })

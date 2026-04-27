@@ -1,12 +1,12 @@
-import type { ReviewInMainDummy } from "@/features/_wide.index/types/dummy.api.type"
+import type { ReviewInMain } from "@/features/_wide.index/types/main.api.type"
 import { Hstack, RoundBox, Vstack } from "@/shared/components"
 
 type ReviewCardInMainProps = {
-  reviewInMain: ReviewInMainDummy
+  reviewInMain: ReviewInMain
   index: number
 }
 const ReviewCardInMain = ({ reviewInMain, index }: ReviewCardInMainProps) => {
-  const { created_at, user_name, thumbnail_url, review } = reviewInMain
+  const { created_at, name, thumbnail_url, review } = reviewInMain
   return (
     <RoundBox
       style={{
@@ -25,7 +25,7 @@ const ReviewCardInMain = ({ reviewInMain, index }: ReviewCardInMainProps) => {
         <Vstack className="justify-between p-lg flex-1">
           <p className="font-thin">{`"${review}"`}</p>
           <Hstack className="w-full justify-start items-center">
-            <p className="grow">{user_name}</p>
+            <p className="grow">{name}</p>
             <p className="text-sm text-text-sub">{created_at.slice(0, 10)}</p>
           </Hstack>
         </Vstack>
