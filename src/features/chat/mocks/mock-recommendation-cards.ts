@@ -6,7 +6,6 @@ export const mockAssistantText =
 
 export const mockRecommendation: RecommendationCardData = {
   recommendationId: 999,
-  sessionId: 999,
   imageSrc: ImageMock,
   imageAlt: "향수 추천 이미지",
   name: "포레스트 리저브",

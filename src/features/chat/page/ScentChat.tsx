@@ -62,7 +62,6 @@ const ScentChat = () => {
     })
 
     setChatMessages((prev) => [...prev, userMessage, typingMessage])
-
     try {
       const response = await sendMessageAsync({
         sessionId,
@@ -72,7 +71,6 @@ const ScentChat = () => {
       const assistantMessages = await handleChatResponse({
         responseData: response.data,
         baseId,
-        sessionId,
       })
 
       setChatMessages((prev) => [

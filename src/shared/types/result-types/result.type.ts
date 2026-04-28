@@ -57,10 +57,13 @@ export type RecommendedScent = {
 }
 
 export type ResultData = {
+  id: number
+  ai_comment: string
+  match_score: number
   recommended_scent: RecommendedScent
-}
-
-export type ResultResponse = {
-  status?: "success"
-  data: ResultData
+  source_type: "image" | "survey" | "keyword" | "chatbot"
+  is_saved: boolean
+  user_message?: string[]
+  ai_keywords?: string[]
+  created_at: string
 }

@@ -1,5 +1,4 @@
 import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
-import { useChatRecommendationResultQuery } from "@/features/chat/hooks/useChatRecommendationResultQuery"
 import {
   BackButton,
   CenterContainer,
@@ -9,10 +8,10 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
-
+import type { ResultData } from "@/shared/types"
 import { useNavigate } from "@tanstack/react-router"
 import { useMemo } from "react"
-import type { AnalysisResult } from "../types/analysis-result.types"
+import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
 import AISection from "./sections/ai-section/AISection"
 import BottomSection from "./sections/bottom-section/BottomSection"
 import TopCardSection from "./sections/card-section/TopCardSection"
@@ -20,70 +19,76 @@ import ScentSection from "./sections/scent-section/ScentSection"
 
 type ResultType = "image" | "survey" | "keyword" | "chat"
 
+type ResultPageProps = {
+  resultId: number
+  type: ResultType
+}
+
 const RESULT_STORAGE_KEY: Record<Exclude<ResultType, "chat">, string> = {
   image: "imageAnalysisResult",
   survey: "surveyAnalysisResult",
   keyword: "keywordAnalysisResult",
 }
 
-type ResultPageProps = {
-  resultId: string
-  type: ResultType
-  sessionId?: number
-}
-
-const ResultPage = ({ resultId, type, sessionId }: ResultPageProps) => {
+const ResultPage = ({ resultId, type }: ResultPageProps) => {
   const navigate = useNavigate()
 
-  const numericResultId = Number(resultId)
-  const isChatResult = type === "chat"
-
   const storedResult = useMemo(() => {
-    if (isChatResult) {
+    if (type === "chat") {
       return undefined
     }
 
     const storageKey = RESULT_STORAGE_KEY[type]
-    const storedResult = sessionStorage.getItem(storageKey)
+    const storedValue = sessionStorage.getItem(storageKey)
 
-    if (!storedResult) {
+    if (!storedValue) {
       return undefined
     }
 
-    const parsedResult = JSON.parse(storedResult) as AnalysisResult
+    const parsedResult = JSON.parse(storedValue) as ResultData
 
-    if (String(parsedResult.id) !== resultId) {
+    if (parsedResult.id !== resultId) {
       return undefined
     }
 
     return parsedResult
-  }, [resultId, type, isChatResult])
+  }, [resultId, type])
 
   const {
-    data: chatResult,
-    isLoading: isChatLoading,
-    isError: isChatError,
-  } = useChatRecommendationResultQuery({
-    sessionId: sessionId ?? 0,
-    recommendationId: numericResultId,
-    enabled:
-      isChatResult &&
-      sessionId !== undefined &&
-      Number.isFinite(numericResultId),
+    data: fetchedResult,
+    isLoading,
+    isError,
+  } = useAnalysisDetailQuery({
+    resultId,
+    type,
+    enabled: !storedResult,
   })
 
-  const result = (isChatResult ? chatResult : storedResult) as
-    | AnalysisResult
-    | undefined
-
-  const isLoading = isChatResult ? isChatLoading : false
-  const isError = isChatResult ? isChatError : false
+  const result = storedResult ?? fetchedResult
 
   const handleBack = () => {
     navigate({ to: "/my-page" })
   }
 
-  if (isLoading) {
+  if (!Number.isFinite(resultId)) {
+    return (
+      <CenterContainer className="w-full py-2xl">
+        <Container
+          width="xl"
+          isPadded
+          className="min-h-screen max-w-container-xl bg-surface-default"
+        >
+          <EmptyState
+            imageSrc={EmptyScentImage}
+            title="잘못된 결과 ID입니다."
+            description="결과 페이지 주소를 다시 확인해주세요."
+          />
+        </Container>
+      </CenterContainer>
+    )
+  }
+
+  if (isLoading && !storedResult) {
     return (
       <CenterContainer className="w-full py-2xl">
         <Container
@@ -97,7 +102,7 @@ const ResultPage = ({ resultId, type, sessionId }: ResultPageProps) => {
     )
   }
 
-  if (isError || !result) {
+  if ((isError && !storedResult) || !result) {
     return (
       <CenterContainer className="w-full py-2xl">
         <Container

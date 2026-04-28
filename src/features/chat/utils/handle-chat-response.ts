@@ -12,13 +12,11 @@ import { toRecommendationCardData } from "./to-recommendation-card-data"
 type HandleChatResponseParams = {
   responseData: SendChatMessageResponse["data"]
   baseId: number
-  sessionId: number
 }
 
 export const handleChatResponse = async ({
   responseData,
   baseId,
-  sessionId,
 }: HandleChatResponseParams): Promise<ChatMessage[]> => {
   const { reply, is_recommendation, recommendation_id, scent_id } = responseData
 
@@ -36,7 +34,6 @@ export const handleChatResponse = async ({
   const recommendationCardData = {
     ...toRecommendationCardData(scentResponse.data),
     recommendationId: recommendation_id,
-    sessionId,
   }
 
   const recommendationMessage = createRecommendationMessage({

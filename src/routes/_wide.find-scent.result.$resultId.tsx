@@ -14,41 +14,17 @@ const isResultType = (value: unknown): value is ResultType => {
   )
 }
 
-const normalizeSearchId = (value: unknown) => {
-  if (typeof value !== "string" && typeof value !== "number") {
-    return undefined
-  }
-
-  const normalizedValue = String(value).replaceAll('"', "")
-  const numericValue = Number(normalizedValue)
-
-  return Number.isFinite(numericValue) ? numericValue : undefined
-}
-
 const ResultRoute = () => {
   const { resultId } = Route.useParams()
-  const search = Route.useSearch()
+  const { type } = Route.useSearch()
 
-  return (
-    <ResultPage
-      resultId={resultId}
-      type={search.type}
-      sessionId={"sessionId" in search ? search.sessionId : undefined}
-    />
-  )
+  return <ResultPage resultId={Number(resultId)} type={type} />
 }
 
 export const Route = createFileRoute("/_wide/find-scent/result/$resultId")({
   validateSearch: (search: Record<string, unknown>) => {
-    const type = isResultType(search.type) ? search.type : "image"
-
-    if (type !== "chat") {
-      return { type }
-    }
-
     return {
-      type,
-      sessionId: normalizeSearchId(search.sessionId),
+      type: isResultType(search.type) ? search.type : "image",
     }
   },
   component: ResultRoute,

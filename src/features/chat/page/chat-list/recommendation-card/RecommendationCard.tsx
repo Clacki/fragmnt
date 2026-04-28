@@ -8,7 +8,6 @@ type RecommendationCardProps = RecommendationCardData
 
 const RecommendationCard = ({
   recommendationId,
-  sessionId,
   imageSrc,
   imageAlt,
   name,
@@ -27,7 +26,6 @@ const RecommendationCard = ({
       },
       search: {
         type: "chat",
-        sessionId,
       },
     })
   }

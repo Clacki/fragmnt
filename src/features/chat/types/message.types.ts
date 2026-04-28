@@ -4,7 +4,6 @@ export type MessageRole = "user" | "assistant"
 
 export type RecommendationCardData = {
   recommendationId: number
-  sessionId: number
   imageSrc: string
   imageAlt: string
   name: string
