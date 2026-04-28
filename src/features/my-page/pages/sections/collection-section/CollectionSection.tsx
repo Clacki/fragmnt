@@ -1,24 +1,24 @@
 import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import { EmptyState } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
+import { formatDate } from "@/shared/utils/date"
+import { useNavigate } from "@tanstack/react-router"
 import { useFavoriteScents } from "../../../hooks/useFavoriteScents"
 import CollectionCard from "./collection-card/CollectionCard"
 
 export const CollectionSection = () => {
-  const { error, favoriteScents, isLoading } = useFavoriteScents()
-
-  const hasItems = favoriteScents.length > 0
-  const collectionList = favoriteScents.map((item) => ({
-    ...item,
-    date: item.savedAt,
-  }))
+  const navigate = useNavigate()
+  const { error, favoriteScents = [], isLoading } = useFavoriteScents()
 
   if (isLoading) {
     return <LoadingState />
   }
+
   if (error) {
     return <div>저장된 향기를 불러오지 못했어요.</div>
   }
+
+  const hasItems = favoriteScents.length > 0
 
   return (
     <section>
@@ -32,8 +32,24 @@ export const CollectionSection = () => {
 
       {hasItems ? (
         <div className="mt-md grid grid-cols-2 gap-lg">
-          {collectionList.map(({ id, ...item }) => (
-            <CollectionCard key={id} {...item} />
+          {favoriteScents.map((item) => (
+            <CollectionCard
+              key={item.id}
+              imageSrc={item.scent.thumbnail_url}
+              imageAlt={item.scent.name}
+              category={item.scent.categories}
+              title={item.scent.name}
+              tags={item.scent.tags ?? []}
+              date={formatDate(item.created_at)}
+              onClick={() => {
+                navigate({
+                  to: "/scent-detail",
+                  search: {
+                    id: item.scent.id,
+                  },
+                })
+              }}
+            />
           ))}
         </div>
       ) : (

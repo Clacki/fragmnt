@@ -7,9 +7,10 @@ type CollectionCardProps = {
   imageAlt?: string
   category: string
   title: string
-  tags: string[]
+  tags?: string[]
   date: string
   onDelete?: () => void
+  onClick?: () => void
 }
 
 const CollectionCard = ({
@@ -17,14 +18,20 @@ const CollectionCard = ({
   imageAlt = "collection image",
   category,
   title,
-  tags,
+  tags = [],
   date,
   onDelete,
+  onClick,
 }: CollectionCardProps) => {
   const [isError, setIsError] = useState(false)
 
   return (
-    <article className="flex h-[440px] w-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-200 hover:shadow-md">
+    <article
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      className="flex h-[440px] w-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-200 hover:shadow-md"
+    >
       <div className="flex items-center justify-center h-[315px] w-full overflow-hidden">
         {imageSrc && !isError ? (
           <img
@@ -45,7 +52,10 @@ const CollectionCard = ({
           </div>
           <button
             type="button"
-            onClick={onDelete}
+            onClick={(e) => {
+              e.stopPropagation()
+              onDelete?.()
+            }}
             aria-label={`${title} 삭제`}
             className="cursor-pointer text-text-sub transition-colors hover:text-primary-hover"
           >

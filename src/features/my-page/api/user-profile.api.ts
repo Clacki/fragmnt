@@ -46,3 +46,13 @@ export const uploadImageToS3 = async (uploadUrl: string, file: File) => {
     throw new Error("S3 이미지 업로드에 실패했습니다.")
   }
 }
+
+// AI 이미지 생성하기
+type AiProfileImageResponse = {
+  message: string
+}
+export const createAiProfileImage =
+  async (): Promise<AiProfileImageResponse> => {
+    const { data } = await instance.post("/question/image")
+    return data
+  }

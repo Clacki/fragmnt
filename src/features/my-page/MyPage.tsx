@@ -7,8 +7,8 @@ import axios from "axios"
 import { LogOutIcon } from "lucide-react"
 import { useEffect } from "react"
 import { useUserProfile } from "./hooks/useUserProfile"
-import TabSection from "./pages/tab-section/TabSection"
-import UserSection from "./pages/user-section/UserSection"
+import { TabSection } from "./pages/tab-section/TabSection"
+import { UserSection } from "./pages/user-section/UserSection"
 
 export const MyPage = () => {
   const { data: user, isLoading, error } = useUserProfile()

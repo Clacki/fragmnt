@@ -9,7 +9,6 @@ type CardSectionProps = {
 
 export const CardSection = ({ items }: CardSectionProps) => {
   const navigate = useNavigate()
-  console.log("CardSection items", items)
 
   if (items.length === 0) {
     return (

@@ -14,10 +14,18 @@ export type UpdateUserProfileRequest = {
 
 export type FavoriteScent = {
   id: number
-  imageSrc?: string
-  imageAlt?: string
-  category: string
-  title: string
-  tags: string[]
-  savedAt: string
+  type: string
+  created_at: string
+
+  scent: {
+    id: number
+    name: string
+    categories: string
+    tags: string[]
+    description: string
+    eng_name: string
+    intensity: number
+    season: string[]
+    thumbnail_url: string
+  }
 }

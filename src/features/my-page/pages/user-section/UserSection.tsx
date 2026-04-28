@@ -12,18 +12,18 @@ import { useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button, EmptyImage } from "@/shared/components"
 import { formatDate } from "@/shared/utils/date"
+import { useCreateAiProfileImage } from "../../hooks/useCreateProfileMutation"
 import { useUpdateUserProfile } from "../../hooks/useUpdateUserProfileMutation"
 import { useUploadProfileImage } from "../../hooks/useUploadImageMutation"
 import type { UpdateUserProfileRequest, UserProfile } from "../../types"
 import EditField from "./edit-field/EditField"
 import UserCard from "./user-card/UserCard"
-
 type UserSectionProps = {
   user: UserProfile
   className?: string
 }
 
-export default function UserSection({ user, className }: UserSectionProps) {
+export const UserSection = ({ user, className }: UserSectionProps) => {
   const [isEditing, setIsEditing] = useState(false)
   const [form, setForm] = useState<UpdateUserProfileRequest>({
     name: user.name,
@@ -61,6 +61,11 @@ export default function UserSection({ user, className }: UserSectionProps) {
   const { mutate: uploadProfileImage, isPending: isImageUploading } =
     useUploadProfileImage()
 
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
+
+  const { mutate: createAiProfileImage, isPending: isAiImageCreating } =
+    useCreateAiProfileImage()
+
   const handleImageClick = () => {
     fileInputRef.current?.click()
   }
@@ -69,10 +74,16 @@ export default function UserSection({ user, className }: UserSectionProps) {
     const file = e.target.files?.[0]
     if (!file) return
 
-    uploadProfileImage(file)
+    uploadProfileImage(file, {
+      onSuccess: () => {
+        setPreviewImage(null)
+      },
+    })
 
     e.target.value = ""
   }
+
+  const profileImageSrc = previewImage || user.profile_image_url || undefined
 
   return (
     <section className={cn("w-full", className)}>
@@ -84,9 +95,9 @@ export default function UserSection({ user, className }: UserSectionProps) {
           className="rounded-full transition-opacity hover:opacity-80 disabled:opacity-50"
           aria-label="프로필 이미지 업로드"
         >
-          {user.profile_image_url ? (
+          {profileImageSrc ? (
             <img
-              src={user.profile_image_url}
+              src={profileImageSrc}
               alt={`${user.name} 프로필 이미지`}
               className="size-35 rounded-full object-cover"
             />
@@ -108,13 +119,22 @@ export default function UserSection({ user, className }: UserSectionProps) {
         </h2>
 
         <Button
+          type="button"
           style="outlined"
           padding="same"
           radius="full"
           className="text-sm"
+          disabled={isAiImageCreating}
+          onClick={() =>
+            createAiProfileImage(undefined, {
+              onSuccess: (data) => {
+                setPreviewImage(data.message)
+              },
+            })
+          }
         >
           <Sparkles size={16} />
-          AI 이미지 생성하기
+          {isAiImageCreating ? "이미지 생성 중..." : "AI 이미지 생성하기"}
         </Button>
 
         <p className="mt-xs text-sm text-text-sub">{user.email}</p>
