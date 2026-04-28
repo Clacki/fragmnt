@@ -1,20 +1,8 @@
 import { instance } from "@/shared/api/axios-instance"
-
-export type SendChatMessagePayload = {
-  sessionId: number
-  message: string
-}
-
-export type SendChatMessageResponse = {
-  status: "success"
-  data: {
-    reply: string
-    is_recommendation: boolean
-    recommendation_id: number | null
-    scent_id: number | null
-    source_type: string
-  }
-}
+import type {
+  SendChatMessagePayload,
+  SendChatMessageResponse,
+} from "../types/message.types"
 
 export const sendChatMessage = async ({
   sessionId,

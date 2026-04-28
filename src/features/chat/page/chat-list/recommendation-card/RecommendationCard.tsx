@@ -1,11 +1,14 @@
 import { Button, Hstack, RoundBox, Tag, Vstack } from "@/shared/components"
 import EmptyImage from "@/shared/components/empty-image/EmptyImage"
+import { useNavigate } from "@tanstack/react-router"
 import type { RecommendationCardData } from "../../../types/message.types"
 import RecommendationActionButton from "./recommendation-button/RecommendationActionButton"
 
 type RecommendationCardProps = RecommendationCardData
 
 const RecommendationCard = ({
+  recommendationId,
+  sessionId,
   imageSrc,
   imageAlt,
   name,
@@ -13,7 +16,21 @@ const RecommendationCard = ({
   description,
   tags,
 }: RecommendationCardProps) => {
+  const navigate = useNavigate()
   const hasImage = Boolean(imageSrc)
+
+  const handleClickDetail = () => {
+    navigate({
+      to: "/find-scent/result/$resultId",
+      params: {
+        resultId: String(recommendationId),
+      },
+      search: {
+        type: "chat",
+        sessionId,
+      },
+    })
+  }
 
   return (
     <RoundBox
@@ -49,7 +66,9 @@ const RecommendationCard = ({
           </ul>
 
           <div className="flex flex-col gap-md">
-            <Button className="w-full">추천 결과 자세히 보기</Button>
+            <Button className="w-full" onClick={handleClickDetail}>
+              추천 결과 자세히 보기
+            </Button>
 
             <Hstack>
               <RecommendationActionButton>저장하기</RecommendationActionButton>

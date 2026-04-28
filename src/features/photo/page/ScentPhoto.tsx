@@ -69,7 +69,7 @@ const ScentPhoto = () => {
           resultId: String(analysisResult.id),
         },
         search: {
-          type: "survey",
+          type: "image",
         },
       })
     } finally {

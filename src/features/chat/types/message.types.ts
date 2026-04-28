@@ -1,5 +1,10 @@
+import type { RecommendedScent } from "@/shared/types"
+
+export type MessageRole = "user" | "assistant"
+
 export type RecommendationCardData = {
-  id: string
+  recommendationId: number
+  sessionId: number
   imageSrc: string
   imageAlt: string
   name: string
@@ -7,8 +12,6 @@ export type RecommendationCardData = {
   description: string
   tags: string[]
 }
-
-export type MessageRole = "user" | "assistant"
 
 export type TextMessage = {
   id: number
@@ -32,17 +35,6 @@ export type RecommendationMessage = {
 
 export type ChatMessage = TextMessage | TypingMessage | RecommendationMessage
 
-export type SendChatMessageResponse = {
-  status: "success"
-  data: {
-    reply: string
-    is_recommendation: boolean
-    recommendation_id: number
-    scent_id: number
-    source_type: "chatbot"
-  }
-}
-
 export type GetScentDetailResponse = {
   status: "success"
   data: {
@@ -53,4 +45,40 @@ export type GetScentDetailResponse = {
     tags: string[]
     thumbnail_url: string
   }
+}
+
+export type SendChatMessagePayload = {
+  sessionId: number
+  message: string
+}
+
+export type SendChatMessageResponse = {
+  status: "success"
+  data: {
+    reply: string
+    is_recommendation: boolean
+    recommendation_id: number | null
+    scent_id: number | null
+    source_type: "chat"
+  }
+}
+
+export type GetChatRecommendationResultRequest = {
+  sessionId: number
+  recommendationId: number
+}
+
+export type ChatRecommendationResultResponse = {
+  status: "success"
+  data: ChatRecommendationResult
+}
+
+export type ChatRecommendationResult = {
+  id: number
+  recommended_scent: RecommendedScent
+  ai_comment: string
+  match_score: number
+  source_type: "chatbot"
+  is_saved: boolean
+  created_at: string
 }

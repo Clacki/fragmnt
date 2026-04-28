@@ -5,7 +5,8 @@ export const mockAssistantText =
   "차분하고 우디한 무드에 어울리는 향을 추천드릴게요."
 
 export const mockRecommendation: RecommendationCardData = {
-  id: "scent-2",
+  recommendationId: 999,
+  sessionId: 999,
   imageSrc: ImageMock,
   imageAlt: "향수 추천 이미지",
   name: "포레스트 리저브",

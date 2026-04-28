@@ -56,6 +56,11 @@ export type RecommendedScent = {
   created_at: string
 }
 
-export type ResultResponse = {
+export type ResultData = {
   recommended_scent: RecommendedScent
+}
+
+export type ResultResponse = {
+  status?: "success"
+  data: ResultData
 }

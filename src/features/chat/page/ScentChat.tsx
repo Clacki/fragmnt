@@ -72,6 +72,7 @@ const ScentChat = () => {
       const assistantMessages = await handleChatResponse({
         responseData: response.data,
         baseId,
+        sessionId,
       })
 
       setChatMessages((prev) => [
