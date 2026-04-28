@@ -1,6 +1,6 @@
 // TODO: 스크롤하면서 로딩 (Network)
 
-import Feather from "@/assets/images/scent-list/Feather.svg"
+import Feather from "@/assets/images/scent-list/feather.svg"
 import { CenterContainer, Container, Hstack, Vstack } from "@/shared/components"
 
 import LoadingState from "@/shared/components/loading-state/LoadingState"
