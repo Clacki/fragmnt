@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { getAnalysisDetail } from "../api/analysis-deatil.api"
 
-type ResultType = "image" | "survey" | "keyword" | "chat"
+type ResultType = "image" | "survey" | "keyword" | "chatbot"
 
 type UseAnalysisDetailQueryParams = {
   resultId: number

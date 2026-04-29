@@ -17,14 +17,14 @@ import BottomSection from "./sections/bottom-section/BottomSection"
 import TopCardSection from "./sections/card-section/TopCardSection"
 import ScentSection from "./sections/scent-section/ScentSection"
 
-type ResultType = "image" | "survey" | "keyword" | "chat"
+type ResultType = "image" | "survey" | "keyword" | "chatbot"
 
 type ResultPageProps = {
   resultId: number
   type: ResultType
 }
 
-const RESULT_STORAGE_KEY: Record<Exclude<ResultType, "chat">, string> = {
+const RESULT_STORAGE_KEY: Record<Exclude<ResultType, "chatbot">, string> = {
   image: "imageAnalysisResult",
   survey: "surveyAnalysisResult",
   keyword: "keywordAnalysisResult",
@@ -34,7 +34,7 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
   const navigate = useNavigate()
 
   const storedResult = useMemo(() => {
-    if (type === "chat") {
+    if (type === "chatbot") {
       return undefined
     }
 

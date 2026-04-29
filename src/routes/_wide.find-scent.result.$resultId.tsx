@@ -3,14 +3,14 @@
 import ResultPage from "@/features/result/page/ResultPage"
 import { createFileRoute } from "@tanstack/react-router"
 
-type ResultType = "image" | "survey" | "keyword" | "chat"
+type ResultType = "image" | "survey" | "keyword" | "chatbot"
 
-const isResultType = (value: unknown): value is ResultType => {
+const isResultType = (type: unknown): type is ResultType => {
   return (
-    value === "image" ||
-    value === "survey" ||
-    value === "keyword" ||
-    value === "chat"
+    type === "image" ||
+    type === "survey" ||
+    type === "keyword" ||
+    type === "chatbot"
   )
 }
 

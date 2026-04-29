@@ -36,7 +36,7 @@ const RecommendationCard = ({
         resultId: String(recommendationId),
       },
       search: {
-        type: "chat",
+        type: "chatbot",
       },
     })
   }
