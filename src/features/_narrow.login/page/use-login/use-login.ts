@@ -19,7 +19,6 @@ type LoginSchema = z.input<typeof loginSchema>
 
 type LoginResponse = {
   access: string
-  refresh: string
 }
 
 const login = async (body: LoginSchema) => {
@@ -27,32 +26,29 @@ const login = async (body: LoginSchema) => {
     "/accounts/login",
     body
   )
-  const { access, refresh } = loginResponse.data
+  const { access } = loginResponse.data
 
   const profileResponse = await plainInstance.get("/accounts/me/profile", {
-    headers: {
-      Authorization: `Bearer ${access}`,
-    },
+    headers: { Authorization: `Bearer ${access}` },
+    withCredentials: true,
   })
   const profile = profileResponse.data as Profile
 
-  return { access, refresh, profile }
+  return { access, profile }
 }
 
 const useLogin = () => {
   const setAccessToken = useAuthStore((state) => state.setAccessToken)
-  const setRefreshToken = useAuthStore((state) => state.setRefreshToken)
   const setProfile = useAuthStore((state) => state.setProfile)
 
   const { mutate } = useMutation({
     mutationFn: (body: LoginSchema) => login(body),
-    onSuccess({ access, refresh, profile }) {
+    onSuccess({ access, profile }) {
       setAccessToken(access)
-      setRefreshToken(refresh)
       setProfile(profile)
 
       // TODO: MUST DELETE BEFORE PUBLISH
-      console.log({ access, refresh, profile })
+      console.log({ access, profile })
     },
   })
 

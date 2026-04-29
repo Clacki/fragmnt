@@ -40,23 +40,21 @@ instance.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const state = useAuthStore.getState()
-    const refreshToken = state.refreshToken
     const setAccessToken = state.setAccessToken
-    const setRefreshToken = state.setRefreshToken
     // const logout = state.logout
     // 로그아웃 주석처리로 같이 주석처리
 
-    // NOTE: 재발급에 사용할 refresh token 없으면 에러 그대로 뱉음
-    if (!refreshToken || !error.config) return Promise.reject(error)
+    if (!error.config) return Promise.reject(error)
 
     try {
       // NOTE: 재발급 성공
-      const refreshResponse = await plainInstance.post("/accounts/me/refresh", {
-        refresh: refreshToken,
-      })
-      const { access, refresh } = refreshResponse.data
+      const refreshResponse = await plainInstance.post(
+        "/accounts/me/refresh",
+        undefined,
+        { withCredentials: true }
+      )
+      const { access } = refreshResponse.data
       setAccessToken(access)
-      setRefreshToken(refresh)
 
       const response = await headOnlyInstance.request(error.config)
       return response
