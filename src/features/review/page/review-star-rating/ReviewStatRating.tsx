@@ -1,21 +1,23 @@
 import { Star } from "lucide-react"
-import { useState } from "react"
 
-const ReviewStarRating = () => {
-  const [rating, setRating] = useState(0)
+type ReviewStarRatingProps = {
+  value: number
+  onChange: (rating: number) => void
+}
 
+const ReviewStarRating = ({ value, onChange }: ReviewStarRatingProps) => {
   return (
     <div className="flex items-center gap-1">
       {Array.from({ length: 5 }, (_, index) => {
         const starValue = index + 1
-        const isFilled = starValue <= rating
+        const isFilled = starValue <= value
 
         return (
           <button
             key={starValue}
             type="button"
             onClick={() => {
-              setRating(starValue)
+              onChange(starValue)
             }}
             className="flex h-10 w-10 items-center justify-center rounded-full transition-transform hover:scale-105"
             aria-label={`${starValue}점 선택`}

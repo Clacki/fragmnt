@@ -1,12 +1,4 @@
-export type ReviewItem = {
-  id: number
-  type: string
-  eng_name: string
-  review: string
-  rating: number
-  created_at: string
-}
-
+import type { ReviewItem } from "../types/review.type"
 export const mockReviewList: ReviewItem[] = [
   {
     id: 1,

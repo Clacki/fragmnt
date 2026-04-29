@@ -1,5 +1,5 @@
 import { Button } from "@/shared/components"
-import type { SimilarScentType } from "@/shared/types"
+import type { RecommendedScent, SimilarScentType } from "@/shared/types"
 import { useNavigate } from "@tanstack/react-router"
 import { MessageSquareIcon } from "lucide-react"
 import SimilarScent from "./similar-scent/SimilarScent"
@@ -7,19 +7,31 @@ import SimilarScent from "./similar-scent/SimilarScent"
 type BottomSectionProps = {
   similarScents?: SimilarScentType[]
   resultId?: number
+  scent?: RecommendedScent
 }
 const BottomSection = ({
   similarScents = [],
   resultId,
+  scent,
 }: BottomSectionProps) => {
   const navigate = useNavigate()
 
   const handleReviewClick = () => {
-    if (!resultId) {
+    if (!resultId || !scent) {
       return
     }
 
-    navigate({ to: "/review" })
+    const { name, eng_name, thumbnail_url } = scent
+
+    navigate({
+      to: "/review",
+      search: {
+        resultId: String(resultId),
+        name,
+        engName: eng_name,
+        thumbnailUrl: thumbnail_url,
+      },
+    })
   }
 
   return (
@@ -65,7 +77,11 @@ const BottomSection = ({
           </p>
         </div>
 
-        <Button size="sm" onClick={handleReviewClick} disabled={!resultId}>
+        <Button
+          size="sm"
+          onClick={handleReviewClick}
+          disabled={!resultId || !scent}
+        >
           후기 남기기
         </Button>
       </div>

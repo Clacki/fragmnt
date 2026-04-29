@@ -144,6 +144,7 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
 
           <BottomSection
             resultId={result.id}
+            scent={result.recommended_scent}
             similarScents={result.recommended_scent?.similar_scents ?? []}
           />
         </Vstack>

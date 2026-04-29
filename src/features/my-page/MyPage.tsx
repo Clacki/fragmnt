@@ -1,4 +1,10 @@
-import { Button, CenterContainer, Container } from "@/shared/components"
+import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
+import {
+  Button,
+  CenterContainer,
+  Container,
+  EmptyState,
+} from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 
 import useAuthStore from "@/shared/api/use-auth-store"
@@ -43,7 +49,15 @@ export const MyPage = () => {
       >
         {isLoading ? <LoadingState /> : null}
 
-        {!isLoading && error ? <div>유저 정보를 불러오지 못했어요.</div> : null}
+        {!isLoading && error ? (
+          <div>
+            <EmptyState
+              imageSrc={EmptyStateImage}
+              title="리뷰를 불러오지 못했습니다."
+              description="잠시 후 다시 시도해주세요!"
+            />
+          </div>
+        ) : null}
 
         {!isLoading && !error && user ? (
           <>

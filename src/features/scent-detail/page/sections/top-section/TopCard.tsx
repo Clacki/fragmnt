@@ -22,7 +22,7 @@ const TopCard = ({ data }: TopCardProps) => {
         <img
           src={scent.thumbnail_url}
           alt={scent.eng_name}
-          className="mb-md aspect-square w-[220px] rounded-xl object-cover"
+          className="mb-md aspect-square w-container-sm rounded-xl object-cover"
           onError={() => setIsImageError(true)}
         />
       ) : (

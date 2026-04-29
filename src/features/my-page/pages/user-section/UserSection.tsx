@@ -15,17 +15,21 @@ import { formatDate } from "@/shared/utils/date"
 import { useCreateAiProfileImage } from "../../hooks/useCreateProfileMutation"
 import { useUpdateUserProfile } from "../../hooks/useUpdateUserProfileMutation"
 import { useUploadProfileImage } from "../../hooks/useUploadImageMutation"
-import type { UpdateUserProfileRequest, UserProfile } from "../../types"
+import type { UserProfile } from "../../types"
 import EditField from "./edit-field/EditField"
 import UserCard from "./user-card/UserCard"
 type UserSectionProps = {
   user: UserProfile
   className?: string
 }
+type UserProfileForm = {
+  name: string
+  birthday: string
+}
 
 export const UserSection = ({ user, className }: UserSectionProps) => {
   const [isEditing, setIsEditing] = useState(false)
-  const [form, setForm] = useState<UpdateUserProfileRequest>({
+  const [form, setForm] = useState<UserProfileForm>({
     name: user.name,
     birthday: user.birthday,
   })
@@ -40,19 +44,17 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
     setIsEditing(true)
   }
 
-  const handleChange =
-    (key: keyof UpdateUserProfileRequest) => (value: string) => {
-      setForm((prev) => ({
-        ...prev,
-        [key]: value,
-      }))
-    }
+  const handleChange = (key: keyof UserProfileForm) => (value: string) => {
+    setForm((prev) => ({
+      ...prev,
+      [key]: value,
+    }))
+  }
 
   const handleSubmit = () => {
-    mutate(form, {
-      onSuccess: () => {
-        setIsEditing(false)
-      },
+    mutate({
+      name: form.name,
+      birthday: form.birthday,
     })
   }
 
@@ -128,7 +130,7 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           onClick={() =>
             createAiProfileImage(undefined, {
               onSuccess: (data) => {
-                setPreviewImage(data.message)
+                setPreviewImage(data.profile_image_url)
               },
             })
           }

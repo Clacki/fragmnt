@@ -56,3 +56,17 @@ export const createAiProfileImage =
     const { data } = await instance.post("/question/image")
     return data
   }
+
+export const uploadProfileImageFile = async (
+  file: File
+): Promise<UserProfile> => {
+  const { presigned_url, img_url } = await getProfileImagePresignedUrl({
+    file_name: file.name,
+  })
+
+  await uploadImageToS3(presigned_url, file)
+
+  return registerProfileImage({
+    profile_image_url: img_url,
+  })
+}

@@ -1,7 +1,7 @@
 import { instance } from "@/shared/api/axios-instance"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import type { UserProfile } from "../types"
-
+import { uploadProfileImageFile } from "../api/user-profile.api"
+import { base64ToFile } from "../utils/base64ToFile"
 export type CreateAiProfileImageResponse = {
   message: string
 }
@@ -16,22 +16,17 @@ export const useCreateAiProfileImage = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: createAiProfileImage,
+    mutationFn: async () => {
+      const aiImage = await createAiProfileImage()
 
-    onSuccess: (data) => {
-      queryClient.setQueryData(
-        ["my-page", "userProfile"],
-        (prev: UserProfile | undefined) => {
-          if (!prev) return prev
+      const file = base64ToFile(aiImage.message, "ai-profile.jpeg")
 
-          return {
-            ...prev,
-            profile_image_url: data.message,
-          }
-        }
-      )
+      return uploadProfileImageFile(file)
     },
-    onSettled: () => {
+
+    onSuccess: (updatedProfile) => {
+      queryClient.setQueryData(["my-page", "userProfile"], updatedProfile)
+
       queryClient.invalidateQueries({
         queryKey: ["my-page", "userProfile"],
       })

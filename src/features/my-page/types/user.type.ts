@@ -7,8 +7,8 @@ export type UserProfile = {
 }
 
 export type UpdateUserProfileRequest = {
-  name: string
-  birthday: string
+  name?: string
+  birthday?: string
   profile_image_url?: string
 }
 

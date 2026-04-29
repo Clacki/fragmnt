@@ -1,5 +1,5 @@
 import { instance } from "@/shared/api/axios-instance"
-import type { ReviewItem } from "../mocks/review.mock"
+import type { ReviewItem } from "../types/review.type"
 
 export const getReviewList = async (): Promise<ReviewItem[]> => {
   const { data } = await instance.get("/analyses/reviews")
