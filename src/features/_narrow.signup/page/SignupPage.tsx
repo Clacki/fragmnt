@@ -2,6 +2,8 @@ import NarrowTitleSection from "@/features/_narrow/components/narrow-title-secti
 import { Button, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
 import PasswordInput from "@/shared/components/inputs/password-input/PasswordInput"
+import EmailVerificationFields from "@/shared/components/verification-fields/email-verification-fields/EmailVerificationFields"
+import PhoneVerificationFields from "@/shared/components/verification-fields/phone-verification-fields/PhoneVerificationFields"
 import SignupModals from "./signup-modals/SignupModals"
 import useSignup from "./use-signup/use-signup"
 
@@ -10,10 +12,7 @@ const SignupPage = () => {
     errors,
     register,
     submitForm,
-    handleEmailVerificationFirst,
-    handleEmailVerificationSecond,
-    handlePhoneVerificationFirst,
-    handlePhoneVerificationSecond,
+    useFormReturns: useFormReturn,
   } = useSignup()
 
   return (
@@ -25,35 +24,7 @@ const SignupPage = () => {
             description="fragmnt에서 당신만의 향기 아카이브를 시작하세요"
           />
 
-          <Labeled isError={Boolean(errors.email)}>
-            <Labeled.Title>이메일</Labeled.Title>
-            <Labeled.Body>
-              <Input
-                {...register("email")}
-                placeholder="your@email.com"
-                status={errors.email ? "error" : "none"}
-              />
-              <Button type="button" onClick={handleEmailVerificationFirst}>
-                인증
-              </Button>
-            </Labeled.Body>
-            <Labeled.Message>{errors.email?.message}</Labeled.Message>
-          </Labeled>
-
-          <Labeled isError={Boolean(errors.email_token)}>
-            <Labeled.Title>이메일 인증코드</Labeled.Title>
-            <Labeled.Body>
-              <Input
-                {...register("email_token")}
-                status={errors.email_token ? "error" : "none"}
-                placeholder="6자리 코드를 입력해주세요"
-              />
-              <Button type="button" onClick={handleEmailVerificationSecond}>
-                확인
-              </Button>
-            </Labeled.Body>
-            <Labeled.Message>{errors.email_token?.message}</Labeled.Message>
-          </Labeled>
+          <EmailVerificationFields useFormReturn={useFormReturn} />
 
           <Labeled isError={Boolean(errors.password)}>
             <Labeled.Title>비밀번호</Labeled.Title>
@@ -75,36 +46,7 @@ const SignupPage = () => {
             <Labeled.Message>{errors.name?.message}</Labeled.Message>
           </Labeled>
 
-          <Labeled isError={Boolean(errors.phone_number)}>
-            <Labeled.Title>전화번호</Labeled.Title>
-            <Labeled.Body>
-              <Input
-                {...register("phone_number")}
-                status={errors.phone_number ? "error" : "none"}
-                type="number"
-                placeholder={`"-"없이 숫자만 입력해주세요`}
-              />
-              <Button type="button" onClick={handlePhoneVerificationFirst}>
-                인증
-              </Button>
-            </Labeled.Body>
-            <Labeled.Message>{errors.phone_number?.message}</Labeled.Message>
-          </Labeled>
-
-          <Labeled isError={Boolean(errors.phone_token)}>
-            <Labeled.Title>전화번호 인증코드</Labeled.Title>
-            <Labeled.Body>
-              <Input
-                {...register("phone_token")}
-                status={errors.phone_token ? "error" : "none"}
-                placeholder="6자리 코드를 입력해주세요"
-              />
-              <Button type="button" onClick={handlePhoneVerificationSecond}>
-                확인
-              </Button>
-            </Labeled.Body>
-            <Labeled.Message>{errors.phone_token?.message}</Labeled.Message>
-          </Labeled>
+          <PhoneVerificationFields useFormReturn={useFormReturn} />
 
           <Labeled isError={Boolean(errors.birthday)}>
             <Labeled.Title>생년월일</Labeled.Title>

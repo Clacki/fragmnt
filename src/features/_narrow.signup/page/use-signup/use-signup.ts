@@ -44,12 +44,12 @@ const useSignup = () => {
     onError: () => setModalKey("error"),
   })
 
+  const useFormReturns = useForm({ resolver: zodResolver(signupSchema) })
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(signupSchema) })
+  } = useFormReturns
 
   const onSubmit = (data: SignupSchema) => {
     console.log({ data })
@@ -62,57 +62,11 @@ const useSignup = () => {
 
   const submitForm = handleSubmit(onSubmit)
 
-  const handleEmailVerificationFirst = async () => {
-    const email = watch().email
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/send-email",
-      {
-        email,
-      }
-    )
-  }
-  const handleEmailVerificationSecond = async () => {
-    const email = watch().email
-    const email_token = watch().email_token
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/verify-email",
-      {
-        email,
-        code: email_token,
-      }
-    )
-  }
-
-  const handlePhoneVerificationFirst = async () => {
-    const phone_number = watch().phone_number
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/send-sms",
-      {
-        phone_number,
-      }
-    )
-  }
-
-  const handlePhoneVerificationSecond = async () => {
-    const phone_number = watch().phone_number
-    const phone_token = watch().phone_token
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/verify-sms",
-      {
-        phone_number,
-        code: phone_token,
-      }
-    )
-  }
-
   return {
     register,
     submitForm,
     errors,
-    handleEmailVerificationFirst,
-    handleEmailVerificationSecond,
-    handlePhoneVerificationFirst,
-    handlePhoneVerificationSecond,
+    useFormReturns,
   }
 }
 
