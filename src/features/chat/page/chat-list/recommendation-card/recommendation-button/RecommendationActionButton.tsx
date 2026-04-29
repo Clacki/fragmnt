@@ -1,17 +1,19 @@
-type RecommendationActionButtonProps = {
-  children: React.ReactNode
-  onClick?: () => void
-}
+import type { ButtonHTMLAttributes, PropsWithChildren } from "react"
+
+type RecommendationActionButtonProps = PropsWithChildren<
+  ButtonHTMLAttributes<HTMLButtonElement>
+>
 
 const RecommendationActionButton = ({
   children,
-  onClick,
+  className = "",
+  ...props
 }: RecommendationActionButtonProps) => {
   return (
     <button
       type="button"
-      onClick={onClick}
-      className="h-8 w-full cursor-pointer rounded-md border border-border font-bold text-text-highlight hover:bg-green-input"
+      className={`h-8 w-full cursor-pointer rounded-md border border-border font-bold text-text-highlight hover:bg-green-input disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent ${className}`}
+      {...props}
     >
       {children}
     </button>

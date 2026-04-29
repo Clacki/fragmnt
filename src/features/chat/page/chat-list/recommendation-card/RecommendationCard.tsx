@@ -4,7 +4,10 @@ import { useNavigate } from "@tanstack/react-router"
 import type { RecommendationCardData } from "../../../types/message.types"
 import RecommendationActionButton from "./recommendation-button/RecommendationActionButton"
 
-type RecommendationCardProps = RecommendationCardData
+type RecommendationCardProps = RecommendationCardData & {
+  onRetry: () => void
+  isRetrying: boolean
+}
 
 const RecommendationCard = ({
   recommendationId,
@@ -14,6 +17,8 @@ const RecommendationCard = ({
   englishName,
   description,
   tags,
+  onRetry,
+  isRetrying,
 }: RecommendationCardProps) => {
   const navigate = useNavigate()
   const hasImage = Boolean(imageSrc)
@@ -70,7 +75,13 @@ const RecommendationCard = ({
 
             <Hstack>
               <RecommendationActionButton>저장하기</RecommendationActionButton>
-              <RecommendationActionButton>다시 추천</RecommendationActionButton>
+
+              <RecommendationActionButton
+                onClick={onRetry}
+                disabled={isRetrying}
+              >
+                {isRetrying ? "다시 추천 중..." : "다시 추천"}
+              </RecommendationActionButton>
             </Hstack>
           </div>
         </section>

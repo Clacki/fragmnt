@@ -6,6 +6,7 @@ import {
 } from "@/shared/components"
 import { useEffect, useState } from "react"
 import { useCreateChatSession } from "../hooks/useCreateChatSession"
+import { useRetryChatRecommendationMutation } from "../hooks/useRetryChatRecommendation"
 import { useSendChatMessage } from "../hooks/useSendChatMessage"
 import { messages } from "../mocks/chat-mocks"
 import type { ChatMessage } from "../types/message.types"
@@ -15,6 +16,8 @@ import {
   createUserMessage,
 } from "../utils/create-chat-message"
 import { handleChatResponse } from "../utils/handle-chat-response"
+
+import { handleRetryChatResponse } from "../utils/handle-retry-chat"
 import ChatHeader from "./chat-header/ChatHeader"
 import ChatInput from "./chat-input/ChatInput"
 import ChatList from "./chat-list/ChatList"
@@ -25,6 +28,8 @@ const ScentChat = () => {
 
   const { mutateAsync: createSession } = useCreateChatSession()
   const { mutateAsync: sendMessageAsync } = useSendChatMessage()
+  const { mutateAsync: retryChatRecommendation, isPending: isRetrying } =
+    useRetryChatRecommendationMutation()
 
   useEffect(() => {
     if (sessionId) {
@@ -62,6 +67,7 @@ const ScentChat = () => {
     })
 
     setChatMessages((prev) => [...prev, userMessage, typingMessage])
+
     try {
       const response = await sendMessageAsync({
         sessionId,
@@ -92,6 +98,48 @@ const ScentChat = () => {
     }
   }
 
+  const handleRetryRecommendation = async () => {
+    if (!sessionId) {
+      return
+    }
+
+    const baseId = Date.now()
+
+    const typingMessage = createTypingMessage({
+      id: baseId,
+    })
+
+    setChatMessages((prev) => [...prev, typingMessage])
+
+    try {
+      const retryResponse = await retryChatRecommendation({
+        sessionId,
+      })
+
+      const retryMessages = await handleRetryChatResponse({
+        responseData: retryResponse.data,
+        baseId,
+      })
+
+      setChatMessages((prev) => [
+        ...prev.filter((message) => message.id !== typingMessage.id),
+        ...retryMessages,
+      ])
+    } catch (error) {
+      console.error(error)
+
+      const errorMessage = createAssistantTextMessage({
+        id: baseId + 1,
+        text: "다시 추천에 실패했어요. 잠시 후 다시 시도해주세요.",
+      })
+
+      setChatMessages((prev) => [
+        ...prev.filter((message) => message.id !== typingMessage.id),
+        errorMessage,
+      ])
+    }
+  }
+
   return (
     <Container>
       <CenterContainer className="p-16">
@@ -101,7 +149,11 @@ const ScentChat = () => {
         >
           <Vstack gap="none" className="h-full">
             <ChatHeader />
-            <ChatList messages={chatMessages} />
+            <ChatList
+              messages={chatMessages}
+              onRetryRecommendation={handleRetryRecommendation}
+              isRetrying={isRetrying}
+            />
             <ChatInput onSendMessage={handleSendMessage} />
           </Vstack>
         </RoundBox>
