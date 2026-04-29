@@ -1,6 +1,8 @@
 import { Button, Hstack, RoundBox, Tag, Vstack } from "@/shared/components"
 import EmptyImage from "@/shared/components/empty-image/EmptyImage"
+import { useSaveAnalysisFeedbackMutation } from "@/shared/hooks/useSaveAnalysisFeedback"
 import { useNavigate } from "@tanstack/react-router"
+import { useState } from "react"
 import type { RecommendationCardData } from "../../../types/message.types"
 import RecommendationActionButton from "./recommendation-button/RecommendationActionButton"
 
@@ -22,6 +24,10 @@ const RecommendationCard = ({
 }: RecommendationCardProps) => {
   const navigate = useNavigate()
   const hasImage = Boolean(imageSrc)
+  const [isSaved, setIsSaved] = useState(false)
+
+  const { mutate: saveAnalysisFeedbackMutate, isPending: isSaving } =
+    useSaveAnalysisFeedbackMutation()
 
   const handleClickDetail = () => {
     navigate({
@@ -33,6 +39,24 @@ const RecommendationCard = ({
         type: "chat",
       },
     })
+  }
+  const handleClickSave = () => {
+    if (isSaved) {
+      return
+    }
+
+    saveAnalysisFeedbackMutate(
+      {
+        id: recommendationId,
+        status: true,
+        type: "chatbot",
+      },
+      {
+        onSuccess: () => {
+          setIsSaved(true)
+        },
+      }
+    )
   }
 
   return (
@@ -74,7 +98,12 @@ const RecommendationCard = ({
             </Button>
 
             <Hstack>
-              <RecommendationActionButton>저장하기</RecommendationActionButton>
+              <RecommendationActionButton
+                onClick={handleClickSave}
+                disabled={isSaved || isSaving}
+              >
+                {isSaved ? "저장완료" : isSaving ? "저장 중..." : "저장하기"}
+              </RecommendationActionButton>
 
               <RecommendationActionButton
                 onClick={onRetry}

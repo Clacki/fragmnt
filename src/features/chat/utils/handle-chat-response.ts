@@ -3,25 +3,25 @@ import type {
   ChatMessage,
   SendChatMessageResponse,
 } from "../types/message.types"
+import { createMessageId } from "./create-chat-id"
 import {
   createAssistantTextMessage,
   createRecommendationMessage,
 } from "./create-chat-message"
+
 import { toRecommendationCardData } from "./to-recommendation-card-data"
 
 type HandleChatResponseParams = {
   responseData: SendChatMessageResponse["data"]
-  baseId: number
 }
 
 export const handleChatResponse = async ({
   responseData,
-  baseId,
 }: HandleChatResponseParams): Promise<ChatMessage[]> => {
   const { reply, is_recommendation, recommendation_id, scent_id } = responseData
 
   const assistantTextMessage = createAssistantTextMessage({
-    id: baseId + 2,
+    id: createMessageId(),
     text: reply,
   })
 
@@ -39,7 +39,7 @@ export const handleChatResponse = async ({
   }
 
   const recommendationMessage = createRecommendationMessage({
-    id: baseId + 3,
+    id: createMessageId(),
     data: recommendationCardData,
   })
 

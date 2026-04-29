@@ -1,25 +1,25 @@
 import { getScentDetail } from "../api/scent-response-detail.api"
 import type { ChatMessage } from "../types/message.types"
 import type { RetryChatRecommendationResponse } from "../types/retry-chat.types"
+import { createMessageId } from "./create-chat-id"
 import {
   createAssistantTextMessage,
   createRecommendationMessage,
 } from "./create-chat-message"
+
 import { toRecommendationCardData } from "./to-recommendation-card-data"
 
 type HandleRetryChatResponseParams = {
   responseData: RetryChatRecommendationResponse["data"]
-  baseId: number
 }
 
 export const handleRetryChatResponse = async ({
   responseData,
-  baseId,
 }: HandleRetryChatResponseParams): Promise<ChatMessage[]> => {
   const { reply, recommendation_id, scent_id } = responseData
 
   const assistantTextMessage = createAssistantTextMessage({
-    id: baseId + 1,
+    id: createMessageId(),
     text: reply,
   })
 
@@ -33,7 +33,7 @@ export const handleRetryChatResponse = async ({
   }
 
   const recommendationMessage = createRecommendationMessage({
-    id: baseId + 2,
+    id: createMessageId(),
     data: recommendationCardData,
   })
 

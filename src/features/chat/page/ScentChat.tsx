@@ -10,13 +10,13 @@ import { useRetryChatRecommendationMutation } from "../hooks/useRetryChatRecomme
 import { useSendChatMessage } from "../hooks/useSendChatMessage"
 import { messages } from "../mocks/chat-mocks"
 import type { ChatMessage } from "../types/message.types"
+import { createMessageId } from "../utils/create-chat-id"
 import {
   createAssistantTextMessage,
   createTypingMessage,
   createUserMessage,
 } from "../utils/create-chat-message"
 import { handleChatResponse } from "../utils/handle-chat-response"
-
 import { handleRetryChatResponse } from "../utils/handle-retry-chat"
 import ChatHeader from "./chat-header/ChatHeader"
 import ChatInput from "./chat-input/ChatInput"
@@ -55,15 +55,13 @@ const ScentChat = () => {
       return
     }
 
-    const baseId = Date.now()
-
     const userMessage = createUserMessage({
-      id: baseId,
+      id: createMessageId(),
       text: trimmedText,
     })
 
     const typingMessage = createTypingMessage({
-      id: baseId + 1,
+      id: createMessageId(),
     })
 
     setChatMessages((prev) => [...prev, userMessage, typingMessage])
@@ -76,7 +74,6 @@ const ScentChat = () => {
 
       const assistantMessages = await handleChatResponse({
         responseData: response.data,
-        baseId,
       })
 
       setChatMessages((prev) => [
@@ -87,7 +84,7 @@ const ScentChat = () => {
       console.error(error)
 
       const errorMessage = createAssistantTextMessage({
-        id: baseId + 2,
+        id: createMessageId(),
         text: "메시지 전송에 실패했어요. 잠시 후 다시 시도해주세요.",
       })
 
@@ -103,10 +100,8 @@ const ScentChat = () => {
       return
     }
 
-    const baseId = Date.now()
-
     const typingMessage = createTypingMessage({
-      id: baseId,
+      id: createMessageId(),
     })
 
     setChatMessages((prev) => [...prev, typingMessage])
@@ -118,7 +113,6 @@ const ScentChat = () => {
 
       const retryMessages = await handleRetryChatResponse({
         responseData: retryResponse.data,
-        baseId,
       })
 
       setChatMessages((prev) => [
@@ -129,7 +123,7 @@ const ScentChat = () => {
       console.error(error)
 
       const errorMessage = createAssistantTextMessage({
-        id: baseId + 1,
+        id: createMessageId(),
         text: "다시 추천에 실패했어요. 잠시 후 다시 시도해주세요.",
       })
 
