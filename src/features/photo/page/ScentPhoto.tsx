@@ -20,6 +20,7 @@ const ScentPhoto = () => {
   const [previewUrl, setPreviewUrl] = useState("")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const navigate = useNavigate()
+
   const { mutateAsync: postAnalysisUploadUrl, isPending: isCreatingUploadUrl } =
     usePostAnalysisUploadUrl()
   const { mutateAsync: postImageAnalysis, isPending: isAnalyzingImage } =
@@ -58,11 +59,6 @@ const ScentPhoto = () => {
         image_key: uploadUrlData.key,
       })
 
-      sessionStorage.setItem(
-        "imageAnalysisResult",
-        JSON.stringify(analysisResult)
-      )
-
       navigate({
         to: "/find-scent/result/$resultId",
         params: {
@@ -76,6 +72,7 @@ const ScentPhoto = () => {
       setIsUploadingToS3(false)
     }
   }
+
   if (isSubmitting) {
     return (
       <Container className="py-60">
@@ -83,6 +80,7 @@ const ScentPhoto = () => {
       </Container>
     )
   }
+
   return (
     <Container className="px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
       <Vstack className="gap-md md:gap-lg">
@@ -101,6 +99,7 @@ const ScentPhoto = () => {
         />
 
         {!isCameraStep && <PhotoTipsSection />}
+
         {!isCameraStep && (
           <Button
             disabled={!hasImage || isSubmitting}

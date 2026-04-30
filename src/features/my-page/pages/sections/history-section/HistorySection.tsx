@@ -30,7 +30,7 @@ export const HistorySection = () => {
         <div className="mt-md flex flex-col gap-md">
           {historyList.map((item) => (
             <HistoryCard
-              key={item.id}
+              key={`${item.type}-${item.id}`}
               imageSrc={item.recommended_scent.thumbnail_url}
               imageAlt={item.recommended_scent.name}
               title={item.recommended_scent.name}

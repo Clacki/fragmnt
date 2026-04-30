@@ -18,11 +18,12 @@ type HandleChatResponseParams = {
 export const handleChatResponse = async ({
   responseData,
 }: HandleChatResponseParams): Promise<ChatMessage[]> => {
-  const { reply, is_recommendation, recommendation_id, scent_id } = responseData
+  const { ai_comment, is_recommendation, recommendation_id, scent_id } =
+    responseData
 
   const assistantTextMessage = createAssistantTextMessage({
     id: createMessageId(),
-    text: reply,
+    text: ai_comment,
   })
 
   if (!is_recommendation || scent_id == null || recommendation_id == null) {

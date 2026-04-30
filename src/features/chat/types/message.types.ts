@@ -54,7 +54,7 @@ export type SendChatMessagePayload = {
 export type SendChatMessageResponse = {
   status: "success"
   data: {
-    reply: string
+    ai_comment: string
     is_recommendation: boolean
     recommendation_id: number | null
     scent_id: number | null

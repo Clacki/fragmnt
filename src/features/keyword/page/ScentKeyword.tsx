@@ -67,8 +67,6 @@ const ScentKeyword = () => {
 
     postKeywordResult(requestBody, {
       onSuccess: (result) => {
-        sessionStorage.setItem("keywordAnalysisResult", JSON.stringify(result))
-
         navigate({
           to: "/find-scent/result/$resultId",
           params: {
@@ -81,15 +79,20 @@ const ScentKeyword = () => {
       },
     })
   }
-  if (isPending || isPostKeywordResultPending) {
-    return <LoadingState />
+
+  if (isPending || isPostKeywordResultPending || !questions) {
+    return (
+      <Container className="py-60">
+        <LoadingState />
+      </Container>
+    )
   }
 
-  if (isError || !questions) {
+  if (isError) {
     return (
       <EmptyState
         imageSrc={EmptyScentImage}
-        title="설문을 불러오지 못했습니다"
+        title="키워드를 불러오지 못했습니다"
         description="잠시 후 다시 시도해주세요!"
       />
     )

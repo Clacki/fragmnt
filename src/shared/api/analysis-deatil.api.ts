@@ -1,7 +1,5 @@
 import { instance } from "@/shared/api/axios-instance"
-import type { ResultData } from "@/shared/types"
-
-type ResultType = "image" | "survey" | "keyword" | "chatbot"
+import type { AnalysisResult, ResultType } from "../types"
 
 type GetAnalysisDetailParams = {
   id: number
@@ -11,12 +9,18 @@ type GetAnalysisDetailParams = {
 export const getAnalysisDetail = async ({
   id,
   type,
-}: GetAnalysisDetailParams) => {
-  const { data } = await instance.get<ResultData>(`/analyses/detail/${id}`, {
-    params: {
-      type,
-    },
-  })
+}: GetAnalysisDetailParams): Promise<AnalysisResult> => {
+  const { data } = await instance.get<Omit<AnalysisResult, "type">>(
+    `/analyses/history/${id}`,
+    {
+      params: {
+        type,
+      },
+    }
+  )
 
-  return data
+  return {
+    ...data,
+    type,
+  } as AnalysisResult
 }

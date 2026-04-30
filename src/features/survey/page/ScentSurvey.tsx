@@ -1,9 +1,7 @@
-import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
 import {
   BackButton,
   Button,
   Container,
-  EmptyState,
   PageIntro,
   Vstack,
 } from "@/shared/components"
@@ -42,6 +40,7 @@ const ScentSurvey = () => {
       [index]: value,
     }))
   }
+
   const handleSubmit = async () => {
     if (!questions) {
       return
@@ -60,8 +59,6 @@ const ScentSurvey = () => {
 
     const result = await submitSurveyResult(requestBody)
 
-    sessionStorage.setItem("surveyAnalysisResult", JSON.stringify(result))
-
     navigate({
       to: "/find-scent/result/$resultId",
       params: {
@@ -73,17 +70,7 @@ const ScentSurvey = () => {
     })
   }
 
-  if (isError || !questions) {
-    return (
-      <EmptyState
-        imageSrc={EmptyScentImage}
-        title="설문을 불러오지 못했습니다"
-        description="잠시 후 다시 시도해주세요!"
-      />
-    )
-  }
-
-  if (isSubmitting || isPending) {
+  if (isSubmitting || isPending || isError || !questions) {
     return (
       <Container className="py-60">
         <LoadingState />
@@ -101,19 +88,17 @@ const ScentSurvey = () => {
           backButton={<BackButton onClick={handleBack} />}
         />
 
-        {questions.map((item, index) => {
-          return (
-            <PreferenceSlider
-              key={`${item.title}-${index}`}
-              item={item}
-              order={index + 1}
-              value={answers[index] ?? DEFAULT_SURVEY_VALUE}
-              onChange={(value) => {
-                handleChangeAnswer({ index, value })
-              }}
-            />
-          )
-        })}
+        {questions.map((item, index) => (
+          <PreferenceSlider
+            key={`${item.title}-${index}`}
+            item={item}
+            order={index + 1}
+            value={answers[index] ?? DEFAULT_SURVEY_VALUE}
+            onChange={(value) => {
+              handleChangeAnswer({ index, value })
+            }}
+          />
+        ))}
 
         <Button
           size="lg"

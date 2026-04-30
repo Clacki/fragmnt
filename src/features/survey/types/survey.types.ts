@@ -24,3 +24,15 @@ export type SurveyResultResponse = {
   ai_comment: string
   match_score: number
 }
+
+export type SurveyUserInput = {
+  title: string
+  answer: string
+}
+
+export type SurveySessionResult = SurveyResultResponse & {
+  type: "survey"
+  user_input: SurveyUserInput[]
+  is_saved: boolean
+  created_at: string
+}

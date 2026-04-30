@@ -22,7 +22,7 @@ const SimilarScent = ({
       onClick={onClick}
       className={cn(
         "flex w-full overflow-hidden rounded-lg border border-border bg-white text-left transition-all",
-        "hover:shadow-md",
+        "hover:shadow-md cursor-pointer",
         className
       )}
     >

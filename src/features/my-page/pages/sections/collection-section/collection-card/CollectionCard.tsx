@@ -64,7 +64,7 @@ const CollectionCard = ({
         </div>
         <div className="flex justify-between items-end">
           <ul className="flex gap-sm flex-wrap">
-            {tags.map((tag, index) => (
+            {tags.slice(0, 3).map((tag, index) => (
               <li key={`${tag}-${index}`}>
                 <Tag label={tag} size="sm" variant="subtle" />
               </li>

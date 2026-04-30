@@ -5,7 +5,7 @@ export type RetryChatRecommendationParams = {
 export type RetryChatRecommendationResponse = {
   status: "success"
   data: {
-    reply: string
+    ai_comment: string
     recommendation_id: number
     scent_id: number
     retry_count: number

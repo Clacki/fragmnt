@@ -23,6 +23,10 @@ export type KeywordResult = {
   recommended_scent: RecommendedScent
   ai_comment: string
   match_score: number
+  user_input: {
+    title: string
+    answer: string
+  }[]
 }
 
 export type PostKeywordResultResponse = KeywordResult

@@ -16,11 +16,11 @@ type HandleRetryChatResponseParams = {
 export const handleRetryChatResponse = async ({
   responseData,
 }: HandleRetryChatResponseParams): Promise<ChatMessage[]> => {
-  const { reply, recommendation_id, scent_id } = responseData
+  const { ai_comment, recommendation_id, scent_id } = responseData
 
   const assistantTextMessage = createAssistantTextMessage({
     id: createMessageId(),
-    text: reply,
+    text: ai_comment,
   })
 
   const scentResponse = await getScentDetail({

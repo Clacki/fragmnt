@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
-import { Button, EmptyImage, Tag } from "@/shared/components"
-import { Bookmark, RotateCcw } from "lucide-react"
+import { Button, Container, EmptyImage, Tag, Vstack } from "@/shared/components"
+import { Heart, RotateCcw, Share2 } from "lucide-react"
 
 type ResultTopCardProps = {
   imageSrc: string
@@ -8,11 +8,15 @@ type ResultTopCardProps = {
   category: string
   matchRate?: number
   title: string
+  engName?: string
   description: string
   tags: string[]
+  isSaved: boolean
+  isSavePending?: boolean
   onDetailClick?: () => void
   onAddCollectionClick?: () => void
   onRetryClick?: () => void
+  onShareClick?: () => void
   className?: string
 }
 
@@ -20,84 +24,110 @@ const ResultTopCard = ({
   imageSrc,
   imageAlt = "추천 향 이미지",
   category,
-  matchRate,
+  matchRate = 0,
   title,
+  engName,
   description,
   tags,
+  isSaved,
+  isSavePending = false,
+  onDetailClick,
+  onAddCollectionClick,
+  onRetryClick,
+  onShareClick,
   className = "",
 }: ResultTopCardProps) => {
   return (
-    <section
-      className={cn(
-        "w-full rounded-lg border border-border bg-white p-sm shadow-sm my-xl",
-        className
-      )}
-    >
-      <div className="flex flex-col gap-6 flex-row m-lg">
-        {/* 이미지 영역 */}
-        <div className="shrink-0 w-1/3">
-          <div className="aspect-3/4 overflow-hidden rounded-lg bg-surface-sub">
-            {imageSrc ? (
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center">
-                <EmptyImage type="image" size="md" />
+    <Container>
+      <Vstack>
+        <section
+          aria-labelledby="recommended-scent-title"
+          className={cn("mx-auto my-xl w-full max-w-[768px]", className)}
+        >
+          <article>
+            <figure className="relative overflow-hidden rounded-xl bg-surface-sub">
+              <div className="aspect-[3/2] w-full overflow-hidden">
+                {imageSrc ? (
+                  <img
+                    src={imageSrc}
+                    alt={imageAlt}
+                    className="h-full w-full object-cover object-center"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center">
+                    <EmptyImage type="image" size="md" />
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
 
-        {/* 텍스트 영역 */}
-        <div className="flex min-w-0 flex-1 flex-col">
-          {/* 상단 라벨 */}
-          <div className="mb-sm flex items-start justify-between gap-4">
-            <span className="text-md font-medium uppercase text-text-sub">
-              {category}
-            </span>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-default via-white/20 to-transparent" />
 
-            <span className="inline-flex h-8 items-center rounded-full bg-primary px-4 text-sm font-medium text-white">
-              {matchRate}% Match
-            </span>
-          </div>
+              <span className="absolute right-md top-md rounded-full bg-surface-default/90 px-sm py-xs text-md font-bold text-primary shadow-sm">
+                {matchRate}% Match
+              </span>
 
-          {/* 제목 */}
-          <h2 className="mb-md text-xl font-semibold text-text-primary">
-            {title}
-          </h2>
+              <figcaption className="absolute inset-x-lg bottom-xl">
+                <div className="mt-md flex flex-wrap gap-xs">
+                  <Tag label={category} size="sm" variant="selected" />
+                  {tags.map((tag, index) => (
+                    <Tag
+                      key={`${tag}-${index}`}
+                      label={tag}
+                      size="sm"
+                      variant="soft"
+                    />
+                  ))}
+                </div>
 
-          {/* 설명 */}
-          <p className="mb-md max-w-full whitespace-pre-line break-keep text-md text-text-description">
-            {description}
-          </p>
+                <h2
+                  id="recommended-scent-title"
+                  className="text-2xl font-semibold text-text-primary"
+                >
+                  {engName ?? title}
+                </h2>
 
-          {/* 태그 */}
-          <div className="mb-xl flex flex-wrap gap-2">
-            {tags.map((tag) => (
-              <Tag key={tag} label={tag} size="sm" variant="soft" />
-            ))}
-          </div>
+                <p className="mt-sm max-w-[560px] break-keep text-md text-text-description">
+                  {description}
+                </p>
+              </figcaption>
+            </figure>
 
-          {/* 버튼 */}
-          <div className="flex flex-wrap gap-3">
-            <Button size="sm">자세히 보기 ↗</Button>
-            <div className="flex flex-wrap gap-3">
-              <Button size="sm" style="outlined">
-                내 컬렉션에 추가하기
-                <Bookmark size={20} />
+            <div className="mt-xl flex gap-md">
+              <Button type="button" className="w-full" onClick={onDetailClick}>
+                자세히 보기
               </Button>
-              <Button size="sm" style="outlined">
-                다시 추천받기
-                <RotateCcw size={20} />
+
+              <Button
+                type="button"
+                style="outlined"
+                disabled={isSavePending}
+                aria-label={
+                  isSaved ? "내 컬렉션에서 제거하기" : "내 컬렉션에 추가하기"
+                }
+                onClick={onAddCollectionClick}
+              >
+                <Heart size={20} fill={isSaved ? "currentColor" : "none"} />
+              </Button>
+
+              <Button type="button" style="outlined" onClick={onShareClick}>
+                <Share2 size={18} />
               </Button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+            <div className="mt-xl flex h-10 items-center justify-center cursor-pointer rounded-xl hover:bg-green-input">
+              <button
+                type="button"
+                className="mt-xs inline-flex items-center gap-xs text-md font-medium text-primary underline-offset-4  cursor-pointer"
+                onClick={onRetryClick}
+              >
+                <RotateCcw size={16} />
+                다시 추천받기
+              </button>
+            </div>
+          </article>
+        </section>
+      </Vstack>
+    </Container>
   )
 }
 

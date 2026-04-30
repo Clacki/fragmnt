@@ -1,39 +1,25 @@
 import { cn } from "@/lib/utils"
 import { Sparkles } from "lucide-react"
 
-type AICardProps = {
-  title: string
-  description?: string
-  className?: string
-}
-
-const AICard = ({ title, description, className = "" }: AICardProps) => {
-  const hasContent = !!description?.trim()
-
+const AIEmptyCard = () => {
   return (
     <section
       className={cn(
-        "w-full rounded-lg border border-border bg-green-input p-lg shadow-sm text-primary",
-        className
+        "w-full rounded-lg border border-border bg-green-input p-lg text-primary shadow-sm"
       )}
     >
       <div className="flex flex-col gap-sm text-primary">
         <div className="flex items-center gap-sm">
           <Sparkles size={24} />
-          <h2 className="text-lg font-bold text-primary pt-xs">{title}</h2>
+          <h2 className="pt-xs text-lg font-bold text-primary">AI 분석 정보</h2>
         </div>
 
-        <p
-          className={cn(
-            "break-keep text-primary text-md leading-relaxed ml-8 font-semibold",
-            hasContent ? "text-primary" : "text-text-sub"
-          )}
-        >
-          {hasContent ? description : "아직 AI 분석 결과가 생성되지 않았어요."}
+        <p className="ml-8 break-keep text-md font-semibold leading-relaxed text-primary">
+          서버 상태로 인해 AI 분석 데이터가 누락된 결과입니다.
         </p>
       </div>
     </section>
   )
 }
 
-export default AICard
+export default AIEmptyCard

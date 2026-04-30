@@ -40,15 +40,15 @@ export type ImageMetadata = {
   is_failed: boolean
   error_log: string | null
 }
-
 export type ImageAnalysisResult = {
   id: number
   recommended_scent: RecommendedScent
+  presigned_image_url: string
   image_metadata: ImageMetadata
   ai_tags: string[]
   ai_keywords: string[]
   ai_intensity: number
-  ai_comment: string
+  ai_comment: string | null
   match_score: number
   is_fallback: boolean
   created_at: string

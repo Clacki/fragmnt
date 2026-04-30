@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { getAnalysisDetail } from "../api/analysis-deatil.api"
-
-type ResultType = "image" | "survey" | "keyword" | "chatbot"
+import type { ResultType } from "../types"
 
 type UseAnalysisDetailQueryParams = {
   resultId: number
@@ -12,10 +11,11 @@ type UseAnalysisDetailQueryParams = {
 export const useAnalysisDetailQuery = ({
   resultId,
   type,
+  enabled = true,
 }: UseAnalysisDetailQueryParams) => {
   return useQuery({
     queryKey: ["analysis-detail", resultId, type],
     queryFn: () => getAnalysisDetail({ id: resultId, type }),
-    enabled: Number.isFinite(resultId),
+    enabled: enabled && Number.isFinite(resultId),
   })
 }

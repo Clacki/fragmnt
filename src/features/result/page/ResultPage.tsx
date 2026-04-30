@@ -8,51 +8,24 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
-import type { ResultData } from "@/shared/types"
+
+import type { AnalysisResult, ResultType } from "@/shared/types"
 import { useNavigate } from "@tanstack/react-router"
 import { useMemo } from "react"
 import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
+import ResultStateLayout from "./result-state-layout/ResultStateLayout"
 import AISection from "./sections/ai-section/AISection"
 import BottomSection from "./sections/bottom-section/BottomSection"
 import TopCardSection from "./sections/card-section/TopCardSection"
 import ScentSection from "./sections/scent-section/ScentSection"
-
-type ResultType = "image" | "survey" | "keyword" | "chatbot"
 
 type ResultPageProps = {
   resultId: number
   type: ResultType
 }
 
-const RESULT_STORAGE_KEY: Record<Exclude<ResultType, "chatbot">, string> = {
-  image: "imageAnalysisResult",
-  survey: "surveyAnalysisResult",
-  keyword: "keywordAnalysisResult",
-}
-
 const ResultPage = ({ resultId, type }: ResultPageProps) => {
   const navigate = useNavigate()
-
-  const storedResult = useMemo(() => {
-    if (type === "chatbot") {
-      return undefined
-    }
-
-    const storageKey = RESULT_STORAGE_KEY[type]
-    const storedValue = sessionStorage.getItem(storageKey)
-
-    if (!storedValue) {
-      return undefined
-    }
-
-    const parsedResult = JSON.parse(storedValue) as ResultData
-
-    if (parsedResult.id !== resultId) {
-      return undefined
-    }
-
-    return parsedResult
-  }, [resultId, type])
 
   const {
     data: fetchedResult,
@@ -61,10 +34,19 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
   } = useAnalysisDetailQuery({
     resultId,
     type,
-    enabled: !storedResult,
+    enabled: Number.isFinite(resultId),
   })
 
-  const result = storedResult ?? fetchedResult
+  const result = useMemo(() => {
+    if (!fetchedResult) {
+      return undefined
+    }
+
+    return {
+      ...fetchedResult,
+      type,
+    } as AnalysisResult
+  }, [fetchedResult, type])
 
   const handleBack = () => {
     navigate({ to: "/my-page" })
@@ -72,56 +54,38 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
 
   if (!Number.isFinite(resultId)) {
     return (
-      <CenterContainer className="w-full py-2xl">
-        <Container
-          width="xl"
-          isPadded
-          className="min-h-screen max-w-container-xl bg-surface-default"
-        >
-          <EmptyState
-            imageSrc={EmptyScentImage}
-            title="잘못된 결과 ID입니다."
-            description="결과 페이지 주소를 다시 확인해주세요."
-          />
-        </Container>
-      </CenterContainer>
+      <ResultStateLayout>
+        <EmptyState
+          imageSrc={EmptyScentImage}
+          title="잘못된 결과 ID입니다."
+          description="결과 페이지 주소를 다시 확인해주세요."
+        />
+      </ResultStateLayout>
     )
   }
 
-  if (isLoading && !storedResult) {
+  if (isLoading) {
     return (
-      <CenterContainer className="w-full py-2xl">
-        <Container
-          width="xl"
-          isPadded
-          className="min-h-screen max-w-container-xl bg-surface-default"
-        >
-          <LoadingState message="추천 결과를 불러오는 중입니다." />
-        </Container>
-      </CenterContainer>
+      <ResultStateLayout>
+        <LoadingState message="추천 결과를 불러오는 중입니다." />
+      </ResultStateLayout>
     )
   }
 
-  if ((isError && !storedResult) || !result) {
+  if (isError || !result) {
     return (
-      <CenterContainer className="w-full py-2xl">
-        <Container
-          width="xl"
-          isPadded
-          className="min-h-screen max-w-container-xl bg-surface-default"
-        >
-          <EmptyState
-            imageSrc={EmptyScentImage}
-            title="추천 결과를 불러올 수 없습니다."
-            description="잠시 후 다시 시도하거나, 향기 추천을 다시 진행해주세요."
-          />
-        </Container>
-      </CenterContainer>
+      <ResultStateLayout>
+        <EmptyState
+          imageSrc={EmptyScentImage}
+          title="추천 결과를 불러올 수 없습니다."
+          description="잠시 후 다시 시도하거나, 향기 추천을 다시 진행해주세요."
+        />
+      </ResultStateLayout>
     )
   }
 
   return (
-    <CenterContainer className="w-full py-2xl">
+    <CenterContainer className="w-full py-xl">
       <Container
         width="xl"
         isPadded
@@ -134,9 +98,8 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
             backButton={<BackButton onClick={handleBack} />}
           />
 
-          <TopCardSection result={result} />
-
-          <AISection aiComment={result.ai_comment} />
+          <TopCardSection result={result} type={type} />
+          <AISection result={result} />
 
           {result.recommended_scent && (
             <ScentSection scent={result.recommended_scent} />
