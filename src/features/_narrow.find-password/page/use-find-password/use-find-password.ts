@@ -40,15 +40,15 @@ const useFindPassword = () => {
     mutationFn: (body: FindPasswordSchema) =>
       // NOTE: api가 아직 나오지 않음
       // NOTE: 현재는 404가 뜹니다
-      plainInstance.post("/accounts/chang-password", body),
+      plainInstance.post("/accounts/change-password", body),
   })
+
+  const useFormReturn = useForm({ resolver: zodResolver(findPasswordSchema) })
   const {
-    setValue,
-    watch,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(findPasswordSchema) })
+  } = useFormReturn
 
   const onSubmit = (data: FindPasswordSchema) => {
     mutate(data)
@@ -56,37 +56,12 @@ const useFindPassword = () => {
 
   const submitForm = handleSubmit(onSubmit)
 
-  const handleEmailVerificationFirst = async () => {
-    const email = watch().email
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/send-email",
-      {
-        email,
-      }
-    )
-  }
-  const handleEmailVerificationSecond = async () => {
-    const email = watch().email
-    const email_token = watch().email_token
-    const response = await plainInstance.post<{
-      detail: string
-      token: string
-    }>("https://fragmnt.pics/api/v1/accounts/verification/verify-email", {
-      email,
-      code: email_token,
-    })
-
-    const token = response.data.token
-    setValue("email_uuid_token", token)
-  }
-
   return {
     data,
     register,
     submitForm,
     errors,
-    handleEmailVerificationFirst,
-    handleEmailVerificationSecond,
+    useFormReturn,
   }
 }
 

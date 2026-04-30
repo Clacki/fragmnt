@@ -28,13 +28,13 @@ const useFindEmail = () => {
       // NOTE: 현재는 404가 뜹니다
       plainInstance.post("/accounts/find-email", body),
   })
+
+  const useFormReturn = useForm({ resolver: zodResolver(findEmailSchema) })
   const {
-    setValue,
-    watch,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(findEmailSchema) })
+  } = useFormReturn
 
   const onSubmit = (data: FindEmailSchema) => {
     mutate(data)
@@ -42,37 +42,12 @@ const useFindEmail = () => {
 
   const submitForm = handleSubmit(onSubmit)
 
-  const handlePhoneVerificationFirst = async () => {
-    const phone_number = watch().phone_number
-    await plainInstance.post(
-      "https://fragmnt.pics/api/v1/accounts/verification/send-sms",
-      {
-        phone_number,
-      }
-    )
-  }
-
-  const handlePhoneVerificationSecond = async () => {
-    const phone_number = watch().phone_number
-    const phone_token = watch().phone_token
-    const response = await plainInstance.post<{
-      detail: string
-      sms_token: string
-    }>("https://fragmnt.pics/api/v1/accounts/verification/verify-sms", {
-      phone_number,
-      code: phone_token,
-    })
-    const token = response.data.sms_token
-    setValue("sms_uuid_token", token)
-  }
-
   return {
     data,
     register,
     errors,
     submitForm,
-    handlePhoneVerificationFirst,
-    handlePhoneVerificationSecond,
+    useFormReturn,
   }
 }
 

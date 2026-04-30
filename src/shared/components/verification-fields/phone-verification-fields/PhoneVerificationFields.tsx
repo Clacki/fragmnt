@@ -1,4 +1,4 @@
-import type { Path, UseFormReturn } from "react-hook-form"
+import type { UseFormReturn } from "react-hook-form"
 import { Button, Input } from "../../inputs"
 import Labeled from "../../inputs/labeled/Labeled"
 import type { PhoneFields } from "../types/use-form-return.type"
@@ -13,7 +13,7 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
   const {
     register,
     formState: { errors },
-  } = useFormReturn
+  } = useFormReturn as unknown as UseFormReturn<PhoneFields> // NOTE: 타입을 강제해서 이 이하에서는 type assertion이 필요 없게 합니다
 
   const {
     phoneFirstData,
@@ -36,7 +36,7 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
         <Labeled.Title>전화번호</Labeled.Title>
         <Labeled.Body>
           <Input
-            {...register("phone_number" as Path<TFieldValues>)}
+            {...register("phone_number")}
             status={errors.phone_number ? "error" : "none"}
             type="number"
             placeholder={`"-"없이 숫자만 입력해주세요`}
@@ -59,7 +59,7 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
         <Labeled.Title>전화번호 인증코드</Labeled.Title>
         <Labeled.Body>
           <Input
-            {...register("phone_token" as Path<TFieldValues>)}
+            {...register("phone_token")}
             status={secondInputStatus}
             placeholder="6자리 코드를 입력해주세요"
           />

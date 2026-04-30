@@ -15,6 +15,7 @@ const signupSchema = z.object({
     .string()
     .min(6, "6자리의 인증번호를 입력해주세요")
     .max(6, "6자리의 인증번호를 입력해주세요"),
+  email_uuid_token: z.string().optional(),
   password: z
     .string()
     .min(1, "비밀번호를 입력해주세요")
@@ -28,6 +29,7 @@ const signupSchema = z.object({
     .string()
     .min(6, "6자리의 인증번호를 입력해주세요")
     .max(6, "6자리의 인증번호를 입력해주세요"),
+  sms_uuid_token: z.string().optional(),
   birthday: z
     .string()
     .min(8, "8자리의 생년월일을 입력해주세요")
