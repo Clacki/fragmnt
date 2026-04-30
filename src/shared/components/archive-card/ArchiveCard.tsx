@@ -42,7 +42,7 @@ const ArchiveCard = ({
       </div>
 
       <ul className="flex gap-xs">
-        {visibleTags.map((tag, index) => (
+        {visibleTags.slice(0, 3).map((tag, index) => (
           <li key={`${tag}-${index}`}>
             <Tag label={tag} variant="soft" size="sm" />
           </li>

@@ -1,3 +1,5 @@
+export type AnalysisType = "image" | "chatbot" | "keyword" | "survey"
+
 export type UserProfile = {
   name: string
   email: string
@@ -7,14 +9,14 @@ export type UserProfile = {
 }
 
 export type UpdateUserProfileRequest = {
-  name?: string
-  birthday?: string
+  name: string
+  birthday: string
   profile_image_url?: string
 }
 
 export type FavoriteScent = {
   id: number
-  type: string
+  type: AnalysisType
   created_at: string
 
   scent: {
@@ -28,4 +30,10 @@ export type FavoriteScent = {
     season: string[]
     thumbnail_url: string
   }
+}
+
+export type UpdateFavoriteScentRequest = {
+  id: number
+  type?: AnalysisType
+  status: boolean
 }

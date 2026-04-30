@@ -2,6 +2,7 @@ import { instance } from "@/shared/api/axios-instance"
 import type { HistoryItem } from "../mocks/history.mock"
 import type {
   FavoriteScent,
+  UpdateFavoriteScentRequest,
   UpdateUserProfileRequest,
   UserProfile,
 } from "../types"
@@ -20,6 +21,22 @@ export const updateMyProfile = async (
 
 export const getFavoriteScents = async (): Promise<FavoriteScent[]> => {
   const { data } = await instance.get("/analyses/feedback")
+  return data
+}
+
+export const updateFavoriteScent = async ({
+  id,
+  type = "image",
+  status,
+}: UpdateFavoriteScentRequest) => {
+  const { data } = await instance.patch(
+    `/analyses/feedback/${id}`,
+    { status },
+    {
+      params: { type },
+    }
+  )
+
   return data
 }
 
