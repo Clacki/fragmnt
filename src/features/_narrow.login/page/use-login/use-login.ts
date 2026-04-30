@@ -4,6 +4,7 @@ import type { Profile } from "@/shared/types"
 // import type { Profile } from "@/shared/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
+import { useCanGoBack, useNavigate, useRouter } from "@tanstack/react-router"
 import { useForm } from "react-hook-form"
 import z from "zod"
 
@@ -41,14 +42,25 @@ const useLogin = () => {
   const setAccessToken = useAuthStore((state) => state.setAccessToken)
   const setProfile = useAuthStore((state) => state.setProfile)
 
+  const navigate = useNavigate()
+  const router = useRouter()
+  const canGoBack = useCanGoBack()
+
+  const handleRedirect = () => {
+    if (canGoBack) {
+      router.history.back()
+      return
+    }
+    navigate({ to: "/", replace: true })
+  }
+
   const { mutate } = useMutation({
     mutationFn: (body: LoginSchema) => login(body),
     onSuccess({ access, profile }) {
       setAccessToken(access)
       setProfile(profile)
 
-      // TODO: MUST DELETE BEFORE PUBLISH
-      console.log({ access, profile })
+      handleRedirect()
     },
   })
 

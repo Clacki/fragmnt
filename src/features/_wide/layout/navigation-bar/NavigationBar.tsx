@@ -1,3 +1,4 @@
+import useAuthStore from "@/shared/api/use-auth-store"
 import { Hstack, Vstack } from "@/shared/components"
 import {
   Link,
@@ -6,7 +7,7 @@ import {
   type LinkProps,
 } from "@tanstack/react-router"
 import clsx from "clsx"
-import { Home, ScrollText, Sparkles, User } from "lucide-react"
+import { Home, LogIn, ScrollText, Sparkles, User } from "lucide-react"
 
 type NavigationPathname = LinkProps["to"]
 type LucideIconProps = typeof Home
@@ -17,12 +18,21 @@ type NavigationButtonConfig = {
   Icon: LucideIconProps
 }
 
-const navigationButtonConfigs: NavigationButtonConfig[] = [
-  { pathname: "/", label: "Home", Icon: Home },
-  { pathname: "/scent-list", label: "List", Icon: ScrollText },
-  { pathname: "/find-scent", label: "Search", Icon: Sparkles },
-  { pathname: "/my-page", label: "My Page", Icon: User },
-]
+const makeNavigationButtonConfigs = (
+  accessToken: string | null
+): NavigationButtonConfig[] => {
+  const defaultConfigs: NavigationButtonConfig[] = [
+    { pathname: "/", label: "Home", Icon: Home },
+    { pathname: "/scent-list", label: "List", Icon: ScrollText },
+    { pathname: "/find-scent", label: "Search", Icon: Sparkles },
+  ]
+
+  const conditionalConfig: NavigationButtonConfig = accessToken
+    ? { pathname: "/my-page", label: "My Page", Icon: User }
+    : { pathname: "/login", label: "Login", Icon: LogIn }
+
+  return [...defaultConfigs, conditionalConfig]
+}
 
 const NavigationButton = ({
   pathname,
@@ -55,9 +65,11 @@ const NavigationButton = ({
 }
 
 const NavigationBar = () => {
+  const accessToken = useAuthStore((state) => state.accessToken)
+  const buttonConfigs = makeNavigationButtonConfigs(accessToken)
   return (
     <Hstack className="justify-evenly bg-card" gap="none">
-      {navigationButtonConfigs.map((config) => (
+      {buttonConfigs.map((config) => (
         <NavigationButton key={config.label} {...config} />
       ))}
     </Hstack>
