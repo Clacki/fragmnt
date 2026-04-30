@@ -34,7 +34,7 @@ const signupSchema = z.object({
     .max(8, "8자리의 생년월일을 입력해주세요"),
 })
 
-type SignupSchema = z.input<typeof signupSchema>
+export type SignupSchema = z.input<typeof signupSchema>
 
 const useSignup = () => {
   const setModalKey = useSignupStore((state) => state.setModalKey)

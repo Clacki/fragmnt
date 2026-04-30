@@ -5,7 +5,7 @@ import type { EmailFields } from "../types/use-form-return.type"
 import useEmailVerification from "./use-email-verification/use-email-verification"
 
 type EmailVerificationFieldsProps<TFieldValues extends EmailFields> = {
-  useFormReturn: UseFormReturn<TFieldValues>
+  useFormReturn: UseFormReturn<TFieldValues, unknown, TFieldValues>
 }
 const EmailVerificationFields = <TFieldValues extends EmailFields>({
   useFormReturn,

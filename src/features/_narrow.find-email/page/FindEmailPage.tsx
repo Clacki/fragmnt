@@ -1,11 +1,18 @@
 import NarrowTitleSection from "@/features/_narrow/components/narrow-title-section/NarrowTitleSection"
-import { Button, Hstack, Input, Vstack } from "@/shared/components"
+import { Button, Input, Vstack } from "@/shared/components"
 import Labeled from "@/shared/components/inputs/labeled/Labeled"
 import FindEmailSuccess from "./find-email-success/FindEmailSuccess"
 import useFindEmail from "./use-find-email/use-find-email"
 
 const FindEmailPage = () => {
-  const { data, errors, register, submitForm } = useFindEmail()
+  const {
+    data,
+    errors,
+    register,
+    submitForm,
+    handlePhoneVerificationFirst,
+    handlePhoneVerificationSecond,
+  } = useFindEmail()
 
   // TODO: api 나오면 응답 타입 확인해야
   if (data) return <FindEmailSuccess email={data.data.email as string} />
@@ -30,29 +37,36 @@ const FindEmailPage = () => {
           </Labeled.Message>
         </Labeled>
 
-        <Labeled isError={Boolean(errors.phone)}>
+        <Labeled isError={Boolean(errors.phone_number)}>
           <Labeled.Title>전화번호</Labeled.Title>
-          <Hstack gap="sm">
+          <Labeled.Body>
             <Input
-              {...register("phone")}
-              status={errors.phone ? "error" : "none"}
+              {...register("phone_number")}
+              status={errors.phone_number ? "error" : "none"}
               type="number"
               placeholder={`"-"없이 숫자만 입력해주세요`}
               className="grow"
             />
-            <Button type="button">인증</Button>
-          </Hstack>
-          <Labeled.Message>{errors.phone?.message}</Labeled.Message>
+            <Button type="button" onClick={handlePhoneVerificationFirst}>
+              인증
+            </Button>
+          </Labeled.Body>
+          <Labeled.Message>{errors.phone_number?.message}</Labeled.Message>
         </Labeled>
 
-        <Labeled isError={Boolean(errors.phoneVerification)}>
+        <Labeled isError={Boolean(errors.phone_token)}>
           <Labeled.Title>전화번호 인증코드</Labeled.Title>
-          <Input
-            {...register("phoneVerification")}
-            status={errors.phoneVerification ? "error" : "none"}
-            placeholder="6자리 코드를 입력해주세요"
-          />
-          <Labeled.Message>{errors.phoneVerification?.message}</Labeled.Message>
+          <Labeled.Body>
+            <Input
+              {...register("phone_token")}
+              status={errors.phone_token ? "error" : "none"}
+              placeholder="6자리 코드를 입력해주세요"
+            />
+            <Button type="button" onClick={handlePhoneVerificationSecond}>
+              확인
+            </Button>
+          </Labeled.Body>
+          <Labeled.Message>{errors.phone_token?.message}</Labeled.Message>
         </Labeled>
 
         <Button className="mt-lg">이메일 찾기</Button>
