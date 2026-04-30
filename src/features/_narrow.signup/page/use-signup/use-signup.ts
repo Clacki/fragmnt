@@ -1,6 +1,7 @@
 import { plainInstance } from "@/shared/api/axios-instance"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
+import type { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import z from "zod"
 import useSignupStore from "../../store/use-signup-store"
@@ -37,11 +38,15 @@ type SignupSchema = z.input<typeof signupSchema>
 
 const useSignup = () => {
   const setModalKey = useSignupStore((state) => state.setModalKey)
+  const setSignupError = useSignupStore((state) => state.setSignupError)
   const { mutate } = useMutation({
     mutationFn: (body: SignupSchema) =>
       plainInstance.post("accounts/signup", body),
     onSuccess: () => setModalKey("success"),
     onError: () => setModalKey("error"),
+    onSettled: (_data, error: AxiosError | null) => {
+      setSignupError(error)
+    },
   })
 
   const useFormReturns = useForm({ resolver: zodResolver(signupSchema) })

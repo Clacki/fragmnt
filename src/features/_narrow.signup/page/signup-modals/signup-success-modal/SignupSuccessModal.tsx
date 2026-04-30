@@ -1,5 +1,6 @@
 import useSignupStore from "@/features/_narrow.signup/store/use-signup-store"
-import { Button, Modal } from "@/shared/components"
+import { Modal } from "@/shared/components"
+import ModalContent from "@/shared/components/modal-content/ModalContent"
 import { useNavigate } from "@tanstack/react-router"
 
 const SignupSuccessModal = () => {
@@ -15,10 +16,18 @@ const SignupSuccessModal = () => {
 
   return (
     <Modal isOpen={modalKey === "success"} onClose={() => setModalKey(null)}>
-      <p>성공: 내용물은 다음 이슈에서 채우겠습니다</p>
-      <Button type="button" onClick={handleClick}>
-        로그인 페이지로 이동
-      </Button>
+      <ModalContent>
+        <ModalContent.Title>회원가입이 완료되었습니다</ModalContent.Title>
+        <ModalContent.ButtonSection>
+          <ModalContent.Button
+            type="button"
+            onClick={handleClick}
+            role="confirm"
+          >
+            로그인 페이지로 이동
+          </ModalContent.Button>
+        </ModalContent.ButtonSection>
+      </ModalContent>
     </Modal>
   )
 }

@@ -46,14 +46,14 @@ const buttonVariants = cva("transition", {
   ],
 })
 
-// NOTE: pill = padding wide + radius full
-// NOTE: circle = padding same + radius full
+export type ButtonStyle = "contained" | "outlined" | "ghost"
 export type WithButtonProps = {
   size?: "sm" | "lg"
   padding?: "wide" | "same"
   radius?: "md" | "full"
-  style?: "contained" | "outlined" | "ghost"
+  style?: ButtonStyle
 }
+
 const Button = ({
   size = "sm",
   padding = "wide",
