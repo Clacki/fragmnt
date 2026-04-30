@@ -2,10 +2,10 @@ import {
   BackButton,
   Button,
   Container,
+  LoadingState,
   PageIntro,
   Vstack,
 } from "@/shared/components"
-import LoadingState from "@/shared/components/loading-state/LoadingState"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { uploadImageToS3 } from "../api/image-analysis.api"
@@ -72,16 +72,13 @@ const ScentPhoto = () => {
     }
   }
 
-  if (isSubmitting) {
-    return (
-      <Container className="py-60">
-        <LoadingState />
-      </Container>
-    )
-  }
-
   return (
-    <Container className="px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
+    <Container className="relative px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <LoadingState />
+        </div>
+      )}
       <Vstack className="gap-md md:gap-lg">
         <PageIntro
           title="사진을 분석하여 향기를 찾습니다"
@@ -102,7 +99,7 @@ const ScentPhoto = () => {
           disabled={!hasImage || isSubmitting}
           onClick={handleAnalyzeImage}
         >
-          이미지 분석하기
+          {isSubmitting ? "분석 중..." : "이미지 분석하기"}
         </Button>
       </Vstack>
     </Container>
