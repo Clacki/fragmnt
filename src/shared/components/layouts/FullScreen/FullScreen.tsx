@@ -10,7 +10,7 @@ const FullScreen = (props: DivProps) => {
     <div
       {...rest}
       className={clsx(
-        "size-screen max-h-screen max-w-screen overflow-hidden",
+        "size-screen max-h-dvh max-w-screen overflow-hidden",
         className
       )}
     >
