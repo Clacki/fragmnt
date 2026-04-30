@@ -4,15 +4,18 @@ import { useNavigate } from "@tanstack/react-router"
 import { MessageSquareIcon } from "lucide-react"
 import SimilarScent from "./similar-scent/SimilarScent"
 
+type AnalysisType = "image" | "chatbot" | "keyword" | "survey"
 type BottomSectionProps = {
   similarScents?: SimilarScentType[]
   resultId?: number
   scent?: RecommendedScent
+  type: AnalysisType
 }
 const BottomSection = ({
   similarScents = [],
   resultId,
   scent,
+  type,
 }: BottomSectionProps) => {
   const navigate = useNavigate()
 
@@ -27,6 +30,7 @@ const BottomSection = ({
       to: "/review",
       search: {
         resultId: String(resultId),
+        type,
         name,
         engName: eng_name,
         thumbnailUrl: thumbnail_url,

@@ -15,6 +15,7 @@ export const Review = () => {
 
   const search = useSearch({ from: "/_wide/review" }) as {
     resultId?: string | number
+    type?: "image" | "chatbot" | "keyword" | "survey"
     name?: string
     engName?: string
     thumbnailUrl?: string
@@ -28,11 +29,14 @@ export const Review = () => {
   const { mutate, isPending } = useCreateReviewMutation()
 
   const handleSubmit = () => {
+    if (!search.type) return
+
     mutate(
       {
         resultId,
         rating,
         review,
+        type: search.type,
       },
       {
         onSuccess: () => {

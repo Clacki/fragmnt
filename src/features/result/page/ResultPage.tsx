@@ -109,6 +109,7 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
             resultId={result.id}
             scent={result.recommended_scent}
             similarScents={result.recommended_scent?.similar_scents ?? []}
+            type={type}
           />
         </Vstack>
       </Container>

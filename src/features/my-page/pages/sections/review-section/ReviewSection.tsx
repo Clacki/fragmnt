@@ -3,11 +3,14 @@ import { useDeleteReview, useReviewList } from "@/features/my-page/hooks"
 import { EmptyState, Toast } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 import { formatDate } from "@/shared/utils/date"
+import { useSearch } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 import { ReviewCard } from "./review-card/ReviewCard"
 
 export const ReviewSection = () => {
-  const { data: reviewList = [], error, isLoading } = useReviewList()
+  const search = useSearch({ from: "/_wide/review" })
+
+  const { data: reviewList = [], error, isLoading } = useReviewList(search.type)
   const { mutate: deleteMutate } = useDeleteReview()
   const hasItems = reviewList.length > 0
 

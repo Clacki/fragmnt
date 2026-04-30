@@ -6,6 +6,7 @@ import { formatDate } from "@/shared/utils/date"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { useFavoriteScents } from "../../../hooks/useFavoriteScents"
+import type { AnalysisType } from "../../../types/user.type"
 import CollectionCard from "./collection-card/CollectionCard"
 
 export const CollectionSection = () => {
@@ -18,10 +19,7 @@ export const CollectionSection = () => {
     variant: "success" | "error"
   } | null>(null)
 
-  const handleDelete = (
-    id: number,
-    type: "image" | "chatbot" | "keyword" | "survey"
-  ) => {
+  const handleDelete = (id: number, type: AnalysisType) => {
     updateFavorite(
       {
         id,
