@@ -1,5 +1,7 @@
-import { Button, Hstack, RoundBox, Vstack } from "@/shared/components"
+import useAuthStore from "@/shared/api/use-auth-store"
+import { Button, RoundBox, Vstack } from "@/shared/components"
 import HOrVStack from "@/shared/components/layouts/HOrVStack/HOrVStack"
+import { useNavigate } from "@tanstack/react-router"
 import {
   ChevronRight,
   Lightbulb,
@@ -7,6 +9,7 @@ import {
   Upload,
   type LucideIcon,
 } from "lucide-react"
+import { handleScroll } from "../../utils/handle-scroll/handle-scroll"
 import SectionVstack from "../section-container/SectionContainer"
 import TitleSection from "../title-section/TitleSection"
 
@@ -24,7 +27,12 @@ const QuickStartCard = ({
 }: QuickStartCardProps) => {
   // NOTE: currently just placeholder
   return (
-    <RoundBox padding="xl" radius="lg" className="bg-card w-full shadow-box">
+    <RoundBox
+      padding="xl"
+      radius="lg"
+      className="bg-card w-full shadow-box"
+      id="main-quick-start"
+    >
       <Vstack className="items-center">
         <RoundBox className="bg-gray-10">
           <Icon size={36} className="text-button" />
@@ -38,6 +46,16 @@ const QuickStartCard = ({
 }
 
 const QuickStart = () => {
+  const accessToken = useAuthStore((state) => state.accessToken)
+  const navigate = useNavigate()
+  const handleStartClick = () => {
+    if (!accessToken) {
+      navigate({ to: "/login" })
+      return
+    }
+    navigate({ to: "/find-scent" })
+  }
+
   return (
     <SectionVstack className="items-center">
       <TitleSection
@@ -67,13 +85,23 @@ const QuickStart = () => {
         />
       </HOrVStack>
 
-      <Hstack gap="none">
-        <Button style="outlined">Start now</Button>
-        <Button style="ghost">
+      <div className="grid grid-cols-2">
+        <Button
+          style="outlined"
+          onClick={handleStartClick}
+          className="justify-self-end"
+        >
+          Start now
+        </Button>
+        <Button
+          style="ghost"
+          onClick={() => handleScroll("#main-faq")}
+          className="justify-self-start"
+        >
           Learn more
           <ChevronRight />
         </Button>
-      </Hstack>
+      </div>
     </SectionVstack>
   )
 }

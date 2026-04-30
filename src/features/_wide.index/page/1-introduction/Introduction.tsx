@@ -1,7 +1,20 @@
 import BgSrc from "@/assets/images/main/introduction.png"
+import useAuthStore from "@/shared/api/use-auth-store"
 import { Button, Vstack } from "@/shared/components"
+import { useNavigate } from "@tanstack/react-router"
 
 const Introduction = () => {
+  const accessToken = useAuthStore((state) => state.accessToken)
+  const navigate = useNavigate()
+  const handleFindScentClick = () => {
+    if (!accessToken) {
+      navigate({ to: "/login" })
+      return
+    }
+
+    navigate({ to: "/find-scent" })
+  }
+
   return (
     <Vstack
       gap="2xl"
@@ -25,7 +38,7 @@ const Introduction = () => {
           <p>공간을 완벽하게 마무리 해줄 향기를 찾아낼게요.</p>
         </Vstack>
       </Vstack>
-      <Button size="sm" className="z-10">
+      <Button size="sm" className="z-10" onClick={handleFindScentClick}>
         나의 마지막 조각 찾기
       </Button>
     </Vstack>

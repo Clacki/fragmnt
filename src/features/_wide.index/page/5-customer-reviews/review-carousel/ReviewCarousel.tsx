@@ -54,7 +54,7 @@ const ReviewCarousel = () => {
       <Hstack className="justify-start overflow-x-hidden pb-sm">
         {reviewsInMain.map((review) => (
           <ReviewCardInMain
-            key={review.id}
+            key={`${review.type}_${review.id}`}
             reviewInMain={review}
             index={index}
           />

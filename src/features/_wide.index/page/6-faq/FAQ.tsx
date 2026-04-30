@@ -8,7 +8,7 @@ import { Button, Vstack } from "@/shared/components"
 import SectionVstack from "../section-container/SectionContainer"
 const FAQ = () => {
   return (
-    <SectionVstack className="items-center">
+    <SectionVstack className="items-center" id="main-faq">
       <Vstack className="items-center">
         <h2 className="text-lg font-bold">자주 묻는 질문</h2>
         <p className="text-text-sub">

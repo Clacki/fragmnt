@@ -24,6 +24,7 @@ export const MainReviewMock: ReviewInMain[] = Array.from(
   { length: 11 },
   (_, index) => ({
     id: index,
+    type: "keyword",
     thumbnail_url: imgUrls[index % imgUrls.length],
     name: `더미유저${index + 1}`,
     created_at: new Date(Date.now() - index * 86400000).toISOString(),

@@ -32,7 +32,7 @@ const WideLayout = () => {
           <Header />
         </ContainerForScrollbarGutter>
 
-        <FlexOneContainer isYScrollable>
+        <FlexOneContainer isYScrollable id="main-scrollable-area">
           <Container className="h-full">
             <Vstack
               gap="none"

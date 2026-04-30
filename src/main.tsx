@@ -9,6 +9,7 @@ import queryClient from "./shared/api/query-client"
 const router = createRouter({
   routeTree,
   context: { queryClient },
+  scrollToTopSelectors: ["#main-scrollable-area"],
 })
 
 declare module "@tanstack/react-router" {

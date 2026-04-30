@@ -4,4 +4,5 @@ export type ReviewInMain = {
   name: string // NOTE: user name
   created_at: string
   review: string
+  type: string
 }
