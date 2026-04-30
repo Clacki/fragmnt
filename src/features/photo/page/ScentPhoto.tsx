@@ -32,7 +32,6 @@ const ScentPhoto = () => {
     isCreatingUploadUrl || isUploadingToS3 || isAnalyzingImage
 
   const hasImage = Boolean(selectedFile)
-  const isCameraStep = step === "camera"
 
   const handleBack = () => {
     navigate({ to: "/find-scent" })
@@ -98,16 +97,13 @@ const ScentPhoto = () => {
           setSelectedFile={setSelectedFile}
         />
 
-        {!isCameraStep && <PhotoTipsSection />}
-
-        {!isCameraStep && (
-          <Button
-            disabled={!hasImage || isSubmitting}
-            onClick={handleAnalyzeImage}
-          >
-            이미지 분석하기
-          </Button>
-        )}
+        <PhotoTipsSection />
+        <Button
+          disabled={!hasImage || isSubmitting}
+          onClick={handleAnalyzeImage}
+        >
+          이미지 분석하기
+        </Button>
       </Vstack>
     </Container>
   )

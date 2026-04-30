@@ -8,7 +8,6 @@ import {
 } from "react"
 import type { MobilePhotoStep } from "../../types/mobile-photo-step.types"
 import PhotoActionButton from "../photo-action-button/PhotoActionButton"
-import MobileCameraContent from "./mobile-camera-content/MobileCameraContent"
 import UploadPreviewBox from "./upload-preview-box/UploadPreviewBox"
 
 type PhotoUploadSectionProps = {
@@ -26,8 +25,17 @@ const PhotoUploadSection = ({
   onStepChange,
   setSelectedFile,
 }: PhotoUploadSectionProps) => {
-  const fileInputRef = useRef<HTMLInputElement | null>(null)
+  const galleryInputRef = useRef<HTMLInputElement | null>(null)
+  const cameraInputRef = useRef<HTMLInputElement | null>(null)
   const objectUrlRef = useRef<string | null>(null)
+
+  const handleOpenGallery = () => {
+    galleryInputRef.current?.click()
+  }
+
+  const handleOpenCamera = () => {
+    cameraInputRef.current?.click()
+  }
 
   const revokeObjectUrl = () => {
     if (objectUrlRef.current) {
@@ -38,16 +46,10 @@ const PhotoUploadSection = ({
 
   const updatePreviewUrl = (nextPreviewUrl: string, isObjectUrl = false) => {
     revokeObjectUrl()
-
     if (isObjectUrl) {
       objectUrlRef.current = nextPreviewUrl
     }
-
     setPreviewUrl(nextPreviewUrl)
-  }
-
-  const handleOpenGallery = () => {
-    fileInputRef.current?.click()
   }
 
   const handleChangeImage = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,12 +65,6 @@ const PhotoUploadSection = ({
     onStepChange("preview")
 
     event.target.value = ""
-  }
-
-  const handleCaptureImage = (imageUrl: string, file: File) => {
-    setSelectedFile(file)
-    updatePreviewUrl(imageUrl, true)
-    onStepChange("preview")
   }
 
   useEffect(() => {
@@ -94,21 +90,11 @@ const PhotoUploadSection = ({
               <PhotoActionButton type="button" onClick={handleOpenGallery}>
                 갤러리 열기
               </PhotoActionButton>
-              <PhotoActionButton
-                type="button"
-                onClick={() => onStepChange("camera")}
-              >
+              <PhotoActionButton type="button" onClick={handleOpenCamera}>
                 카메라 열기
               </PhotoActionButton>
             </Hstack>
           </div>
-        )}
-
-        {step === "camera" && (
-          <MobileCameraContent
-            onCapture={handleCaptureImage}
-            onClose={() => onStepChange("select")}
-          />
         )}
 
         {step === "preview" && previewUrl && (
@@ -118,10 +104,7 @@ const PhotoUploadSection = ({
               <PhotoActionButton type="button" onClick={handleOpenGallery}>
                 다른 이미지 선택
               </PhotoActionButton>
-              <PhotoActionButton
-                type="button"
-                onClick={() => onStepChange("camera")}
-              >
+              <PhotoActionButton type="button" onClick={handleOpenCamera}>
                 카메라로 다시 찍기
               </PhotoActionButton>
             </Hstack>
@@ -130,9 +113,18 @@ const PhotoUploadSection = ({
       </section>
 
       <input
-        ref={fileInputRef}
+        ref={galleryInputRef}
         type="file"
         accept="image/*"
+        className="hidden"
+        onChange={handleChangeImage}
+      />
+
+      <input
+        ref={cameraInputRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
         className="hidden"
         onChange={handleChangeImage}
       />

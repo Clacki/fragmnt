@@ -1,3 +1,5 @@
+// TODO : 카메라, 기본 UI로 변경 현 파일 보류
+
 import { RefreshCw, X } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
 import CameraIconButton from "./camera-icon-button/CameraIconButton"

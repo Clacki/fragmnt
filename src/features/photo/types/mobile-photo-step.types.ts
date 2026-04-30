@@ -1,1 +1,1 @@
-export type MobilePhotoStep = "select" | "camera" | "preview"
+export type MobilePhotoStep = "select" | "preview"
