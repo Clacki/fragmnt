@@ -6,35 +6,44 @@ import { useForm } from "react-hook-form"
 import z from "zod"
 import useSignupStore from "../../store/use-signup-store"
 
-const signupSchema = z.object({
-  email: z
-    .string()
-    .min(1, "이메일을 입력해주세요")
-    .email("올바른 이메일 형식으로 입력해주세요"),
-  email_token: z
-    .string()
-    .min(6, "6자리의 인증번호를 입력해주세요")
-    .max(6, "6자리의 인증번호를 입력해주세요"),
-  email_uuid_token: z.string().optional(),
-  password: z
-    .string()
-    .min(1, "비밀번호를 입력해주세요")
-    .regex(
-      /^(?=.*[A-Za-z])(?=.*\d).{8,}$/,
-      "영문과 숫자를 포함해 8자리 이상을 입력해주세요"
-    ),
-  name: z.string().min(1, "이름을 입력해주세요"),
-  phone_number: z.string().min(1, "전화번호를 입력해주세요"),
-  phone_token: z
-    .string()
-    .min(6, "6자리의 인증번호를 입력해주세요")
-    .max(6, "6자리의 인증번호를 입력해주세요"),
-  sms_uuid_token: z.string().optional(),
-  birthday: z
-    .string()
-    .min(8, "8자리의 생년월일을 입력해주세요")
-    .max(8, "8자리의 생년월일을 입력해주세요"),
-})
+const signupSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, "이메일을 입력해주세요")
+      .email("올바른 이메일 형식으로 입력해주세요"),
+    email_token: z
+      .string()
+      .min(6, "6자리의 인증번호를 입력해주세요")
+      .max(6, "6자리의 인증번호를 입력해주세요"),
+    email_uuid_token: z.string().optional(),
+    password: z
+      .string()
+      .min(1, "비밀번호를 입력해주세요")
+      .regex(
+        /^(?=.*[A-Za-z])(?=.*\d).{8,}$/,
+        "영문과 숫자를 포함해 8자리 이상을 입력해주세요"
+      ),
+    name: z.string().min(1, "이름을 입력해주세요"),
+    phone_number: z.string().min(1, "전화번호를 입력해주세요"),
+    phone_token: z
+      .string()
+      .min(6, "6자리의 인증번호를 입력해주세요")
+      .max(6, "6자리의 인증번호를 입력해주세요"),
+    sms_uuid_token: z.string().optional(),
+    birthday: z
+      .string()
+      .min(8, "8자리의 생년월일을 입력해주세요")
+      .max(8, "8자리의 생년월일을 입력해주세요"),
+  })
+  .refine((data) => data.email_uuid_token, {
+    message: "확인 버튼을 눌러 이메일 인증코드를 확인해주세요",
+    path: ["email_token"],
+  })
+  .refine((data) => data.sms_uuid_token, {
+    message: "확인 버튼을 눌러 전화번호 인증코드를 확인해주세요",
+    path: ["phone_token"],
+  })
 
 export type SignupSchema = z.input<typeof signupSchema>
 

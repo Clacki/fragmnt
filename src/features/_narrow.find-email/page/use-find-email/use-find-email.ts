@@ -16,7 +16,7 @@ const findEmailSchema = z
   })
   .refine((data) => data.sms_uuid_token, {
     message: "확인 버튼을 눌러 전화번호 인증코드를 확인해주세요",
-    path: ["email_token"],
+    path: ["phone_token"],
   })
 
 type FindEmailSchema = z.input<typeof findEmailSchema>
