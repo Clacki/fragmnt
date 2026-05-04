@@ -18,6 +18,7 @@ import { useUploadProfileImage } from "../../hooks/useUploadImageMutation"
 import type { UserProfile } from "../../types"
 import EditField from "./edit-field/EditField"
 import UserCard from "./user-card/UserCard"
+
 type UserSectionProps = {
   user: UserProfile
   className?: string
@@ -94,7 +95,7 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           type="button"
           onClick={handleImageClick}
           disabled={isImageUploading}
-          className="rounded-full transition-opacity hover:opacity-80 disabled:opacity-50"
+          className="relative rounded-full transition-opacity hover:opacity-80 disabled:opacity-50"
           aria-label="프로필 이미지 업로드"
         >
           {profileImageSrc ? (
@@ -106,8 +107,12 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           ) : (
             <EmptyImage type="avatar" />
           )}
-        </button>
 
+          {/* 연필 버튼 */}
+          <div className="absolute bottom-1 right-1 flex size-10 items-center justify-center rounded-full bg-badge shadow-sm border border-white">
+            <Pencil size={18} className="text-primary" />
+          </div>
+        </button>
         <input
           ref={fileInputRef}
           type="file"
@@ -115,11 +120,9 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           onChange={handleImageChange}
           className="hidden"
         />
-
         <h2 className="mt-lg text-xl font-bold text-text-primary">
           {user.name}
         </h2>
-
         <Button
           type="button"
           style="outlined"
@@ -138,7 +141,6 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           <Sparkles size={16} />
           {isAiImageCreating ? "이미지 생성 중..." : "AI 이미지 생성하기"}
         </Button>
-
         <p className="mt-xs text-sm text-text-sub">{user.email}</p>
       </div>
 
