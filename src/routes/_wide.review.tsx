@@ -4,7 +4,7 @@ import { z } from "zod"
 
 const validateSearch = z.object({
   resultId: z.union([z.string(), z.number()]).optional(),
-  type: z.enum(["image", "chatbot", "keyword", "survey"]),
+  type: z.enum(["image", "chatbot", "keyword", "survey"]).optional(),
   name: z.string().optional(),
   engName: z.string().optional(),
   thumbnailUrl: z.string().optional(),

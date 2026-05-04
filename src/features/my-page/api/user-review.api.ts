@@ -3,10 +3,10 @@ import type { ReviewItem } from "../types/review.type"
 import type { AnalysisType } from "../types/user.type"
 
 export const getReviewList = async (
-  type: AnalysisType
+  type?: AnalysisType
 ): Promise<ReviewItem[]> => {
   const { data } = await instance.get("/analyses/reviews", {
-    params: { type },
+    params: type ? { type } : undefined,
   })
 
   return data
