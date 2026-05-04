@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WideRouteImport } from './routes/_wide'
 import { Route as NarrowRouteImport } from './routes/_narrow'
 import { Route as WideIndexRouteImport } from './routes/_wide.index'
+import { Route as ShareShareIdRouteImport } from './routes/share.$shareId'
 import { Route as WideScentListRouteImport } from './routes/_wide.scent-list'
 import { Route as WideScentDetailRouteImport } from './routes/_wide.scent-detail'
 import { Route as WideReviewRouteImport } from './routes/_wide.review'
@@ -41,6 +42,11 @@ const WideIndexRoute = WideIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => WideRoute,
+} as any)
+const ShareShareIdRoute = ShareShareIdRouteImport.update({
+  id: '/share/$shareId',
+  path: '/share/$shareId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const WideScentListRoute = WideScentListRouteImport.update({
   id: '/scent-list',
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
+  '/share/$shareId': typeof ShareShareIdRoute
   '/find-scent/chat': typeof WideFindScentChatRoute
   '/find-scent/keyword': typeof WideFindScentKeywordRoute
   '/find-scent/photo': typeof WideFindScentPhotoRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
+  '/share/$shareId': typeof ShareShareIdRoute
   '/find-scent/chat': typeof WideFindScentChatRoute
   '/find-scent/keyword': typeof WideFindScentKeywordRoute
   '/find-scent/photo': typeof WideFindScentPhotoRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/_wide/review': typeof WideReviewRoute
   '/_wide/scent-detail': typeof WideScentDetailRoute
   '/_wide/scent-list': typeof WideScentListRoute
+  '/share/$shareId': typeof ShareShareIdRoute
   '/_wide/': typeof WideIndexRoute
   '/_wide/find-scent/chat': typeof WideFindScentChatRoute
   '/_wide/find-scent/keyword': typeof WideFindScentKeywordRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/review'
     | '/scent-detail'
     | '/scent-list'
+    | '/share/$shareId'
     | '/find-scent/chat'
     | '/find-scent/keyword'
     | '/find-scent/photo'
@@ -215,6 +225,7 @@ export interface FileRouteTypes {
     | '/review'
     | '/scent-detail'
     | '/scent-list'
+    | '/share/$shareId'
     | '/find-scent/chat'
     | '/find-scent/keyword'
     | '/find-scent/photo'
@@ -235,6 +246,7 @@ export interface FileRouteTypes {
     | '/_wide/review'
     | '/_wide/scent-detail'
     | '/_wide/scent-list'
+    | '/share/$shareId'
     | '/_wide/'
     | '/_wide/find-scent/chat'
     | '/_wide/find-scent/keyword'
@@ -247,6 +259,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   NarrowRoute: typeof NarrowRouteWithChildren
   WideRoute: typeof WideRouteWithChildren
+  ShareShareIdRoute: typeof ShareShareIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof WideIndexRouteImport
       parentRoute: typeof WideRoute
+    }
+    '/share/$shareId': {
+      id: '/share/$shareId'
+      path: '/share/$shareId'
+      fullPath: '/share/$shareId'
+      preLoaderRoute: typeof ShareShareIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_wide/scent-list': {
       id: '/_wide/scent-list'
@@ -451,6 +471,7 @@ const WideRouteWithChildren = WideRoute._addFileChildren(WideRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   NarrowRoute: NarrowRouteWithChildren,
   WideRoute: WideRouteWithChildren,
+  ShareShareIdRoute: ShareShareIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

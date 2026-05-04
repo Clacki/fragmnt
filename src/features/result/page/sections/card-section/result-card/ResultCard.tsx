@@ -13,6 +13,7 @@ type ResultTopCardProps = {
   tags: string[]
   isSaved: boolean
   isSavePending?: boolean
+  isSharePending?: boolean
   onDetailClick?: () => void
   onAddCollectionClick?: () => void
   onRetryClick?: () => void
@@ -31,6 +32,7 @@ const ResultTopCard = ({
   tags,
   isSaved,
   isSavePending = false,
+  isSharePending = false,
   onDetailClick,
   onAddCollectionClick,
   onRetryClick,
@@ -109,7 +111,12 @@ const ResultTopCard = ({
                 <Heart size={20} fill={isSaved ? "currentColor" : "none"} />
               </Button>
 
-              <Button type="button" style="outlined" onClick={onShareClick}>
+              <Button
+                type="button"
+                style="outlined"
+                onClick={onShareClick}
+                disabled={isSharePending}
+              >
                 <Share2 size={18} />
               </Button>
             </div>
