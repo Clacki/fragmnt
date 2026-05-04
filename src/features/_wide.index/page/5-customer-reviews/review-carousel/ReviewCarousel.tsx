@@ -5,9 +5,11 @@ import type { WithButtonProps } from "@/shared/components/inputs/Button/Button"
 import type { DefaultButtonProps } from "@/shared/types"
 import { useQuery } from "@tanstack/react-query"
 import { useLoaderData } from "@tanstack/react-router"
+import clsx from "clsx"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
 import ReviewCardInMain from "./review-card-in-main/ReviewCardInMain"
+import styles from "./ReviewCarousel.module.css"
 
 const RoundButton = (props: DefaultButtonProps & WithButtonProps) => {
   return <Button padding="same" radius="full" style="ghost" {...props} />
@@ -51,7 +53,12 @@ const ReviewCarousel = () => {
         </Hstack>
       )}
 
-      <Hstack className="justify-start overflow-x-hidden pb-sm">
+      <Hstack
+        className={clsx(
+          "justify-start overflow-x-hidden pb-sm -mx-2xl px-2xl",
+          styles.review_carousel_mask
+        )}
+      >
         {reviewsInMain.map((review) => (
           <ReviewCardInMain
             key={`${review.type}_${review.id}`}
