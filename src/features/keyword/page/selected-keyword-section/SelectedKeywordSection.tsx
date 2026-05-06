@@ -17,7 +17,7 @@ const SelectedKeywordSection = ({
   return (
     <article className="w-full">
       <div className="w-full rounded-lg border border-green-input bg-white p-lg">
-        <div className="flex justify-between pb-md text-text-sub">
+        <div className="flex justify-between pb-md text-text-sub text-sm md:text-md">
           <p>최소 3개의 키워드를 선택해주세요</p>
 
           {hasSelectedKeywords && (

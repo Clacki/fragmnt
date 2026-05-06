@@ -98,7 +98,7 @@ const ScentKeyword = () => {
   }
 
   return (
-    <Container className="px-30 pt-16 pb-40">
+    <Container className="relative px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
       <Vstack>
         <PageIntro
           title="나만의 향 찾기"

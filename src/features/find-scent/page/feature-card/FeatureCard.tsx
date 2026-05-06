@@ -27,20 +27,23 @@ const FeatureCard = ({
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="button"
-      className="flex h-[360px] w-[250px] cursor-pointer flex-col overflow-hidden rounded-3xl border border-gray-20 bg-white shadow-box transition-all duration-300 hover:-translate-y-2 focus:outline-none focus:ring-2 focus:ring-primary"
+      className="flex h-auto w-full max-w-[320px] cursor-pointer overflow-hidden rounded-3xl border border-gray-20 bg-white shadow-box transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-primary md:h-[360px] md:w-[250px] md:flex-col md:hover:-translate-y-2"
     >
-      <div className="h-[200px] w-full overflow-hidden">
+      <div className="h-auto w-[112px] shrink-0 overflow-hidden md:h-[200px] md:w-full">
         <img
           src={imageSrc}
           alt={imageAlt}
-          className="h-full w-full object-cover"
+          className="h-full min-h-[132px] w-full object-cover md:min-h-0"
         />
       </div>
 
-      <div className="flex flex-1 flex-col items-center px-8 pt-5 pb-4">
-        <div className="flex flex-col items-center gap-2">
-          <h3 className="text-[20px] font-bold">{title}</h3>
-          <p className="whitespace-pre-line text-center text-sm font-normal text-text-description">
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-sm px-md py-md md:items-center md:px-8 md:pb-4 md:pt-5">
+        <div className="flex min-w-0 flex-col gap-2 md:items-center">
+          <h3 className="break-keep text-md font-bold text-text-primary md:text-[20px]">
+            {title}
+          </h3>
+
+          <p className="line-clamp-2 break-keep text-sm font-normal text-text-description md:whitespace-pre-line md:text-center">
             {description}
           </p>
         </div>
@@ -48,7 +51,7 @@ const FeatureCard = ({
         <Button
           type="button"
           size="sm"
-          className="pointer-events-none mt-auto"
+          className="pointer-events-none mt-sm w-fit md:mt-auto"
           tabIndex={-1}
         >
           {buttonLabel}

@@ -23,7 +23,7 @@ const ScentSection = ({ scent }: ScentSectionProps) => {
 
   return (
     <div className="w-full mt-md">
-      <div className="flex flex-row gap-sm w-full">
+      <div className="flex flex-col md:flex-row gap-sm w-full">
         {/* profile */}
         <div className="flex-1 w-full rounded-lg border border-border bg-white p-xl">
           <div className="mb-md text-sm font-semibold text-text-primary">

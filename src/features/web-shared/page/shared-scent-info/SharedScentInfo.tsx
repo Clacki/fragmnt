@@ -10,7 +10,7 @@ const SharedScentInfo = ({ scent }: SharedScentInfoProps) => {
   return (
     <section
       aria-labelledby="shared-scent-title"
-      className=" flex flex-col items-center text-center gap-md"
+      className=" flex flex-col items-center text-center gap-sm"
     >
       <p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary/55">
         {scent.eng_name}

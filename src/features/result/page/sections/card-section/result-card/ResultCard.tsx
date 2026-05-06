@@ -64,12 +64,12 @@ const ResultTopCard = ({
 
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-default via-white/20 to-transparent" />
 
-              <span className="absolute right-md top-md rounded-full bg-surface-default/90 px-sm py-xs text-md font-bold text-primary shadow-sm">
+              <span className="absolute right-md top-md rounded-full bg-surface-default/90 px-sm py-xs text-sm md:text-md font-bold text-primary shadow-sm">
                 {matchRate}% Match
               </span>
 
-              <figcaption className="absolute inset-x-lg bottom-xl">
-                <div className="mt-md flex flex-wrap gap-xs">
+              <figcaption className=" absolute inset-x-lg bottom-sm md:bottom-xl">
+                <div className="mt-md hidden md:flex flex-wrap gap-xs">
                   <Tag label={category} size="sm" variant="selected" />
                   {tags.map((tag, index) => (
                     <Tag
@@ -80,21 +80,19 @@ const ResultTopCard = ({
                     />
                   ))}
                 </div>
-
                 <h2
                   id="recommended-scent-title"
-                  className="text-2xl font-semibold text-text-primary"
+                  className="truncate text-xl font-semibold text-text-primary md:text-2xl"
                 >
                   {engName ?? title}
                 </h2>
-
-                <p className="mt-sm max-w-[560px] break-keep text-md text-text-description">
+                <p className="md:mt-sm truncate text-sm text-text-description md:max-w-[560px] md:whitespace-normal md:break-keep md:text-md">
                   {description}
                 </p>
               </figcaption>
             </figure>
 
-            <div className="mt-xl flex gap-md">
+            <div className="mt-xl flex gap-sm md:gap-md">
               <Button type="button" className="w-full" onClick={onDetailClick}>
                 자세히 보기
               </Button>
@@ -121,7 +119,7 @@ const ResultTopCard = ({
               </Button>
             </div>
 
-            <div className="mt-xl flex h-10 items-center justify-center cursor-pointer rounded-xl hover:bg-green-input">
+            <div className="bg-green-input md:bg-surface-default mt-sm md:mt-xl flex h-10 items-center justify-center cursor-pointer rounded-xl hover:bg-green-input">
               <button
                 type="button"
                 className="mt-xs inline-flex items-center gap-xs text-md font-medium text-primary underline-offset-4  cursor-pointer"

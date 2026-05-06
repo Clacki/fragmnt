@@ -12,12 +12,12 @@ const SurveyAIContent = ({ result }: SurveyAIContentProps) => {
 
   return (
     <section aria-labelledby="survey-analysis-title" className="w-full py-xl">
-      <div className="flex flex-col gap-lg rounded-2xl bg-green-input p-xl">
+      <div className="flex flex-col gap-lg rounded-2xl bg-green-input p-lg md:p-xl">
         <section
           aria-labelledby="survey-analysis-title"
           className="flex flex-col gap-lg rounded-xl bg-surface-default p-lg shadow-sm"
         >
-          <header className="flex items-center gap-sm">
+          <header className="flex flex-col items-center gap-sm text-center md:flex-row md:items-start md:text-left">
             <span
               aria-hidden="true"
               className="flex size-9 shrink-0 items-center justify-center rounded-full bg-green-input text-primary"
@@ -28,7 +28,7 @@ const SurveyAIContent = ({ result }: SurveyAIContentProps) => {
             <div className="flex flex-col gap-2xs">
               <h3
                 id="survey-analysis-title"
-                className="text-lg font-bold text-primary"
+                className="text-md font-bold text-primary md:text-lg"
               >
                 SURVEY RESPONSES
               </h3>
@@ -44,7 +44,7 @@ const SurveyAIContent = ({ result }: SurveyAIContentProps) => {
               {surveyAnswers.map((item, index) => (
                 <li
                   key={`${item.title}-${item.answer}-${index}`}
-                  className="rounded-2xl border border-border bg-green-input/60 p-lg"
+                  className="rounded-2xl border border-border bg-green-input/60 p-md md:p-lg"
                 >
                   <div className="flex items-start gap-md">
                     <span
@@ -77,7 +77,7 @@ const SurveyAIContent = ({ result }: SurveyAIContentProps) => {
         {ai_comment && (
           <section
             aria-labelledby="survey-analysis-summary-title"
-            className="flex flex-col gap-md rounded-xl bg-surface-default p-lg shadow-sm md:flex-row"
+            className="flex flex-col items-center gap-md rounded-xl bg-surface-default p-lg text-center shadow-sm md:flex-row md:items-start md:text-left"
           >
             <span
               aria-hidden="true"
@@ -94,7 +94,7 @@ const SurveyAIContent = ({ result }: SurveyAIContentProps) => {
                 AI 분석 요약
               </h4>
 
-              <p className="whitespace-pre-line break-keep text-md font-medium leading-loose text-primary">
+              <p className="whitespace-pre-line break-keep text-sm font-medium leading-relaxed text-primary md:text-md md:leading-loose">
                 {ai_comment}
               </p>
             </div>

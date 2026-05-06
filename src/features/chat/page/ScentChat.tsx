@@ -139,9 +139,9 @@ const ScentChat = () => {
 
   return (
     <Container>
-      <CenterContainer className="p-16">
+      <CenterContainer className="p-4 md:p-16">
         <RoundBox
-          className="h-160 w-full border border-border bg-white shadow-2xl"
+          className="h-120 md:h-160 w-full border border-border bg-white shadow-2xl"
           padding="none"
         >
           <Vstack gap="none" className="h-full">

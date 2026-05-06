@@ -34,7 +34,7 @@ const PreferenceSlider = ({
   return (
     <article
       className={clsx(
-        "flex w-full flex-col gap-md rounded-2xl border border-border bg-card p-lg",
+        "flex w-full flex-col gap-md rounded-2xl border border-border bg-card p-md md:p-lg",
         className
       )}
     >
@@ -44,13 +44,17 @@ const PreferenceSlider = ({
         </div>
 
         <div className="flex flex-col">
-          <h3 className="text-lg font-bold text-text-primary">{title}</h3>
-          <p className="text-md text-text-sub">{additional}</p>
+          <h3 className="break-keep text-lg font-bold text-text-primary">
+            {title}
+          </h3>
+          <p className="break-keep text-sm text-text-sub md:text-md">
+            {additional}
+          </p>
         </div>
       </header>
 
-      <div className="flex flex-col px-2xl pb-xl">
-        <div className="flex items-center justify-between text-md text-text-sub">
+      <div className="flex flex-col pb-8 px-8">
+        <div className="flex items-center justify-between text-sm text-text-sub md:text-md">
           <span>{leftEdgeLabel}</span>
           <span>{rightEdgeLabel}</span>
         </div>

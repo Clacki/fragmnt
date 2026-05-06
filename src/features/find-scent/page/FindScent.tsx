@@ -1,10 +1,4 @@
-import {
-  Container,
-  FadeUpItem,
-  Hstack,
-  PageIntro,
-  Vstack,
-} from "@/shared/components"
+import { Container, FadeUpItem, PageIntro, Vstack } from "@/shared/components"
 import { useNavigate } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
 import { featureCardList } from "../data/feature-card-list"
@@ -53,14 +47,14 @@ const FindScent = () => {
 
   return (
     <>
-      <Container className=" pt-16 pb-60">
-        <Vstack gap="none" className="gap-20">
+      <Container className="pt-16 md:pb-60 md:px-10">
+        <Vstack gap="none" className="gap-12 md:gap-16">
           <PageIntro
             title="어떤 방식으로 향기를 찾을까요?"
-            description="당신의 공간과 취향, 그 정교한 조각(Fragment)들을 분석해 드립니다"
+            description={`당신의 공간과 취향,\n그 정교한 조각(Fragment)들을 분석해 드립니다`}
           />
 
-          <Hstack className="w-full justify-center gap-6">
+          <div className="grid w-full grid-cols-1 justify-items-center gap-lg pb-28 md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:pb-0">
             {featureCardList.map((card, index) => (
               <FadeUpItem key={card.id} isReady={isReady} delay={index * 160}>
                 <FeatureCard
@@ -69,7 +63,7 @@ const FindScent = () => {
                 />
               </FadeUpItem>
             ))}
-          </Hstack>
+          </div>
         </Vstack>
       </Container>
 

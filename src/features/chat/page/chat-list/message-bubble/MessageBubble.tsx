@@ -15,7 +15,11 @@ const MessageBubble = ({ role, text }: MessageBubbleProps) => {
         "justify-start": isAssistant,
       })}
     >
-      <div className="flex max-w-[80%] items-start gap-sm">
+      <div
+        className={clsx("flex w-full items-start gap-sm", {
+          "justify-end": role === "user",
+        })}
+      >
         {isAssistant && (
           <div className="flex h-8 w-8 shrink-0 items-center justify-center pt-xs">
             <img src={BotIcon} alt="fragmnt bot" className="h-8 w-8" />
@@ -24,7 +28,7 @@ const MessageBubble = ({ role, text }: MessageBubbleProps) => {
 
         <div
           className={clsx(
-            "whitespace-pre-line rounded-2xl px-md py-sm text-md leading-[150%]",
+            "max-w-[260px] whitespace-pre-line break-keep rounded-2xl px-md py-sm text-md leading-[150%] md:max-w-[360px]",
             {
               "bg-primary text-white": role === "user",
               "border border-border bg-white text-text-primary": isAssistant,

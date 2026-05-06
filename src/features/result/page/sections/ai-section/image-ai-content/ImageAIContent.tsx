@@ -15,12 +15,12 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
     <section aria-labelledby="image-ai-analysis-title" className="w-full py-xl">
       <Container>
         <Vstack className="gap-lg">
-          <article className="flex flex-col gap-lg rounded-2xl bg-green-input p-xl shadow-sm">
+          <article className="flex flex-col gap-lg rounded-2xl bg-green-input p-lg shadow-sm md:p-xl">
             <section
               aria-labelledby="image-analysis-summary-title"
-              className="flex flex-col gap-md rounded-xl bg-surface-default p-lg shadow-sm md:flex-row md:items-center"
+              className="flex flex-col items-center gap-md rounded-xl bg-surface-default p-lg text-center shadow-sm md:flex-row md:items-center md:text-left"
             >
-              <figure className="relative size-24 shrink-0 overflow-hidden rounded-xl border border-border bg-green-input shadow-sm md:size-28">
+              <figure className="size-24 shrink-0 overflow-hidden rounded-xl border border-border bg-green-input shadow-sm md:size-28">
                 <img
                   src={presigned_image_url}
                   alt="AI가 분석한 업로드 이미지"
@@ -28,9 +28,9 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
                 />
               </figure>
 
-              <div className="flex min-w-0 flex-1 flex-col gap-sm">
+              <div className="flex min-w-0 flex-1 flex-col items-center gap-sm md:items-start">
                 <header className="space-y-xs">
-                  <div className="flex items-center gap-sm">
+                  <div className="flex items-center justify-center gap-sm md:justify-start">
                     <span
                       aria-hidden="true"
                       className="flex size-9 shrink-0 items-center justify-center rounded-full bg-green-input text-primary"
@@ -40,7 +40,7 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
 
                     <h4
                       id="image-analysis-summary-title"
-                      className="text-lg font-bold text-primary"
+                      className="break-keep text-md font-bold text-primary md:text-lg"
                     >
                       이미지 분석 요약
                     </h4>
@@ -54,7 +54,7 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
 
                 {keywords.length > 0 && (
                   <ul
-                    className="flex flex-wrap gap-xs"
+                    className="flex flex-wrap justify-center gap-xs md:justify-start"
                     aria-label="이미지 분석 키워드"
                   >
                     {keywords.map((keyword) => (
@@ -74,7 +74,7 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
             {ai_comment && (
               <section
                 aria-labelledby="image-ai-comment-title"
-                className="flex flex-col gap-md rounded-xl bg-surface-default p-lg shadow-sm md:flex-row"
+                className="flex flex-col items-center gap-md rounded-xl bg-surface-default p-lg text-center shadow-sm md:flex-row md:items-start md:text-left"
               >
                 <span
                   aria-hidden="true"
@@ -91,7 +91,7 @@ const ImageAIContent = ({ result }: ImageAIContentProps) => {
                     AI 분석 요약
                   </h5>
 
-                  <p className="break-keep text-md font-medium leading-loose text-primary">
+                  <p className="break-keep text-sm font-medium leading-relaxed text-primary md:text-md md:leading-loose">
                     {ai_comment}
                   </p>
                 </div>

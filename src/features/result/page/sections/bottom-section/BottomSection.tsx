@@ -46,7 +46,7 @@ const BottomSection = ({
             Similar Scents
           </div>
 
-          <div className="w-full grid grid-cols-2 gap-md">
+          <div className="w-full grid md:grid-cols-2 gap-md">
             {similarScents.map((scent) => (
               <SimilarScent
                 key={scent.id}
@@ -76,7 +76,7 @@ const BottomSection = ({
 
         <div className="flex flex-col gap-xs items-center">
           <p className="font-semibold text-md">추천 결과에 만족하셨나요?</p>
-          <p className="font-light text-md text-text-sub">
+          <p className="font-light text-center text-md text-text-sub">
             추천받은 향기에 대한 생각을 공유해 주시면 다음 추천에 반영할게요.
           </p>
         </div>

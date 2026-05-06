@@ -14,17 +14,20 @@ const PageIntro = ({
   backButton,
   className,
 }: PageIntroProps) => {
+  const formattedDescription = description?.replace(/,\s*/g, ",\n")
   return (
     <div className={clsx("relative w-full", className)}>
-      {backButton && <div className="absolute left-0 top-0">{backButton}</div>}
+      {backButton && (
+        <div className="absolute left-0 top-0 hidden md:flex">{backButton}</div>
+      )}
 
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-lg md:text-3xl font-bold text-text-primary">
           {title}
         </h1>
-        {description && (
-          <p className="whitespace-pre-line  text-sm md:text-base text-text-description">
-            {description}
+        {formattedDescription && (
+          <p className="whitespace-pre-line break-keep text-sm text-text-description md:text-base">
+            {formattedDescription}
           </p>
         )}
       </div>

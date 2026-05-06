@@ -23,11 +23,10 @@ const WebSharedPage = () => {
   }
 
   const scent = data.recommended_scent
-
   return (
-    <main className="min-h-dvh">
+    <main className="min-h-dvh overscroll-contain">
       <Container>
-        <div className="flex min-h-dvh items-center justify-center px-md py-lg">
+        <div className="flex min-h-dvh justify-center px-md py-lg pb-2xl">
           <article className="fade-up w-full max-w-168 rounded-lg border border-border bg-white px-lg py-xl shadow-sm md:px-xl">
             <Vstack>
               <SharedHeader />

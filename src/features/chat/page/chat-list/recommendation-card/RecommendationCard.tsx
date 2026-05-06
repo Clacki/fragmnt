@@ -61,7 +61,7 @@ const RecommendationCard = ({
 
   return (
     <RoundBox
-      className="ml-10 border border-border message-enter w-full max-w-[440px] bg-white"
+      className="message-enter w-full max-w-[440px] border border-border bg-white md:ml-10"
       padding="none"
     >
       <Vstack gap="none">

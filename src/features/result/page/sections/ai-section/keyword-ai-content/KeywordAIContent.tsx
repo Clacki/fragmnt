@@ -12,12 +12,12 @@ const KeywordAIContent = ({ result }: KeywordAIContentProps) => {
 
   return (
     <section aria-labelledby="selected-keywords-title" className="w-full py-xl">
-      <div className="flex flex-col gap-lg rounded-2xl bg-green-input p-xl">
+      <div className="flex flex-col gap-lg rounded-2xl bg-green-input p-lg md:p-xl">
         <section
           aria-labelledby="selected-keywords-title"
           className="flex flex-col gap-lg rounded-xl bg-surface-default p-lg shadow-sm"
         >
-          <header className="flex items-center gap-sm">
+          <header className="flex flex-col items-center gap-sm text-center md:flex-row md:items-start md:text-left">
             <span
               aria-hidden="true"
               className="flex size-9 shrink-0 items-center justify-center rounded-full bg-green-input text-primary"
@@ -28,7 +28,7 @@ const KeywordAIContent = ({ result }: KeywordAIContentProps) => {
             <div className="flex flex-col gap-2xs">
               <h3
                 id="selected-keywords-title"
-                className="text-lg font-bold text-primary"
+                className="text-md font-bold text-primary md:text-lg"
               >
                 SELECTED KEYWORDS
               </h3>
@@ -44,7 +44,7 @@ const KeywordAIContent = ({ result }: KeywordAIContentProps) => {
               {selectedKeywords.map((keyword, index) => (
                 <li
                   key={`${keyword.answer}-${index}`}
-                  className="flex items-center justify-between gap-md rounded-2xl border border-border bg-green-input/60 px-lg py-md"
+                  className="flex items-center justify-between gap-md rounded-2xl border border-border bg-green-input/60 px-md py-md md:px-lg"
                 >
                   <div className="min-w-0">
                     {keyword.title && (
@@ -73,7 +73,7 @@ const KeywordAIContent = ({ result }: KeywordAIContentProps) => {
         {ai_comment && (
           <section
             aria-labelledby="keyword-analysis-summary-title"
-            className="flex flex-col gap-md rounded-xl bg-surface-default p-lg shadow-sm md:flex-row"
+            className="flex flex-col items-center gap-md rounded-xl bg-surface-default p-lg text-center shadow-sm md:flex-row md:items-start md:text-left"
           >
             <span
               aria-hidden="true"
@@ -90,7 +90,7 @@ const KeywordAIContent = ({ result }: KeywordAIContentProps) => {
                 AI 분석 요약
               </h4>
 
-              <p className="whitespace-pre-line break-keep text-md font-medium leading-loose text-primary">
+              <p className="whitespace-pre-line break-keep text-sm font-medium leading-relaxed text-primary md:text-md md:leading-loose">
                 {ai_comment}
               </p>
             </div>
