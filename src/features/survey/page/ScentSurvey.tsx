@@ -6,6 +6,7 @@ import {
   Vstack,
 } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import {
@@ -17,6 +18,8 @@ import PreferenceSlider from "./preference-slider/PreferenceSlider"
 const DEFAULT_SURVEY_VALUE = 2
 
 const ScentSurvey = () => {
+  useUserGuard()
+
   const { data: questions, isPending, isError } = useSurveyQuestions()
   const { mutateAsync: submitSurveyResult, isPending: isSubmitting } =
     useSurveyResultMutation()

@@ -9,6 +9,7 @@ import {
   Vstack,
 } from "@/shared/components"
 
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import type { AnalysisResult, ResultType } from "@/shared/types"
 import { useMemo } from "react"
 import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
@@ -24,6 +25,8 @@ type ResultPageProps = {
 }
 
 const ResultPage = ({ resultId, type }: ResultPageProps) => {
+  useUserGuard()
+
   const {
     data: fetchedResult,
     isLoading,

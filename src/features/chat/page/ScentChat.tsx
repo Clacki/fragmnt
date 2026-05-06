@@ -4,6 +4,7 @@ import {
   RoundBox,
   Vstack,
 } from "@/shared/components"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useEffect, useState } from "react"
 import { useCreateChatSession } from "../hooks/useCreateChatSession"
 import { useRetryChatRecommendationMutation } from "../hooks/useRetryChatRecommendation"
@@ -23,6 +24,8 @@ import ChatInput from "./chat-input/ChatInput"
 import ChatList from "./chat-list/ChatList"
 
 const ScentChat = () => {
+  useUserGuard()
+
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(messages)
   const [sessionId, setSessionId] = useState<number | null>(null)
 

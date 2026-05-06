@@ -6,6 +6,7 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { uploadImageToS3 } from "../api/image-analysis.api"
@@ -16,6 +17,7 @@ import PhotoTipsSection from "./photo-tips-section/PhotoTipsSection"
 import PhotoUploadSection from "./photo-upload-section/PhotoUploadSection"
 
 const ScentPhoto = () => {
+  useUserGuard()
   const [step, setStep] = useState<MobilePhotoStep>("select")
   const [previewUrl, setPreviewUrl] = useState("")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)

@@ -5,12 +5,14 @@ import {
   RoundBox,
   Vstack,
 } from "@/shared/components"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useState } from "react"
 import { useCreateReviewMutation } from "../hooks/useCreateReviewMutation"
 import ReviewStarRating from "./review-star-rating/ReviewStatRating"
 
 export const Review = () => {
+  useUserGuard()
   const navigate = useNavigate()
 
   const search = useSearch({ from: "/_wide/review" }) as {
