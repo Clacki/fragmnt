@@ -45,10 +45,6 @@ const ScentKeyword = () => {
     })
   }
 
-  const handleBack = () => {
-    navigate({ to: "/find-scent" })
-  }
-
   const handleClearKeywords = () => {
     setSelectedKeywords([])
   }
@@ -105,7 +101,7 @@ const ScentKeyword = () => {
           title="나만의 향 찾기"
           description={`지금 가장 끌리는 무드를 선택해 보세요
 당신의 취향을 담은 향기를 큐레이션해 드립니다`}
-          backButton={<BackButton onClick={handleBack} />}
+          backButton={<BackButton fallbackPath="/find-scent" mode="fallback" />}
         />
 
         <KeywordSelectionSection

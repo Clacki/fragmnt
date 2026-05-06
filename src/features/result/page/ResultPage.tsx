@@ -10,7 +10,6 @@ import {
 } from "@/shared/components"
 
 import type { AnalysisResult, ResultType } from "@/shared/types"
-import { useNavigate } from "@tanstack/react-router"
 import { useMemo } from "react"
 import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
 import ResultStateLayout from "./result-state-layout/ResultStateLayout"
@@ -25,8 +24,6 @@ type ResultPageProps = {
 }
 
 const ResultPage = ({ resultId, type }: ResultPageProps) => {
-  const navigate = useNavigate()
-
   const {
     data: fetchedResult,
     isLoading,
@@ -47,10 +44,6 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
       type,
     } as AnalysisResult
   }, [fetchedResult, type])
-
-  const handleBack = () => {
-    navigate({ to: "/my-page" })
-  }
 
   if (!Number.isFinite(resultId)) {
     return (
@@ -95,7 +88,7 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
           <PageIntro
             title="당신을 위한 향기 추천 결과"
             description="당신의 취향과 정보를 분석하여, 가장 잘어울리는 향기를 찾았습니다"
-            backButton={<BackButton onClick={handleBack} />}
+            backButton={<BackButton fallbackPath="/my-page" mode="fallback" />}
           />
 
           <TopCardSection result={result} type={type} />

@@ -33,10 +33,6 @@ const ScentPhoto = () => {
 
   const hasImage = Boolean(selectedFile)
 
-  const handleBack = () => {
-    navigate({ to: "/find-scent" })
-  }
-
   const handleAnalyzeImage = async () => {
     if (!selectedFile) {
       return
@@ -83,7 +79,7 @@ const ScentPhoto = () => {
         <PageIntro
           title="사진을 분석하여 향기를 찾습니다"
           description="이미지를 업로드하거나 직접 촬영하면 AI가 최적의 향기를 매칭합니다."
-          backButton={<BackButton onClick={handleBack} />}
+          backButton={<BackButton fallbackPath="/find-scent" mode="fallback" />}
         />
 
         <PhotoUploadSection

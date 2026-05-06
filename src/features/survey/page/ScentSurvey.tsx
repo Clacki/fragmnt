@@ -24,10 +24,6 @@ const ScentSurvey = () => {
   const navigate = useNavigate()
   const [answers, setAnswers] = useState<Record<number, number>>({})
 
-  const handleBack = () => {
-    navigate({ to: "/find-scent" })
-  }
-
   const handleChangeAnswer = ({
     index,
     value,
@@ -85,7 +81,7 @@ const ScentSurvey = () => {
           title="나만의 향 찾기"
           description={`각 질문에 대해 선호하는 방향을 선택해 주세요
 드래그하거나 점을 탭하여 선택할 수 있습니다`}
-          backButton={<BackButton onClick={handleBack} />}
+          backButton={<BackButton fallbackPath="/find-scent" mode="fallback" />}
         />
 
         {questions.map((item, index) => (

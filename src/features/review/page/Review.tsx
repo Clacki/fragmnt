@@ -46,16 +46,26 @@ export const Review = () => {
     )
   }
 
-  const handleBack = () => {
-    navigate({ to: "/find-scent" })
-  }
-
   return (
     <Vstack className="gap-lg px-10 py-16">
       <PageIntro
         title="소중한 의견을 들려주세요"
         description="여러분의 소중한 피드백은 추천 서비스의 정확도를 높이는 데 큰 도움이 됩니다."
-        backButton={<BackButton onClick={handleBack} />}
+        backButton={
+          <BackButton
+            onClick={() =>
+              navigate({
+                to: "/find-scent/result/$resultId",
+                params: {
+                  resultId: String(resultId),
+                },
+                search: {
+                  type: search.type ?? "image",
+                },
+              })
+            }
+          />
+        }
       />
 
       <RoundBox className="mt-10 border border-border bg-white" padding="xl">

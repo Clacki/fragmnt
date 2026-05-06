@@ -8,7 +8,7 @@ import {
   Vstack,
 } from "@/shared/components"
 
-import { useNavigate, useSearch } from "@tanstack/react-router"
+import { useSearch } from "@tanstack/react-router"
 import { useDetailQuery } from "./hooks/useDetailQuery"
 
 import BottomCard from "./page/sections/bottom-section/BottomCard"
@@ -20,7 +20,6 @@ export const ScentDetail = () => {
   const { id } = useSearch({ from: "/_wide/scent-detail" })
   const scentId = Number(id)
 
-  const navigate = useNavigate()
   const { data, isLoading, error } = useDetailQuery(scentId)
 
   const scent = data?.data
@@ -36,8 +35,7 @@ export const ScentDetail = () => {
         className="min-h-screen max-w-container-xl bg-surface-default"
       >
         <Vstack className="mx-2xl">
-          <BackButton onClick={() => navigate({ to: "/scent-list" })} />
-
+          <BackButton fallbackPath="/scent-list" />
           {isLoading ? (
             <LoadingState />
           ) : isInvalid ? (
