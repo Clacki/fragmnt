@@ -28,8 +28,9 @@ const UserCard = (props: UserCardProps) => {
         {icon ?? <Mail size={18} strokeWidth={2} />}
       </div>
 
-      <div className="flex flex-col justify-center">
+      <div className="min-w-0 flex flex-1 flex-col justify-center">
         <span className="text-sm leading-none text-text-sub">{label}</span>
+
         <span className="truncate pt-xs text-md leading-none text-text-primary">
           {value}
         </span>

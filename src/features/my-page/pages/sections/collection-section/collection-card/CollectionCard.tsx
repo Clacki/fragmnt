@@ -30,9 +30,9 @@ const CollectionCard = ({
       onClick={onClick}
       role="button"
       tabIndex={0}
-      className="flex h-[440px] w-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-200 hover:shadow-md"
+      className="flex w-full flex-col overflow-hidden rounded-lg border border-border bg-card transition-shadow duration-200 hover:shadow-md"
     >
-      <div className="flex items-center justify-center h-[315px] w-full overflow-hidden">
+      <div className="flex items-center justify-center aspect-square w-full overflow-hidden">
         {imageSrc && !isError ? (
           <img
             src={imageSrc}
@@ -48,7 +48,7 @@ const CollectionCard = ({
         <div className="flex justify-between">
           <div>
             <p className="text-sm font-light text-text-sub">{category}</p>
-            <h3 className="text-[20px] font-bold">{title}</h3>
+            <h3 className="text-lg font-bold">{title}</h3>
           </div>
           <button
             type="button"

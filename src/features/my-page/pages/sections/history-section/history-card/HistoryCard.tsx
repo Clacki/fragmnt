@@ -23,17 +23,17 @@ const HistoryCard = ({
       type="button"
       onClick={onClick}
       className={cn(
-        "flex w-full h-[120px] items-center gap-4 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all",
+        "flex w-full min-h-[96px] items-center gap-3 rounded-md border border-primary bg-white px-md py-md text-left shadow-md transition-all sm:min-h-[120px] sm:gap-4",
         "hover:bg-gray-5 hover:shadow-lg",
         className
       )}
     >
-      <div className="flex  aspect-square shrink-0 items-left justify-left overflow-hidden rounded-lg bg-disabled">
+      <div className="flex size-18 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-disabled sm:size-25">
         {imageSrc && !isError ? (
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="block size-25 object-cover"
+            className="h-full w-full object-cover"
             onError={() => setIsError(true)}
           />
         ) : (
@@ -42,13 +42,13 @@ const HistoryCard = ({
       </div>
 
       <div className="flex-1 min-w-0 gap-md">
-        <div className="flex min-w-0 items-center gap-sm">
-          <h3 className="min-w-0 truncate text-lg font-bold leading-none text-text-primary">
+        <div className="flex min-w-0 flex-col items-start gap-xs sm:flex-row sm:items-center sm:gap-sm">
+          <h3 className="min-w-0 truncate text-md font-bold leading-none text-text-primary sm:text-lg">
             {title}
           </h3>
 
           {badgeText && (
-            <span className="inline-flex h-6 shrink-0 items-center rounded-full bg-badge px-2 text-sm font-semibold text-text-description">
+            <span className="inline-flex h-6 shrink-0 items-center rounded-full bg-badge px-2 text-sm font-semibold text-text-description whitespace-nowrap">
               {badgeText}
             </span>
           )}

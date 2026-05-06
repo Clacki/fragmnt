@@ -80,7 +80,7 @@ export const CollectionSection = () => {
         </h2>
 
         {hasItems ? (
-          <div className="mt-md grid grid-cols-2 gap-lg">
+          <div className="mt-md grid grid-cols-1 gap-lg sm:grid-cols-2">
             {favoriteScents.map((item) => (
               <CollectionCard
                 key={item.id}
