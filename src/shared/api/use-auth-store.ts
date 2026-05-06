@@ -1,3 +1,4 @@
+import { logoutApi } from "@/features/my-page/api/user.api"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 import type { Profile } from "../types"
@@ -6,25 +7,51 @@ type AuthStoreState = {
   accessToken: string | null
   setAccessToken: (accessToken: string | null) => void
 
+  refreshToken: string | null
+  setRefreshToken: (refreshToken: string | null) => void
+
   profile: Profile | null
   setProfile: (profile: Profile | null) => void
 
-  logout: () => void
+  logout: () => Promise<void>
+
+  clearAuth: () => void
 }
 
 const useAuthStore = create<AuthStoreState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       accessToken: null,
       setAccessToken: (accessToken) => set({ accessToken }),
+
+      refreshToken: null,
+      setRefreshToken: (refreshToken) => set({ refreshToken }),
 
       profile: null,
       setProfile: (profile) => set({ profile }),
 
-      logout: () => {
-        // TODO: 로그아웃 요청도 보내야 합니다
-        // TODO: 추후 profile을 저장하면 그것도 지워야 합니다
-        set({ accessToken: null })
+      logout: async () => {
+        const refreshToken = get().refreshToken
+
+        try {
+          if (refreshToken) {
+            await logoutApi(refreshToken)
+          }
+        } finally {
+          set({
+            accessToken: null,
+            refreshToken: null,
+            profile: null,
+          })
+        }
+      },
+
+      clearAuth: () => {
+        set({
+          accessToken: null,
+          refreshToken: null,
+          profile: null,
+        })
       },
     }),
     {
@@ -32,6 +59,7 @@ const useAuthStore = create<AuthStoreState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         accessToken: state.accessToken,
+        refreshToken: state.refreshToken,
       }),
     }
   )

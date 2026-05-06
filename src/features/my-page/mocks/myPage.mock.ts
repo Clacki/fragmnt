@@ -1,6 +1,7 @@
 import type { UserProfile } from "../types"
 
 export const mockUserProfile: UserProfile = {
+  id: 1,
   name: "정수지",
   email: "staff5@example.com",
   phone_number: "010-5555-5555",

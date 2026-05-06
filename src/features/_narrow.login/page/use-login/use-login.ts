@@ -20,6 +20,7 @@ type LoginSchema = z.input<typeof loginSchema>
 
 type LoginResponse = {
   access: string
+  refresh: string
 }
 
 const login = async (body: LoginSchema) => {
@@ -27,20 +28,24 @@ const login = async (body: LoginSchema) => {
     "/accounts/login",
     body
   )
-  const { access } = loginResponse.data
+
+  const { access, refresh } = loginResponse.data
 
   const profileResponse = await plainInstance.get("/accounts/me/profile", {
     headers: { Authorization: `Bearer ${access}` },
     withCredentials: true,
   })
+
   const profile = profileResponse.data as Profile
 
-  return { access, profile }
+  return { access, refresh, profile }
 }
 
 const useLogin = () => {
   const setAccessToken = useAuthStore((state) => state.setAccessToken)
+  const setRefreshToken = useAuthStore((state) => state.setRefreshToken)
   const setProfile = useAuthStore((state) => state.setProfile)
+  const clearAuth = useAuthStore((state) => state.clearAuth)
 
   const navigate = useNavigate()
   const router = useRouter()
@@ -56,9 +61,14 @@ const useLogin = () => {
 
   const { mutate } = useMutation({
     mutationFn: (body: LoginSchema) => login(body),
-    onSuccess({ access, profile }) {
+    onSuccess: async ({ access, refresh, profile }) => {
+      clearAuth()
+
       setAccessToken(access)
+      setRefreshToken(refresh)
       setProfile(profile)
+
+      await router.invalidate()
 
       handleRedirect()
     },

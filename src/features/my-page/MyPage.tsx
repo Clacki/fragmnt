@@ -61,9 +61,8 @@ export const MyPage = () => {
 
         {!isLoading && !error && user ? (
           <>
-            <UserSection user={user} />
+            <UserSection key={user.id} user={user} />
             <TabSection />
-
             <Button
               style="ghost"
               size="sm"

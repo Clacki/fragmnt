@@ -1,3 +1,6 @@
+import { cn } from "@/lib/utils"
+import { Button, EmptyImage } from "@/shared/components"
+import { formatDate } from "@/shared/utils/date"
 import {
   CalendarDays,
   Check,
@@ -8,10 +11,6 @@ import {
   UserRound,
 } from "lucide-react"
 import { useRef, useState } from "react"
-
-import { cn } from "@/lib/utils"
-import { Button, EmptyImage } from "@/shared/components"
-import { formatDate } from "@/shared/utils/date"
 import { useCreateAiProfileImage } from "../../hooks/useCreateProfileMutation"
 import { useUpdateUserProfile } from "../../hooks/useUpdateUserProfileMutation"
 import { useUploadProfileImage } from "../../hooks/useUploadImageMutation"
@@ -30,6 +29,8 @@ type UserProfileForm = {
 
 export const UserSection = ({ user, className }: UserSectionProps) => {
   const [isEditing, setIsEditing] = useState(false)
+  const [previewImage, setPreviewImage] = useState<string | null>(null)
+
   const [form, setForm] = useState<UserProfileForm>({
     name: user.name,
     birthday: user.birthday,
@@ -63,8 +64,6 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
 
   const { mutate: uploadProfileImage, isPending: isImageUploading } =
     useUploadProfileImage()
-
-  const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const { mutate: createAiProfileImage, isPending: isAiImageCreating } =
     useCreateAiProfileImage()

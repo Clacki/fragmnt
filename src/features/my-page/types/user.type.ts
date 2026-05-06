@@ -1,6 +1,7 @@
 export type AnalysisType = "image" | "chatbot" | "keyword" | "survey"
 
 export type UserProfile = {
+  id: number
   name: string
   email: string
   phone_number: string
