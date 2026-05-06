@@ -12,7 +12,7 @@ const TitleSection = ({
   subtitle,
 }: TitleSectionProps) => {
   return (
-    <Vstack className="items-center">
+    <Vstack className="items-center text-center">
       <h2 className="text-text-sub">{smallTitle}</h2>
       <h3 className="text-xl font-bold">{bigTitle}</h3>
       {subtitle}

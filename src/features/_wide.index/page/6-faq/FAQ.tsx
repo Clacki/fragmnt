@@ -9,7 +9,7 @@ import SectionVstack from "../section-container/SectionContainer"
 const FAQ = () => {
   return (
     <SectionVstack className="items-center" id="main-faq">
-      <Vstack className="items-center">
+      <Vstack className="items-center text-center">
         <h2 className="text-lg font-bold">자주 묻는 질문</h2>
         <p className="text-text-sub">
           Fragmnt 서비스에 대해 궁금한 점을 확인해보세요.
