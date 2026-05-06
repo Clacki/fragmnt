@@ -27,7 +27,7 @@ const ContainerForScrollbarGutter = ({
 const WideLayout = () => {
   return (
     <FullScreen>
-      <Vstack gap="none" className="h-screen overflow-hidden">
+      <Vstack gap="none" className="h-dvh max-h-dvh overflow-hidden">
         <ContainerForScrollbarGutter>
           <Header />
         </ContainerForScrollbarGutter>
