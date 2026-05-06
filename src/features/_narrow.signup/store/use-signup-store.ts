@@ -5,8 +5,8 @@ type SignupStoreState = {
   modalKey: "success" | "error" | null
   setModalKey: (modelKey: "success" | "error" | null) => void
 
-  signupError: AxiosError | null
-  setSignupError: (signupError: AxiosError | null) => void
+  signupError: AxiosError<{ code: string }> | null
+  setSignupError: (signupError: AxiosError<{ code: string }> | null) => void
 }
 
 const useSignupStore = create<SignupStoreState>()((set) => ({

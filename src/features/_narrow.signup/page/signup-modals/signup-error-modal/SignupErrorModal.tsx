@@ -1,6 +1,7 @@
 import useSignupStore from "@/features/_narrow.signup/store/use-signup-store"
 import { Modal } from "@/shared/components"
 import ModalContent from "@/shared/components/modal-content/ModalContent"
+import { parseErrorMessage } from "@/shared/utils/parse-error-message"
 
 const SignupErrorModal = () => {
   const modalKey = useSignupStore((state) => state.modalKey)
@@ -11,7 +12,7 @@ const SignupErrorModal = () => {
 
   if (!signupError?.response?.data) return null
 
-  const errorMessage = Object.entries(signupError.response.data)[0][1]
+  const errorMessage = parseErrorMessage(signupError)
 
   return (
     <Modal isOpen={modalKey === "error"} onClose={() => setModalKey(null)}>
