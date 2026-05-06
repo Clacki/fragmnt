@@ -55,7 +55,7 @@ const HistoryCard = ({
         </div>
 
         {!!tags.length && (
-          <div className="mt-lg flex overflow-hidden gap-xs">
+          <div className="mt-lg hidden gap-xs sm:flex">
             {tags.map((tag) => (
               <Tag key={tag} label={tag} size="sm" variant="outlined" />
             ))}
