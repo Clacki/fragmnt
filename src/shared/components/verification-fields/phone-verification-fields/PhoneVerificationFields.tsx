@@ -13,6 +13,7 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormReturn as unknown as UseFormReturn<PhoneFields> // NOTE: 타입을 강제해서 이 이하에서는 type assertion이 필요 없게 합니다
 
   const {
@@ -26,7 +27,7 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
 
   const secondInputStatus = errors.phone_token
     ? "error"
-    : phoneSecondData
+    : phoneSecondData && watch().phone_token && watch().sms_uuid_token
       ? "success"
       : "none"
 
@@ -74,7 +75,9 @@ const PhoneVerificationFields = <TFieldValues extends PhoneFields>({
         <Labeled.Message>
           {errors.phone_token?.message as string}
         </Labeled.Message>
-        <Labeled.Message>{phoneSecondData?.data.detail}</Labeled.Message>
+        {secondInputStatus === "success" && (
+          <Labeled.Message>{phoneSecondData?.data.detail}</Labeled.Message>
+        )}
       </Labeled>
     </>
   )

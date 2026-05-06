@@ -1,10 +1,12 @@
 import { plainInstance } from "@/shared/api/axios-instance"
 import useAuthStore from "@/shared/api/use-auth-store"
 import type { Profile } from "@/shared/types"
+import { parseErrorMessage } from "@/shared/utils/parse-error-message"
 // import type { Profile } from "@/shared/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
 import { useCanGoBack, useNavigate, useRouter } from "@tanstack/react-router"
+import type { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import z from "zod"
 
@@ -71,10 +73,18 @@ const useLogin = () => {
       await router.invalidate()
 
       handleRedirect()
+      clearErrors()
+    },
+    onError: (error: AxiosError<{ code: string }>) => {
+      const message = parseErrorMessage(error)
+      setError("email", { type: "custom", message })
+      setError("password", { type: "custom", message })
     },
   })
 
   const {
+    setError,
+    clearErrors,
     register,
     handleSubmit,
     formState: { errors },

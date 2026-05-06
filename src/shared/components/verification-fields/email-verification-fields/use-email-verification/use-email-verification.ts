@@ -1,4 +1,5 @@
 import { plainInstance } from "@/shared/api/axios-instance"
+import { parseErrorMessage } from "@/shared/utils/parse-error-message"
 import { useMutation } from "@tanstack/react-query"
 import type { AxiosError } from "axios"
 import type { UseFormReturn } from "react-hook-form"
@@ -26,12 +27,14 @@ const useEmailVerification = <TFieldValues extends EmailFields>(
     },
     onSuccess: () => {
       clearErrors("email")
-      setValue("email_token", undefined)
+      setValue("email_token", "")
     },
-    onError: (error: AxiosError<{ error_detail: string }>) => {
+    onError: (error: AxiosError<{ code: string }>) => {
+      // NOTE: 이메일 필드에 한글을 입력하면 zod가 이를 잡아내지 못합니다
+      const message = parseErrorMessage(error)
       setError("email", {
         type: "custom",
-        message: error.response?.data.error_detail,
+        message,
       })
     },
   })

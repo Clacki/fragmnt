@@ -1,3 +1,4 @@
+// NOTE: INVALID는 온갖 상황에서 사용되어 매핑에서 제외했습니다
 export const ERROR_CODE_TO_MESSAGE = {
   USER_ALREADY_EXISTS: "이미 가입된 이메일 혹은 전화번호입니다",
   INVALID_EMAIL_FORMAT: "이메일 형식이 올바르지 않습니다",

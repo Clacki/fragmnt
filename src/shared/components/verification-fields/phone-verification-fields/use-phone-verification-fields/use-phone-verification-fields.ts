@@ -25,6 +25,7 @@ const usePhoneVerification = <TFieldValues extends PhoneFields>(
     },
     onSuccess: () => {
       clearErrors("phone_number")
+      setValue("phone_token", "")
     },
     onError(error: AxiosError<{ error_detail: string }>) {
       setError("phone_number", {

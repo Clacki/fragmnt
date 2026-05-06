@@ -1,6 +1,7 @@
 import { plainInstance } from "@/shared/api/axios-instance"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation } from "@tanstack/react-query"
+import type { AxiosError } from "axios"
 import { useForm } from "react-hook-form"
 import z from "zod"
 
@@ -36,11 +37,20 @@ const findPasswordSchema = z
 type FindPasswordSchema = z.input<typeof findPasswordSchema>
 
 const useFindPassword = () => {
-  const { data, mutate } = useMutation({
-    mutationFn: (body: FindPasswordSchema) =>
+  const {
+    data,
+    mutate,
+    error: mutationError,
+    reset,
+  } = useMutation<unknown, AxiosError<{ code: string }>, FindPasswordSchema>({
+    mutationFn: (body) =>
       // NOTE: api가 아직 나오지 않음
       // NOTE: 현재는 404가 뜹니다
       plainInstance.post("/accounts/change-password", body),
+    onError: () => {
+      setValue("email_token", "")
+      setValue("email_uuid_token", undefined)
+    },
   })
 
   const useFormReturn = useForm({ resolver: zodResolver(findPasswordSchema) })
@@ -48,6 +58,7 @@ const useFindPassword = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useFormReturn
 
   const onSubmit = (data: FindPasswordSchema) => {
@@ -62,6 +73,8 @@ const useFindPassword = () => {
     submitForm,
     errors,
     useFormReturn,
+    mutationError,
+    reset,
   }
 }
 
