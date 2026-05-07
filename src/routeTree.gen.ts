@@ -16,7 +16,6 @@ import { Route as ShareShareIdRouteImport } from './routes/share.$shareId'
 import { Route as WideScentListRouteImport } from './routes/_wide.scent-list'
 import { Route as WideScentDetailRouteImport } from './routes/_wide.scent-detail'
 import { Route as WideReviewRouteImport } from './routes/_wide.review'
-import { Route as WideNotRealRouteImport } from './routes/_wide.not-real'
 import { Route as WideMyPageRouteImport } from './routes/_wide.my-page'
 import { Route as WideFindScentRouteImport } from './routes/_wide.find-scent'
 import { Route as NarrowSignupRouteImport } from './routes/_narrow.signup'
@@ -61,11 +60,6 @@ const WideScentDetailRoute = WideScentDetailRouteImport.update({
 const WideReviewRoute = WideReviewRouteImport.update({
   id: '/review',
   path: '/review',
-  getParentRoute: () => WideRoute,
-} as any)
-const WideNotRealRoute = WideNotRealRouteImport.update({
-  id: '/not-real',
-  path: '/not-real',
   getParentRoute: () => WideRoute,
 } as any)
 const WideMyPageRoute = WideMyPageRouteImport.update({
@@ -138,7 +132,6 @@ export interface FileRoutesByFullPath {
   '/signup': typeof NarrowSignupRoute
   '/find-scent': typeof WideFindScentRouteWithChildren
   '/my-page': typeof WideMyPageRoute
-  '/not-real': typeof WideNotRealRoute
   '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
@@ -157,7 +150,6 @@ export interface FileRoutesByTo {
   '/login': typeof NarrowLoginRoute
   '/signup': typeof NarrowSignupRoute
   '/my-page': typeof WideMyPageRoute
-  '/not-real': typeof WideNotRealRoute
   '/review': typeof WideReviewRoute
   '/scent-detail': typeof WideScentDetailRoute
   '/scent-list': typeof WideScentListRoute
@@ -179,7 +171,6 @@ export interface FileRoutesById {
   '/_narrow/signup': typeof NarrowSignupRoute
   '/_wide/find-scent': typeof WideFindScentRouteWithChildren
   '/_wide/my-page': typeof WideMyPageRoute
-  '/_wide/not-real': typeof WideNotRealRoute
   '/_wide/review': typeof WideReviewRoute
   '/_wide/scent-detail': typeof WideScentDetailRoute
   '/_wide/scent-list': typeof WideScentListRoute
@@ -202,7 +193,6 @@ export interface FileRouteTypes {
     | '/signup'
     | '/find-scent'
     | '/my-page'
-    | '/not-real'
     | '/review'
     | '/scent-detail'
     | '/scent-list'
@@ -221,7 +211,6 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/my-page'
-    | '/not-real'
     | '/review'
     | '/scent-detail'
     | '/scent-list'
@@ -242,7 +231,6 @@ export interface FileRouteTypes {
     | '/_narrow/signup'
     | '/_wide/find-scent'
     | '/_wide/my-page'
-    | '/_wide/not-real'
     | '/_wide/review'
     | '/_wide/scent-detail'
     | '/_wide/scent-list'
@@ -311,13 +299,6 @@ declare module '@tanstack/react-router' {
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof WideReviewRouteImport
-      parentRoute: typeof WideRoute
-    }
-    '/_wide/not-real': {
-      id: '/_wide/not-real'
-      path: '/not-real'
-      fullPath: '/not-real'
-      preLoaderRoute: typeof WideNotRealRouteImport
       parentRoute: typeof WideRoute
     }
     '/_wide/my-page': {
@@ -449,7 +430,6 @@ const WideFindScentRouteWithChildren = WideFindScentRoute._addFileChildren(
 interface WideRouteChildren {
   WideFindScentRoute: typeof WideFindScentRouteWithChildren
   WideMyPageRoute: typeof WideMyPageRoute
-  WideNotRealRoute: typeof WideNotRealRoute
   WideReviewRoute: typeof WideReviewRoute
   WideScentDetailRoute: typeof WideScentDetailRoute
   WideScentListRoute: typeof WideScentListRoute
@@ -459,7 +439,6 @@ interface WideRouteChildren {
 const WideRouteChildren: WideRouteChildren = {
   WideFindScentRoute: WideFindScentRouteWithChildren,
   WideMyPageRoute: WideMyPageRoute,
-  WideNotRealRoute: WideNotRealRoute,
   WideReviewRoute: WideReviewRoute,
   WideScentDetailRoute: WideScentDetailRoute,
   WideScentListRoute: WideScentListRoute,

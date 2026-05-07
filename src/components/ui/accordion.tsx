@@ -1,12 +1,4 @@
 import { Accordion as AccordionPrimitive } from "radix-ui"
-// NOTE: (채현님) 보통 accordian은 컴포넌트 구조 깨짐을 방지하기 위해서
-// `import * as AccordionPrimitive from "@radix-ui/react-accordion"`
-// 이런식으로 불러오는 게 맞다고 합니다!
-// (관련 문서)
-// TODO:
-// 그렇군요!
-// 그렇다면 shadcn에서 명령어로 설치를 한 다음에 import 문들을 수정하는 게 좋을까요?
-// 아니면 accordion 에만 해당되는 내용일까요?
 import * as React from "react"
 
 import { cn } from "@/lib/utils"

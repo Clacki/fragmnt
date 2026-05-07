@@ -68,11 +68,7 @@ const useSignup = () => {
   } = useFormReturns
 
   const onSubmit = (data: SignupSchema) => {
-    // mutate(data) // TODO: 회원가입 API에서 gender가 빠지면 이걸 사용합니다
-
-    // TODO: 회원가입 api 에서 gender가 빠지면 아래를 삭제합니다
-    const body = { ...data, gender: "M" }
-    mutate(body)
+    mutate(data)
   }
 
   const submitForm = handleSubmit(onSubmit)

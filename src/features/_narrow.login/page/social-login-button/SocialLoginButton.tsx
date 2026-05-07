@@ -17,25 +17,22 @@ const providerToButtonInfo: Record<Provider, ButtonInfo> = {
     src: GoogleSrc,
     label: "Sign in with Google",
     onClick: () => {
-      window.location.href =
-        "https://fragmnt.pics/api/v1/accounts/social-login/google" // TODO: 카카오로 로그인 병합 후에 BASE_URL 변수 사용
+      window.location.href = `${BASE_URL}/accounts/social-login/google`
     },
   },
   kakao: {
     src: KakaoSrc,
     label: "카카오로 로그인",
     onClick: () => {
-      // plainInstance.get("/accounts/social-login/kakao")
       window.location.href = `${BASE_URL}/accounts/social-login/kakao`
-    }, // TODO: need to fill in
+    },
   },
   naver: {
     src: NaverSrc,
     label: "네이버로 로그인",
     onClick: () => {
-      window.location.href =
-        "https://fragmnt.pics/api/v1/accounts/social-login/naver" // TODO: 카카오로 로그인 병합 후에 BASE_URL 변수 사용
-    }, // TODO: need to fill in
+      window.location.href = `${BASE_URL}/accounts/social-login/naver`
+    },
   },
 }
 
