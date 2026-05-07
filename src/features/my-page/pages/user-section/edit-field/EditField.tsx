@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { HTMLInputTypeAttribute, ReactNode } from "react"
 
 import { cn } from "@/lib/utils"
 import { Input } from "@/shared/components"
@@ -8,6 +8,8 @@ type EditFieldProps = {
   value: string
   onChange: (value: string) => void
   icon: ReactNode
+  type?: HTMLInputTypeAttribute
+  max?: string
 }
 
 export default function EditField({
@@ -15,11 +17,13 @@ export default function EditField({
   value,
   onChange,
   icon,
+  type = "text",
+  max,
 }: EditFieldProps) {
   return (
     <div
       className={cn(
-        "flex w-full items-center gap-3 rounded-lg border border-border-primary bg-card p-lg",
+        "flex w-full min-w-0 items-center gap-3 rounded-lg border border-border-primary bg-card p-lg",
         "shadow-md"
       )}
     >
@@ -27,10 +31,14 @@ export default function EditField({
         {icon}
       </div>
 
-      <div className="flex flex-col justify-center">
+      <div className="flex min-w-0 flex-1 flex-col justify-center">
         <span className="text-sm leading-none text-text-sub">{label}</span>
+
         <Input
+          type={type}
           value={value}
+          max={max}
+          className="w-full min-w-0"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             onChange(e.target.value)
           }

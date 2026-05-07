@@ -209,6 +209,8 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
               value={form.birthday}
               onChange={handleChange("birthday")}
               icon={<CalendarDays size={18} strokeWidth={2} />}
+              type="date"
+              max={new Date().toISOString().split("T")[0]}
             />
           </>
         ) : (
