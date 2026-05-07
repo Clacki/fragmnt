@@ -61,8 +61,8 @@ const NoteCard = ({ notes, tags, seasons }: NoteCardProps) => {
         ))}
       </div>
 
-      <div className="flex w-full justify-between gap-2xl px-2xl pt-2xl">
-        <div className="flex flex-1 flex-col gap-md">
+      <div className="flex w-full flex-col items-center gap-xl px-lg pt-2xl md:flex-row md:items-start md:justify-between md:gap-2xl md:px-2xl">
+        <div className="flex w-full flex-1 flex-col items-center gap-md md:items-start">
           <div className="flex items-center gap-2 text-lg font-bold">
             <TagIcon size={16} />
             <span>Tags</span>

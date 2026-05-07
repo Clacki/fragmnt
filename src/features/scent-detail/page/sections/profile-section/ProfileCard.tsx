@@ -71,7 +71,7 @@ const ProfileCard = ({ intensity, profile }: ProfileCardProps) => {
           />
         </div>
 
-        <div className="flex h-full items-center justify-center p-sm">
+        <div className="hidden h-full items-center justify-center p-sm sm:flex">
           <div className="flex size-button-lg items-center justify-center rounded-full bg-badge font-bold text-text-primary">
             {intensity}
           </div>
@@ -79,7 +79,7 @@ const ProfileCard = ({ intensity, profile }: ProfileCardProps) => {
       </div>
 
       <div className="w-full rounded-lg border border-border bg-white p-lg">
-        <div className="grid grid-cols-2 gap-lg">
+        <div className="grid grid-cols-1 gap-lg sm:grid-cols-2">
           {metrics.map((metric) => (
             <StateBar
               key={metric.label}

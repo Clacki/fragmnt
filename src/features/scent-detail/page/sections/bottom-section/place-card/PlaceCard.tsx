@@ -43,14 +43,19 @@ export default function PlaceCard({
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
       {typeof matchRate === "number" && (
-        <div className="absolute right-md top-md">
+        <div className="absolute right-sm top-sm md:right-md md:top-md">
           <Tag label={`${matchRate}% MATCH`} size="sm" variant="subtle" />
         </div>
       )}
 
-      <div className="absolute bottom-lg left-lg right-lg">
-        <h3 className="text-lg font-bold text-white">{title}</h3>
-        <p className="text-sm text-white/85 line-clamp-2">{description}</p>
+      <div className="absolute bottom-md left-md right-md md:bottom-lg md:left-lg md:right-lg">
+        <h3 className="truncate text-md font-bold text-white md:text-lg">
+          {title}
+        </h3>
+
+        <p className="line-clamp-1 text-sm text-white/85 md:line-clamp-2">
+          {description}
+        </p>
       </div>
     </div>
   )

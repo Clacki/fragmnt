@@ -23,7 +23,7 @@ const BottomCard = ({
         <div className="text-lg font-bold">Recommended Places</div>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-4">
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         {recommendedPlaces.map((place) => (
           <PlaceCard
             key={place.name}
@@ -41,7 +41,7 @@ const BottomCard = ({
         <div className="text-lg font-bold">Similar Scents</div>
       </div>
 
-      <div className="grid w-full grid-cols-2 gap-4">
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
         {similarScents.map((scent) => (
           <ArchiveCard
             key={scent.id}
