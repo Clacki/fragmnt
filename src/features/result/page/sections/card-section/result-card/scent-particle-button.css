@@ -1,0 +1,120 @@
+.scent-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(86, 101, 74, 0.72);
+  box-shadow:
+    0 0 6px rgba(86, 101, 74, 0.32),
+    0 0 12px rgba(86, 101, 74, 0.18);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  animation: scent-particle-burst 620ms ease-out forwards;
+}
+
+.scent-particle-1 {
+  --particle-x: -26px;
+  --particle-y: -22px;
+  animation-delay: 0ms;
+}
+
+.scent-particle-2 {
+  --particle-x: -12px;
+  --particle-y: -34px;
+  animation-delay: 35ms;
+}
+
+.scent-particle-3 {
+  --particle-x: 8px;
+  --particle-y: -32px;
+  animation-delay: 15ms;
+}
+
+.scent-particle-4 {
+  --particle-x: 25px;
+  --particle-y: -18px;
+  animation-delay: 45ms;
+}
+
+.scent-particle-5 {
+  --particle-x: -22px;
+  --particle-y: 2px;
+  animation-delay: 20ms;
+}
+
+.scent-particle-6 {
+  --particle-x: 22px;
+  --particle-y: 4px;
+  animation-delay: 25ms;
+}
+
+.scent-particle-7 {
+  --particle-x: -6px;
+  --particle-y: -18px;
+  animation-delay: 50ms;
+}
+
+.scent-particle-8 {
+  --particle-x: 4px;
+  --particle-y: -8px;
+  animation-delay: 65ms;
+}
+
+.scent-button-pulse {
+  animation: scent-button-pulse 360ms ease-out;
+}
+
+.scent-icon-pop {
+  display: inline-flex;
+  animation: scent-icon-pop 420ms ease-out;
+}
+
+@keyframes scent-particle-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--particle-x)),
+        calc(-50% + var(--particle-y))
+      )
+      scale(1);
+  }
+}
+
+@keyframes scent-button-pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(0.96);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scent-icon-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.16);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

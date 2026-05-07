@@ -42,7 +42,13 @@ instance.interceptors.response.use(
     const setAccessToken = state.setAccessToken
     const clearAuthLogout = state.clearAuth
 
-    if (!error.config) return Promise.reject(error)
+    if (!error.config) {
+      return Promise.reject(error)
+    }
+
+    if (error.response?.status !== 401) {
+      return Promise.reject(error)
+    }
 
     try {
       // NOTE: 재발급 성공
@@ -51,6 +57,7 @@ instance.interceptors.response.use(
         undefined,
         { withCredentials: true }
       )
+
       const { access } = refreshResponse.data
       setAccessToken(access)
 

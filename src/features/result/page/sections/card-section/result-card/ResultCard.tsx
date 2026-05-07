@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button, Container, EmptyImage, Tag, Vstack } from "@/shared/components"
 import { Heart, RotateCcw, Share2 } from "lucide-react"
+import ScentParticleButton from "./ScentParticleButton"
 
 type ResultTopCardProps = {
   imageSrc: string
@@ -92,33 +93,33 @@ const ResultTopCard = ({
               </figcaption>
             </figure>
 
-            <div className="mt-xl flex gap-sm md:gap-md">
-              <Button type="button" className="w-full" onClick={onDetailClick}>
+            <div className="mt-xl flex items-stretch gap-sm md:gap-md">
+              <Button
+                type="button"
+                className="h-11 w-full"
+                onClick={onDetailClick}
+              >
                 자세히 보기
               </Button>
 
-              <Button
-                className="hover:bg-primary hover:text-surface-default"
-                type="button"
-                style="outlined"
-                disabled={isSavePending}
-                aria-label={
+              <ScentParticleButton
+                className="h-11 w-16 p-0"
+                isPending={isSavePending}
+                ariaLabel={
                   isSaved ? "내 컬렉션에서 제거하기" : "내 컬렉션에 추가하기"
                 }
                 onClick={onAddCollectionClick}
               >
                 <Heart size={20} fill={isSaved ? "currentColor" : "none"} />
-              </Button>
+              </ScentParticleButton>
 
-              <Button
-                className="hover:bg-primary hover:text-surface-default"
-                type="button"
-                style="outlined"
+              <ScentParticleButton
+                className="h-11 w-16 p-0"
+                isPending={isSharePending}
                 onClick={onShareClick}
-                disabled={isSharePending}
               >
                 <Share2 size={18} />
-              </Button>
+              </ScentParticleButton>
             </div>
 
             <div className="bg-green-input md:bg-surface-default mt-sm md:mt-xl flex h-10 items-center justify-center cursor-pointer rounded-xl hover:bg-green-input">

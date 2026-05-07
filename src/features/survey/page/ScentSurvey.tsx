@@ -69,9 +69,9 @@ const ScentSurvey = () => {
     })
   }
 
-  if (isSubmitting || isPending || isError || !questions) {
+  if (isPending || isError || !questions) {
     return (
-      <Container className="py-60">
+      <Container className="flex min-h-[70dvh] items-center justify-center px-10">
         <LoadingState />
       </Container>
     )
@@ -79,6 +79,11 @@ const ScentSurvey = () => {
 
   return (
     <Container className="relative px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
+      {isSubmitting && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <LoadingState />
+        </div>
+      )}
       <Vstack className="w-full gap-lg">
         <PageIntro
           title="나만의 향 찾기"

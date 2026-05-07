@@ -4,7 +4,7 @@ import {
   FullScreen,
   Vstack,
 } from "@/shared/components"
-import { Outlet } from "@tanstack/react-router"
+import { Outlet, useLocation } from "@tanstack/react-router"
 import type { ReactNode } from "react"
 import Footer from "./footer/Footer"
 import Header from "./header/Header"
@@ -13,6 +13,7 @@ import NavigationBar from "./navigation-bar/NavigationBar"
 type ContainerForScrollbarGutterProps = {
   children: ReactNode
 }
+
 const ContainerForScrollbarGutter = ({
   children,
 }: ContainerForScrollbarGutterProps) => {
@@ -24,7 +25,20 @@ const ContainerForScrollbarGutter = ({
   )
 }
 
+const HIDDEN_FOOTER_PATHS = [
+  "/find-scent/survey",
+  "/find-scent/photo",
+  "/find-scent/chat",
+  "/find-scent/keyword",
+]
+
 const WideLayout = () => {
+  const location = useLocation()
+
+  const shouldHideFooter = HIDDEN_FOOTER_PATHS.some((path) =>
+    location.pathname.startsWith(path)
+  )
+
   return (
     <FullScreen>
       <Vstack gap="none" className="h-dvh max-h-dvh overflow-hidden">
@@ -39,7 +53,7 @@ const WideLayout = () => {
               className="min-h-full justify-between bg-surface-default"
             >
               <Outlet />
-              <Footer />
+              {!shouldHideFooter && <Footer />}
             </Vstack>
           </Container>
         </FlexOneContainer>
