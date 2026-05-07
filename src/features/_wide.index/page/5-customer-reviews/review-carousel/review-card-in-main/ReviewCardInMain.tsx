@@ -23,7 +23,8 @@ const ReviewCardInMain = ({ reviewInMain, index }: ReviewCardInMainProps) => {
         />
 
         <Vstack className="justify-between p-lg flex-1">
-          <p className="font-thin">{`"${review}"`}</p>
+          <p className="line-clamp-2 font-light">{`"${review}"`}</p>
+
           <Hstack className="w-full justify-start items-center">
             <p className="grow">{name}</p>
             <p className="text-sm text-text-sub">{created_at.slice(0, 10)}</p>
