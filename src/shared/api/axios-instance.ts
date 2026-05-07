@@ -40,7 +40,7 @@ instance.interceptors.response.use(
   async (error: AxiosError) => {
     const state = useAuthStore.getState()
     const setAccessToken = state.setAccessToken
-    const logout = state.logout
+    const clearAuthLogout = state.clearAuth
 
     if (!error.config) return Promise.reject(error)
 
@@ -59,7 +59,7 @@ instance.interceptors.response.use(
     } catch (error) {
       // NOTE: 재발급 실패 -> 추가 요청 없이 로그아웃
       console.log({ error })
-      logout()
+      clearAuthLogout()
       return Promise.reject(error)
     }
   }
