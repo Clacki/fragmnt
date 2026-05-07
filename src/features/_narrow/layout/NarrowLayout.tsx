@@ -11,14 +11,16 @@ const NarrowLayout = () => {
     <FullScreen>
       <FlexOneContainer
         isYScrollable
-        className="max-h-screen py-2xl"
         id="main-scrollable-area"
+        className="h-dvh px-4 py-8"
       >
-        <Container width="lg">
-          <RoundBox className="bg-card shadow-box" padding="2xl">
-            <Outlet />
-          </RoundBox>
-        </Container>
+        <div className="flex min-h-full items-start justify-center md:items-center">
+          <Container width="lg">
+            <RoundBox className="bg-card shadow-box" padding="2xl">
+              <Outlet />
+            </RoundBox>
+          </Container>
+        </div>
       </FlexOneContainer>
     </FullScreen>
   )

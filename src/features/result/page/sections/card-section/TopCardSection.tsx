@@ -84,8 +84,7 @@ const TopCardSection = ({ result, type }: TopCardSectionProps) => {
       },
       {
         onSuccess: async ({ share_id }) => {
-          const webShareUrl = `${window.location.origin}/share/${share_id}`
-
+          const webShareUrl = `fragmnt.pics/share-og/${share_id}`
           try {
             await navigator.clipboard.writeText(webShareUrl)
             showToast("공유 링크가 복사되었습니다")

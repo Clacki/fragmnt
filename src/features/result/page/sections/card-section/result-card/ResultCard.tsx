@@ -98,6 +98,7 @@ const ResultTopCard = ({
               </Button>
 
               <Button
+                className="hover:bg-primary hover:text-surface-default"
                 type="button"
                 style="outlined"
                 disabled={isSavePending}
@@ -110,6 +111,7 @@ const ResultTopCard = ({
               </Button>
 
               <Button
+                className="hover:bg-primary hover:text-surface-default"
                 type="button"
                 style="outlined"
                 onClick={onShareClick}

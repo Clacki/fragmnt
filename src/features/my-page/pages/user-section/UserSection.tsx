@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { Button, EmptyImage } from "@/shared/components"
+import { Button, EmptyImage, Toast } from "@/shared/components"
 import { formatDate } from "@/shared/utils/date"
 import {
   CalendarDays,
@@ -11,6 +11,7 @@ import {
   UserRound,
 } from "lucide-react"
 import { useRef, useState } from "react"
+import { toast } from "sonner"
 import { useCreateAiProfileImage } from "../../hooks/useCreateProfileMutation"
 import { useUpdateUserProfile } from "../../hooks/useUpdateUserProfileMutation"
 import { useUploadProfileImage } from "../../hooks/useUploadImageMutation"
@@ -94,6 +95,23 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
 
   const profileImageSrc = previewImage || user.profile_image_url || undefined
 
+  const handleCreateAiProfileImage = () => {
+    createAiProfileImage(undefined, {
+      onSuccess: (data) => {
+        setPreviewImage(data.profile_image_url)
+      },
+      onError: () => {
+        toast.custom(() => (
+          <Toast
+            variant="error"
+            message={`추천 기록을 바탕으로 향기 이미지를 생성해요.
+             먼저 향을 추천받아 주세요.`}
+          />
+        ))
+      },
+    })
+  }
+
   return (
     <section className={cn("w-full", className)}>
       <div className="flex flex-col items-center gap-xs">
@@ -136,13 +154,7 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
           radius="full"
           className="text-sm"
           disabled={isAiImageCreating}
-          onClick={() =>
-            createAiProfileImage(undefined, {
-              onSuccess: (data) => {
-                setPreviewImage(data.profile_image_url)
-              },
-            })
-          }
+          onClick={handleCreateAiProfileImage}
         >
           <Sparkles size={16} />
           {isAiImageCreating ? "이미지 생성 중..." : "AI 이미지 생성하기"}

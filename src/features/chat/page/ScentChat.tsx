@@ -25,15 +25,14 @@ import ChatList from "./chat-list/ChatList"
 
 const ScentChat = () => {
   useUserGuard()
-
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(messages)
   const [sessionId, setSessionId] = useState<number | null>(null)
-
   const { mutateAsync: createSession } = useCreateChatSession()
-  const { mutateAsync: sendMessageAsync } = useSendChatMessage()
+  const { mutateAsync: sendMessageAsync, isPending: isSending } =
+    useSendChatMessage()
   const { mutateAsync: retryChatRecommendation, isPending: isRetrying } =
     useRetryChatRecommendationMutation()
-
+  const isChatInputDisabled = !sessionId || isSending || isRetrying
   useEffect(() => {
     if (sessionId) {
       return
@@ -151,7 +150,10 @@ const ScentChat = () => {
               onRetryRecommendation={handleRetryRecommendation}
               isRetrying={isRetrying}
             />
-            <ChatInput onSendMessage={handleSendMessage} />
+            <ChatInput
+              disabled={isChatInputDisabled}
+              onSendMessage={handleSendMessage}
+            />
           </Vstack>
         </RoundBox>
       </CenterContainer>

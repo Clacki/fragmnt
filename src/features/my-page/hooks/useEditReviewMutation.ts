@@ -8,7 +8,7 @@ export const useEditReviewMutation = () => {
     mutationFn: editReview,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["my-page", "reviewList"],
+        queryKey: ["reviewList"],
       })
     },
   })

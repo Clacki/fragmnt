@@ -1,4 +1,4 @@
-import ChatImage from "@/assets/images/find-scent/chat.jpg"
+import ChatImage from "@/assets/images/find-scent/chatbot.webp"
 import PhotoImage from "@/assets/images/find-scent/photo.jpg"
 import SurveyImage from "@/assets/images/find-scent/survey.jpg"
 

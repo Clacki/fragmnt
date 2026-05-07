@@ -41,7 +41,7 @@ export const MyPage = () => {
   }
 
   return (
-    <CenterContainer className="min-h-screen w-full py-2xl">
+    <CenterContainer className="min-h-screen w-full">
       <Container
         width="xl"
         isPadded

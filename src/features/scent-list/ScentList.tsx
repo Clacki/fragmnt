@@ -20,7 +20,7 @@ export const ScentList = () => {
   } = useScentFilter(scentCards)
 
   return (
-    <CenterContainer className="w-full py-2xl">
+    <CenterContainer className="w-full">
       <Container
         width="xl"
         isPadded

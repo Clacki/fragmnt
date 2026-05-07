@@ -1,21 +1,22 @@
 import useAuthStore from "@/shared/api/use-auth-store"
 import { Hstack, Vstack } from "@/shared/components"
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  type LinkProps,
-} from "@tanstack/react-router"
+import { Link, useLocation, type LinkProps } from "@tanstack/react-router"
 import clsx from "clsx"
-import { Home, LogIn, ScrollText, Sparkles, User } from "lucide-react"
+import {
+  Home,
+  LogIn,
+  ScrollText,
+  Sparkles,
+  User,
+  type LucideIcon,
+} from "lucide-react"
 
 type NavigationPathname = LinkProps["to"]
-type LucideIconProps = typeof Home
 
 type NavigationButtonConfig = {
   pathname: NavigationPathname
   label: string
-  Icon: LucideIconProps
+  Icon: LucideIcon
 }
 
 const makeNavigationButtonConfigs = (
@@ -42,23 +43,25 @@ const NavigationButton = ({
   const currentPathname = useLocation({
     select: (location) => location.pathname,
   })
+
   const isSelected = currentPathname === pathname
-  const navigate = useNavigate()
+
   return (
     <Link
       to={pathname}
-      className="w-full hover:bg-gray-5 transition pt-sm border-t border-border"
+      className="flex h-14 w-full items-center justify-center border-t border-border transition hover:bg-gray-5 md:h-18 md:pt-sm"
     >
-      <Vstack gap="none" className="items-center">
+      <Vstack gap="none" className="items-center justify-center">
         <Icon
-          size={40}
           className={clsx(
-            "rounded-md transition",
-            isSelected ? "text-card bg-primary scale-120" : "text-primary"
+            "size-7 rounded-md p-1 transition-all duration-300 md:size-10",
+            isSelected
+              ? "scale-140 md:scale-110 bg-primary text-card shadow-[0_0_16px_rgba(86,101,74,0.35)]"
+              : "text-primary opacity-70"
           )}
-          onClick={() => navigate({ to: pathname })}
         />
-        <p className="text-button">{label}</p>
+
+        <p className="hidden text-button md:block">{label}</p>
       </Vstack>
     </Link>
   )
@@ -67,6 +70,7 @@ const NavigationButton = ({
 const NavigationBar = () => {
   const accessToken = useAuthStore((state) => state.accessToken)
   const buttonConfigs = makeNavigationButtonConfigs(accessToken)
+
   return (
     <Hstack className="justify-evenly bg-card" gap="none">
       {buttonConfigs.map((config) => (

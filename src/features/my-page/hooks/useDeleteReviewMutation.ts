@@ -1,3 +1,4 @@
+import { makeReviewsInMainQueryOptions } from "@/features/_wide.index/loader/main-loader"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deleteReview } from "../api/user-review.api"
 
@@ -6,9 +7,13 @@ export const useDeleteReview = () => {
 
   return useMutation({
     mutationFn: deleteReview,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["my-page", "reviewList"],
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["reviewList"],
+      })
+
+      await queryClient.invalidateQueries({
+        queryKey: makeReviewsInMainQueryOptions().queryKey,
       })
     },
   })

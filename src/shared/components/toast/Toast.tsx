@@ -39,7 +39,9 @@ const Toast = ({ message, variant = "success", className }: ToastProps) => {
         <Icon className="h-lg w-lg" />
       </div>
 
-      <p className="text-sm font-semibold text-text-primary">{message}</p>
+      <p className="whitespace-pre-line text-sm font-semibold text-text-primary">
+        {message}
+      </p>
     </div>
   )
 }

@@ -15,6 +15,9 @@ const ChatInput = ({ disabled = false, onSendMessage }: ChatInputProps) => {
   const [inputValue, setInputValue] = useState("")
   const [isComposing, setIsComposing] = useState(false)
 
+  const isEmpty = inputValue.trim().length === 0
+  const isSendDisabled = disabled || isEmpty
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
   }
@@ -61,14 +64,17 @@ const ChatInput = ({ disabled = false, onSendMessage }: ChatInputProps) => {
         onKeyDown={handleKeyDown}
         disabled={disabled}
         className="w-full rounded-md border border-border bg-green-input px-lg outline-none transition-colors focus:border-text-primary disabled:cursor-not-allowed disabled:opacity-60"
-        placeholder="메세지를 입력해주세요"
+        placeholder={
+          disabled ? "답변을 생성하고 있어요" : "메세지를 입력해주세요"
+        }
       />
 
       <button
         type="button"
         onClick={handleSend}
-        disabled={disabled}
+        disabled={isSendDisabled}
         className="flex h-10 w-11 items-center justify-center rounded-md bg-primary text-white disabled:cursor-not-allowed disabled:opacity-60"
+        aria-label="메시지 전송"
       >
         <Send size={18} />
       </button>
