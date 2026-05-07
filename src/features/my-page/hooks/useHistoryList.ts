@@ -6,5 +6,8 @@ export const useHistoryList = () => {
   return useQuery<HistoryItem[]>({
     queryKey: ["my-page", "historyList"],
     queryFn: getHistoryList,
+    staleTime: 0,
+    refetchOnMount: "always",
+    gcTime: 0,
   })
 }

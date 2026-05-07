@@ -11,6 +11,10 @@ export const useUpdateFavoriteScent = () => {
       queryClient.invalidateQueries({
         queryKey: ["favoriteScents"],
       })
+
+      queryClient.invalidateQueries({
+        queryKey: ["analysis-detail"],
+      })
     },
   })
 }

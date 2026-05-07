@@ -11,9 +11,7 @@ export const useSaveAnalysisFeedbackMutation = () => {
       queryClient.setQueryData<AnalysisResult>(
         ["analysis-detail", variables.id, variables.type],
         (oldData) => {
-          if (!oldData) {
-            return oldData
-          }
+          if (!oldData) return oldData
 
           return {
             ...oldData,
@@ -24,6 +22,10 @@ export const useSaveAnalysisFeedbackMutation = () => {
 
       queryClient.invalidateQueries({
         queryKey: ["analysis-detail", variables.id, variables.type],
+      })
+
+      queryClient.invalidateQueries({
+        queryKey: ["favoriteScents"],
       })
     },
   })

@@ -6,6 +6,8 @@ export const useFavoriteScents = () => {
   const query = useQuery<FavoriteScent[]>({
     queryKey: ["favoriteScents"],
     queryFn: getFavoriteScents,
+    staleTime: 0,
+    refetchOnMount: "always",
   })
 
   return {

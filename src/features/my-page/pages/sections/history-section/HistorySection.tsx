@@ -1,3 +1,4 @@
+import EmptyStateImage from "@/assets/images/empty-state/empty-scent.svg"
 import EmptyState from "@/shared/components/empty-state/EmptyState"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 
@@ -52,7 +53,7 @@ export const HistorySection = () => {
       ) : (
         <div className="mt-2xl flex justify-center">
           <EmptyState
-            imageSrc="/images/empty-history.png"
+            imageSrc={EmptyStateImage}
             title="아직 기록된 향기가 없어요"
             description="향 추천을 받고 나만의 기록을 남겨보세요"
           />
