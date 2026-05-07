@@ -45,7 +45,7 @@ export const getHistoryList = async (): Promise<HistoryItem[]> => {
   return data
 }
 
-export const logoutApi = async (refresh: string): Promise<void> => {
+export const logoutApi = async (refresh?: string | null): Promise<void> => {
   await instance.post("/accounts/logout", {
     refresh,
   })

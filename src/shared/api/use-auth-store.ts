@@ -7,9 +7,6 @@ type AuthStoreState = {
   accessToken: string | null
   setAccessToken: (accessToken: string | null) => void
 
-  refreshToken: string | null
-  setRefreshToken: (refreshToken: string | null) => void
-
   profile: Profile | null
   setProfile: (profile: Profile | null) => void
 
@@ -20,27 +17,19 @@ type AuthStoreState = {
 
 const useAuthStore = create<AuthStoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       accessToken: null,
       setAccessToken: (accessToken) => set({ accessToken }),
-
-      refreshToken: null,
-      setRefreshToken: (refreshToken) => set({ refreshToken }),
 
       profile: null,
       setProfile: (profile) => set({ profile }),
 
       logout: async () => {
-        const refreshToken = get().refreshToken
-
         try {
-          if (refreshToken) {
-            await logoutApi(refreshToken)
-          }
+          await logoutApi(null)
         } finally {
           set({
             accessToken: null,
-            refreshToken: null,
             profile: null,
           })
         }
@@ -49,7 +38,6 @@ const useAuthStore = create<AuthStoreState>()(
       clearAuth: () => {
         set({
           accessToken: null,
-          refreshToken: null,
           profile: null,
         })
       },
@@ -59,7 +47,6 @@ const useAuthStore = create<AuthStoreState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
       }),
     }
   )
