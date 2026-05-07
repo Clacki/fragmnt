@@ -34,7 +34,7 @@ const Input = ({
       <input
         {...rest}
         disabled={disabled}
-        className="flex-1 border-0 py-md pl-lg outline-0"
+        className="flex-1 border-0 py-md pl-lg outline-0 min-w-0"
       />
       {trailingChild}
     </Hstack>

@@ -1,3 +1,4 @@
+import cn from "@/lib/utils"
 import type { DivProps } from "@/shared/types"
 import type {
   None,
@@ -5,9 +6,8 @@ import type {
 } from "@/shared/types/commonPropsTypes/commonPropsTypes"
 import { gapVariants } from "@/shared/utils/variant-to-classname"
 import { cva } from "class-variance-authority"
-import clsx from "clsx"
 
-const hstackVariants = cva("flex justify-center", {
+const hstackVariants = cva("min-w-0 flex justify-center", {
   variants: {
     gap: gapVariants,
   },
@@ -25,7 +25,7 @@ const Hstack = ({ gap = "lg", ...props }: DivProps & WithHstackProps) => {
   const { className, children, ...rest } = props
 
   return (
-    <div {...rest} className={clsx(hstackVariants({ gap }), className)}>
+    <div {...rest} className={cn(hstackVariants({ gap }), className)}>
       {children}
     </div>
   )
