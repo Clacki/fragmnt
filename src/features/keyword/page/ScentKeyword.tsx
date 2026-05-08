@@ -100,7 +100,7 @@ const ScentKeyword = () => {
   return (
     <Container className="relative px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
       {isPostKeywordResultPending && (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-background/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
           <LoadingState />
         </div>
       )}

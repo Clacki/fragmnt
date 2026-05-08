@@ -80,7 +80,7 @@ const ScentSurvey = () => {
   return (
     <Container className="relative px-10 pt-16 pb-20 md:px-30 md:pt-16 md:pb-40">
       {isSubmitting && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
           <LoadingState />
         </div>
       )}
