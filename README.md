@@ -44,15 +44,14 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 | 프로젝트명 | Fragmnt |
 | 한 줄 설명 | 사용자의 취향과 상황에 맞는 향기를 추천하고, 추천 결과를 저장·공유할 수 있는 향기 추천 서비스 |
 | 팀 구성 | Frontend 3명, Backend 4명 |
-| 담당 포지션 | Frontend 김광욱 김채현 하흥주 Backend 박진규 황현진 이규빈 심상보|
+| Frontend | 김광욱, 김채현, 하흥주 |
+| Backend | 박진규, 황현진, 이규빈, 심상보 |
 | 배포 | Vercel |
 
 ---
+## 배포
 
-## 링크
-
-- 배포 URL: https://fe-one-piece.vercel.app/
-
+- https://fe-one-piece.vercel.app/
 ---
 
 ## 주요 기능
