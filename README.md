@@ -52,8 +52,10 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 
 ## 배포
 
-- https://fe-one-piece.vercel.app/
+- https://fragmnt-space.vercel.app/
 
+> 현재 Demo는 포트폴리오 확인을 위해 MSW 기반 Mock API로 동작합니다.  
+> 일부 인증 및 서버 연동 기능은 실제 운영 서버가 아닌 Mock 데이터 기준으로 확인할 수 있습니다.
 ---
 
 ## 주요 기능
