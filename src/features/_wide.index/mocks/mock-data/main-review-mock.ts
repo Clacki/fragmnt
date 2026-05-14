@@ -1,17 +1,17 @@
 import type { ReviewInMain } from "../../types/main.api.type"
 
 const imgUrls = [
-  "/public/mock-images/amber-wood.jpg",
-  "/public/mock-images/basil-shade.jpg",
-  "/public/mock-images/bergamot-air.jpg",
-  "/public/mock-images/blossom-dream.jpg",
-  "/public/mock-images/cashmere-dust.jpg",
-  "/public/mock-images/cedar-hour.jpg",
-  "/public/mock-images/cherry-veil.jpg",
-  "/public/mock-images/citrus-dawn.jpg",
-  "/public/mock-images/cotton-veil.jpg",
-  "/public/mock-images/fig-garden.jpg",
-  "/public/mock-images/white-peony.jpg",
+  "/mock-images/amber-wood.jpg",
+  "/mock-images/basil-shade.jpg",
+  "/mock-images/bergamot-air.jpg",
+  "/mock-images/blossom-dream.jpg",
+  "/mock-images/cashmere-dust.jpg",
+  "/mock-images/cedar-hour.jpg",
+  "/mock-images/cherry-veil.jpg",
+  "/mock-images/citrus-dawn.jpg",
+  "/mock-images/cotton-veil.jpg",
+  "/mock-images/fig-garden.jpg",
+  "/mock-images/white-peony.jpg",
 ]
 
 const reviewNames = [

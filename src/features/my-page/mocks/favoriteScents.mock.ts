@@ -15,7 +15,7 @@ export const mockFavoriteScents: FavoriteScent[] = [
       eng_name: "Rose Mist",
       intensity: 64,
       season: ["spring", "summer"],
-      thumbnail_url: "/public/mock-images/rose-mist.jpg",
+      thumbnail_url: "/mock-images/rose-mist.jpg",
     },
   },
 ]
