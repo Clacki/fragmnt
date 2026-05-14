@@ -105,7 +105,7 @@ const PhotoUploadSection = ({
                 다른 이미지 선택
               </PhotoActionButton>
               <PhotoActionButton type="button" onClick={handleOpenCamera}>
-                카메라로 다시 찍기
+                다시 촬영하기
               </PhotoActionButton>
             </Hstack>
           </div>

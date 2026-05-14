@@ -12,6 +12,7 @@ type ButtonInfo = {
   label: string
   onClick: () => void
 }
+
 const providerToButtonInfo: Record<Provider, ButtonInfo> = {
   google: {
     src: GoogleSrc,
@@ -53,14 +54,17 @@ const socialLoginButtonVariant = cva(
 
 type SocialLoginButtonProps = {
   provider: Provider
+  onClick?: () => void
 }
-const SocialLoginButton = ({ provider }: SocialLoginButtonProps) => {
-  const { src, label, onClick } = providerToButtonInfo[provider]
+
+const SocialLoginButton = ({ provider, onClick }: SocialLoginButtonProps) => {
+  const { src, label, onClick: defaultOnClick } = providerToButtonInfo[provider]
+
   return (
     <button
       type="button"
       className={clsx(socialLoginButtonVariant({ provider }))}
-      onClick={onClick}
+      onClick={onClick ?? defaultOnClick}
     >
       <img src={src} alt="소셜 로그인 로고" className="size-5" />
       <p className="mx-auto">{label}</p>

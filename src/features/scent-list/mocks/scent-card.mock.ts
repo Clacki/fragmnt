@@ -10,9 +10,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "체리 블라썸과 머스크, 바닐라가 부드럽게 어우러진 향입니다. 사랑스럽고 포근한 분위기를 더해 주며, 공간 안에 로맨틱한 여운을 남깁니다.",
-      thumbnail_url: "https://example.com/scents/blossom-dream-detail.jpg",
+      thumbnail_url: "/mock-images/blossom-dream.jpg",
       intensity: 76,
-      tags: ["따뜻한", "부드러운", "달콤한", "로맨틱"],
+      tags: ["warm", "soft", "sweet", "romantic"],
       season: ["spring", "autumn"],
     },
     {
@@ -22,9 +22,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "이슬 맺힌 장미 정원을 떠올리게 하는 향입니다. 우아하고 차분한 플로럴 톤이 공간을 정돈된 분위기로 채워 줍니다.",
-      thumbnail_url: "https://example.com/scents/rose-mist-detail.jpg",
+      thumbnail_url: "/mock-images/rose-mist.jpg",
       intensity: 64,
-      tags: ["우아한", "잔잔한", "플로럴", "정돈된"],
+      tags: ["elegant", "calm", "floral", "tidy"],
       season: ["spring", "summer"],
     },
     {
@@ -34,9 +34,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "깨끗한 화이트 페탈의 느낌을 담은 플로럴 향입니다. 가볍고 맑은 분위기가 공간에 부드럽게 스며들어 산뜻한 인상을 남깁니다.",
-      thumbnail_url: "https://example.com/scents/white-peony-detail.jpg",
+      thumbnail_url: "/mock-images/white-peony.jpg",
       intensity: 58,
-      tags: ["맑은", "가벼운", "산뜻한", "깨끗한"],
+      tags: ["clear", "light", "fresh", "clean"],
       season: ["spring", "summer"],
     },
     {
@@ -46,9 +46,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "짙은 꽃잎의 질감처럼 매끄럽고 풍부한 향입니다. 지나치게 화려하지 않지만 분명한 존재감을 지녀 공간을 우아하게 채워 줍니다.",
-      thumbnail_url: "https://example.com/scents/velvet-bloom-detail.jpg",
+      thumbnail_url: "/mock-images/velvet-bloom.jpg",
       intensity: 73,
-      tags: ["우아한", "깊이감 있는", "풍부한", "성숙한"],
+      tags: ["elegant", "deep", "rich", "mature"],
       season: ["autumn", "winter"],
     },
     {
@@ -58,9 +58,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "은은한 과실감과 꽃잎의 부드러움이 함께 감도는 향입니다. 발랄함보다는 섬세하고 여린 인상에 가까워 작은 공간에 잘 어울립니다.",
-      thumbnail_url: "https://example.com/scents/cherry-veil-detail.jpg",
+      thumbnail_url: "/mock-images/cherry-veil.jpg",
       intensity: 62,
-      tags: ["달콤한", "사랑스러운", "섬세한", "은은한"],
+      tags: ["sweet", "lovely", "delicate", "subtle"],
       season: ["spring", "autumn"],
     },
     {
@@ -70,9 +70,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "floral",
       description:
         "파우더리한 아이리스와 투명한 꽃향이 만나 차분하고 고급스러운 인상을 만들어 줍니다. 과하지 않게 정갈한 공간감이 돋보이는 향입니다.",
-      thumbnail_url: "https://example.com/scents/iris-petal-detail.jpg",
+      thumbnail_url: "/mock-images/iris-petal.jpg",
       intensity: 59,
-      tags: ["차분한", "고급스러운", "부드러운", "정갈한"],
+      tags: ["calm", "luxurious", "soft", "neat"],
       season: ["spring", "winter"],
     },
     {
@@ -82,9 +82,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "깊은 숲속을 천천히 거닐 때 느껴지는 고요함을 닮은 향입니다. 묵직하지만 답답하지 않고, 공간에 차분한 중심을 만들어 줍니다.",
-      thumbnail_url: "https://example.com/scents/serene-woods-detail.jpg",
+      thumbnail_url: "/mock-images/serene-woods.jpg",
       intensity: 72,
-      tags: ["차분한", "깊이감 있는", "내추럴", "안정적인"],
+      tags: ["calm", "deep", "natural", "stable"],
       season: ["autumn", "winter"],
     },
     {
@@ -94,9 +94,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "부드러운 샌달우드가 중심이 되는 향으로, 과하게 무겁지 않고 따뜻한 안정감을 오래 남깁니다. 편안한 휴식 공간에 잘 어울립니다.",
-      thumbnail_url: "https://example.com/scents/sandal-quiet-detail.jpg",
+      thumbnail_url: "/mock-images/sandal-quiet.jpg",
       intensity: 68,
-      tags: ["포근한", "부드러운", "차분한", "따뜻한"],
+      tags: ["cozy", "soft", "calm", "warm"],
       season: ["autumn", "winter"],
     },
     {
@@ -106,9 +106,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "건조한 나무결과 은은한 허브가 조화롭게 이어지는 향입니다. 단정하고 절제된 분위기가 공간을 안정적으로 정리해 줍니다.",
-      thumbnail_url: "https://example.com/scents/cedar-hour-detail.jpg",
+      thumbnail_url: "/mock-images/cedar-hour.jpg",
       intensity: 66,
-      tags: ["드라이한", "정돈된", "깊은", "고요한"],
+      tags: ["dry", "tidy", "deep", "serene"],
       season: ["autumn", "winter"],
     },
     {
@@ -118,9 +118,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "나무의 단단한 결 위로 앰버의 따뜻한 빛이 얹힌 향입니다. 공간을 깊고 안정적으로 감싸면서도 지나치게 무겁지 않은 균형이 특징입니다.",
-      thumbnail_url: "https://example.com/scents/amber-wood-detail.jpg",
+      thumbnail_url: "/mock-images/amber-wood.jpg",
       intensity: 74,
-      tags: ["따뜻한", "묵직한", "고급스러운", "안정적인"],
+      tags: ["warm", "weighty", "luxurious", "stable"],
       season: ["autumn", "winter"],
     },
     {
@@ -130,9 +130,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "오크와 베티버의 묵직한 구조감이 공간을 차분하게 눌러 주는 향입니다. 조용한 성찰과 몰입이 필요한 순간에 특히 잘 어울립니다.",
-      thumbnail_url: "https://example.com/scents/oak-ritual-detail.jpg",
+      thumbnail_url: "/mock-images/oak-ritual.jpg",
       intensity: 79,
-      tags: ["묵직한", "깊은", "절제된", "집중되는"],
+      tags: ["weighty", "deep", "restrained", "focused"],
       season: ["autumn", "winter"],
     },
     {
@@ -142,9 +142,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "woody",
       description:
         "나무의 그을린 결 위에 은은한 스파이스가 더해진 향입니다. 지나치게 강하지 않지만 분명한 존재감으로 공간의 인상을 또렷하게 바꿔 줍니다.",
-      thumbnail_url: "https://example.com/scents/smoked-timber-detail.jpg",
+      thumbnail_url: "/mock-images/smoked-timber.jpg",
       intensity: 83,
-      tags: ["스모키한", "강렬한", "깊은", "묵직한"],
+      tags: ["smoky", "intense", "deep", "weighty"],
       season: ["autumn", "winter"],
     },
     {
@@ -154,9 +154,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "citrus",
       description:
         "이른 아침의 깨끗한 공기처럼 밝고 선명한 시트러스 향입니다. 공간을 산뜻하게 환기시키며 가벼운 에너지를 더해 줍니다.",
-      thumbnail_url: "https://example.com/scents/citrus-dawn-detail.jpg",
+      thumbnail_url: "/mock-images/citrus-dawn.jpg",
       intensity: 57,
-      tags: ["상쾌한", "밝은", "가벼운", "깨끗한"],
+      tags: ["refreshing", "bright", "light", "clean"],
       season: ["spring", "summer"],
     },
     {
@@ -166,9 +166,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "citrus",
       description:
         "막 세탁한 리넨에 레몬 껍질의 산뜻함이 얹힌 듯한 향입니다. 깨끗하고 가벼운 분위기로 일상 공간을 환하게 정돈해 줍니다.",
-      thumbnail_url: "https://example.com/scents/lemon-linen-detail.jpg",
+      thumbnail_url: "/mock-images/lemon-linen.jpg",
       intensity: 52,
-      tags: ["깨끗한", "가벼운", "산뜻한", "정돈된"],
+      tags: ["clean", "light", "fresh", "tidy"],
       season: ["spring", "summer"],
     },
     {
@@ -178,9 +178,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "citrus",
       description:
         "베르가못의 투명한 시트러스가 공기처럼 가볍게 퍼지는 향입니다. 밝고 맑은 인상으로 답답한 공간을 환기해 줍니다.",
-      thumbnail_url: "https://example.com/scents/bergamot-air-detail.jpg",
+      thumbnail_url: "/mock-images/bergamot-air.jpg",
       intensity: 54,
-      tags: ["맑은", "산뜻한", "투명한", "가벼운"],
+      tags: ["clear", "fresh", "transparent", "light"],
       season: ["spring", "summer"],
     },
     {
@@ -190,9 +190,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "citrus",
       description:
         "그레이프프루트 특유의 쌉싸름한 상큼함이 공간에 생기를 더하는 향입니다. 밝고 경쾌한 무드가 필요한 낮 시간에 특히 잘 어울립니다.",
-      thumbnail_url: "https://example.com/scents/grapefruit-glow-detail.jpg",
+      thumbnail_url: "/mock-images/grapefruit-glow.jpg",
       intensity: 56,
-      tags: ["경쾌한", "밝은", "상쾌한", "활기 있는"],
+      tags: ["cheerful", "bright", "refreshing", "vibrant"],
       season: ["spring", "summer"],
     },
     {
@@ -202,9 +202,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "musk",
       description:
         "깨끗한 머스크와 막 마른 리넨의 포근함이 중심인 향입니다. 과하지 않게 부드러운 존재감으로 일상 공간을 편안하게 만들어 줍니다.",
-      thumbnail_url: "https://example.com/scents/soft-linen-detail.jpg",
+      thumbnail_url: "/mock-images/soft-linen.jpg",
       intensity: 49,
-      tags: ["깨끗한", "포근한", "부드러운", "은은한"],
+      tags: ["clean", "cozy", "soft", "subtle"],
       season: ["spring", "summer", "autumn"],
     },
     {
@@ -214,9 +214,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "musk",
       description:
         "얇은 코튼 천처럼 가볍고 부드러운 머스크 향입니다. 눈에 띄기보다 배경처럼 공간을 편안하게 감싸 주는 데 강점이 있습니다.",
-      thumbnail_url: "https://example.com/scents/cotton-veil-detail.jpg",
+      thumbnail_url: "/mock-images/cotton-veil.jpg",
       intensity: 44,
-      tags: ["은은한", "부드러운", "깨끗한", "가벼운"],
+      tags: ["subtle", "soft", "clean", "light"],
       season: ["spring", "summer"],
     },
     {
@@ -226,9 +226,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "musk",
       description:
         "소리 없이 가까워지는 듯한 깨끗한 머스크 향입니다. 미니멀하고 정제된 공간에 잘 어울리며, 존재감은 적지만 분위기를 확실히 다듬어 줍니다.",
-      thumbnail_url: "https://example.com/scents/pure-hush-detail.jpg",
+      thumbnail_url: "/mock-images/pure-hush.jpg",
       intensity: 41,
-      tags: ["미니멀한", "깨끗한", "조용한", "절제된"],
+      tags: ["minimal", "clean", "quiet", "restrained"],
       season: ["spring", "summer", "autumn"],
     },
     {
@@ -238,9 +238,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "musk",
       description:
         "깨끗한 비누 향과 머스크가 가볍게 겹쳐지는 향입니다. 무난하지만 지루하지 않은 인상으로 어떤 공간에도 편안하게 어울립니다.",
-      thumbnail_url: "https://example.com/scents/clean-veil-detail.jpg",
+      thumbnail_url: "/mock-images/clean-veil.jpg",
       intensity: 46,
-      tags: ["깨끗한", "데일리", "부드러운", "편안한"],
+      tags: ["clean", "daily", "soft", "comfortable"],
       season: ["spring", "summer"],
     },
     {
@@ -250,9 +250,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "green",
       description:
         "잠시 창문을 열고 식물의 숨을 들이마시는 순간을 닮은 향입니다. 생기 있지만 과하게 날카롭지 않아 공간에 자연스러운 여유를 만들어 줍니다.",
-      thumbnail_url: "https://example.com/scents/green-pause-detail.jpg",
+      thumbnail_url: "/mock-images/green-pause.jpg",
       intensity: 61,
-      tags: ["싱그러운", "자연스러운", "환기되는", "편안한"],
+      tags: ["fresh", "natural", "airy", "comfortable"],
       season: ["spring", "summer"],
     },
     {
@@ -262,9 +262,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "green",
       description:
         "무화과잎의 싱그러움과 크리미한 과육 느낌이 조화로운 향입니다. 자연스럽고 세련된 무드로 공간에 여유로운 결을 더해 줍니다.",
-      thumbnail_url: "https://example.com/scents/fig-garden-detail.jpg",
+      thumbnail_url: "/mock-images/fig-garden.jpg",
       intensity: 67,
-      tags: ["싱그러운", "세련된", "내추럴", "여유로운"],
+      tags: ["fresh", "elegant", "natural", "relaxed"],
       season: ["spring", "summer", "autumn"],
     },
     {
@@ -274,9 +274,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "green",
       description:
         "바질과 허브의 선명한 초록향이 공간을 시원하게 정리해 줍니다. 개운하고 또렷한 분위기를 좋아하는 취향에 잘 맞는 향입니다.",
-      thumbnail_url: "https://example.com/scents/basil-shade-detail.jpg",
+      thumbnail_url: "/mock-images/basil-shade.jpg",
       intensity: 63,
-      tags: ["허브한", "선명한", "환기되는", "드라이한"],
+      tags: ["herbal", "clear", "airy", "dry"],
       season: ["spring", "summer"],
     },
     {
@@ -286,9 +286,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "powdery",
       description:
         "고운 파우더가 살짝 흩날리는 듯한 부드럽고 정적인 향입니다. 피부 가까이에 머무는 듯한 포근함이 있어 침실이나 개인 공간에 잘 어울립니다.",
-      thumbnail_url: "https://example.com/scents/soft-powder-detail.jpg",
+      thumbnail_url: "/mock-images/soft-powder.jpg",
       intensity: 51,
-      tags: ["포근한", "파우더리", "부드러운", "조용한"],
+      tags: ["cozy", "powdery", "soft", "quiet"],
       season: ["autumn", "winter"],
     },
     {
@@ -298,9 +298,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "powdery",
       description:
         "캐시미어 니트의 포근한 촉감과 잔잔한 파우더 향을 닮은 향입니다. 부드럽고 따뜻한 인상이 차분한 공간을 천천히 채워 줍니다.",
-      thumbnail_url: "https://example.com/scents/cashmere-dust-detail.jpg",
+      thumbnail_url: "/mock-images/cashmere-dust.jpg",
       intensity: 57,
-      tags: ["포근한", "따뜻한", "부드러운", "아늑한"],
+      tags: ["cozy", "warm", "soft", "snug"],
       season: ["autumn", "winter"],
     },
     {
@@ -310,9 +310,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "spicy",
       description:
         "핑크 페퍼의 가벼운 스파이스가 공간에 활기와 긴장감을 동시에 더하는 향입니다. 무겁지 않으면서도 분명한 개성을 드러냅니다.",
-      thumbnail_url: "https://example.com/scents/pink-pepper-day-detail.jpg",
+      thumbnail_url: "/mock-images/pink-pepper-day.jpg",
       intensity: 65,
-      tags: ["활기 있는", "개성 있는", "스파이시한", "선명한"],
+      tags: ["vibrant", "distinctive", "spicy", "clear"],
       season: ["spring", "autumn"],
     },
     {
@@ -322,9 +322,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "spicy",
       description:
         "클로브와 앰버가 얇게 겹쳐지며 따뜻하고 이국적인 인상을 남기는 향입니다. 공간을 단숨에 특별하게 바꿔 주는 존재감이 있습니다.",
-      thumbnail_url: "https://example.com/scents/spice-veil-detail.jpg",
+      thumbnail_url: "/mock-images/spice-veil.jpg",
       intensity: 77,
-      tags: ["이국적인", "따뜻한", "강렬한", "특별한"],
+      tags: ["exotic", "warm", "intense", "special"],
       season: ["autumn", "winter"],
     },
     {
@@ -334,9 +334,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "aquatic",
       description:
         "바닷바람이 창문을 스치듯 시원하고 깨끗한 향입니다. 무겁지 않은 청량감이 공간을 넓고 가볍게 느껴지도록 만들어 줍니다.",
-      thumbnail_url: "https://example.com/scents/ocean-breath-detail.jpg",
+      thumbnail_url: "/mock-images/ocean-breath.jpg",
       intensity: 53,
-      tags: ["청량한", "시원한", "넓은", "가벼운"],
+      tags: ["refreshing", "cool", "spacious", "light"],
       season: ["summer"],
     },
     {
@@ -346,9 +346,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "fruity",
       description:
         "잘 익은 배의 은은한 과즙감과 부드러운 머스크가 만나 밝고 사랑스러운 무드를 연출하는 향입니다. 과하지 않게 기분을 환하게 바꿔 줍니다.",
-      thumbnail_url: "https://example.com/scents/pear-velvet-detail.jpg",
+      thumbnail_url: "/mock-images/pear-velvet.jpg",
       intensity: 60,
-      tags: ["사랑스러운", "밝은", "과즙감 있는", "부드러운"],
+      tags: ["lovely", "bright", "juicy", "soft"],
       season: ["spring", "summer"],
     },
     {
@@ -358,9 +358,9 @@ export const scentCardMockData: GetScentsResponse = {
       categories: "amber",
       description:
         "따뜻한 햇빛이 오래 머문 듯한 앰버 계열의 향입니다. 부드러운 온기와 깊은 여운이 함께 남아 공간에 고급스러운 무드를 더해 줍니다.",
-      thumbnail_url: "https://example.com/scents/golden-amber-detail.jpg",
+      thumbnail_url: "/mock-images/golden-amber.jpg",
       intensity: 78,
-      tags: ["따뜻한", "고급스러운", "깊은", "포근한"],
+      tags: ["warm", "luxurious", "deep", "cozy"],
       season: ["autumn", "winter"],
     },
   ],

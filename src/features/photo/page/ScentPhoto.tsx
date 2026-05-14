@@ -6,7 +6,6 @@ import {
   PageIntro,
   Vstack,
 } from "@/shared/components"
-import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import { uploadImageToS3 } from "../api/image-analysis.api"
@@ -17,7 +16,9 @@ import PhotoTipsSection from "./photo-tips-section/PhotoTipsSection"
 import PhotoUploadSection from "./photo-upload-section/PhotoUploadSection"
 
 const ScentPhoto = () => {
-  useUserGuard()
+  // useUserGuard()
+  // TODO: Mock 배포 환경에서 페이지 접근성 확인을 위해 인증 가드를 임시 비활성화합니다.
+  // 실제 인증 연동 시 로그인 상태 기반 접근 제한을 복구합니다.
   const [step, setStep] = useState<MobilePhotoStep>("select")
   const [previewUrl, setPreviewUrl] = useState("")
   const [selectedFile, setSelectedFile] = useState<File | null>(null)

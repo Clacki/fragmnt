@@ -27,7 +27,7 @@ export const ScentList = () => {
         className="min-h-screen max-w-container-xl bg-surface-default"
       >
         <Vstack className="gap-xs pb-xl">
-          <Hstack className="items-center justify-between pt-lg">
+          <Hstack className="items-center pt-lg">
             <h1 className="text-xl font-bold text-text-primary">
               Scent Archive
             </h1>

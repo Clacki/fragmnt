@@ -43,9 +43,9 @@ export const scentFilterData: ScentFilterSection[] = [
     title: "INTENSITY",
     category: "intensity",
     options: [
-      { id: 15, name: "약함", category: "intensity" },
-      { id: 16, name: "보통", category: "intensity" },
-      { id: 17, name: "강함", category: "intensity" },
+      { id: 15, name: "weak", category: "intensity" },
+      { id: 16, name: "normal", category: "intensity" },
+      { id: 17, name: "strong", category: "intensity" },
     ],
   },
 ]

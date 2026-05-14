@@ -1,33 +1,55 @@
 import type { ReviewInMain } from "../../types/main.api.type"
 
 const imgUrls = [
-  "https://placehold.co/600x400",
-  "https://placehold.co/400",
-  "https://placehold.co/600x400/000000/FFF",
+  "/public/mock-images/amber-wood.jpg",
+  "/public/mock-images/basil-shade.jpg",
+  "/public/mock-images/bergamot-air.jpg",
+  "/public/mock-images/blossom-dream.jpg",
+  "/public/mock-images/cashmere-dust.jpg",
+  "/public/mock-images/cedar-hour.jpg",
+  "/public/mock-images/cherry-veil.jpg",
+  "/public/mock-images/citrus-dawn.jpg",
+  "/public/mock-images/cotton-veil.jpg",
+  "/public/mock-images/fig-garden.jpg",
+  "/public/mock-images/white-peony.jpg",
+]
+
+const reviewNames = [
+  "민지",
+  "서윤",
+  "지훈",
+  "하린",
+  "도윤",
+  "유나",
+  "현우",
+  "수빈",
+  "지아",
+  "태오",
+  "나은",
 ]
 
 const reviews = [
-  "정말 좋아요! 향이 오래 지속됩니다.",
-  "제 skin과 잘 맞습니다. 강추!",
-  "남자친구에게 선물했더니 너무 좋아해요.",
-  "첫 향이 살짝 느끼했는데 가라 앉으니 너무 좋습니다.",
-  "가격 대비 만족스러워요. 재구매 의사 있습니다.",
-  "산뜻한 향이라 일상에서 쓰기 좋아요.",
-  "좋은 향입니다.身边的人都说好闻",
-  "여름에 쓰기 좋은 시트러스 향이네요.",
-  "包装精美，送人也很合适。",
-  "드라마에서 봐서 샀는데 기대 이상입니다.",
-  "학교장에서 쓰기엔 좀 강한 편이에요.",
+  "사진 분위기와 어울리는 향을 추천받을 수 있어서 신기했어요.",
+  "제가 고른 키워드만으로 취향에 가까운 향이 나와서 만족스러웠습니다.",
+  "평소 어떤 향을 좋아하는지 잘 몰랐는데 추천 결과가 도움이 됐어요.",
+  "설문 흐름이 어렵지 않아서 처음 사용하는 사람도 편하게 쓸 수 있을 것 같아요.",
+  "추천 결과를 저장해두고 나중에 다시 볼 수 있는 점이 좋았습니다.",
+  "시트러스 계열을 좋아하는데 결과가 제 취향이랑 잘 맞았어요.",
+  "챗봇으로 대화하듯 추천받는 방식이 자연스럽고 재미있었습니다.",
+  "향 설명이 분위기 중심으로 정리되어 있어서 이해하기 쉬웠어요.",
+  "친구에게 공유했더니 이미지랑 향 추천이 잘 어울린다고 하더라고요.",
+  "선물용 향수를 고를 때 참고하기 좋은 서비스라고 느꼈습니다.",
+  "추천 방식이 여러 가지라 상황에 맞게 선택할 수 있는 점이 좋았어요.",
 ]
 
 export const MainReviewMock: ReviewInMain[] = Array.from(
   { length: 11 },
   (_, index) => ({
-    id: index,
-    type: "keyword",
+    id: index + 1,
+    type: ["image", "keyword", "chat", "survey"][index % 4],
     thumbnail_url: imgUrls[index % imgUrls.length],
-    name: `더미유저${index + 1}`,
+    name: reviewNames[index],
     created_at: new Date(Date.now() - index * 86400000).toISOString(),
-    review: reviews[index % reviews.length],
+    review: reviews[index],
   })
 )

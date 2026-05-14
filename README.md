@@ -39,19 +39,21 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 
 ## 프로젝트 개요
 
-| 항목 | 내용 |
-| --- | --- |
-| 프로젝트명 | Fragmnt |
+| 항목       | 내용                                                                                          |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| 프로젝트명 | Fragmnt                                                                                       |
 | 한 줄 설명 | 사용자의 취향과 상황에 맞는 향기를 추천하고, 추천 결과를 저장·공유할 수 있는 향기 추천 서비스 |
-| 팀 구성 | Frontend 3명, Backend 4명 |
-| Frontend | 김광욱, 김채현, 하흥주 |
-| Backend | 박진규, 황현진, 이규빈, 심상보 |
-| 배포 | Vercel |
+| 팀 구성    | Frontend 3명, Backend 4명                                                                     |
+| Frontend   | 김광욱, 김채현, 하흥주                                                                        |
+| Backend    | 박진규, 황현진, 이규빈, 심상보                                                                |
+| 배포       | Vercel                                                                                        |
 
 ---
+
 ## 배포
 
 - https://fe-one-piece.vercel.app/
+
 ---
 
 ## 주요 기능
@@ -77,36 +79,36 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 
 Fragmnt의 프론트엔드는 기능 단위로 담당 영역을 나누어 개발했습니다. 각 담당자는 페이지 구현, API 연동, 상태 처리, 반응형 UI를 함께 관리했으며, 공통 UI와 서버 상태 관리 방식은 팀 내 컨벤션에 맞춰 일관되게 적용했습니다.
 
-| 이름 | 포지션 | 담당 영역 |
-| --- | --- | --- |
-| 광욱 | Frontend | 기능 선택 페이지, 사진/챗봇/키워드/설문 기반 추천 페이지, 추천 결과 페이지, 공유 페이지, 추천 결과 저장·공유 API 연동, 담당 페이지 반응형 UI, 인증 상태에 따른 접근 제어, 공유 URL 및 OG 관련 문제 수정, 마이페이지 캐시 갱신 관련 문제 해결 |
-| 채현 | Frontend | 마이페이지, 향기 리스트 페이지, 향기 상세 페이지, 리뷰 페이지, 관련 API 연동 및 UI 구현 |
-| 흥주 | Frontend | 메인 랜딩 페이지, 로그인, 회원가입, 인증 관련 UI 및 흐름 구현 |
-| Backend | Backend | 회원 인증, 향기 데이터 관리, 추천 분석 API, 추천 결과 저장 및 공유 API, 리뷰 API, 마이페이지 API 구현 |
+| 이름    | 포지션   | 담당 영역                                                                                                                                                                                                                                    |
+| ------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 광욱    | Frontend | 기능 선택 페이지, 사진/챗봇/키워드/설문 기반 추천 페이지, 추천 결과 페이지, 공유 페이지, 추천 결과 저장·공유 API 연동, 담당 페이지 반응형 UI, 인증 상태에 따른 접근 제어, 공유 URL 및 OG 관련 문제 수정, 마이페이지 캐시 갱신 관련 문제 해결 |
+| 채현    | Frontend | 마이페이지, 향기 리스트 페이지, 향기 상세 페이지, 리뷰 페이지, 관련 API 연동 및 UI 구현                                                                                                                                                      |
+| 흥주    | Frontend | 메인 랜딩 페이지, 로그인, 회원가입, 인증 관련 UI 및 흐름 구현                                                                                                                                                                                |
+| Backend | Backend  | 회원 인증, 향기 데이터 관리, 추천 분석 API, 추천 결과 저장 및 공유 API, 리뷰 API, 마이페이지 API 구현                                                                                                                                        |
 
 ---
 
 ## 기술 스택
 
-| 분류 | 기술 | 사용 목적 |
-| --- | --- | --- |
-| Framework | React 19, TypeScript | 컴포넌트 기반 UI 구현 및 정적 타입 기반 개발 |
-| Build Tool | Vite | 빠른 개발 서버와 번들링 환경 구성 |
-| Routing | TanStack Router | 파일 기반 라우팅, 중첩 라우트, 동적 라우트 관리 |
-| Server State | TanStack Query | 서버 상태 관리, API 요청 캐싱, 데이터 무효화 처리 |
-| Client State | Zustand | 인증 정보 등 클라이언트 전역 상태 관리 |
-| HTTP Client | Axios | API 요청 인스턴스 및 인터셉터 기반 HTTP 통신 |
-| Styling | Tailwind CSS v4 | 토큰 기반 반응형 UI 스타일링 |
-| UI Components | shadcn/ui, Radix UI | 접근성과 재사용성을 고려한 UI 컴포넌트 구성 |
-| Icons | lucide-react | 일관된 아이콘 시스템 적용 |
-| Animation | Framer Motion | 추천 플로우 내 전환 및 인터랙션 애니메이션 구현 |
-| Asset | SVGR | SVG 에셋을 React 컴포넌트로 활용 |
-| Mocking | MSW | 개발 환경 API 모킹 |
-| Documentation | Storybook | 공통 UI 컴포넌트 확인 및 문서화 |
-| Code Quality | ESLint, Prettier | 코드 품질 검사 및 포맷팅 |
-| Git Hooks | husky, lint-staged | 커밋 전 자동 포맷팅 및 린트 검사 |
-| Commit | commitlint | Conventional Commits 기반 커밋 메시지 검사 |
-| Deploy | Vercel | 프론트엔드 배포 및 공유 URL 검증 |
+| 분류          | 기술                 | 사용 목적                                         |
+| ------------- | -------------------- | ------------------------------------------------- |
+| Framework     | React 19, TypeScript | 컴포넌트 기반 UI 구현 및 정적 타입 기반 개발      |
+| Build Tool    | Vite                 | 빠른 개발 서버와 번들링 환경 구성                 |
+| Routing       | TanStack Router      | 파일 기반 라우팅, 중첩 라우트, 동적 라우트 관리   |
+| Server State  | TanStack Query       | 서버 상태 관리, API 요청 캐싱, 데이터 무효화 처리 |
+| Client State  | Zustand              | 인증 정보 등 클라이언트 전역 상태 관리            |
+| HTTP Client   | Axios                | API 요청 인스턴스 및 인터셉터 기반 HTTP 통신      |
+| Styling       | Tailwind CSS v4      | 토큰 기반 반응형 UI 스타일링                      |
+| UI Components | shadcn/ui, Radix UI  | 접근성과 재사용성을 고려한 UI 컴포넌트 구성       |
+| Icons         | lucide-react         | 일관된 아이콘 시스템 적용                         |
+| Animation     | Framer Motion        | 추천 플로우 내 전환 및 인터랙션 애니메이션 구현   |
+| Asset         | SVGR                 | SVG 에셋을 React 컴포넌트로 활용                  |
+| Mocking       | MSW                  | 개발 환경 API 모킹                                |
+| Documentation | Storybook            | 공통 UI 컴포넌트 확인 및 문서화                   |
+| Code Quality  | ESLint, Prettier     | 코드 품질 검사 및 포맷팅                          |
+| Git Hooks     | husky, lint-staged   | 커밋 전 자동 포맷팅 및 린트 검사                  |
+| Commit        | commitlint           | Conventional Commits 기반 커밋 메시지 검사        |
+| Deploy        | Vercel               | 프론트엔드 배포 및 공유 URL 검증                  |
 
 ---
 
@@ -167,29 +169,29 @@ src/
 
 ## 스크립트
 
-| 명령어 | 설명 |
-| --- | --- |
-| `pnpm dev` | Vite 개발 서버 실행 |
-| `pnpm build` | TypeScript 컴파일 후 Vite 프로덕션 빌드 |
-| `pnpm preview` | 빌드 결과물 로컬 미리보기 |
-| `pnpm lint` | ESLint 검사 |
-| `pnpm format` | Prettier 포맷팅 및 import 정리 |
-| `pnpm storybook` | Storybook 개발 서버 실행 |
-| `pnpm build-storybook` | Storybook 정적 빌드 |
-| `pnpm prepare` | Husky Git Hook 설정 |
+| 명령어                 | 설명                                    |
+| ---------------------- | --------------------------------------- |
+| `pnpm dev`             | Vite 개발 서버 실행                     |
+| `pnpm build`           | TypeScript 컴파일 후 Vite 프로덕션 빌드 |
+| `pnpm preview`         | 빌드 결과물 로컬 미리보기               |
+| `pnpm lint`            | ESLint 검사                             |
+| `pnpm format`          | Prettier 포맷팅 및 import 정리          |
+| `pnpm storybook`       | Storybook 개발 서버 실행                |
+| `pnpm build-storybook` | Storybook 정적 빌드                     |
+| `pnpm prepare`         | Husky Git Hook 설정                     |
 
 ---
 
 ## 브랜치 전략
 
-| 브랜치 | 용도 |
-| --- | --- |
-| `main` | 배포 가능한 안정 버전 관리 |
-| `develop` | 기능 통합 및 QA 진행 |
-| `feature/*` | 기능 단위 개발 |
-| `fix/*` | 버그 수정 |
-| `docs/*` | 문서 수정 |
-| `refactor/*` | 리팩토링 작업 |
+| 브랜치       | 용도                       |
+| ------------ | -------------------------- |
+| `main`       | 배포 가능한 안정 버전 관리 |
+| `develop`    | 기능 통합 및 QA 진행       |
+| `feature/*`  | 기능 단위 개발             |
+| `fix/*`      | 버그 수정                  |
+| `docs/*`     | 문서 수정                  |
+| `refactor/*` | 리팩토링 작업              |
 
 브랜치는 작업 목적이 드러나도록 작성합니다.
 
@@ -215,19 +217,19 @@ Fragmnt는 Conventional Commits 기반의 커밋 메시지 규칙을 사용합�
 
 ### 커밋 타입
 
-| 타입 | 설명 |
-| --- | --- |
-| `feat` | 새로운 기능 추가 |
-| `fix` | 버그 수정 또는 문제 해결 |
-| `docs` | 문서 작성 및 수정 |
-| `style` | 코드 포맷팅, 세미콜론 등 기능 변경이 없는 스타일 수정 |
-| `refactor` | 기능 변경 없이 코드 구조 개선 |
-| `test` | 테스트 코드 추가 및 수정 |
-| `chore` | 설정, 패키지, 빌드 관련 작업 |
-| `remove` | 사용하지 않는 파일 또는 코드 삭제 |
-| `hotfix` | 운영 중 긴급 버그 수정 |
-| `deprecated` | 더 이상 사용하지 않는 기능 표시 또는 제거 예정 처리 |
-| `design` | UI/UX 및 스타일 관련 작업 |
+| 타입         | 설명                                                  |
+| ------------ | ----------------------------------------------------- |
+| `feat`       | 새로운 기능 추가                                      |
+| `fix`        | 버그 수정 또는 문제 해결                              |
+| `docs`       | 문서 작성 및 수정                                     |
+| `style`      | 코드 포맷팅, 세미콜론 등 기능 변경이 없는 스타일 수정 |
+| `refactor`   | 기능 변경 없이 코드 구조 개선                         |
+| `test`       | 테스트 코드 추가 및 수정                              |
+| `chore`      | 설정, 패키지, 빌드 관련 작업                          |
+| `remove`     | 사용하지 않는 파일 또는 코드 삭제                     |
+| `hotfix`     | 운영 중 긴급 버그 수정                                |
+| `deprecated` | 더 이상 사용하지 않는 기능 표시 또는 제거 예정 처리   |
+| `design`     | UI/UX 및 스타일 관련 작업                             |
 
 ### 예시
 
@@ -239,11 +241,11 @@ docs: README 프로젝트 구조 정리 (#21)
 
 ### Git Hooks
 
-| Hook | 동작 |
-| --- | --- |
+| Hook         | 동작                                                          |
+| ------------ | ------------------------------------------------------------- |
 | `pre-commit` | `pnpm run format` 실행 후 변경 파일에 대해 `lint-staged` 실행 |
-| `commit-msg` | commitlint로 커밋 메시지 형식 검사 |
-| `pre-push` | `pnpm build`로 빌드 검증 |
+| `commit-msg` | commitlint로 커밋 메시지 형식 검사                            |
+| `pre-push`   | `pnpm build`로 빌드 검증                                      |
 
 ---
 

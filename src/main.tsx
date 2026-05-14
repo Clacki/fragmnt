@@ -24,13 +24,15 @@ export type RouterContext = {
 }
 
 const enableMocking = async () => {
-  if (import.meta.env.DEV && import.meta.env.VITE_ENABLE_MSW === "true") {
-    const { worker } = await import("./shared/mocks/browser")
-
-    await worker.start({
-      onUnhandledRequest: "bypass",
-    })
+  if (import.meta.env.VITE_ENABLE_MSW !== "true") {
+    return
   }
+
+  const { worker } = await import("./shared/mocks/browser")
+
+  await worker.start({
+    onUnhandledRequest: "bypass",
+  })
 }
 
 const rootElement = document.getElementById("root")

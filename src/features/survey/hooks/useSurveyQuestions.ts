@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import {
   getSurveyQuestions,
   postSurveyResult,
-} from "../api/survey-questions.types"
+} from "../api/survey-questions.api"
 
 export const useSurveyQuestions = () => {
   return useQuery({

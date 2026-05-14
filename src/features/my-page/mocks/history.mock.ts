@@ -13,19 +13,18 @@ export type HistoryItem = {
   rating: number | null
   created_at: string
 }
-
 export const mockHistoryList: HistoryItem[] = [
   {
     id: 4,
     type: "image",
     recommended_scent: {
-      id: 12,
-      name: "스모크드 팀버",
-      tags: ["스모키한", "강렬한", "깊은", "묵직한"],
+      id: 21,
+      name: "그린 포즈",
+      tags: ["싱그러운", "자연스러운", "맑은", "편안한"],
       description:
-        "나무의 그을린 결 위에 은은한 스파이스가 더해진 향입니다. 지나치게 강하지 않지만 분명한 존재감으로 공간의 인상을 또렷하게 바꿔 줍니다.",
-      eng_name: "Smoked Timber",
-      thumbnail_url: "",
+        "잠시 창문을 열고 식물의 숨을 들이마시는 순간을 닮은 향입니다. 생기 있지만 과하게 날카롭지 않아 공간에 자연스러운 여유를 만들어 줍니다.",
+      eng_name: "Green Pause",
+      thumbnail_url: "/mock-images/green-pause.jpg",
     },
     review: null,
     rating: null,

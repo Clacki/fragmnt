@@ -9,7 +9,6 @@ import {
   Vstack,
 } from "@/shared/components"
 
-import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import type { AnalysisResult, ResultType } from "@/shared/types"
 import { useMemo } from "react"
 import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
@@ -25,8 +24,9 @@ type ResultPageProps = {
 }
 
 const ResultPage = ({ resultId, type }: ResultPageProps) => {
-  useUserGuard()
-
+  // useUserGuard()
+  // TODO: Mock 배포 환경에서 페이지 접근성 확인을 위해 인증 가드를 임시 비활성화합니다.
+  // 실제 인증 연동 시 로그인 상태 기반 접근 제한을 복구합니다.
   const {
     data: fetchedResult,
     isLoading,

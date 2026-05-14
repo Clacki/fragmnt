@@ -1,22 +1,32 @@
 import { findEmailHandlers } from "@/features/_narrow.find-email/mocks/handlers"
 import { findPasswordHandlers } from "@/features/_narrow.find-password/mocks/handlers"
+import { authHandlers } from "@/features/_narrow.login/mocks/handlers"
 import { mainPageHandlers } from "@/features/_wide.index/mocks/main-page-handler"
+import { keywordHandlers } from "@/features/keyword/mocks/handlers"
 import { myPageHandlers } from "@/features/my-page/mocks/handlers"
+import { photoHandlers } from "@/features/photo/mocks/handlers"
+import { resultHandlers } from "@/features/result/mock/handlers"
 import { detailPageHandlers } from "@/features/scent-detail/mocks/handler"
 import { scentHandlers } from "@/features/scent-list/mocks/handlers"
+import { surveyHandlers } from "@/features/survey/mocks/handlers"
+import { webSharedHandlers } from "@/features/web-shared/mocks/handlers"
 import { http, HttpResponse } from "msw"
 
 export const handlers = [
-  // 기본 설정 핸들러 예시
   http.get("/api/hello", () => {
     return HttpResponse.json({ message: "Hello, world!", code: 200 })
   }),
+
   ...myPageHandlers,
   ...scentHandlers,
   ...detailPageHandlers,
   ...mainPageHandlers,
-
+  ...surveyHandlers,
+  ...keywordHandlers,
+  ...authHandlers,
+  ...photoHandlers,
+  ...resultHandlers,
   ...findEmailHandlers,
-
   ...findPasswordHandlers,
+  ...webSharedHandlers,
 ]
