@@ -1,6 +1,8 @@
+import type { ResultType } from "@/shared/types"
+
 export type HistoryItem = {
   id: number
-  type: "image"
+  type: ResultType
   recommended_scent: {
     id: number
     name: string

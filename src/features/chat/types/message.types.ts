@@ -1,4 +1,4 @@
-import type { RecommendedScent } from "@/shared/types"
+import type { ChatbotAnalysisResult } from "@/shared/types"
 
 export type MessageRole = "user" | "assistant"
 
@@ -72,12 +72,4 @@ export type ChatRecommendationResultResponse = {
   data: ChatRecommendationResult
 }
 
-export type ChatRecommendationResult = {
-  id: number
-  recommended_scent: RecommendedScent
-  ai_comment: string
-  match_score: number
-  source_type: "chatbot"
-  is_saved: boolean
-  created_at: string
-}
+export type ChatRecommendationResult = ChatbotAnalysisResult

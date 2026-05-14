@@ -1,6 +1,7 @@
 import { delay, http, HttpResponse } from "msw"
 
 import { createAnalysisResultMock } from "@/features/result/mock/result-factory"
+import { getAnalysisResult } from "@/features/result/mock/result.store"
 import { mockFavoriteScents } from "./favoriteScents.mock"
 import { mockHistoryList } from "./history.mock"
 import { mockUserProfile } from "./myPage.mock"
@@ -123,27 +124,38 @@ export const myPageHandlers = [
     })
   }),
 
-  http.get(`${BASE_URL}/analyses/history/:historyId`, ({ params, request }) => {
-    const { historyId } = params as { historyId: string }
+  http.get(`${BASE_URL}/analyses/:analysisId`, ({ params }) => {
+    const { analysisId } = params as { analysisId: string }
+    const numericAnalysisId = Number(analysisId)
 
-    const url = new URL(request.url)
-    const type = url.searchParams.get("type") ?? "image"
+    if (Number.isNaN(numericAnalysisId)) {
+      return HttpResponse.json(
+        { message: "잘못된 추천 결과 ID입니다." },
+        { status: 400 }
+      )
+    }
+
+    const storedResult = getAnalysisResult(numericAnalysisId)
+
+    if (storedResult) {
+      return HttpResponse.json(storedResult)
+    }
 
     const historyItem = mockHistoryList.find(
-      (item) => item.id === Number(historyId)
+      (history) => history.id === numericAnalysisId
     )
 
     if (!historyItem) {
       return HttpResponse.json(
-        { message: "추천 기록을 찾을 수 없습니다." },
+        { message: "추천 결과를 찾을 수 없습니다." },
         { status: 404 }
       )
     }
 
     return HttpResponse.json(
       createAnalysisResultMock({
-        id: Number(historyId),
-        type: type === "keyword" ? "keyword" : "image",
+        id: numericAnalysisId,
+        type: historyItem.type,
       })
     )
   }),

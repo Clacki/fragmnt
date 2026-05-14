@@ -1,8 +1,18 @@
+import { Link } from "@tanstack/react-router"
+
 const Header = () => {
   return (
-    <div className="bg-card text-lg font-league-gothic font-bold w-full py-xs md:py-md flex justify-center  border-b border-border shadow-md">
-      fragmnt
-    </div>
+    <header className="w-full border-b border-border bg-card py-xs shadow-md md:py-md">
+      <div className="flex items-center justify-center px-md">
+        <Link
+          to="/"
+          className="font-league-gothic text-lg font-bold text-foreground"
+          aria-label="메인 페이지로 이동"
+        >
+          fragmnt
+        </Link>
+      </div>
+    </header>
   )
 }
 

@@ -8,31 +8,42 @@ import SurveyAIContent from "./survey-ai-content/SurveyAIContent"
 type AISectionProps = {
   result: AnalysisResult
 }
+const hasArrayContent = (value?: unknown) => {
+  return Array.isArray(value) && value.length > 0
+}
+
+const hasTextContent = (value?: unknown) => {
+  return typeof value === "string" && value.trim().length > 0
+}
+
 const hasAIContent = (result: AnalysisResult) => {
   switch (result.type) {
     case "image":
-      return Boolean(
-        result.ai_comment ||
-        result.presigned_image_url ||
-        result.ai_tags.length > 0 ||
-        result.ai_keywords.length > 0
+      return (
+        hasTextContent(result.ai_comment) ||
+        hasTextContent(result.presigned_image_url) ||
+        hasArrayContent(result.ai_tags) ||
+        hasArrayContent(result.ai_keywords)
       )
 
     case "keyword":
     case "survey":
-      return Boolean(result.ai_comment || result.user_input.length > 0)
+      return (
+        hasTextContent(result.ai_comment) || hasArrayContent(result.user_input)
+      )
 
     case "chatbot":
-      return Boolean(
-        result.ai_comment ||
-        result.user_message ||
-        result.ai_keywords.length > 0
+      return (
+        hasTextContent(result.ai_comment) ||
+        hasTextContent(result.user_message) ||
+        hasArrayContent(result.ai_keywords)
       )
 
     default:
       return false
   }
 }
+
 const AISection = ({ result }: AISectionProps) => {
   if (!hasAIContent(result)) {
     return <AIEmptyCard></AIEmptyCard>

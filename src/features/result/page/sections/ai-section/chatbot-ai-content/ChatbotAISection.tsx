@@ -10,7 +10,10 @@ const ChatbotAIContent = ({ result }: ChatbotAIContentProps) => {
   const { ai_comment, user_message, ai_keywords } = result
 
   const keywords = Array.isArray(ai_keywords) ? ai_keywords : []
-  const userMessages = Array.isArray(user_message) ? user_message : []
+  const userMessages =
+    typeof user_message === "string" && user_message.trim().length > 0
+      ? [user_message]
+      : []
   const hasUserMessage = userMessages.length > 0
 
   return (

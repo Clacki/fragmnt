@@ -1,19 +1,56 @@
 import { mockHistoryList } from "@/features/my-page/mocks/history.mock"
-import type { ResultType } from "@/shared/types"
+import type { AnalysisResult, ResultType } from "@/shared/types"
 import { delay, http, HttpResponse } from "msw"
-import { analysisResultStore } from "./result.store"
+import { createAnalysisResultMock } from "./result-factory"
+import { getAnalysisResult, saveAnalysisResult } from "./result.store"
 
 type SaveAnalysisFeedbackRequest = {
   status?: boolean
 }
+
 type PostWebShareRequest = {
   result_id?: number
   type?: ResultType
 }
+
 const getHistoryResult = (resultId: number, type: ResultType) => {
   return mockHistoryList.find(
     (item) => item.id === resultId && item.type === type
   )
+}
+
+const createFallbackResult = ({
+  id,
+  type,
+}: {
+  id: number
+  type: ResultType
+}): AnalysisResult => {
+  switch (type) {
+    case "image":
+      return createAnalysisResultMock({
+        id,
+        type: "image",
+      })
+
+    case "chatbot":
+      return createAnalysisResultMock({
+        id,
+        type: "chatbot",
+      })
+
+    case "keyword":
+      return createAnalysisResultMock({
+        id,
+        type: "keyword",
+      })
+
+    case "survey":
+      return createAnalysisResultMock({
+        id,
+        type: "survey",
+      })
+  }
 }
 
 export const resultHandlers = [
@@ -30,22 +67,33 @@ export const resultHandlers = [
       )
     }
 
-    const storedResult = analysisResultStore.get(resultId)
+    const storedResult = getAnalysisResult(resultId)
 
     if (storedResult && storedResult.type === type) {
       return HttpResponse.json(storedResult)
     }
 
-    const historyResult = getHistoryResult(resultId, type)
+    const historyItem = getHistoryResult(resultId, type)
 
-    if (!historyResult) {
-      return HttpResponse.json(
-        { message: "분석 결과를 찾을 수 없습니다." },
-        { status: 404 }
-      )
+    if (historyItem) {
+      const historyResult = createFallbackResult({
+        id: resultId,
+        type: historyItem.type,
+      })
+
+      saveAnalysisResult(historyResult)
+
+      return HttpResponse.json(historyResult)
     }
 
-    return HttpResponse.json(historyResult)
+    const fallbackResult = createFallbackResult({
+      id: resultId,
+      type,
+    })
+
+    saveAnalysisResult(fallbackResult)
+
+    return HttpResponse.json(fallbackResult)
   }),
 
   http.patch("*/analyses/feedback/:resultId", async ({ params, request }) => {
@@ -72,10 +120,10 @@ export const resultHandlers = [
       )
     }
 
-    const storedResult = analysisResultStore.get(resultId)
+    const storedResult = getAnalysisResult(resultId)
 
     if (storedResult && storedResult.type === type) {
-      analysisResultStore.set(resultId, {
+      saveAnalysisResult({
         ...storedResult,
         is_saved: body.status,
       })
@@ -105,7 +153,7 @@ export const resultHandlers = [
 
     return HttpResponse.json({
       share_id: shareId,
-      og_crawler: `https://fragmnt-space.vercel.app/share-og/${shareId}`,
+      og_crawler: `https://fragmnt-space.vercel.app/share/${shareId}`,
     })
   }),
 ]

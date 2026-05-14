@@ -28,17 +28,27 @@ const MainPage = () => {
     if (!accessToken) return
     navigate({ to: "/" })
   }, [socialLoginAccessToken, accessToken]) // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
-    <Vstack gap="2xl" className="pb-2xl">
-      <Introduction />
-      <FindYourScent />
-      <ViewAllScents />
-      <img src={InsertionSrc} alt="삽입 이미지" />
-      <QuickStart />
-      <CustomerReviews />
-      <FAQ />
-    </Vstack>
+    <div className="relative">
+      <div className="absolute left-1/2 top-md z-10 w-[calc(100%-32px)] max-w-[520px] -translate-x-1/2 rounded-full border border-white/20 bg-white/20 px-sm py-xs text-center text-caption text-white/65 backdrop-blur-[2px]">
+        <strong className="font-medium text-white/75">Portfolio Demo</strong>
+        <span className="mx-xs text-white/45">·</span>
+        <span className="hidden sm:inline">
+          일부 기능은 목데이터 기반으로 동작합니다.
+        </span>
+        <span className="sm:hidden">목데이터 기반</span>
+      </div>
+
+      <Vstack gap="2xl" className="pb-2xl">
+        <Introduction />
+        <FindYourScent />
+        <ViewAllScents />
+        <img src={InsertionSrc} alt="삽입 이미지" />
+        <QuickStart />
+        <CustomerReviews />
+        <FAQ />
+      </Vstack>
+    </div>
   )
 }
 
