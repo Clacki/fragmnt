@@ -58,6 +58,19 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 > 일부 인증 및 서버 연동 기능은 실제 운영 서버가 아닌 Mock 데이터 기준으로 확인할 수 있습니다.
 ---
 
+## Preview
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/acdb73d0-7742-4100-9354-fdfdb45e6772" alt="Fragmnt 메인 화면" width="45%" />
+  <img src="https://github.com/user-attachments/assets/d4c52133-f90c-41ea-8ead-e13de30086e8" alt="Fragmnt 추천 방식 선택 화면" width="45%" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/eba7e4d2-607b-4b4d-8500-3b6d85b733b6" alt="Fragmnt 추천 결과 화면" width="45%" />
+  <img src="https://github.com/user-attachments/assets/641dd313-f0e4-47da-9c07-55177f3371af" alt="Fragmnt 마이페이지 화면" width="45%" />
+</p>
+
+---
+
 ## 주요 기능
 
 - 메인 랜딩 페이지
