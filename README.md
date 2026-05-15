@@ -56,9 +56,7 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 
 > 현재 Demo는 포트폴리오 확인을 위해 MSW 기반 Mock API로 동작합니다.  
 > 일부 인증 및 서버 연동 기능은 실제 운영 서버가 아닌 Mock 데이터 기준으로 확인할 수 있습니다.
----
 
-## Preview
 ---
 
 ## Preview
@@ -66,23 +64,22 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 <table>
   <tr>
     <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/acdb73d0-7742-4100-9354-fdfdb45e6772" alt="Fragmnt 메인 화면" width="100%" />
+      <img src="https://github.com/user-attachments/assets/79002aad-009f-46e4-b408-3bb460c2c78b" alt="Fragmnt 메인 화면" width="100%" />
     </td>
     <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/d4c52133-f90c-41ea-8ead-e13de30086e8" alt="Fragmnt 추천 방식 선택 화면" width="100%" />
+      <img src="https://github.com/user-attachments/assets/c3a72442-b3ce-43d4-863a-5bd5d07dcc53" alt="Fragmnt 추천 방식 선택 화면" width="100%" />
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/eba7e4d2-607b-4b4d-8500-3b6d85b733b6" alt="Fragmnt 추천 결과 화면" width="100%" />
+      <img src="https://github.com/user-attachments/assets/51e97e7a-4267-419d-b3f9-9eda57b1672b" alt="Fragmnt 추천 결과 화면" width="100%" />
     </td>
     <td width="50%" align="center">
-      <img src="https://github.com/user-attachments/assets/641dd313-f0e4-47da-9c07-55177f3371af" alt="Fragmnt 마이페이지 화면" width="100%" />
+      <img src="https://github.com/user-attachments/assets/1e2b6529-b442-45ba-95c2-77ee78362467" alt="Fragmnt 마이페이지 화면" width="100%" />
     </td>
   </tr>
 </table>
 
----
 ---
 
 ## 주요 기능
