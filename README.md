@@ -59,16 +59,30 @@ Fragmnt는 사용자가 자신에게 어울리는 향기를 더 쉽게 찾을 �
 ---
 
 ## Preview
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/acdb73d0-7742-4100-9354-fdfdb45e6772" alt="Fragmnt 메인 화면" width="45%" />
-  <img src="https://github.com/user-attachments/assets/d4c52133-f90c-41ea-8ead-e13de30086e8" alt="Fragmnt 추천 방식 선택 화면" width="45%" />
-</p>
+---
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/eba7e4d2-607b-4b4d-8500-3b6d85b733b6" alt="Fragmnt 추천 결과 화면" width="45%" />
-  <img src="https://github.com/user-attachments/assets/641dd313-f0e4-47da-9c07-55177f3371af" alt="Fragmnt 마이페이지 화면" width="45%" />
-</p>
+## Preview
 
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/acdb73d0-7742-4100-9354-fdfdb45e6772" alt="Fragmnt 메인 화면" width="100%" />
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/d4c52133-f90c-41ea-8ead-e13de30086e8" alt="Fragmnt 추천 방식 선택 화면" width="100%" />
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/eba7e4d2-607b-4b4d-8500-3b6d85b733b6" alt="Fragmnt 추천 결과 화면" width="100%" />
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github.com/user-attachments/assets/641dd313-f0e4-47da-9c07-55177f3371af" alt="Fragmnt 마이페이지 화면" width="100%" />
+    </td>
+  </tr>
+</table>
+
+---
 ---
 
 ## 주요 기능
