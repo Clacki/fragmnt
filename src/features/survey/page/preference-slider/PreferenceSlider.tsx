@@ -104,7 +104,7 @@ const PreferenceSlider = ({
             value={value}
             onChange={handleChange}
             aria-label={title}
-            className="preference-slider absolute inset-0 z-40"
+            className="preference-slider absolute z-40"
           />
 
           <output

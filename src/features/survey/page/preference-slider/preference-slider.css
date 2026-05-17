@@ -7,11 +7,26 @@
   outline: none;
   background: transparent;
   cursor: pointer;
+
+  border: 0;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.preference-slider:focus,
+.preference-slider:focus-visible,
+.preference-slider:active {
+  outline: none;
+  box-shadow: none;
 }
 
 .preference-slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  appearance: none;
   height: 100%;
   background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .preference-slider::-webkit-slider-thumb {
@@ -19,20 +34,21 @@
   appearance: none;
   width: 28px;
   height: 28px;
-  border: none;
+  border: 0;
+  border-radius: 9999px;
   background: transparent;
+  box-shadow: none;
   cursor: pointer;
 }
 
-.preference-slider::-moz-range-track {
-  height: 100%;
+.preference-slider:focus::-webkit-slider-runnable-track,
+.preference-slider:active::-webkit-slider-runnable-track {
   background: transparent;
+  box-shadow: none;
 }
 
-.preference-slider::-moz-range-thumb {
-  width: 28px;
-  height: 28px;
-  border: none;
+.preference-slider:focus::-webkit-slider-thumb,
+.preference-slider:active::-webkit-slider-thumb {
   background: transparent;
-  cursor: pointer;
+  box-shadow: none;
 }
