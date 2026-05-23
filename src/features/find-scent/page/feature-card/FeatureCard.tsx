@@ -33,6 +33,7 @@ const FeatureCard = ({
         <img
           src={imageSrc}
           alt={imageAlt}
+          loading="lazy"
           className="h-full min-h-[132px] w-full object-cover md:min-h-0"
         />
       </div>

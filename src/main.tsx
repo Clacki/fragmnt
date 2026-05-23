@@ -1,7 +1,7 @@
+import { QueryClientProvider, type QueryClient } from "@tanstack/react-query"
 import { RouterProvider, createRouter } from "@tanstack/react-router"
 import ReactDOM from "react-dom/client"
 
-import { QueryClientProvider, type QueryClient } from "@tanstack/react-query"
 import "./index.css"
 import { routeTree } from "./routeTree.gen"
 import queryClient from "./shared/api/query-client"
@@ -24,14 +24,41 @@ export type RouterContext = {
 }
 
 const enableMocking = async () => {
-  if (import.meta.env.VITE_ENABLE_MSW !== "true") {
+  if (import.meta.env.VITE_API_MOCKING !== "enabled") {
     return
   }
 
   const { worker } = await import("./shared/mocks/browser")
 
   await worker.start({
-    onUnhandledRequest: "bypass",
+    serviceWorker: {
+      url: "/mockServiceWorker.js",
+      options: {
+        scope: "/",
+        updateViaCache: "none",
+      },
+    },
+    onUnhandledRequest(request, print) {
+      const url = new URL(request.url)
+
+      if (request.mode === "navigate") {
+        return
+      }
+
+      if (request.destination === "document") {
+        return
+      }
+
+      if (request.destination) {
+        return
+      }
+
+      if (!url.pathname.startsWith("/api")) {
+        return
+      }
+
+      print.warning()
+    },
   })
 }
 
@@ -41,14 +68,22 @@ if (!rootElement) {
   throw new Error("root element를 찾을 수 없어요.")
 }
 
-if (!rootElement.innerHTML) {
-  enableMocking().then(() => {
-    const root = ReactDOM.createRoot(rootElement)
+const renderApp = () => {
+  if (rootElement.innerHTML) {
+    return
+  }
 
-    root.render(
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    )
-  })
+  const root = ReactDOM.createRoot(rootElement)
+
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
+  )
 }
+
+enableMocking()
+  .catch((error) => {
+    console.error("MSW 실행 중 문제가 발생했어요.", error)
+  })
+  .finally(renderApp)

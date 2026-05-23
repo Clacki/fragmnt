@@ -38,6 +38,7 @@ const CollectionCard = ({
             src={imageSrc}
             alt={imageAlt}
             className="w-full h-full object-cover bg-surface-default"
+            loading="lazy"
             onError={() => setIsError(true)}
           />
         ) : (

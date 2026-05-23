@@ -12,6 +12,7 @@ import { scentHandlers } from "@/features/scent-list/mocks/handlers"
 import { surveyHandlers } from "@/features/survey/mocks/handlers"
 import { webSharedHandlers } from "@/features/web-shared/mocks/handlers"
 import { http, HttpResponse } from "msw"
+import { accountHandlers } from "./account-handlers"
 
 export const handlers = [
   http.get("/api/hello", () => {
@@ -25,6 +26,7 @@ export const handlers = [
   ...surveyHandlers,
   ...keywordHandlers,
   ...authHandlers,
+  ...accountHandlers,
   ...photoHandlers,
   ...chatbotHandlers,
   ...findEmailHandlers,

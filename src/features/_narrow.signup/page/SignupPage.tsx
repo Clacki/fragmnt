@@ -8,7 +8,7 @@ import { useNavigate } from "@tanstack/react-router"
 import SignupModals from "./signup-modals/SignupModals"
 import useSignup from "./use-signup/use-signup"
 
-const isMockServer = import.meta.env.VITE_ENABLE_MSW === "true"
+const isMockServer = import.meta.env.VITE_API_MOCKING === "enabled"
 
 const DemoSignupGuide = () => {
   const navigate = useNavigate()

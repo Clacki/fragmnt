@@ -4,7 +4,6 @@ import ErrorBox from "@/shared/components/error-box/ErrorBox"
 import type { WithButtonProps } from "@/shared/components/inputs/Button/Button"
 import type { DefaultButtonProps } from "@/shared/types"
 import { useQuery } from "@tanstack/react-query"
-import { useLoaderData } from "@tanstack/react-router"
 import clsx from "clsx"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
@@ -14,26 +13,27 @@ import styles from "./ReviewCarousel.module.css"
 const RoundButton = (props: DefaultButtonProps & WithButtonProps) => {
   return <Button padding="same" radius="full" style="ghost" {...props} />
 }
-
 const ReviewCarousel = () => {
   const [index, setIndex] = useState(0)
 
-  const { data: loaderData, error: loaderError } = useLoaderData({
-    from: "/_wide/",
-  })
-
   const {
-    data: queryData,
-    error: queryError,
+    data: reviewsInMain,
+    error,
     refetch,
+    isLoading,
   } = useQuery(makeReviewsInMainQueryOptions())
 
-  const reviewsInMain = queryData ?? loaderData
-  const error = queryError ?? loaderError
+  if (isLoading) {
+    return null
+  }
 
-  if (error) return <ErrorBox refetch={refetch} />
-  if (!reviewsInMain) throw new Error("---- UNREACHABLE")
+  if (error) {
+    return <ErrorBox refetch={refetch} />
+  }
 
+  if (!reviewsInMain || reviewsInMain.length === 0) {
+    return null
+  }
   return (
     <div className="relative">
       {reviewsInMain.length > 2 && (

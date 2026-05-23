@@ -34,6 +34,7 @@ const ArchiveCard = ({
             src={imageSrc}
             alt={imageAlt}
             onError={() => setIsError(true)}
+            loading="lazy"
             className="h-full w-full object-cover"
           />
         ) : (

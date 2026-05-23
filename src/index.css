@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @tailwind utilities;
 @custom-variant dark (&: is(.dark *));
@@ -278,17 +277,10 @@
 }
 
 /* fonts */
-@font-face {
-  font-family: "Apple SD Gothic Neo";
-  src: url("/src/assets/fonts/AppleSDGothicNeoL.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
 
 @font-face {
   font-family: "Apple SD Gothic Neo";
-  src: url("/src/assets/fonts/AppleSDGothicNeoM.ttf") format("truetype");
+  src: url("/src/assets/fonts/AppleSDGothicNeo-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -296,15 +288,7 @@
 
 @font-face {
   font-family: "Apple SD Gothic Neo";
-  src: url("/src/assets/fonts/AppleSDGothicNeoSB.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Apple SD Gothic Neo";
-  src: url("/src/assets/fonts/AppleSDGothicNeoB.ttf") format("truetype");
+  src: url("/src/assets/fonts/AppleSDGothicNeo-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -312,7 +296,10 @@
 
 @font-face {
   font-family: "League Gothic";
-  src: url("/src/assets/fonts/LeagueGothic.ttf") format("truetype");
+  src: url("/src/assets/fonts/LeagueGothic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 html,

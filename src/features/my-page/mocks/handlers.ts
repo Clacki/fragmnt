@@ -108,7 +108,7 @@ export const myPageHandlers = [
     return HttpResponse.json(mockReviewList)
   }),
 
-  http.delete(`${BASE_URL}/analyses/:reviewId/review`, (req) => {
+  http.delete(`${BASE_URL}/analyses/reviews/:reviewId`, (req) => {
     const { reviewId } = req.params
 
     const index = mockReviewList.findIndex(
@@ -161,25 +161,26 @@ export const myPageHandlers = [
   }),
 
   http.patch(
-    `${BASE_URL}/analyses/:reviewId/review`,
+    `${BASE_URL}/analyses/reviews/:reviewId`,
     async ({ request, params }) => {
       const { reviewId } = params as { reviewId: string }
-      const { content } = (await request.json()) as { content: string }
+      const { review } = (await request.json()) as { review: string }
 
-      const review = mockReviewList.find(
-        (review) => review.id === Number(reviewId)
+      const reviewItem = mockReviewList.find(
+        (item) => item.id === Number(reviewId)
       )
 
-      if (!review) {
+      if (!reviewItem) {
         return new HttpResponse(null, {
           status: 404,
         })
       }
 
-      review.review = content
+      reviewItem.review = review
 
-      return new HttpResponse(null, {
-        status: 204,
+      return HttpResponse.json({
+        detail: "리뷰가 수정되었습니다.",
+        review: reviewItem,
       })
     }
   ),

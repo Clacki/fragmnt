@@ -9,7 +9,7 @@ import { useEffect, useState, type ReactNode } from "react"
 import SocialLoginButton from "./social-login-button/SocialLoginButton"
 import useLogin from "./use-login/use-login"
 
-const isMockServer = import.meta.env.VITE_ENABLE_MSW === "true"
+const isMockServer = import.meta.env.VITE_API_MOCKING === "enabled"
 
 type DimLinkProps = {
   to: React.ComponentProps<typeof Link>["to"]

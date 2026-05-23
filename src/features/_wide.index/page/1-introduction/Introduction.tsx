@@ -1,4 +1,5 @@
-import BgSrc from "@/assets/images/main/introduction.png"
+import MobileBgSrc from "@/assets/images/main/introduction-mobile.webp"
+import BgSrc from "@/assets/images/main/introduction.webp"
 import useAuthStore from "@/shared/api/use-auth-store"
 import { Button, Vstack } from "@/shared/components"
 import { useMediaQuery } from "@/shared/utils/use-media-query"
@@ -24,11 +25,24 @@ const Introduction = () => {
       gap="2xl"
       className="relative items-center p-2xl justify-between overflow-hidden"
     >
-      <img
-        src={BgSrc}
-        alt="소개 배경"
-        className="absolute top-0 inset-0 brightness-60 size-full object-cover"
-      />
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcSet={MobileBgSrc}
+          width={640}
+          height={360}
+        />
+        <img
+          src={BgSrc}
+          alt="소개 배경"
+          fetchPriority="high"
+          decoding="async"
+          loading="eager"
+          width={1920}
+          height={1080}
+          className="absolute top-0 inset-0 brightness-60 size-full object-cover"
+        />
+      </picture>
 
       <Vstack className="z-10 justify-between w-full flex-1 text-card">
         <Vstack gap="none" className={"text-2xl pb-25"}>

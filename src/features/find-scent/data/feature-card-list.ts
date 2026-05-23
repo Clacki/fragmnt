@@ -1,6 +1,6 @@
 import ChatImage from "@/assets/images/find-scent/chatbot.webp"
-import PhotoImage from "@/assets/images/find-scent/photo.jpg"
-import SurveyImage from "@/assets/images/find-scent/survey.jpg"
+import PhotoImage from "@/assets/images/find-scent/photo.webp"
+import SurveyImage from "@/assets/images/find-scent/survey.webp"
 
 import type { FeatureCardItem } from "../types/feature-card.type"
 
