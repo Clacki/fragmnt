@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query"
 import clsx from "clsx"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useState } from "react"
+import ReviewCarouselSkeleton from "../ReviewCarouselSkeleton"
 import ReviewCardInMain from "./review-card-in-main/ReviewCardInMain"
 import styles from "./ReviewCarousel.module.css"
 
@@ -24,7 +25,7 @@ const ReviewCarousel = () => {
   } = useQuery(makeReviewsInMainQueryOptions())
 
   if (isLoading) {
-    return null
+    return <ReviewCarouselSkeleton />
   }
 
   if (error) {
