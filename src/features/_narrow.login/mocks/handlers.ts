@@ -1,7 +1,8 @@
+import { mockApi } from "@/shared/mocks/mock-api"
 import { delay, http, HttpResponse } from "msw"
 
 export const authHandlers = [
-  http.post("*/accounts/login", async ({ request }) => {
+  http.post(mockApi("/accounts/login"), async ({ request }) => {
     await delay(500)
 
     const body = (await request.json()) as {
@@ -28,7 +29,7 @@ export const authHandlers = [
     })
   }),
 
-  http.post("*/accounts/logout", async () => {
+  http.post(mockApi("/accounts/logout"), async () => {
     await delay(300)
 
     return HttpResponse.json({
@@ -36,7 +37,7 @@ export const authHandlers = [
     })
   }),
 
-  http.post("*/accounts/me/refresh", async () => {
+  http.post(mockApi("/accounts/me/refresh"), async () => {
     await delay(200)
 
     return HttpResponse.json({

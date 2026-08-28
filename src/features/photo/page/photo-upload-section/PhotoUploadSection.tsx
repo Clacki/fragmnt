@@ -1,4 +1,5 @@
-import { Hstack } from "@/shared/components"
+import { Hstack, Toast } from "@/shared/components"
+import { validateImageFile } from "@/shared/utils/validate-image-file"
 import {
   useEffect,
   useRef,
@@ -6,6 +7,7 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react"
+import { toast } from "sonner"
 import type { MobilePhotoStep } from "../../types/mobile-photo-step.types"
 import PhotoActionButton from "../photo-action-button/PhotoActionButton"
 import UploadPreviewBox from "./upload-preview-box/UploadPreviewBox"
@@ -56,6 +58,14 @@ const PhotoUploadSection = ({
     const file = event.target.files?.[0]
 
     if (!file) {
+      return
+    }
+
+    const validationMessage = validateImageFile(file)
+
+    if (validationMessage) {
+      toast.custom(() => <Toast variant="error" message={validationMessage} />)
+      event.target.value = ""
       return
     }
 
@@ -115,7 +125,7 @@ const PhotoUploadSection = ({
       <input
         ref={galleryInputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp"
         className="hidden"
         onChange={handleChangeImage}
       />
@@ -123,7 +133,7 @@ const PhotoUploadSection = ({
       <input
         ref={cameraInputRef}
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/webp"
         capture="environment"
         className="hidden"
         onChange={handleChangeImage}

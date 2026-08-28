@@ -1,6 +1,8 @@
+import EmptyScentImage from "@/assets/images/empty-state/empty-scent.svg"
 import {
   BackButton,
   Button,
+  EmptyState,
   PageIntro,
   RoundBox,
   Vstack,
@@ -9,35 +11,45 @@ import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 import { useState } from "react"
 import { useCreateReviewMutation } from "../hooks/useCreateReviewMutation"
-import ReviewStarRating from "./review-star-rating/ReviewStatRating"
+import ReviewStarRating from "./review-star-rating/ReviewStarRating"
 
 export const Review = () => {
   useUserGuard()
   const navigate = useNavigate()
 
-  const search = useSearch({ from: "/_wide/review" }) as {
-    resultId?: string | number
-    type?: "image" | "chatbot" | "keyword" | "survey"
-    name?: string
-    engName?: string
-    thumbnailUrl?: string
-  }
-
-  const resultId = Number(search.resultId)
+  const search = useSearch({ from: "/_wide/review" })
+  const resultId = search.resultId
 
   const [rating, setRating] = useState(0)
   const [review, setReview] = useState("")
+  const [validationMessage, setValidationMessage] = useState("")
 
-  const { mutate, isPending } = useCreateReviewMutation()
+  const { mutate, isPending, isError } = useCreateReviewMutation()
 
   const handleSubmit = () => {
-    if (!search.type) return
+    if (!resultId || !search.type) {
+      return
+    }
+
+    const trimmedReview = review.trim()
+
+    if (rating === 0) {
+      setValidationMessage("별점을 선택해 주세요.")
+      return
+    }
+
+    if (!trimmedReview) {
+      setValidationMessage("리뷰 내용을 입력해 주세요.")
+      return
+    }
+
+    setValidationMessage("")
 
     mutate(
       {
         resultId,
         rating,
-        review,
+        review: trimmedReview,
         type: search.type,
       },
       {
@@ -45,6 +57,23 @@ export const Review = () => {
           navigate({ to: "/my-page" })
         },
       }
+    )
+  }
+
+  if (!resultId || !search.type) {
+    return (
+      <div className="px-lg py-2xl">
+        <EmptyState
+          imageSrc={EmptyScentImage}
+          title="리뷰를 작성할 추천 결과가 없어요"
+          description="먼저 향기를 추천받은 뒤 결과 페이지에서 리뷰를 작성해주세요."
+          action={
+            <Button onClick={() => navigate({ to: "/find-scent" })}>
+              향기 추천받기
+            </Button>
+          }
+        />
+      </div>
     )
   }
 
@@ -62,7 +91,7 @@ export const Review = () => {
                   resultId: String(resultId),
                 },
                 search: {
-                  type: search.type ?? "image",
+                  type: search.type ?? null,
                 },
               })
             }
@@ -109,17 +138,31 @@ export const Review = () => {
 
           <textarea
             value={review}
-            onChange={(e) => setReview(e.target.value)}
+            onChange={(e) => {
+              setReview(e.target.value)
+              setValidationMessage("")
+            }}
+            maxLength={500}
             className="min-h-36 w-full resize-none rounded-2xl border border-transparent bg-green-input px-md py-md text-sm text-text-primary outline-none transition-colors placeholder:text-text-sub focus:border-primary"
             placeholder="예: 추천 결과는 좋았지만, 향의 분위기를 조금 더 자세히 설명해주면 좋을 것 같아요."
           />
+          <span className="self-end text-xs text-text-sub">
+            {review.length}/500
+          </span>
         </Vstack>
       </RoundBox>
+
+      {(validationMessage || isError) && (
+        <p className="text-center text-sm text-error" role="alert">
+          {validationMessage ||
+            "리뷰를 저장하지 못했습니다. 잠시 후 다시 시도해 주세요."}
+        </p>
+      )}
 
       <Button
         className="mx-auto min-w-32"
         onClick={handleSubmit}
-        disabled={isPending || !Number.isFinite(resultId)}
+        disabled={isPending || rating === 0 || !review.trim()}
       >
         후기 제출하기
       </Button>

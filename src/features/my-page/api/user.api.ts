@@ -1,7 +1,7 @@
 import { instance } from "@/shared/api/axios-instance"
-import type { HistoryItem } from "../mocks/history.mock"
 import type {
   FavoriteScent,
+  HistoryItem,
   UpdateFavoriteScentRequest,
   UpdateUserProfileRequest,
   UserProfile,

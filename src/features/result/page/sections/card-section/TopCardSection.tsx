@@ -20,6 +20,7 @@ const TopCardSection = ({ result, type }: TopCardSectionProps) => {
     message: string
     variant: ToastVariant
   } | null>(null)
+  const [shareFallbackUrl, setShareFallbackUrl] = useState("")
 
   const recommendedScent = result?.recommended_scent
   const matchScore = result?.match_score
@@ -88,9 +89,11 @@ const TopCardSection = ({ result, type }: TopCardSectionProps) => {
 
           try {
             await navigator.clipboard.writeText(webShareUrl)
+            setShareFallbackUrl("")
             showToast("공유 링크가 복사되었습니다")
           } catch {
-            showToast("공유 링크 복사에 실패했습니다", "error")
+            setShareFallbackUrl(webShareUrl)
+            showToast("아래 링크를 직접 복사해주세요", "error")
           }
         },
         onError: () => {
@@ -105,6 +108,23 @@ const TopCardSection = ({ result, type }: TopCardSectionProps) => {
       {toast && (
         <div className="fixed left-1/2 top-xl z-50 w-[calc(100%-2rem)] max-w-[24rem] -translate-x-1/2">
           <Toast message={toast.message} variant={toast.variant} />
+        </div>
+      )}
+      {shareFallbackUrl && (
+        <div className="mb-md rounded-lg border border-border bg-card p-md">
+          <label
+            htmlFor="share-fallback-url"
+            className="mb-xs block text-sm font-medium text-text-primary"
+          >
+            공유 링크
+          </label>
+          <input
+            id="share-fallback-url"
+            value={shareFallbackUrl}
+            readOnly
+            onFocus={(event) => event.currentTarget.select()}
+            className="w-full rounded-md border border-border bg-surface-default px-sm py-xs text-sm text-text-sub outline-none focus:border-primary"
+          />
         </div>
       )}
       <ResultTopCard

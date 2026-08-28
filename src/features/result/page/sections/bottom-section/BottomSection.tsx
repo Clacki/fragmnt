@@ -29,7 +29,7 @@ const BottomSection = ({
     navigate({
       to: "/review",
       search: {
-        resultId: String(resultId),
+        resultId,
         type,
         name,
         engName: eng_name,

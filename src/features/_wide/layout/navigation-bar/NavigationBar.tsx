@@ -1,5 +1,6 @@
 import useAuthStore from "@/shared/api/use-auth-store"
 import { Hstack, Vstack } from "@/shared/components"
+import { IS_DEMO_MODE } from "@/shared/env/env-vars"
 import { Link, useLocation, type LinkProps } from "@tanstack/react-router"
 import clsx from "clsx"
 import {
@@ -69,7 +70,9 @@ const NavigationButton = ({
 
 const NavigationBar = () => {
   const accessToken = useAuthStore((state) => state.accessToken)
-  const buttonConfigs = makeNavigationButtonConfigs(accessToken)
+  const buttonConfigs = makeNavigationButtonConfigs(
+    IS_DEMO_MODE ? "demo-access" : accessToken
+  )
 
   return (
     <Hstack className="justify-evenly bg-card" gap="none">

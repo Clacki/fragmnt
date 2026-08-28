@@ -7,11 +7,14 @@ import {
 } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
 
+import { instance } from "@/shared/api/axios-instance"
+import queryClient from "@/shared/api/query-client"
 import useAuthStore from "@/shared/api/use-auth-store"
+import { IS_DEMO_MODE } from "@/shared/env/env-vars"
 import { useNavigate } from "@tanstack/react-router"
 import axios from "axios"
-import { LogOutIcon } from "lucide-react"
-import { useEffect } from "react"
+import { LogOutIcon, RotateCcwIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 import { useUserProfile } from "./hooks/useUserProfile"
 import { TabSection } from "./pages/tab-section/TabSection"
 import { UserSection } from "./pages/user-section/UserSection"
@@ -20,9 +23,14 @@ export const MyPage = () => {
   const { data: user, isLoading, error } = useUserProfile()
   const navigate = useNavigate()
   const logout = useAuthStore((state) => state.logout)
+  const [isResettingDemo, setIsResettingDemo] = useState(false)
 
   useEffect(() => {
-    if (axios.isAxiosError(error) && error.response?.status === 401) {
+    if (
+      !IS_DEMO_MODE &&
+      axios.isAxiosError(error) &&
+      error.response?.status === 401
+    ) {
       logout()
 
       navigate({
@@ -38,6 +46,18 @@ export const MyPage = () => {
   const handleLogout = () => {
     logout()
     navigate({ to: "/" })
+  }
+
+  const handleResetDemo = async () => {
+    setIsResettingDemo(true)
+
+    try {
+      await instance.post("/demo/reset")
+      queryClient.clear()
+      window.location.reload()
+    } finally {
+      setIsResettingDemo(false)
+    }
   }
 
   return (
@@ -63,15 +83,28 @@ export const MyPage = () => {
           <>
             <UserSection key={user.id} user={user} />
             <TabSection />
-            <Button
-              style="ghost"
-              size="sm"
-              onClick={handleLogout}
-              className="mt-2xl self-end text-text-sub text-sm"
-            >
-              <LogOutIcon size={16} />
-              로그아웃
-            </Button>
+            {IS_DEMO_MODE ? (
+              <Button
+                style="ghost"
+                size="sm"
+                onClick={handleResetDemo}
+                disabled={isResettingDemo}
+                className="mt-2xl self-end text-sm text-text-sub"
+              >
+                <RotateCcwIcon size={16} />
+                {isResettingDemo ? "초기화 중..." : "데모 데이터 초기화"}
+              </Button>
+            ) : (
+              <Button
+                style="ghost"
+                size="sm"
+                onClick={handleLogout}
+                className="mt-2xl self-end text-sm text-text-sub"
+              >
+                <LogOutIcon size={16} />
+                로그아웃
+              </Button>
+            )}
           </>
         ) : null}
       </Container>

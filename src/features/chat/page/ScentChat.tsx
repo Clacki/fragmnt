@@ -4,6 +4,7 @@ import {
   RoundBox,
   Vstack,
 } from "@/shared/components"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useEffect, useState } from "react"
 import { useCreateChatSession } from "../hooks/useCreateChatSession"
 import { useRetryChatRecommendationMutation } from "../hooks/useRetryChatRecommendation"
@@ -23,9 +24,7 @@ import ChatInput from "./chat-input/ChatInput"
 import ChatList from "./chat-list/ChatList"
 
 const ScentChat = () => {
-  // useUserGuard()
-  // TODO: Mock 배포 환경에서 페이지 접근성 확인을 위해 인증 가드를 임시 비활성화합니다.
-  // 실제 인증 연동 시 로그인 상태 기반 접근 제한을 복구합니다.
+  useUserGuard()
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>(messages)
   const [sessionId, setSessionId] = useState<number | null>(null)
   const { mutateAsync: createSession } = useCreateChatSession()
@@ -43,8 +42,14 @@ const ScentChat = () => {
       try {
         const response = await createSession()
         setSessionId(response.data.id)
-      } catch (error) {
-        console.error(error)
+      } catch {
+        setChatMessages((prev) => [
+          ...prev,
+          createAssistantTextMessage({
+            id: createMessageId(),
+            text: "대화를 시작하지 못했어요. 잠시 후 다시 시도해주세요.",
+          }),
+        ])
       }
     }
 
@@ -83,9 +88,7 @@ const ScentChat = () => {
         ...prev.filter((message) => message.id !== typingMessage.id),
         ...assistantMessages,
       ])
-    } catch (error) {
-      console.error(error)
-
+    } catch {
       const errorMessage = createAssistantTextMessage({
         id: createMessageId(),
         text: "메시지 전송에 실패했어요. 잠시 후 다시 시도해주세요.",
@@ -122,9 +125,7 @@ const ScentChat = () => {
         ...prev.filter((message) => message.id !== typingMessage.id),
         ...retryMessages,
       ])
-    } catch (error) {
-      console.error(error)
-
+    } catch {
       const errorMessage = createAssistantTextMessage({
         id: createMessageId(),
         text: "다시 추천에 실패했어요. 잠시 후 다시 시도해주세요.",

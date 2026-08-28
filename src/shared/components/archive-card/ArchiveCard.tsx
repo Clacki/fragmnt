@@ -26,7 +26,7 @@ const ArchiveCard = ({
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full flex-col gap-md rounded-lg border border-border bg-card p-lg text-left shadow-box transition hover:bg-gray-5 hover:shadow-hover"
+      className="flex w-full cursor-pointer flex-col gap-md rounded-lg border border-border bg-card p-lg text-left shadow-box transition hover:bg-gray-5 hover:shadow-hover"
     >
       <div className="flex h-[200px] w-full items-center justify-center overflow-hidden rounded-md">
         {imageSrc && !isError ? (

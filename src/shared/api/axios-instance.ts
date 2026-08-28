@@ -63,11 +63,10 @@ instance.interceptors.response.use(
 
       const response = await headOnlyInstance.request(error.config)
       return response
-    } catch (error) {
+    } catch (refreshError) {
       // NOTE: 재발급 실패 -> 추가 요청 없이 로그아웃
-      console.log({ error })
       clearAuthLogout()
-      return Promise.reject(error)
+      return Promise.reject(refreshError)
     }
   }
 )

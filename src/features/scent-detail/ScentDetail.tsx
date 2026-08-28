@@ -18,14 +18,12 @@ import TopCard from "./page/sections/top-section/TopCard"
 
 export const ScentDetail = () => {
   const { id } = useSearch({ from: "/_wide/scent-detail" })
-  const scentId = Number(id)
+  const scentId = id ?? Number.NaN
 
   const { data, isLoading, error } = useDetailQuery(scentId)
 
   const scent = data?.data
   const isInvalid = !Number.isFinite(scentId) || error || !scent
-
-  console.log(data)
 
   return (
     <CenterContainer className="w-full">

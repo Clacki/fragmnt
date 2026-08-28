@@ -1,10 +1,9 @@
+import { mockApi } from "@/shared/mocks/mock-api"
 import { http, HttpResponse } from "msw"
 import { getFragranceDetailMock } from "./fragranceDetail.mock"
 
-const BASE_URL = import.meta.env.VITE_BASE_URL
-
 export const detailPageHandlers = [
-  http.get(`${BASE_URL}/scents/:id`, ({ params }) => {
+  http.get(mockApi("/scents/:id"), ({ params }) => {
     const scentId = Number(params.id)
     const fragranceDetail = getFragranceDetailMock(scentId)
 
