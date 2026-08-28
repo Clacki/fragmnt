@@ -1,14 +1,15 @@
 import { createAnalysisResultMock } from "@/features/result/mock/result-factory"
 import { saveAnalysisResult } from "@/features/result/mock/result.store"
+import { mockApi } from "@/shared/mocks/mock-api"
 import { delay, http, HttpResponse } from "msw"
 import type { PostKeywordResultRequest } from "../types/keyword-questions.types"
 import { scentKeywordMockData } from "./scent-keyword-mock-data"
 
 export const keywordHandlers = [
-  http.get("*/question/keyword", () => {
+  http.get(mockApi("/question/keyword"), () => {
     return HttpResponse.json(scentKeywordMockData)
   }),
-  http.post("*/question/keyword", async ({ request }) => {
+  http.post(mockApi("/question/keyword"), async ({ request }) => {
     const body = (await request.json()) as PostKeywordResultRequest
 
     if (!Array.isArray(body) || body.length === 0) {

@@ -34,18 +34,6 @@ export type RecommendationMessage = {
 
 export type ChatMessage = TextMessage | TypingMessage | RecommendationMessage
 
-export type GetScentDetailResponse = {
-  status: "success"
-  data: {
-    id: number
-    name: string
-    eng_name: string
-    description: string
-    tags: string[]
-    thumbnail_url: string
-  }
-}
-
 export type SendChatMessagePayload = {
   sessionId: number
   message: string

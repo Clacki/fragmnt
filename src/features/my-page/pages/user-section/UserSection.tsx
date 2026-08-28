@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button, EmptyImage, Toast } from "@/shared/components"
 import { formatDate } from "@/shared/utils/date"
+import { validateImageFile } from "@/shared/utils/validate-image-file"
 import {
   CalendarDays,
   Check,
@@ -84,6 +85,14 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
     const file = e.target.files?.[0]
     if (!file) return
 
+    const validationMessage = validateImageFile(file)
+
+    if (validationMessage) {
+      toast.custom(() => <Toast variant="error" message={validationMessage} />)
+      e.target.value = ""
+      return
+    }
+
     uploadProfileImage(file, {
       onSuccess: () => {
         setPreviewImage(null)
@@ -140,7 +149,7 @@ export const UserSection = ({ user, className }: UserSectionProps) => {
         <input
           ref={fileInputRef}
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp"
           onChange={handleImageChange}
           className="hidden"
         />

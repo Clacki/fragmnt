@@ -1,7 +1,5 @@
-import type {
-  GetScentDetailResponse,
-  RecommendationCardData,
-} from "../types/message.types"
+import type { ScentDetail } from "@/shared/types/scent-types/scent.type"
+import type { RecommendationCardData } from "../types/message.types"
 
 type RecommendationCardDisplayData = Omit<
   RecommendationCardData,
@@ -9,7 +7,7 @@ type RecommendationCardDisplayData = Omit<
 >
 
 export const toRecommendationCardData = (
-  scent: GetScentDetailResponse["data"]
+  scent: ScentDetail
 ): RecommendationCardDisplayData => {
   return {
     imageSrc: scent.thumbnail_url,

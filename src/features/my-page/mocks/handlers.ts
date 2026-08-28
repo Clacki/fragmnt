@@ -1,13 +1,12 @@
 import { delay, http, HttpResponse } from "msw"
 
-import { createAnalysisResultMock } from "@/features/result/mock/result-factory"
-import { getAnalysisResult } from "@/features/result/mock/result.store"
-import { mockFavoriteScents } from "./favoriteScents.mock"
-import { mockHistoryList } from "./history.mock"
-import { mockUserProfile } from "./myPage.mock"
-import { mockReviewList } from "./review.mock"
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
+import {
+  getAnalysisResult,
+  saveAnalysisResult,
+} from "@/features/result/mock/result.store"
+import { mockApi } from "@/shared/mocks/mock-api"
+import { mockDb, persistMockDb } from "@/shared/mocks/mock-db"
+import { MAX_IMAGE_FILE_SIZE } from "@/shared/utils/validate-image-file"
 
 type ProfileImagePresignedUrlRequest = {
   file_name?: string
@@ -19,7 +18,7 @@ type RegisterProfileImageRequest = {
 
 const MOCK_AI_PROFILE_IMAGE_URL = "/msw-image/mock-profile.jpg"
 
-let uploadedProfileImageUrl = mockUserProfile.profile_image_url
+let uploadedProfileImageUrl = mockDb.profile.profile_image_url
 
 const blobToBase64 = async (blob: Blob) => {
   const arrayBuffer = await blob.arrayBuffer()
@@ -35,27 +34,28 @@ const blobToBase64 = async (blob: Blob) => {
 }
 
 export const myPageHandlers = [
-  http.get(`${BASE_URL}/accounts/me/profile`, () => {
-    return HttpResponse.json(mockUserProfile)
+  http.get(mockApi("/accounts/me/profile"), () => {
+    return HttpResponse.json(mockDb.profile)
   }),
 
-  http.patch(`${BASE_URL}/accounts/me/profile`, async ({ request }) => {
+  http.patch(mockApi("/accounts/me/profile"), async ({ request }) => {
     await delay(500)
 
     const body = await request.json()
 
-    Object.assign(mockUserProfile, body)
+    Object.assign(mockDb.profile, body)
+    persistMockDb()
 
-    return HttpResponse.json(mockUserProfile)
+    return HttpResponse.json(mockDb.profile)
   }),
 
   http.put(
-    `${BASE_URL}/accounts/me/profile-image/presigned-url`,
+    mockApi("/accounts/me/profile-image/presigned-url"),
     async ({ request }) => {
       const body = (await request.json()) as ProfileImagePresignedUrlRequest
 
       return HttpResponse.json({
-        presigned_url: `${BASE_URL}/mock-s3/profile-image`,
+        presigned_url: mockApi("/mock-s3/profile-image"),
         img_url: `/mock-upload/${body.file_name ?? "profile-image.jpeg"}`,
         key: body.file_name ?? "profile-image.jpeg",
         resource_id: 1,
@@ -63,28 +63,43 @@ export const myPageHandlers = [
     }
   ),
 
-  http.put(`${BASE_URL}/mock-s3/profile-image`, async ({ request }) => {
+  http.put(mockApi("/mock-s3/profile-image"), async ({ request }) => {
     const blob = await request.blob()
 
-    uploadedProfileImageUrl = URL.createObjectURL(blob)
+    if (!blob.type.startsWith("image/")) {
+      return HttpResponse.json(
+        { message: "지원하지 않는 이미지 형식입니다." },
+        { status: 415 }
+      )
+    }
+
+    if (blob.size > MAX_IMAGE_FILE_SIZE) {
+      return HttpResponse.json(
+        { message: "이미지는 2MB 이하로 업로드해주세요." },
+        { status: 413 }
+      )
+    }
+
+    uploadedProfileImageUrl = await blobToBase64(blob)
 
     return new HttpResponse(null, {
       status: 200,
     })
   }),
 
-  http.patch(`${BASE_URL}/accounts/me/profile-image`, async ({ request }) => {
+  http.patch(mockApi("/accounts/me/profile-image"), async ({ request }) => {
     const body = (await request.json()) as RegisterProfileImageRequest
 
-    mockUserProfile.profile_image_url =
+    mockDb.profile.profile_image_url =
       uploadedProfileImageUrl ||
       body.profile_image_url ||
       MOCK_AI_PROFILE_IMAGE_URL
+    persistMockDb()
 
-    return HttpResponse.json(mockUserProfile)
+    return HttpResponse.json(mockDb.profile)
   }),
 
-  http.post(`${BASE_URL}/question/image`, async () => {
+  http.post(mockApi("/question/image"), async () => {
     await delay(1600)
 
     const response = await fetch(MOCK_AI_PROFILE_IMAGE_URL)
@@ -96,87 +111,134 @@ export const myPageHandlers = [
     })
   }),
 
-  http.get(`${BASE_URL}/analyses/feedback`, () => {
-    return HttpResponse.json(mockFavoriteScents)
+  http.get(mockApi("/analyses/feedback"), () => {
+    return HttpResponse.json(mockDb.favorites)
   }),
 
-  http.get(`${BASE_URL}/analyses/history`, () => {
-    return HttpResponse.json(mockHistoryList)
+  http.get(mockApi("/analyses/history"), () => {
+    return HttpResponse.json(mockDb.histories)
   }),
 
-  http.get(`${BASE_URL}/analyses/reviews`, () => {
-    return HttpResponse.json(mockReviewList)
+  http.get(mockApi("/analyses/reviews"), ({ request }) => {
+    const type = new URL(request.url).searchParams.get("type")
+
+    return HttpResponse.json(
+      type
+        ? mockDb.reviews.filter((review) => review.type === type)
+        : mockDb.reviews
+    )
   }),
 
-  http.delete(`${BASE_URL}/analyses/reviews/:reviewId`, (req) => {
-    const { reviewId } = req.params
+  http.delete(mockApi("/analyses/reviews/:reviewId"), ({ params, request }) => {
+    const { reviewId } = params
+    const type = new URL(request.url).searchParams.get("type")
 
-    const index = mockReviewList.findIndex(
-      (review) => review.id === Number(reviewId)
+    const index = mockDb.reviews.findIndex(
+      (review) =>
+        review.id === Number(reviewId) && (!type || review.type === type)
     )
 
     if (index !== -1) {
-      mockReviewList.splice(index, 1)
+      mockDb.reviews.splice(index, 1)
     }
+
+    const numericReviewId = Number(reviewId)
+    const storedResult = getAnalysisResult(numericReviewId)
+
+    if (storedResult && (!type || storedResult.type === type)) {
+      saveAnalysisResult({
+        ...storedResult,
+        review: null,
+        rating: null,
+      })
+    }
+
+    const historyItem = mockDb.histories.find(
+      (item) => item.id === numericReviewId && (!type || item.type === type)
+    )
+
+    if (historyItem) {
+      historyItem.review = null
+      historyItem.rating = null
+    }
+    persistMockDb()
 
     return new HttpResponse(null, {
       status: 204,
     })
   }),
 
-  http.get(`${BASE_URL}/analyses/:analysisId`, ({ params }) => {
-    const { analysisId } = params as { analysisId: string }
-    const numericAnalysisId = Number(analysisId)
-
-    if (Number.isNaN(numericAnalysisId)) {
-      return HttpResponse.json(
-        { message: "잘못된 추천 결과 ID입니다." },
-        { status: 400 }
-      )
-    }
-
-    const storedResult = getAnalysisResult(numericAnalysisId)
-
-    if (storedResult) {
-      return HttpResponse.json(storedResult)
-    }
-
-    const historyItem = mockHistoryList.find(
-      (history) => history.id === numericAnalysisId
-    )
-
-    if (!historyItem) {
-      return HttpResponse.json(
-        { message: "추천 결과를 찾을 수 없습니다." },
-        { status: 404 }
-      )
-    }
-
-    return HttpResponse.json(
-      createAnalysisResultMock({
-        id: numericAnalysisId,
-        type: historyItem.type,
-      })
-    )
-  }),
-
   http.patch(
-    `${BASE_URL}/analyses/reviews/:reviewId`,
+    mockApi("/analyses/reviews/:reviewId"),
     async ({ request, params }) => {
       const { reviewId } = params as { reviewId: string }
-      const { review } = (await request.json()) as { review: string }
+      const numericReviewId = Number(reviewId)
+      const type = new URL(request.url).searchParams.get("type")
+      const { review, rating } = (await request.json()) as {
+        review?: string
+        rating?: number
+      }
 
-      const reviewItem = mockReviewList.find(
-        (item) => item.id === Number(reviewId)
+      if (!Number.isFinite(numericReviewId) || !type || review === undefined) {
+        return HttpResponse.json(
+          { message: "리뷰 요청 정보가 올바르지 않습니다." },
+          { status: 400 }
+        )
+      }
+
+      let reviewItem = mockDb.reviews.find(
+        (item) => item.id === numericReviewId && item.type === type
       )
 
-      if (!reviewItem) {
-        return new HttpResponse(null, {
-          status: 404,
+      if (reviewItem) {
+        reviewItem.review = review
+        reviewItem.rating = rating ?? reviewItem.rating
+      } else {
+        const storedResult = getAnalysisResult(numericReviewId)
+        const historyItem = mockDb.histories.find(
+          (item) => item.id === numericReviewId && item.type === type
+        )
+
+        if (!storedResult && !historyItem) {
+          return HttpResponse.json(
+            { message: "추천 결과를 찾을 수 없습니다." },
+            { status: 404 }
+          )
+        }
+
+        reviewItem = {
+          id: numericReviewId,
+          type,
+          eng_name:
+            storedResult?.recommended_scent.eng_name ??
+            historyItem?.recommended_scent.eng_name ??
+            "",
+          review,
+          rating: rating ?? 0,
+          created_at: new Date().toISOString(),
+        }
+        mockDb.reviews.unshift(reviewItem)
+      }
+
+      const storedResult = getAnalysisResult(numericReviewId)
+
+      if (storedResult && storedResult.type === type) {
+        saveAnalysisResult({
+          ...storedResult,
+          review,
+          rating: rating ?? storedResult.rating,
         })
       }
 
-      reviewItem.review = review
+      const historyItem = mockDb.histories.find(
+        (item) => item.id === numericReviewId && item.type === type
+      )
+
+      if (historyItem) {
+        historyItem.review = review
+        historyItem.rating = rating ?? historyItem.rating
+      }
+      persistMockDb()
 
       return HttpResponse.json({
         detail: "리뷰가 수정되었습니다.",

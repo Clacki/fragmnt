@@ -1,5 +1,3 @@
-// TODO: 스크롤하면서 로딩 (Network)
-
 import Feather from "@/assets/images/scent-list/scent-feather.svg"
 import { CenterContainer, Container, Hstack, Vstack } from "@/shared/components"
 

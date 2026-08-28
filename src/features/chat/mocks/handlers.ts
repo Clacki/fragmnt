@@ -1,11 +1,11 @@
 import { baseAnalysisResultMockData } from "@/features/result/mock/result-base-mock"
 import { saveAnalysisResult } from "@/features/result/mock/result.store"
+import { mockApi } from "@/shared/mocks/mock-api"
 import { delay, http, HttpResponse } from "msw"
 import type { CreateChatSessionResponse } from "../api/create-chat-session.api"
 import type {
   ChatRecommendationResult,
   ChatRecommendationResultResponse,
-  GetScentDetailResponse,
   SendChatMessageResponse,
 } from "../types/message.types"
 import type { RetryChatRecommendationResponse } from "../types/retry-chat.types"
@@ -71,7 +71,7 @@ const createChatRecommendationResult = ({
 })
 
 export const chatbotHandlers = [
-  http.post("*/chatbot/sessions", async () => {
+  http.post(mockApi("/chatbot/sessions"), async () => {
     await delay(300)
 
     const nextSessionId = sessionId++
@@ -91,7 +91,7 @@ export const chatbotHandlers = [
   }),
 
   http.post(
-    "*/chatbot/sessions/:sessionId/messages",
+    mockApi("/chatbot/sessions/:sessionId/messages"),
     async ({ request, params }) => {
       await delay(700)
 
@@ -153,7 +153,7 @@ export const chatbotHandlers = [
   ),
 
   http.post(
-    "*/chatbot/sessions/:sessionId/recommendations/retry",
+    mockApi("/chatbot/sessions/:sessionId/recommendations/retry"),
     async ({ params }) => {
       await delay(900)
 
@@ -188,34 +188,8 @@ export const chatbotHandlers = [
     }
   ),
 
-  http.get("*/scents/:scentId", ({ params }) => {
-    const scentId = Number(params.scentId)
-    const scent = baseAnalysisResultMockData.recommended_scent
-
-    if (scent.id !== scentId) {
-      return HttpResponse.json(
-        { message: "향기 정보를 찾을 수 없습니다." },
-        { status: 404 }
-      )
-    }
-
-    const response: GetScentDetailResponse = {
-      status: "success",
-      data: {
-        id: scent.id,
-        name: scent.name,
-        eng_name: scent.eng_name,
-        description: scent.description,
-        tags: scent.tags,
-        thumbnail_url: scent.thumbnail_url,
-      },
-    }
-
-    return HttpResponse.json(response)
-  }),
-
   http.get(
-    "*/chatbot/sessions/:sessionId/recommendations/:recommendationId",
+    mockApi("/chatbot/sessions/:sessionId/recommendations/:recommendationId"),
     ({ params }) => {
       const id = Number(params.recommendationId)
       const result = chatRecommendationResults.get(id)

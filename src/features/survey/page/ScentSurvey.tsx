@@ -6,6 +6,7 @@ import {
   Vstack,
 } from "@/shared/components"
 import LoadingState from "@/shared/components/loading-state/LoadingState"
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import { useNavigate } from "@tanstack/react-router"
 import { useState } from "react"
 import {
@@ -17,9 +18,7 @@ import PreferenceSlider from "./preference-slider/PreferenceSlider"
 const DEFAULT_SURVEY_VALUE = 2
 
 const ScentSurvey = () => {
-  // useUserGuard()
-  // TODO: Mock 배포 환경에서 페이지 접근성 확인을 위해 인증 가드를 임시 비활성화합니다.
-  // 실제 인증 연동 시 로그인 상태 기반 접근 제한을 복구합니다.
+  useUserGuard()
   const { data: questions, isPending, isError } = useSurveyQuestions()
   const { mutateAsync: submitSurveyResult, isPending: isSubmitting } =
     useSurveyResultMutation()

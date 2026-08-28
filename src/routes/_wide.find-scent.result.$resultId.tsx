@@ -18,13 +18,13 @@ const ResultRoute = () => {
   const { resultId } = Route.useParams()
   const { type } = Route.useSearch()
 
-  return <ResultPage resultId={Number(resultId)} type={type} />
+  return <ResultPage resultId={Number(resultId)} type={type ?? undefined} />
 }
 
 export const Route = createFileRoute("/_wide/find-scent/result/$resultId")({
   validateSearch: (search: Record<string, unknown>) => {
     return {
-      type: isResultType(search.type) ? search.type : "image",
+      type: isResultType(search.type) ? search.type : null,
     }
   },
   component: ResultRoute,

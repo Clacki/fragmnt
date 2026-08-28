@@ -3,6 +3,7 @@ import Find2ImageSrc from "@/assets/images/main/find2.webp"
 import Find3ImageSrc from "@/assets/images/main/find3.webp"
 import useAuthStore from "@/shared/api/use-auth-store"
 import HOrVStack from "@/shared/components/layouts/HOrVStack/HOrVStack"
+import { IS_DEMO_MODE } from "@/shared/env/env-vars"
 import { useNavigate, type LinkProps } from "@tanstack/react-router"
 import SectionVstack from "../section-container/SectionContainer"
 import TitleSection from "../title-section/TitleSection"
@@ -10,13 +11,11 @@ import CardWithImage from "./card-with-image/CardWithImage"
 
 type NavigationPathname = LinkProps["to"]
 const FindYourScent = () => {
-  // TODO: 뷰포트 좁아지면 그리드를 Vstack으로 바꿔야 함
-  // TODO: 이 때는 세로로 긴 상자 없이 둘 다 글 왼쪽 그림 오른쪽으로 배치해야
   const accessToken = useAuthStore((state) => state.accessToken)
   const navigate = useNavigate()
 
   const handleNavigation = (to: NavigationPathname) => {
-    if (!accessToken) {
+    if (!IS_DEMO_MODE && !accessToken) {
       navigate({ to: "/login" })
       return
     }

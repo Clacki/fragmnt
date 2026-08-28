@@ -11,13 +11,9 @@ import { detailPageHandlers } from "@/features/scent-detail/mocks/handler"
 import { scentHandlers } from "@/features/scent-list/mocks/handlers"
 import { surveyHandlers } from "@/features/survey/mocks/handlers"
 import { webSharedHandlers } from "@/features/web-shared/mocks/handlers"
-import { http, HttpResponse } from "msw"
 import { accountHandlers } from "./account-handlers"
 
 export const handlers = [
-  http.get("/api/hello", () => {
-    return HttpResponse.json({ message: "Hello, world!", code: 200 })
-  }),
   ...resultHandlers,
   ...myPageHandlers,
   ...scentHandlers,

@@ -1,20 +1,4 @@
-import type { ResultType } from "@/shared/types"
-
-export type HistoryItem = {
-  id: number
-  type: ResultType
-  recommended_scent: {
-    id: number
-    name: string
-    tags: string[]
-    description: string | null
-    eng_name: string
-    thumbnail_url: string
-  }
-  review: string | null
-  rating: number | null
-  created_at: string
-}
+import type { HistoryItem } from "../types"
 export const mockHistoryList: HistoryItem[] = [
   {
     id: 4,

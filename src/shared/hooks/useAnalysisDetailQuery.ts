@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getAnalysisDetail } from "../api/analysis-deatil.api"
+import { getAnalysisDetail } from "../api/analysis-detail.api"
 import type { ResultType } from "../types"
 
 type UseAnalysisDetailQueryParams = {

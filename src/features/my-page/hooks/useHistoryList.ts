@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { getHistoryList } from "../api/user.api"
-import type { HistoryItem } from "../mocks/history.mock"
+import type { HistoryItem } from "../types"
 
 export const useHistoryList = () => {
   return useQuery<HistoryItem[]>({

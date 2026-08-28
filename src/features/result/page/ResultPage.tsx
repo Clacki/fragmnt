@@ -9,6 +9,7 @@ import {
   Vstack,
 } from "@/shared/components"
 
+import { useUserGuard } from "@/shared/hooks/useUserGuard"
 import type { AnalysisResult, ResultType } from "@/shared/types"
 import { useMemo } from "react"
 import { useAnalysisDetailQuery } from "../../../shared/hooks/useAnalysisDetailQuery"
@@ -20,21 +21,19 @@ import ScentSection from "./sections/scent-section/ScentSection"
 
 type ResultPageProps = {
   resultId: number
-  type: ResultType
+  type?: ResultType
 }
 
 const ResultPage = ({ resultId, type }: ResultPageProps) => {
-  // useUserGuard()
-  // TODO: Mock 배포 환경에서 페이지 접근성 확인을 위해 인증 가드를 임시 비활성화합니다.
-  // 실제 인증 연동 시 로그인 상태 기반 접근 제한을 복구합니다.
+  useUserGuard()
   const {
     data: fetchedResult,
     isLoading,
     isError,
   } = useAnalysisDetailQuery({
     resultId,
-    type,
-    enabled: Number.isFinite(resultId),
+    type: type ?? "image",
+    enabled: Number.isFinite(resultId) && Boolean(type),
   })
 
   const result = useMemo(() => {
@@ -48,13 +47,13 @@ const ResultPage = ({ resultId, type }: ResultPageProps) => {
     } as AnalysisResult
   }, [fetchedResult, type])
 
-  if (!Number.isFinite(resultId)) {
+  if (!Number.isFinite(resultId) || !type) {
     return (
       <ResultStateLayout>
         <EmptyState
           imageSrc={EmptyScentImage}
-          title="잘못된 결과 ID입니다."
-          description="결과 페이지 주소를 다시 확인해주세요."
+          title="잘못된 추천 결과 주소입니다."
+          description="향기 추천을 다시 진행하거나 주소를 확인해주세요."
         />
       </ResultStateLayout>
     )

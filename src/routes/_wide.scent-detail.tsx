@@ -3,8 +3,10 @@ import { createFileRoute } from "@tanstack/react-router"
 
 export const Route = createFileRoute("/_wide/scent-detail")({
   validateSearch: (search: Record<string, unknown>) => {
+    const id = Number(search.id)
+
     return {
-      id: Number(search.id) || 0,
+      id: Number.isInteger(id) && id > 0 ? id : null,
     }
   },
   component: ScentDetail,
