@@ -18,6 +18,8 @@ type AuthStoreState = {
   clearAuth: () => void
 }
 
+const AUTH_STORAGE_KEY = "fragmnt store"
+
 const useAuthStore = create<AuthStoreState>()(
   persist(
     (set, get) => ({
@@ -53,11 +55,14 @@ const useAuthStore = create<AuthStoreState>()(
       logout: async () => {
         try {
           await logoutApi(null)
+        } catch {
+          // 서버가 응답하지 않더라도 클라이언트 로그아웃은 완료합니다.
         } finally {
           set({
             accessToken: null,
             profile: null,
           })
+          localStorage.removeItem(AUTH_STORAGE_KEY)
         }
       },
 
@@ -66,10 +71,11 @@ const useAuthStore = create<AuthStoreState>()(
           accessToken: null,
           profile: null,
         })
+        localStorage.removeItem(AUTH_STORAGE_KEY)
       },
     }),
     {
-      name: "fragmnt store",
+      name: AUTH_STORAGE_KEY,
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         accessToken: state.accessToken,

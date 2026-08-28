@@ -49,9 +49,9 @@ export const MyPage = () => {
 
     try {
       await logout()
+    } finally {
       queryClient.clear()
       await navigate({ to: "/", replace: true })
-    } finally {
       setIsLoggingOut(false)
     }
   }
