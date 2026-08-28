@@ -24,6 +24,7 @@ export const MyPage = () => {
   const navigate = useNavigate()
   const logout = useAuthStore((state) => state.logout)
   const [isResettingDemo, setIsResettingDemo] = useState(false)
+  const [isLoggingOut, setIsLoggingOut] = useState(false)
 
   useEffect(() => {
     if (
@@ -43,9 +44,16 @@ export const MyPage = () => {
     }
   }, [error, logout, navigate])
 
-  const handleLogout = () => {
-    logout()
-    navigate({ to: "/" })
+  const handleLogout = async () => {
+    setIsLoggingOut(true)
+
+    try {
+      await logout()
+      queryClient.clear()
+      await navigate({ to: "/", replace: true })
+    } finally {
+      setIsLoggingOut(false)
+    }
   }
 
   const handleResetDemo = async () => {
@@ -73,8 +81,8 @@ export const MyPage = () => {
           <div>
             <EmptyState
               imageSrc={EmptyStateImage}
-              title="리뷰를 불러오지 못했습니다."
-              description="잠시 후 다시 시도해주세요!"
+              title="프로필을 불러오지 못했습니다."
+              description="잠시 후 다시 시도해 주세요."
             />
           </div>
         ) : null}
@@ -83,28 +91,30 @@ export const MyPage = () => {
           <>
             <UserSection key={user.id} user={user} />
             <TabSection />
-            {IS_DEMO_MODE ? (
-              <Button
-                style="ghost"
-                size="sm"
-                onClick={handleResetDemo}
-                disabled={isResettingDemo}
-                className="mt-2xl self-end text-sm text-text-sub"
-              >
-                <RotateCcwIcon size={16} />
-                {isResettingDemo ? "초기화 중..." : "데모 데이터 초기화"}
-              </Button>
-            ) : (
+            <div className="mt-2xl flex self-end">
+              {IS_DEMO_MODE ? (
+                <Button
+                  style="ghost"
+                  size="sm"
+                  onClick={handleResetDemo}
+                  disabled={isResettingDemo || isLoggingOut}
+                  className="text-sm text-text-sub"
+                >
+                  <RotateCcwIcon size={16} />
+                  {isResettingDemo ? "데모 초기화 중..." : "데모 데이터 초기화"}
+                </Button>
+              ) : null}
               <Button
                 style="ghost"
                 size="sm"
                 onClick={handleLogout}
-                className="mt-2xl self-end text-sm text-text-sub"
+                disabled={isLoggingOut || isResettingDemo}
+                className="text-sm text-text-sub"
               >
                 <LogOutIcon size={16} />
-                로그아웃
+                {isLoggingOut ? "로그아웃 중..." : "로그아웃"}
               </Button>
-            )}
+            </div>
           </>
         ) : null}
       </Container>
