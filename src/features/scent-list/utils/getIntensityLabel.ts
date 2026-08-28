@@ -1,7 +1,7 @@
-export const getIntensityLabel = (
-  intensity: number
-): "약함" | "보통" | "강함" => {
-  if (intensity <= 50) return "약함"
-  if (intensity <= 70) return "보통"
-  return "강함"
+import type { ScentIntensityLabel } from "../types/scent-card.type"
+
+export const getIntensityLabel = (intensity: number): ScentIntensityLabel => {
+  if (intensity <= 50) return "weak"
+  if (intensity <= 70) return "normal"
+  return "strong"
 }

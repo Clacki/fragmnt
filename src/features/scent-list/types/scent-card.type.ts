@@ -12,7 +12,7 @@ export type ScentCategory =
 
 export type ScentSeason = "spring" | "summer" | "autumn" | "winter"
 
-export type ScentIntensityLabel = "약함" | "보통" | "강함"
+export type ScentIntensityLabel = "weak" | "normal" | "strong"
 
 export type ScentCardItem = {
   id: number

@@ -28,23 +28,33 @@ export const useScentFilter = (initialData: ScentCardItem[]) => {
 
     if (selectedItems.length === 0) return safeData
 
-    return safeData.filter((card) =>
-      selectedItems.every((selected) => {
-        if (selected.category === "category") {
-          return card.category === selected.name
-        }
-
-        if (selected.category === "season") {
-          return card.season.includes(selected.name as ScentSeason)
-        }
-
-        if (selected.category === "intensity") {
-          return getIntensityLabel(card.intensity) === selected.name
-        }
-
-        return true
-      })
+    const selectedCategories = selectedItems.filter(
+      (item) => item.category === "category"
     )
+    const selectedSeasons = selectedItems.filter(
+      (item) => item.category === "season"
+    )
+    const selectedIntensities = selectedItems.filter(
+      (item) => item.category === "intensity"
+    )
+
+    return safeData.filter((card) => {
+      const matchesCategory =
+        selectedCategories.length === 0 ||
+        selectedCategories.some((selected) => card.category === selected.name)
+      const matchesSeason =
+        selectedSeasons.length === 0 ||
+        selectedSeasons.some((selected) =>
+          card.season.includes(selected.name as ScentSeason)
+        )
+      const matchesIntensity =
+        selectedIntensities.length === 0 ||
+        selectedIntensities.some(
+          (selected) => getIntensityLabel(card.intensity) === selected.name
+        )
+
+      return matchesCategory && matchesSeason && matchesIntensity
+    })
   }, [selectedItems, initialData])
 
   return {
